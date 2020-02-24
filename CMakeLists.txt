@@ -24,11 +24,9 @@ endif(NOT OPENGL_FOUND)
 # Include GLUT for Windows
 if  (WIN32)
 
-    set(GLUT_DIR ${CMAKE_CURRENT_SOURCE_DIR} "/lib/glut")
+    set(GLUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/lib/glut")
 	
     message(STATUS "GLUT_DIR set to: " ${GLUT_DIR})
-
-	# set(GLUT_DIR "" CACHE PATH "Path to GLUT folder")
 
 	if (NOT EXISTS "${GLUT_DIR}/GL/glut.h" OR NOT EXISTS "${GLUT_DIR}/glut32.lib")
 		message(ERROR ": GLUT not found")
