@@ -7,6 +7,7 @@ add_executable(Engine src/main.cpp)
 target_link_libraries(Engine Common)
 
 # Include OpenGL
+set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED)
 include_directories(${OpenGL_INCLUDE_DIRS})
 link_directories(${OpenGL_LIBRARY_DIRS})
@@ -40,7 +41,7 @@ if  (WIN32)
 	
 else (WIN32) # Include GLUT for Linux and Mac
 
-	set( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} Wno-deprecated")
+	set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} Wno-deprecated")
 	find_package(GLUT REQUIRED)
 
 	include_directories(${GLUT_INCLUDE_DIR})
