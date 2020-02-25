@@ -13,11 +13,11 @@ bool PlaneGenerator::ParseArguments(int argc, char *argv[]) {
 
         string planeName = argv[4];
 
-        if (planeName=="xy")
+        if (planeName == "xy")
             plane_ = kPlaneXY;
-        else if (planeName=="xz")
+        else if (planeName == "xz")
             plane_ = kPlaneXZ;
-        else if (planeName=="yz")
+        else if (planeName == "yz")
             plane_ = kPlaneYZ;
         else {
             cerr << "Plano " << planeName << " não definido!" << endl
@@ -42,8 +42,8 @@ bool PlaneGenerator::ParseArguments(int argc, char *argv[]) {
 }
 
 void PlaneGenerator::GenerateVertices() {
-    double w = width_/2.0;
-    double h = height_/2.0;
+    double w = width_ / 2.0;
+    double h = height_ / 2.0;
 
     switch (plane_) {
         case kPlaneYZ:AddVertex(0.0, w, -h);
