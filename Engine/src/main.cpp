@@ -1,6 +1,10 @@
 #include <iostream>
+#define _USE_MATH_DEFINES
 #include "tinyxml2.h"
 
+#include <tinyxml2/tinyxml2.h>
+
+void changeSize(int w, int h) {
 using namespace std;
 
 int main(int argc, char *argv[]) {

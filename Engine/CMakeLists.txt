@@ -1,7 +1,8 @@
 include_directories(${CG_TP_SOURCE_DIR}/Common/include)
-include_directories(${CG_TP_SOURCE_DIR}/Engine/lib/tinyxml2)
+include_directories(${CG_TP_SOURCE_DIR}/Engine/lib)
 
 link_directories(${CG_TP_SOURCE_DIR}/Common/src)
+link_directories(${CG_TP_SOURCE_DIR}/Engine/lib)
 
 add_executable(Engine src/main.cpp)
 target_link_libraries(Engine Common)
