@@ -1,6 +1,4 @@
-include_directories(${CG_TP_SOURCE_DIR}/Common/include)
-
-link_directories(${CG_TP_SOURCE_DIR}/Common/src)
+cmake_minimum_required(VERSION 3.10)
 
 add_executable(Generator src/PlaneGenerator.cpp src/PlaneGenerator.h src/AbstractGenerator.h src/main.cpp)
 
