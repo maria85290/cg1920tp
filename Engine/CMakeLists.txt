@@ -1,5 +1,5 @@
 include_directories(${CG_TP_SOURCE_DIR}/Common/include)
-include_directories(${CG_TP_SOURCE_DIR}/lib/tinyxml2)
+include_directories(${CG_TP_SOURCE_DIR}/Engine/lib/tinyxml2)
 
 link_directories(${CG_TP_SOURCE_DIR}/Common/src)
 
