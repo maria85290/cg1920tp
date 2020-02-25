@@ -28,16 +28,16 @@ list<vec3> generateCone(int bottomRadius, int height, int slices, int stacks);
 void saveModel(const list<vec3> &vertices, const string &fileName);
 
 int main(int argc, char *argv[]) {
-  if (argc <= 1) {
-    cerr << "Não foi especificado um tipo de primitva a gerar!" << endl;
-    cerr << "Uso: ./generator <plane/box/sphere/cone> <parameters...>" << endl;
+    if (argc <= 1) {
+        cerr << "Não foi especificado um tipo de primitva a gerar!" << endl;
+        cerr << "Uso: ./generator <plane/box/sphere/cone> <parameters...>" << endl;
 
-    return 1;
-  }
+        return 1;
+    }
 
-  string primitiveType = argv[1];
+    string primitiveType = argv[1];
 
-  list<vec3> vertices;
+    list<vec3> vertices;
   string fileName;
 
   if (primitiveType == "plane") {
@@ -62,25 +62,25 @@ int main(int argc, char *argv[]) {
 }
 
 void saveModel(const list<vec3> &vertices, const string &fileName) {
-  fstream file(fileName, fstream::out);
+    fstream file(fileName, fstream::out);
 
-  for (const vec3 &vertex : vertices) {
-    file << vertex.x << " "
-         << vertex.y << " "
-         << vertex.z << endl;
-  }
+    for (const vec3 &vertex : vertices) {
+        file << vertex.x << " "
+             << vertex.y << " "
+             << vertex.z << endl;
+    }
 
-  file.close();
+    file.close();
 }
 
 void AbstractGenerator::SaveVerticesToFile() {
   fstream file(filename_, fstream::out);
 
-  for (const vec3 &vertex : vertices_) {
-    file << vertex.x << " "
-         << vertex.y << " "
-         << vertex.z << endl;
-  }
+    for (const vec3 &vertex : vertices_) {
+        file << vertex.x << " "
+             << vertex.y << " "
+             << vertex.z << endl;
+    }
 
   file.close();
 }

@@ -8,21 +8,21 @@
 #include "AbstractGenerator.h"
 
 class PlaneGenerator : public AbstractGenerator {
- private:
-  int plane_ = 0;
-  int width_ = 0;
-  int height_ = 0;
+private:
+    int plane_ = 0;
+    int width_ = 0;
+    int height_ = 0;
 
-  static const int kPlaneXY = 0;
-  static const int kPlaneXZ = 1;
-  static const int kPlaneYZ = 2;
+    static const int kPlaneXY = 0;
+    static const int kPlaneXZ = 1;
+    static const int kPlaneYZ = 2;
 
- public:
-  ~PlaneGenerator() override = default;
+public:
+    ~PlaneGenerator() override = default;
 
-  bool ParseArguments(int argc, char *argv[]) override;
+    bool ParseArguments(int argc, char *argv[]) override;
 
-  void GenerateVertices() override;
+    void GenerateVertices() override;
 };
 
 #endif //CG_TP_PLANEGENERATOR_H

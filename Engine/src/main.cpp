@@ -6,7 +6,7 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-    if (argc != 2) {
+    if (argc!=2) {
         cerr << "Engine requer exatamente 1 argumento, o ficheiro de configuração XML." << endl;
         cerr << "Uso ./engine <file.xml>" << endl;
         return 1;
