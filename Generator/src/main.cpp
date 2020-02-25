@@ -18,20 +18,20 @@ int main(int argc, char *argv[]) {
 
     AbstractGenerator *generator = nullptr;
 
-    if (primitiveType=="plane") {
+    if (primitiveType == "plane") {
         generator = new PlaneGenerator;
-    } else if (primitiveType=="box") {
+    } else if (primitiveType == "box") {
         // generator = new BoxGenerator;
-    } else if (primitiveType=="sphere") {
+    } else if (primitiveType == "sphere") {
         // generator = new SphereGenerator;
-    } else if (primitiveType=="cone") {
+    } else if (primitiveType == "cone") {
         // generator = new ConeGenerator;
     } else {
         // ERROR!
         return 2;
     }
 
-    if (generator==nullptr || !generator->ParseArguments(argc, argv)) {
+    if (generator == nullptr || !generator->ParseArguments(argc, argv)) {
         return -1;
     }
 

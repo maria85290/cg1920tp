@@ -38,27 +38,27 @@ int main(int argc, char *argv[]) {
     string primitiveType = argv[1];
 
     list<vec3> vertices;
-  string fileName;
+    string fileName;
 
-  if (primitiveType == "plane") {
+    if (primitiveType == "plane") {
 
-    vertices = generateSquare(plane, stoi(argv[2]), stoi(argv[3]));
-  } else if (primitiveType == "box") {
-    vertices = generateBox(stoi(argv[2]), stoi(argv[3]), stoi(argv[4]), stoi(argv[5]));
-    fileName = argv[6];
-  } else if (primitiveType == "sphere") {
-    vertices = generateSphere(stoi(argv[2]), stoi(argv[3]), stoi(argv[4]));
-    fileName = argv[5];
-  } else if (primitiveType == "cone") {
-    vertices = generateCone(stoi(argv[2]), stoi(argv[3]), stoi(argv[4]), stoi(argv[5]));
-    fileName = argv[6];
-  }
+        vertices = generateSquare(plane, stoi(argv[2]), stoi(argv[3]));
+    } else if (primitiveType == "box") {
+        vertices = generateBox(stoi(argv[2]), stoi(argv[3]), stoi(argv[4]), stoi(argv[5]));
+        fileName = argv[6];
+    } else if (primitiveType == "sphere") {
+        vertices = generateSphere(stoi(argv[2]), stoi(argv[3]), stoi(argv[4]));
+        fileName = argv[5];
+    } else if (primitiveType == "cone") {
+        vertices = generateCone(stoi(argv[2]), stoi(argv[3]), stoi(argv[4]), stoi(argv[5]));
+        fileName = argv[6];
+    }
 
-  saveModel(vertices, fileName);
+    saveModel(vertices, fileName);
 
-  cout << "Saved model to file " << fileName << endl;
+    cout << "Saved model to file " << fileName << endl;
 
-  return 0;
+    return 0;
 }
 
 void saveModel(const list<vec3> &vertices, const string &fileName) {
@@ -74,7 +74,7 @@ void saveModel(const list<vec3> &vertices, const string &fileName) {
 }
 
 void AbstractGenerator::SaveVerticesToFile() {
-  fstream file(filename_, fstream::out);
+    fstream file(filename_, fstream::out);
 
     for (const vec3 &vertex : vertices_) {
         file << vertex.x << " "
@@ -82,5 +82,5 @@ void AbstractGenerator::SaveVerticesToFile() {
              << vertex.z << endl;
     }
 
-  file.close();
+    file.close();
 }
