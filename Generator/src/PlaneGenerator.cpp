@@ -11,7 +11,7 @@ bool PlaneGenerator::ParseArguments(int argc, char *argv[]) {
     if(argc > 5) {
         // O utilizador especificou o plano no qual construir o retângulo
 
-        string planeName = argv[4];
+        const string planeName = argv[4];
 
         if(planeName == "xy")
             plane_ = kPlaneXY;
