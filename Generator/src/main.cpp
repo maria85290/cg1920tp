@@ -10,7 +10,7 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-    if (argc <= 1) {
+    if(argc <= 1) {
         cerr << "Não foi especificado um tipo de primitva a gerar!" << endl;
         cerr << "Uso: ./Generator <plane/box/sphere/cone> <parameters...> <filename>" << endl;
 
@@ -21,20 +21,20 @@ int main(int argc, char *argv[]) {
 
     AbstractGenerator *generator = nullptr;
 
-    if (primitiveType == "plane") {
+    if(primitiveType == "plane") {
         generator = new PlaneGenerator;
-    } else if (primitiveType == "box") {
+    } else if(primitiveType == "box") {
         generator = new BoxGenerator;
-    } else if (primitiveType == "sphere") {
+    } else if(primitiveType == "sphere") {
         generator = new SphereGenerator;
-    } else if (primitiveType == "cone") {
+    } else if(primitiveType == "cone") {
         generator = new ConeGenerator;
     } else {
         // ERROR!
         return 2;
     }
 
-    if (!generator->ParseArguments(argc, argv)) {
+    if(!generator->ParseArguments(argc, argv)) {
         return -1;
     }
 

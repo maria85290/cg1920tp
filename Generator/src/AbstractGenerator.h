@@ -22,22 +22,22 @@ private:
     std::string filename_;
 
 protected:
-    void SetFilename(const std::string &filename) {
+    void SetFilename(const std::string& filename) {
         this->filename_ = filename;
     }
 
-    void AddVertex(const vec3 &vertex) {
+    void AddVertex(const vec3& vertex) {
         this->vertices_.push_back(vertex);
     }
 
-    void AddVertex(const double &x, const double &y, const double &z) {
+    void AddVertex(const double& x, const double& y, const double& z) {
         this->vertices_.push_back({x, y, z});
     }
 
 public:
     virtual ~AbstractGenerator() = default;
 
-    const std::string &GetFilename() {
+    const std::string& GetFilename() {
         return this->filename_;
     }
 
@@ -67,7 +67,7 @@ public:
     void SaveVerticesToFile() {
         std::fstream file(filename_, std::fstream::out);
 
-        for (const vec3 &vertex : vertices_) {
+        for(const vec3& vertex : vertices_) {
             file << vertex.x << " "
                  << vertex.y << " "
                  << vertex.z << std::endl;

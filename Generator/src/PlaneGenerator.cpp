@@ -8,16 +8,16 @@ bool PlaneGenerator::ParseArguments(int argc, char *argv[]) {
     plane_ = kPlaneXZ;
 
     // Minor parsing para manter compatibilidade com aquilo que o stor pediu
-    if (argc > 5) {
+    if(argc > 5) {
         // O utilizador especificou o plano no qual construir o retângulo
 
         string planeName = argv[4];
 
-        if (planeName == "xy")
+        if(planeName == "xy")
             plane_ = kPlaneXY;
-        else if (planeName == "xz")
+        else if(planeName == "xz")
             plane_ = kPlaneXZ;
-        else if (planeName == "yz")
+        else if(planeName == "yz")
             plane_ = kPlaneYZ;
         else {
             cerr << "Plano " << planeName << " não definido!" << endl
@@ -27,7 +27,7 @@ bool PlaneGenerator::ParseArguments(int argc, char *argv[]) {
         }
 
         SetFilename(argv[5]);
-    } else if (argc < 5) { // Número incorreto de argumentos passado
+    } else if(argc < 5) { // Número incorreto de argumentos passado
         cerr << "Faltam argumentos!" << endl
              << "Utilização: ./Gerador plane <width> <height> [xy|xz|yz]" << endl;
 
@@ -45,7 +45,7 @@ void PlaneGenerator::GenerateVertices() {
     double w = width_ / 2.0;
     double h = height_ / 2.0;
 
-    switch (plane_) {
+    switch(plane_) {
         case kPlaneYZ:AddVertex(0.0, w, -h);
             AddVertex(0.0, -w, -h);
             AddVertex(0.0, -w, h);
