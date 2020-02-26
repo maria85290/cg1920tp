@@ -6,6 +6,8 @@
 #include <Common/vectors.h>
 #include <fstream>
 
+using namespace std;
+
 /**
  * Um Gerador é capaz de gerar vértices para um tipo de sólido geométrico arbitrário,
  * dados certos parâmetros.
@@ -16,13 +18,13 @@
 class AbstractGenerator {
 private:
     /** @var vertices_ Os vértices que este gerador gerou. */
-    std::list<vec3> vertices_ = std::list<vec3>();
+    list<vec3> vertices_ = list<vec3>();
 
     /** @var filename_ O nome do ficheiro onde guardar os vértices gerados. */
-    std::string filename_;
+    string filename_;
 
 protected:
-    void SetFilename(const std::string& filename) {
+    void SetFilename(const string& filename) {
         this->filename_ = filename;
     }
 
@@ -37,7 +39,7 @@ protected:
 public:
     virtual ~AbstractGenerator() = default;
 
-    const std::string& GetFilename() {
+    const string& GetFilename() {
         return this->filename_;
     }
 
@@ -65,12 +67,12 @@ public:
      * O formato é comum a todos os geradores; portanto, esta função também.
      */
     void SaveVerticesToFile() {
-        std::fstream file(filename_, std::fstream::out);
+        ofstream file(filename_);
 
         for(const vec3& vertex : vertices_) {
             file << vertex.x << " "
                  << vertex.y << " "
-                 << vertex.z << std::endl;
+                 << vertex.z << endl;
         }
 
         file.close();

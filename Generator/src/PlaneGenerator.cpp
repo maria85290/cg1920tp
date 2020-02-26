@@ -46,7 +46,8 @@ void PlaneGenerator::GenerateVertices() {
     double h = height_ / 2.0;
 
     switch(plane_) {
-        case kPlaneYZ:AddVertex(0.0, w, -h);
+        case kPlaneYZ:
+            AddVertex(0.0, w, -h);
             AddVertex(0.0, -w, -h);
             AddVertex(0.0, -w, h);
 
@@ -55,7 +56,8 @@ void PlaneGenerator::GenerateVertices() {
             AddVertex(0.0, w, h);
 
             break;
-        case kPlaneXZ:AddVertex(w, 0.0, -h);
+        case kPlaneXZ:
+            AddVertex(w, 0.0, -h);
             AddVertex(-w, 0.0, -h);
             AddVertex(-w, 0.0, h);
 
@@ -64,7 +66,8 @@ void PlaneGenerator::GenerateVertices() {
             AddVertex(w, 0.0, h);
 
             break;
-        case kPlaneXY:AddVertex(w, -h, 0.0);
+        case kPlaneXY:
+            AddVertex(w, -h, 0.0);
             AddVertex(-w, -h, 0.0);
             AddVertex(-w, h, 0.0);
 

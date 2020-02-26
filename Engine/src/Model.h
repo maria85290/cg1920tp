@@ -2,19 +2,23 @@
 #define CG_TP_ENGINE_SRC_MODEL_H_
 
 #include <string>
+#include <Common/vectors.h>
 
 using namespace std;
 
 class Model {
 private:
-    const string& file_;
+    list<vec3> vertices_ = list<vec3>();
+
+protected:
+    void AddVertex(double x, double y, double z) {
+        vertices_.push_back({x, y, z});
+    }
 
 public:
-    explicit Model(const string& file) : file_(file) {}
+    explicit Model(const string& filename);
 
-    const string& GetFile() {
-        return file_;
-    }
+    void Render();
 };
 
 #endif //CG_TP_ENGINE_SRC_MODEL_H_
