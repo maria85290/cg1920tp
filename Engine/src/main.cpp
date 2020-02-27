@@ -1,9 +1,8 @@
 #include <iostream>
 
 #define _USE_MATH_DEFINES
-#include <cmath>
 
-#include <tinyxml2/tinyxml2.h>
+#include <cmath>
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>
@@ -11,7 +10,12 @@
 #include <GL/glut.h>
 #endif
 
+
+#include <tinyxml2/tinyxml2.h>
+
 #include "Scene.h"
+
+#include "window.h"
 
 using namespace std;
 using namespace tinyxml2;
@@ -95,7 +99,6 @@ void render() {
     // permite o movimento do teclado
    
 	glRotatef(angle, 0, 0, 1);
-	
 
     scene.Render();
 
@@ -107,9 +110,6 @@ void  keyboard_events(unsigned char k, int mouseX, int mouseY) {
     if (k = 'q') {
         angle = fmod((angle + 1), 180);
     }
-
-
-
     glutPostRedisplay();
 }
 
@@ -141,6 +141,8 @@ int main(int argc, char *argv[]) {
 
     XMLNode *model = root->FirstChild();
 
+    Scene& scene = window::GetScene();
+
     while(model != nullptr) {
         XMLElement *element = model->ToElement();
 
@@ -153,7 +155,7 @@ int main(int argc, char *argv[]) {
 
         if(file == nullptr) {
             cerr << "Não existe campo 'file'." << endl;
-            return 0;
+            return 1;
         }
 
         scene.AddModel(Model(file));
@@ -183,6 +185,7 @@ int main(int argc, char *argv[]) {
 
     // enter GLUT's main cycle
     glutMainLoop();
+
 
     return 0;
 }

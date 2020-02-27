@@ -11,17 +11,23 @@ bool PlaneGenerator::ParseArguments(int argc, char *argv[]) {
     if(argc > 5) {
         // O utilizador especificou o plano no qual construir o retângulo
 
-        string planeName = argv[4];
+        const string planeName = argv[4];
 
         if(planeName == "xy")
             plane_ = kPlaneXY;
+        else if(planeName == "yx")
+            plane_ = kPlaneYX;
         else if(planeName == "xz")
             plane_ = kPlaneXZ;
+        else if(planeName == "zx")
+            plane_ = kPlaneZX;
         else if(planeName == "yz")
             plane_ = kPlaneYZ;
+        else if(planeName == "zy")
+            plane_ = kPlaneZY;
         else {
             cerr << "Plano " << planeName << " não definido!" << endl
-                 << "Planos possívels: xy, xz, yz" << endl;
+                 << "Planos possívels: xy, yx, xz, zx, yz, zy" << endl;
 
             return false;
         }
@@ -29,7 +35,7 @@ bool PlaneGenerator::ParseArguments(int argc, char *argv[]) {
         SetFilename(argv[5]);
     } else if(argc < 5) { // Número incorreto de argumentos passado
         cerr << "Faltam argumentos!" << endl
-             << "Utilização: ./Gerador plane <width> <height> [xy|xz|yz]" << endl;
+             << "Utilização: ./Gerador plane <width> <height> [xy|yx|xz|zx|yz|zy]" << endl;
 
         return false;
     } else
@@ -47,34 +53,63 @@ void PlaneGenerator::GenerateVertices() {
 
     switch(plane_) {
         case kPlaneYZ:
-            AddVertex(0.0, w, -h);
-            AddVertex(0.0, -w, -h);
-            AddVertex(0.0, -w, h);
+            AddVertex(0.0, h, w);
+            AddVertex(0.0, -h, w);
+            AddVertex(0.0, -h, -w);
 
-            AddVertex(0.0, w, -h);
-            AddVertex(0.0, -w, h);
-            AddVertex(0.0, w, h);
-
+            AddVertex(0.0, h, w);
+            AddVertex(0.0, -h, -w);
+            AddVertex(0.0, h, -w);
             break;
+
+        case kPlaneZY:
+            AddVertex(0.0, h, w);
+            AddVertex(0.0, -h, -w);
+            AddVertex(0.0, -h, w);
+
+            AddVertex(0.0, h, w);
+            AddVertex(0.0, h, -w);
+            AddVertex(0.0, -h, -w);
+            break;
+
         case kPlaneXZ:
-            AddVertex(w, 0.0, -h);
             AddVertex(-w, 0.0, -h);
+            AddVertex(w, 0.0, h);
             AddVertex(-w, 0.0, h);
 
+            AddVertex(-w, 0.0, -h);
             AddVertex(w, 0.0, -h);
+            AddVertex(w, 0.0, h);
+            break;
+
+        case kPlaneZX:
+            AddVertex(-w, 0.0, -h);
             AddVertex(-w, 0.0, h);
             AddVertex(w, 0.0, h);
 
+            AddVertex(-w, 0.0, -h);
+            AddVertex(w, 0.0, h);
+            AddVertex(w, 0.0, -h);
             break;
+
         case kPlaneXY:
+            AddVertex(w, h, 0.0);
+            AddVertex(-w, h, 0.0);
+            AddVertex(-w, -h, 0.0);
+
+            AddVertex(w, h, 0.0);
+            AddVertex(-w, -h, 0.0);
             AddVertex(w, -h, 0.0);
+            break;
+
+        case kPlaneYX:
+            AddVertex(w, h, 0.0);
             AddVertex(-w, -h, 0.0);
             AddVertex(-w, h, 0.0);
 
-            AddVertex(w, -h, 0.0);
-            AddVertex(-w, h, 0.0);
             AddVertex(w, h, 0.0);
-
+            AddVertex(w, -h, 0.0);
+            AddVertex(-w, -h, 0.0);
             break;
     }
 }

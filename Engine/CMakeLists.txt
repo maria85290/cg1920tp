@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 
 add_subdirectory(lib)
 
-add_executable(Engine src/main.cpp src/Scene.cpp src/Model.cpp src/Scene.h src/Model.h)
+add_executable(Engine src/main.cpp src/Scene.cpp src/Model.cpp src/Scene.h src/Model.h src/window.h src/window.cpp)
 
 set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED)
@@ -29,7 +29,7 @@ if (WIN32)
 
     if (EXISTS "${GLUT_DIR}/glut32.dll")
         file(COPY ${GLUT_DIR}/glut32.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine)
-        message(STATUS "Copied glut to " ${CMAKE_BINARY_DIR}/Engine)
+        file(COPY ${GLUT_DIR}/glut32.dll DESTINATION ${CG_TP_SOURCE_DIR}/Configurations)
     endif (EXISTS "${GLUT_DIR}/glut32.dll")
 
     set_property(DIRECTORY ${CG_TP_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Engine)
