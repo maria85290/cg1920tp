@@ -18,6 +18,11 @@ using namespace tinyxml2;
 
 Scene scene;
 
+float angle = 0;
+
+
+
+
 void changeSize(int w, int h) {
 
     // Prevent a divide by zero, when window is too short
@@ -82,11 +87,30 @@ void render() {
 
     glEnd();
 
-    glPolygonMode(GL_FRONT, GL_FILL); // Desenhar linhas em vez de encher os triângulos com cor
+
+    glPolygonMode(GL_FRONT, GL_LINE); // Desenhar linhas em vez de encher os triângulos com cor
+
     glColor3f(1, 0, 0);
+
+    // permite o movimento do teclado
+   
+	glRotatef(angle, 0, 0, 1);
+	
+
     scene.Render();
 
     glutSwapBuffers();
+}
+
+
+void  keyboard_events(unsigned char k, int mouseX, int mouseY) {
+    if (k = 'q') {
+        angle = fmod((angle + 1), 180);
+    }
+
+
+
+    glutPostRedisplay();
 }
 
 int main(int argc, char *argv[]) {
@@ -150,7 +174,7 @@ int main(int argc, char *argv[]) {
     glutReshapeFunc(changeSize);
 
     // Callback registration for keyboard processing
-    // glutKeyboardFunc(processKeys);
+    glutKeyboardFunc(keyboard_events);
     // glutSpecialFunc(processSpecialKeys);
 
     //  OpenGL settings

@@ -24,11 +24,11 @@ int main(int argc, char *argv[]) {
     if(primitiveType == "plane") {
         generator = new PlaneGenerator;
     } else if(primitiveType == "box") {
-        generator = new BoxGenerator;
+         generator = new BoxGenerator;
     } else if(primitiveType == "sphere") {
         generator = new SphereGenerator;
     } else if(primitiveType == "cone") {
-        generator = new ConeGenerator;
+       generator = new ConeGenerator;
     } else {
         // ERROR!
         return 2;
