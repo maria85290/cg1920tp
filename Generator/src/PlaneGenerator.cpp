@@ -27,7 +27,7 @@ bool PlaneGenerator::ParseArguments(int argc, char *argv[]) {
             plane_ = kPlaneZY;
         else {
             cerr << "Plano " << planeName << " não definido!" << endl
-                 << "Planos possívels: xy, xz, yz" << endl;
+                 << "Planos possívels: xy, yx, xz, zx, yz, zy" << endl;
 
             return false;
         }
@@ -35,7 +35,7 @@ bool PlaneGenerator::ParseArguments(int argc, char *argv[]) {
         SetFilename(argv[5]);
     } else if(argc < 5) { // Número incorreto de argumentos passado
         cerr << "Faltam argumentos!" << endl
-             << "Utilização: ./Gerador plane <width> <height> [xy|xz|yz]" << endl;
+             << "Utilização: ./Gerador plane <width> <height> [xy|yx|xz|zx|yz|zy]" << endl;
 
         return false;
     } else
