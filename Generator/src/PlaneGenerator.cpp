@@ -15,10 +15,16 @@ bool PlaneGenerator::ParseArguments(int argc, char *argv[]) {
 
         if(planeName == "xy")
             plane_ = kPlaneXY;
+        else if(planeName == "yx")
+            plane_ = kPlaneYX;
         else if(planeName == "xz")
             plane_ = kPlaneXZ;
+        else if(planeName == "zx")
+            plane_ = kPlaneZX;
         else if(planeName == "yz")
             plane_ = kPlaneYZ;
+        else if(planeName == "zy")
+            plane_ = kPlaneZY;
         else {
             cerr << "Plano " << planeName << " não definido!" << endl
                  << "Planos possívels: xy, xz, yz" << endl;
@@ -47,25 +53,45 @@ void PlaneGenerator::GenerateVertices() {
 
     switch(plane_) {
         case kPlaneYZ:
+            AddVertex(0.0, h, w);
+            AddVertex(0.0, -h, w);
+            AddVertex(0.0, -h, -w);
+
+            AddVertex(0.0, h, w);
+            AddVertex(0.0, -h, -w);
             AddVertex(0.0, h, -w);
+            break;
+
+        case kPlaneZY:
+            AddVertex(0.0, h, w);
             AddVertex(0.0, -h, -w);
             AddVertex(0.0, -h, w);
 
-            AddVertex(0.0, h, -w);
-            AddVertex(0.0, -h, w);
             AddVertex(0.0, h, w);
-
+            AddVertex(0.0, h, -w);
+            AddVertex(0.0, -h, -w);
             break;
+
         case kPlaneXZ:
-            AddVertex(w, 0.0, -h);
             AddVertex(-w, 0.0, -h);
+            AddVertex(w, 0.0, h);
             AddVertex(-w, 0.0, h);
 
+            AddVertex(-w, 0.0, -h);
             AddVertex(w, 0.0, -h);
+            AddVertex(w, 0.0, h);
+            break;
+
+        case kPlaneZX:
+            AddVertex(-w, 0.0, -h);
             AddVertex(-w, 0.0, h);
             AddVertex(w, 0.0, h);
 
+            AddVertex(-w, 0.0, -h);
+            AddVertex(w, 0.0, h);
+            AddVertex(w, 0.0, -h);
             break;
+
         case kPlaneXY:
             AddVertex(w, h, 0.0);
             AddVertex(-w, h, 0.0);
@@ -74,7 +100,16 @@ void PlaneGenerator::GenerateVertices() {
             AddVertex(w, h, 0.0);
             AddVertex(-w, -h, 0.0);
             AddVertex(w, -h, 0.0);
+            break;
 
+        case kPlaneYX:
+            AddVertex(w, h, 0.0);
+            AddVertex(-w, -h, 0.0);
+            AddVertex(-w, h, 0.0);
+
+            AddVertex(w, h, 0.0);
+            AddVertex(w, -h, 0.0);
+            AddVertex(-w, -h, 0.0);
             break;
     }
 }

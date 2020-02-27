@@ -68,7 +68,7 @@ namespace window {
         // set the camera
         glLoadIdentity();
 
-        gluLookAt(0.0, 4.0, 1.0,
+        gluLookAt(3.0, 3.0, 3.0,
                   0.0, 0.0, 0.0,
                   0.0, 1.0, 0.0);
 

@@ -14,8 +14,12 @@ private:
     int height_ = 0;
 
     static const int kPlaneXY = 0;
-    static const int kPlaneXZ = 1;
-    static const int kPlaneYZ = 2;
+    static const int kPlaneYX = 1;
+    static const int kPlaneXZ = 2;
+    static const int kPlaneZX = 3;
+    static const int kPlaneYZ = 4;
+    static const int kPlaneZY = 5;
+
 
 public:
     ~PlaneGenerator() override = default;
