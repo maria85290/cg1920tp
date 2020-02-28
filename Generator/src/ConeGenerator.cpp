@@ -2,6 +2,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 bool ConeGenerator::ParseArguments(int argc, char *argv[]) {
+ 
     SetFilename(argv[6]); // Número correto de argumentos passado
 
     bottomRadius_ = stoi(argv[2]);

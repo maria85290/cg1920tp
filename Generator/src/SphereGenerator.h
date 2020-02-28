@@ -3,6 +3,17 @@
 
 #include "AbstractGenerator.h"
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
+#include <list>
+
+#include <Common/vectors.h>
+#include <math.h>
+#include <string>
+#include <stdbool.h> 
+
+
 class SphereGenerator : public AbstractGenerator {
 private:
     int radius_;
@@ -18,3 +29,4 @@ public:
 };
 
 #endif //CG_TP_GENERATOR_SRC_SPHEREGENERATOR_H_
+

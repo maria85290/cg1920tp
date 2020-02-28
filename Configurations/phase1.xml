@@ -1,5 +1,3 @@
 <scene>
-    <model file='plane_xy.3d'/>
-    <model file='plane_yz.3d'/>
-    <model file='plane_zx.3d'/>
+    <model file='esfera.3d'/>
 </scene>

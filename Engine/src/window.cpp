@@ -1,12 +1,23 @@
 ﻿#include "window.h"
+#define _USE_MATH_DEFINES
+#include <cmath>
 
 #include "glut.h"
 
 namespace window {
     static Scene current_scene;
+    float angle = 0;
 
     void ChangeSize(int, int);
     void RenderScene();
+
+    void keyboard_events(unsigned char k, int mouseX, int mouseY) {
+        if (k == 'q') {
+            angle = fmod((angle + 1), 360);
+        }
+
+        glutPostRedisplay();
+    }
 
     void InitWindow(char *programName) {
         int argc = 1;
@@ -21,12 +32,13 @@ namespace window {
         glutDisplayFunc(RenderScene);
         glutReshapeFunc(ChangeSize);
 
-        // glutKeyboardFunc(processKeys);
+        glutKeyboardFunc(keyboard_events);
         // glutSpecialFunc(processSpecialKeys);
 
         //  OpenGL settings
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
+        glPolygonMode(GL_FRONT, GL_LINE);
     }
 
     Scene& GetScene() {
@@ -67,6 +79,9 @@ namespace window {
 
         // set the camera
         glLoadIdentity();
+
+        // permite o movimento do teclado
+        glRotatef(angle, 0, 0, 1);
 
         gluLookAt(3.0, 3.0, 3.0,
                   0.0, 0.0, 0.0,
