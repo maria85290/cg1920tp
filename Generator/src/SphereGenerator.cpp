@@ -5,9 +5,9 @@
 bool SphereGenerator::ParseArguments(int argc, char* argv[]) {
 
     
-   if (argc < 6) { // Número incorreto de argumentos passado
+   if (argc < 6) { // NÃºmero incorreto de argumentos passado
         cerr << "Faltam argumentos!" << endl
-            << "Utilização: ./Gerador  sphere <radius> <slices> <stacks> " << endl;
+            << "UtilizaÃ§Ã£o: ./Gerador  sphere <radius> <slices> <stacks> " << endl;
 
         return false;
     }
@@ -52,11 +52,11 @@ void SphereGenerator::GenerateVertices() {
 
     for (int i = 0; i < stacks_; i++) {
 
-        angBeta = (beta * i);			//Cálculo do ângulo Beta
+        angBeta = (beta * i);			//CÃ¡lculo do Ã¢ngulo Beta
 
         for (int j = 0; j < slices_; j++) {
 
-            angAlfa = (alfa * j);		//Cálculo do ângulo Alfa
+            angAlfa = (alfa * j);		//CÃ¡lculo do Ã¢ngulo Alfa
 
         // para o ponto "principal"
 
@@ -103,11 +103,11 @@ void SphereGenerator::GenerateVertices() {
 
     for (int i = 0; i < stacks_; i++) {
 
-        angBeta = (beta * i);			//Cálculo do ângulo Beta
+        angBeta = (beta * i);			//CÃ¡lculo do Ã¢ngulo Beta
 
         for (int j = 0; j < slices_; j++) {
 
-            angAlfa = (alfa * j);		//Cálculo do ângulo Alfa
+            angAlfa = (alfa * j);		//CÃ¡lculo do Ã¢ngulo Alfa
 
         // para o ponto "principal"
 

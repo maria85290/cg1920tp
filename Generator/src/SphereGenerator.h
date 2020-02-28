@@ -1,18 +1,15 @@
 #ifndef CG_TP_GENERATOR_SRC_SPHEREGENERATOR_H_
 #define CG_TP_GENERATOR_SRC_SPHEREGENERATOR_H_
 
-#include "AbstractGenerator.h"
-
 #define _USE_MATH_DEFINES
-#include <math.h>
+#include <cmath>
 
 #include <list>
+#include <string>
 
 #include <Common/vectors.h>
-#include <math.h>
-#include <string>
-#include <stdbool.h> 
 
+#include "AbstractGenerator.h"
 
 class SphereGenerator : public AbstractGenerator {
 private:
