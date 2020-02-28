@@ -1,8 +1,5 @@
 #include <iostream>
 
-#define _USE_MATH_DEFINES
-#include <cmath>
-
 #include "ConeGenerator.h"
 
 bool ConeGenerator::ParseArguments(int argc, char *argv[]) {

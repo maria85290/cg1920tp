@@ -2,16 +2,13 @@
 
 #include "SphereGenerator.h"
 
-bool SphereGenerator::ParseArguments(int argc, char* argv[]) {
-
-    
-   if (argc < 6) { // Número incorreto de argumentos passado
-        cerr << "Faltam argumentos!" << endl
-            << "Utilização: ./Gerador  sphere <radius> <slices> <stacks> " << endl;
+bool SphereGenerator::ParseArguments(int argc, char *argv[]) {
+    if(argc < 6) {
+        cerr << "Erro: Faltam argumentos!" << endl;
+        cerr << "Utilização: " << argv[0] << " sphere <radius> <slices> <stacks> <fileName>" << endl;
 
         return false;
     }
-    
 
     SetFilename(argv[5]);
 
@@ -19,46 +16,43 @@ bool SphereGenerator::ParseArguments(int argc, char* argv[]) {
     slices_ = stoi(argv[3]);
     stacks_ = stoi(argv[3]);
 
-    
     return true;
 }
 
-
 void SphereGenerator::GenerateVertices() {
-
-    float angAlfa = 0;
-    float angBeta = 0;
+    double angAlfa = 0;
+    double angBeta = 0;
 
     // ponto P , ponto principal
-    float xP;
-    float yP;
-    float zP;
+    double xP;
+    double yP;
+    double zP;
 
-    float xA;
-    float yA;
-    float zA;
+    double xA;
+    double yA;
+    double zA;
 
-    float xB;
-    float yB;
-    float zB;
+    double xB;
+    double yB;
+    double zB;
 
-    float xC;
-    float yC;
-    float zC;
+    double xC;
+    double yC;
+    double zC;
 
-    float alfa = 2 * M_PI / slices_;
-    float beta = (M_PI- (M_PI / 2)) / stacks_;
+    double alfa = 2 * M_PI / slices_;
+    double beta = (M_PI - (M_PI / 2)) / stacks_;
     // Para encontrar a metade inferior da esfera
 
-    for (int i = 0; i < stacks_; i++) {
+    for(int i = 0; i < stacks_; i++) {
 
-        angBeta = (beta * i);			//Cálculo do ângulo Beta
+        angBeta = (beta * i);            //Cálculo do ângulo Beta
 
-        for (int j = 0; j < slices_; j++) {
+        for(int j = 0; j < slices_; j++) {
 
-            angAlfa = (alfa * j);		//Cálculo do ângulo Alfa
+            angAlfa = (alfa * j);        //Cálculo do ângulo Alfa
 
-        // para o ponto "principal"
+            // para o ponto "principal"
 
             xP = radius_ * cos(angBeta) * sin(angAlfa);
             yP = radius_ * sin(angBeta);
@@ -91,25 +85,22 @@ void SphereGenerator::GenerateVertices() {
             AddVertex(xC, yC, zC);
 
         }
-
     }
-    
+
     // Para encontrar a metade inferior da esfera
 
     alfa = 2 * M_PI / slices_;
-    beta = ( (M_PI / 2) - M_PI) / stacks_;
-    angBeta = 0;
-    angAlfa = 0;
+    beta = ((M_PI / 2) - M_PI) / stacks_;
 
-    for (int i = 0; i < stacks_; i++) {
+    for(int i = 0; i < stacks_; i++) {
 
-        angBeta = (beta * i);			//Cálculo do ângulo Beta
+        angBeta = (beta * i);            //Cálculo do ângulo Beta
 
-        for (int j = 0; j < slices_; j++) {
+        for(int j = 0; j < slices_; j++) {
 
-            angAlfa = (alfa * j);		//Cálculo do ângulo Alfa
+            angAlfa = (alfa * j);        //Cálculo do ângulo Alfa
 
-        // para o ponto "principal"
+            // para o ponto "principal"
 
             xP = radius_ * cos(angBeta) * sin(angAlfa);
             yP = radius_ * sin(angBeta);
@@ -136,15 +127,11 @@ void SphereGenerator::GenerateVertices() {
             AddVertex(xA, yA, zA);
             AddVertex(xP, yP, zP);
             AddVertex(xC, yC, zC);
-            
-            
+
             AddVertex(xC, yC, zC);
             AddVertex(xP, yP, zP);
             AddVertex(xB, yB, zB);
-            
-            
 
         }
-
     }
 }

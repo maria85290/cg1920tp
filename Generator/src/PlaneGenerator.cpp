@@ -34,8 +34,8 @@ bool PlaneGenerator::ParseArguments(int argc, char *argv[]) {
 
         SetFilename(argv[5]);
     } else if(argc < 5) { // Número incorreto de argumentos passado
-        cerr << "Faltam argumentos!" << endl
-             << "Utilização: ./Gerador plane <width> <height> [xy|yx|xz|zx|yz|zy]" << endl;
+        cerr << "Erro: faltam argumentos!" << endl
+             << "Utilização: " << argv[0] << " plane <width> <height> [xy|yx|xz|zx|yz|zy] <fileName>" << endl;
 
         return false;
     } else

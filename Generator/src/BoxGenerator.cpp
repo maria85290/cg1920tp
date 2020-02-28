@@ -1,8 +1,7 @@
 #include <iostream>
-
 #include <string>
+
 #include "BoxGenerator.h"
-#include "PlaneGenerator.h"
 
 bool BoxGenerator::ParseArguments(int argc, char* argv[]) {
    
@@ -13,7 +12,7 @@ bool BoxGenerator::ParseArguments(int argc, char* argv[]) {
         return false;
      }
 
-    SetFilename(argv[5]); // Número correto de argumentos passado
+    SetFilename(argv[5]); // NÃºmero correto de argumentos passado
 
     dimX_ = stoi(argv[2]) ;
     dimY_ = stoi(argv[3]);;

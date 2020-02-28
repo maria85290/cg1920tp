@@ -6,6 +6,9 @@
 #include <Common/vectors.h>
 #include <fstream>
 
+#define _USE_MATH_DEFINES
+#include <cmath>
+
 using namespace std;
 
 /**
