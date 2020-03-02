@@ -12,7 +12,7 @@ using namespace std;
 int main(int argc, char *argv[]) {
     if(argc <= 1) {
         cerr << "Não foi especificado um tipo de primitva a gerar!" << endl;
-        cerr << "Uso: ./Generator <plane/box/sphere/cone> <parameters...> <filename>" << endl;
+        cerr << "Uso: " << argv[0] << " <plane/box/sphere/cone> <parameters...> <filename>" << endl;
 
         return 1;
     }

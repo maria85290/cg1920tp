@@ -2,9 +2,10 @@
 #define CG_TP_PLANEGENERATOR_H
 
 #include <list>
+#include <string>
 
 #include <Common/vectors.h>
-#include <string>
+
 #include "AbstractGenerator.h"
 
 class PlaneGenerator : public AbstractGenerator {

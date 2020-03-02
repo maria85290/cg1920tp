@@ -2,9 +2,9 @@
 #define CG_TP_ABSTRACTGENERATOR_H
 
 #include <list>
+#include <fstream>
 
 #include <Common/vectors.h>
-#include <fstream>
 
 #define _USE_MATH_DEFINES
 #include <cmath>
