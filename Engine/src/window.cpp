@@ -83,7 +83,7 @@ namespace window {
         // permite o movimento do teclado
         glRotatef(angle, 0, 0, 1);
 
-        gluLookAt(3.0, 3.0, 3.0,
+        gluLookAt(20.0, 20.0, 20.0,
                   0.0, 0.0, 0.0,
                   0.0, 1.0, 0.0);
 
