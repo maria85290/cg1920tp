@@ -55,25 +55,25 @@ void SphereGenerator::GenerateVertices() {
 
             angAlfa = (alfa * j);        //Cálculo do ângulo Alfa
 
-            // para o ponto P
+            // para o ponto P (canto inferior esquerdo)
 
             xP = radius_ * cos(angBeta) * sin(angAlfa);
             yP = radius_ * sin(angBeta);
             zP = radius_ * cos(angBeta) * cos(angAlfa);
 
-            // para o ponto A:
+            // para o ponto A (canto inferior direito)
 
             xA = radius_ * cos(angBeta) * sin(angAlfa + alfa);
             yA = radius_ * sin(angBeta );
             zA = radius_ * cos(angBeta) * cos(angAlfa + alfa);
 
-            // Para o ponto B:
+            // Para o ponto B (canto superior esquerdo)
 
             xB = radius_ * cos(angBeta + beta) * sin(angAlfa );
             yB = radius_ * sin(angBeta + beta);
             zB = radius_ * cos(angBeta + beta) * cos(angAlfa );
 
-            // para o ponto C:
+            // para o ponto C (canto superior direito)
 
             xC = radius_ * cos(angBeta + beta) * sin(angAlfa + alfa);
             yC = radius_ * sin(angBeta + beta);
