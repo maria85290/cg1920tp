@@ -1,17 +1,17 @@
 ﻿#include "window.h"
 #define _USE_MATH_DEFINES
-#include <cmath>
+#include <math.h>
 
 #include "glut.h"
 
 namespace window {
-    static Scene current_scene;
+    static Scene currentScene;
     float angle = 0;
 
     void ChangeSize(int, int);
     void RenderScene();
 
-    void keyboard_events(unsigned char k, int mouseX, int mouseY) {
+    void KeyboardEvents(unsigned char k, int mouseX, int mouseY) {
         if (k == 'q') {
             angle = fmod((angle + 1), 360);
         }
@@ -32,7 +32,7 @@ namespace window {
         glutDisplayFunc(RenderScene);
         glutReshapeFunc(ChangeSize);
 
-        glutKeyboardFunc(keyboard_events);
+        glutKeyboardFunc(KeyboardEvents);
         // glutSpecialFunc(processSpecialKeys);
 
         //  OpenGL settings
@@ -42,7 +42,7 @@ namespace window {
     }
 
     Scene& GetScene() {
-        return current_scene;
+        return currentScene;
     }
 
     void MainLoop() {
@@ -87,7 +87,7 @@ namespace window {
                   0.0, 0.0, 0.0,
                   0.0, 1.0, 0.0);
 
-        current_scene.Render();
+        currentScene.Render();
 
         glutSwapBuffers();
     }
