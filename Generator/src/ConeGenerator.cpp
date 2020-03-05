@@ -27,50 +27,50 @@ void ConeGenerator::GenerateVertices() {
 
     double r = bottomRadius_ / stacks;
     double angle = (2 * M_PI) / slices_;
-    double x, x2, z, z2, x3, x4, z3, z4;
+    double xA, xB, xC, xD, zA, zB, zC, zD;
 
     for(int i = 0; i < slices_; i++) {
-        x = r * sin(i * angle);
-        x2 = r * sin((i + 1) * angle);
-        z = r * cos(i * angle);
-        z2 = r * cos((i + 1) * angle);
+        xA = r * sin(i * angle);
+        xB = r * sin((i + 1) * angle);
+        zA = r * cos(i * angle);
+        zB = r * cos((i + 1) * angle);
 
         AddVertex(0.0, height_, 0.0);
-        AddVertex(x, height_ - (height_ / stacks), z);
-        AddVertex(x2, height_ - (height_ / stacks), z2);
+        AddVertex(xA, height_ - (height_ / stacks), zA);
+        AddVertex(xB, height_ - (height_ / stacks), zB);
     }
 
     for(int j = 1; j < stacks; j++) {
         for(int k = 0; k <= slices_; k++) {
 
-            x = j * r * sin(k * angle);
-            x2 = j * r * sin((k + 1) * angle);
-            x3 = (j + 1) * r * sin(k * angle);
-            x4 = (j + 1) * r * sin((k + 1) * angle);
-            z = j * r * cos(k * angle);
-            z2 = j * r * cos((k + 1) * angle);
-            z3 = (j + 1) * r * cos(k * angle);
-            z4 = (j + 1) * r * cos((k + 1) * angle);
+            xA = j * r * sin(k * angle);
+            xB = j * r * sin((k + 1) * angle);
+            xC = (j + 1) * r * sin(k * angle);
+            xD = (j + 1) * r * sin((k + 1) * angle);
+            zA = j * r * cos(k * angle);
+            zB = j * r * cos((k + 1) * angle);
+            zC = (j + 1) * r * cos(k * angle);
+            zD = (j + 1) * r * cos((k + 1) * angle);
 
-            AddVertex(x2, height_ - j * (height_ / stacks), z2);
-            AddVertex(x, height_ - j * (height_ / stacks), z);
-            AddVertex(x3, height_ - (j + 1) * (height_ / stacks), z3);
+            AddVertex(xB, height_ - j * (height_ / stacks), zB);
+            AddVertex(xA, height_ - j * (height_ / stacks), zA);
+            AddVertex(xC, height_ - (j + 1) * (height_ / stacks), zC);
 
-            AddVertex(x3, height_ - (j + 1) * (height_ / stacks), z3);
-            AddVertex(x4, height_ - (j + 1) * (height_ / stacks), z4);
-            AddVertex(x2, height_ - j * (height_ / stacks), z2);
+            AddVertex(xC, height_ - (j + 1) * (height_ / stacks), zC);
+            AddVertex(xD, height_ - (j + 1) * (height_ / stacks), zD);
+            AddVertex(xB, height_ - j * (height_ / stacks), zB);
         }
     }
 
     for(int i = 0; i < slices_; i++) {
-        x = r * stacks * sin(i * angle);
-        x2 = r * stacks * sin((i + 1) * angle);
-        z = r * stacks * cos(i * angle);
-        z2 = r * stacks * cos((i + 1) * angle);
+        xA = r * stacks * sin(i * angle);
+        xB= r * stacks * sin((i + 1) * angle);
+        zA = r * stacks * cos(i * angle);
+        zB = r * stacks * cos((i + 1) * angle);
 
         AddVertex(0.0, height_ - stacks * (height_ / stacks), 0.0);
-        AddVertex(x2, height_ - stacks * (height_ / stacks), z2);
-        AddVertex(x, height_ - stacks * (height_ / stacks), z);
+        AddVertex(xB, height_ - stacks * (height_ / stacks), zB);
+        AddVertex(xA, height_ - stacks * (height_ / stacks), zA);
     }
 
 }
