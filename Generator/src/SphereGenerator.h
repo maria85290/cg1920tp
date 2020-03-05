@@ -2,7 +2,7 @@
 #define CG_TP_GENERATOR_SRC_SPHEREGENERATOR_H_
 
 #define _USE_MATH_DEFINES
-#include <cmath>
+#include <math.h>
 
 #include <list>
 #include <string>

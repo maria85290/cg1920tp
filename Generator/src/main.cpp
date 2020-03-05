@@ -25,10 +25,13 @@ int main(int argc, char *argv[]) {
         generator = new PlaneGenerator;
     } else if(primitiveType == "box") {
          generator = new BoxGenerator;
+
     } else if(primitiveType == "sphere") {
         generator = new SphereGenerator;
+
     } else if(primitiveType == "cone") {
        generator = new ConeGenerator;
+
     } else {
         // ERROR!
         return 2;

@@ -2,6 +2,8 @@
 
 #include "ConeGenerator.h"
 
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 bool ConeGenerator::ParseArguments(int argc, char *argv[]) {
     if(argc < 7) {
