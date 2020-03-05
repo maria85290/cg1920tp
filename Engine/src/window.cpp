@@ -6,9 +6,11 @@
 
 namespace window {
     static Scene currentScene;
-    float angleQ = 0;
-    float angleW = 0;
-    float angleE = 0;
+	
+    double angleQ = 0;
+    double angleW = 0;
+    double angleE = 0;
+	
     void ChangeSize(int, int);
     void RenderScene();
 
@@ -96,7 +98,7 @@ namespace window {
         glRotatef(angleW, 0 , 1, 0);
         glRotatef(angleE, 0 , 0, 1);
 
-        current_scene.Render();
+        currentScene.Render();
 
         glutSwapBuffers();
     }
