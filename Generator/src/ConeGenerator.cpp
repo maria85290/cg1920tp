@@ -2,6 +2,7 @@
 
 #include "ConeGenerator.h"
 
+
 bool ConeGenerator::ParseArguments(int argc, char *argv[]) {
     if(argc < 7) {
         cerr << "Erro: faltam argumentos!" << endl;
@@ -66,8 +67,8 @@ void ConeGenerator::GenerateVertices() {
         z2 = r * stacks * cos((i + 1) * angle);
 
         AddVertex(0.0, height_ - stacks * (height_ / stacks), 0.0);
-        AddVertex(x, height_ - stacks * (height_ / stacks), z);
         AddVertex(x2, height_ - stacks * (height_ / stacks), z2);
+        AddVertex(x, height_ - stacks * (height_ / stacks), z);
     }
 
 }
