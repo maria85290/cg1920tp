@@ -23,6 +23,7 @@ bool BoxGenerator::ParseArguments(int argc, char *argv[]) {
 }
 
 void BoxGenerator::GenerateVertices() {
+    
     double y_ = -dimY_ / 2.0;
     double h = dimZ_ / 2.0;
     double w = dimX_ / 2.0;

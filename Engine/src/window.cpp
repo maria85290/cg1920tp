@@ -6,16 +6,22 @@
 
 namespace window {
     static Scene currentScene;
-    float angle = 0;
-
+    float angleQ = 0;
+    float angleW = 0;
+    float angleE = 0;
     void ChangeSize(int, int);
     void RenderScene();
 
     void KeyboardEvents(unsigned char k, int mouseX, int mouseY) {
         if (k == 'q') {
-            angle = fmod((angle + 1), 360);
+            angleQ = fmod((angleQ + 1), 360);
         }
-
+        if (k == 'w') {
+            angleW = fmod((angleW + 1), 360);
+        }
+        if (k == 'e') {
+            angleE = fmod((angleE + 1), 360);
+        }
         glutPostRedisplay();
     }
 
@@ -81,13 +87,16 @@ namespace window {
         glLoadIdentity();
 
         // permite o movimento do teclado
-        glRotatef(angle, 0, 0, 1);
 
-        gluLookAt(20.0, 20.0, 20.0,
+        gluLookAt(3.0, 3.0, 3.0,
                   0.0, 0.0, 0.0,
                   0.0, 1.0, 0.0);
 
-        currentScene.Render();
+        glRotatef(angleQ, 1 , 0, 0);
+        glRotatef(angleW, 0 , 1, 0);
+        glRotatef(angleE, 0 , 0, 1);
+
+        current_scene.Render();
 
         glutSwapBuffers();
     }
