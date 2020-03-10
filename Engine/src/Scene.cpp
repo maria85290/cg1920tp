@@ -1,5 +1,3 @@
-#include <list>
-
 #include "Scene.h"
 
 void Scene::Render() {

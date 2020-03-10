@@ -2,13 +2,15 @@
 #define CG_TP_ENGINE_SRC_MODEL_H_
 
 #include <string>
+#include <vector>
+
 #include <Common/vectors.h>
 
 using namespace std;
 
 class Model {
 private:
-    list<vec3> vertices_ = list<vec3>();
+    vector<vec3> vertices_ = vector<vec3>();
 
 protected:
     void AddVertex(double x, double y, double z) {

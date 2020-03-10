@@ -1,7 +1,7 @@
 #ifndef CG_TP_ENGINE_SRC_SCENE_H_
 #define CG_TP_ENGINE_SRC_SCENE_H_
 
-#include <list>
+#include <vector>
 
 #include "Model.h"
 
@@ -9,14 +9,14 @@ using namespace std;
 
 class Scene {
 private:
-    list<Model> models_ = list<Model>();
+    vector<Model> models_ = vector<Model>();
 
 public:
     void AddModel(const Model& model) {
-        models_.push_front(model);
+        models_.push_back(model);
     }
 
-    const list<Model>& GetModels() {
+    const vector<Model>& GetModels() {
         return models_;
     }
 

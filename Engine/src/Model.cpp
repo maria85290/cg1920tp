@@ -1,8 +1,5 @@
-#include <list>
 #include <string>
 #include <fstream>
-
-#include <iostream>
 
 #include "glut.h"
 

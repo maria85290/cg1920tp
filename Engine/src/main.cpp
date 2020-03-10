@@ -1,7 +1,7 @@
 #include <iostream>
 
 #define _USE_MATH_DEFINES
-#include <cmath>
+#include <math.h>
 
 #include <tinyxml2/tinyxml2.h>
 
