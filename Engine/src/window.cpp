@@ -92,7 +92,7 @@ namespace window {
 
         // permite o movimento do teclado
 
-        gluLookAt(3.0, 3.0, 3.0,
+        gluLookAt(5.0, 0.0, 5.0,
                   0.0, 0.0, 0.0,
                   0.0, 1.0, 0.0);
 

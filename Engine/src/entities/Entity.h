@@ -2,7 +2,11 @@
 #define CG_TP_ENGINE_SRC_ENTITIES_ENTITY_H_
 
 #include <tinyxml2/tinyxml2.h>
+#include <iostream>
 
+#include "../glut.h"
+
+using namespace std;
 using namespace tinyxml2;
 
 namespace entities {

@@ -1,8 +1,11 @@
 #include <iostream>
-#include "../glut.h"
+
+#include "Models.h"
+#include "Translate.h"
+#include "Rotate.h"
+#include "Scale.h"
 
 #include "Group.h"
-#include "Models.h"
 
 namespace entities {
     Group::~Group() {
@@ -15,26 +18,27 @@ namespace entities {
         XMLNode *childNode = groupNode->FirstChild();
 
         while(childNode != nullptr) {
-            if(strcmp("translate", childNode->Value()) == 0) {
-                // TODO
-            } else if(strcmp("rotate", childNode->Value()) == 0) {
-                // TODO
-            } else if(strcmp("scale", childNode->Value()) == 0) {
-                // TODO
-            } else if(strcmp("models", childNode->Value()) == 0) {
-                auto *models = new Models;
-                models->ParseXml(childNode);
+            string nodeName(childNode->Value());
 
-                this->AddEntity(models);
-            } else if(strcmp("group", childNode->Value()) == 0) {
-                auto *group = new Group;
-                group->ParseXml(childNode);
+            Entity *entity;
 
-                this->AddEntity(group);
+            if(nodeName == "translate") {
+                entity = new Translate;
+            } else if(nodeName == "rotate") {
+                entity = new Rotate;
+            } else if(nodeName == "scale") {
+                entity = new Scale;
+            } else if(nodeName == "models") {
+                entity = new Models;
+            } else if(nodeName == "group") {
+                entity = new Group;
             } else {
                 cerr << "Errou!" << endl; // TODO
                 return false;
             }
+
+            entity->ParseXml(childNode);
+            this->AddEntity(entity);
 
             childNode = childNode->NextSibling();
         }

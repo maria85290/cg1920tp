@@ -37,7 +37,9 @@ int main(int argc, char *argv[]) {
     }
 
     Scene& scene = window::GetScene();
-    scene.ParseXml(root);
+    if(!scene.ParseXml(root)) {
+        return -1;
+    }
 	
     window::InitWindow(argv[0]);
     window::MainLoop();
