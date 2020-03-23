@@ -1,8 +1,10 @@
-﻿#include "window.h"
+﻿#include <stdlib.h>
+#include "glut.h"
+
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-#include "glut.h"
+#include "Scene.h"
 
 namespace window {
     static Scene currentScene;
@@ -102,5 +104,4 @@ namespace window {
 
         glutSwapBuffers();
     }
-
 }

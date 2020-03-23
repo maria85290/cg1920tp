@@ -1,26 +1,26 @@
 #ifndef CG_TP_ENGINE_SRC_SCENE_H_
 #define CG_TP_ENGINE_SRC_SCENE_H_
 
-#include <vector>
+#include <tinyxml2/tinyxml2.h>
 
-#include "Model.h"
+#include "entities/Group.h"
 
-using namespace std;
+using namespace tinyxml2;
+using namespace entities;
 
 class Scene {
 private:
-    vector<Model> models_ = vector<Model>();
+    vector<const Group*> groups_ = vector<const Group*>();
+
+    void AddGroup(const Group *group) {
+        groups_.push_back(group);
+    }
 
 public:
-    void AddModel(const Model& model) {
-        models_.push_back(model);
-    }
+    ~Scene();
 
-    const vector<Model>& GetModels() {
-        return models_;
-    }
-
-    void Render();
+    bool ParseXml(XMLNode* sceneNode);
+    void Render() const;
 };
 
 #endif //CG_TP_ENGINE_SRC_SCENE_H_

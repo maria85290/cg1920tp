@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdio>
+#include "glut.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -6,10 +8,12 @@
 #include <tinyxml2/tinyxml2.h>
 
 #include "Scene.h"
+
 #include "window.h"
 
 using namespace std;
 using namespace tinyxml2;
+using namespace entities;
 
 int main(int argc, char *argv[]) {
     if(argc != 2) {
@@ -32,34 +36,9 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    if(root->NoChildren()) {
-        cout << "Não contêm models." << endl;
-        return 1;
-    }
-
-    XMLNode *model = root->FirstChild();
-
     Scene& scene = window::GetScene();
-
-    while(model != nullptr) {
-        XMLElement *element = model->ToElement();
-
-        if(strcmp("model", model->Value()) != 0) {
-            cerr << "Esperado valor 'model', obtido '" << model->Value() << "'" << endl;
-            return 1;
-        }
-
-        const char *file = element->Attribute("file");
-
-        if(file == nullptr) {
-            cerr << "Não existe campo 'file'." << endl;
-            return 1;
-        }
-
-        scene.AddModel(Model(file));
-        model = model->NextSibling();
-    }
-
+    scene.ParseXml(root);
+	
     window::InitWindow(argv[0]);
     window::MainLoop();
 
