@@ -1,70 +1,61 @@
-<scene>    <!-- alinhado nos Z positivos -->
+<scene>
     <group>
-        <translate X=0 Y=0 Z=2.992>  
+        <translate X="0" Y="0" Z="2.992"/>
         <models>
-         <!-- Terra -->
             <model file = "sphere.3d" /> 
         </models>
         <group>
-         <!-- Sol -->
-            <translate X=0 Y=0 Z=-2.992>  
-            <scale X=109 Y =109 Z=109>
+            <translate X="0" Y="0" Z="-2.992"/>
+            <scale X="109" Y="109" Z="109"/>
             <models>
                 <model file = "sphere.3d" /> 
             </models>
         </group>
         <group>
-         <!-- Mercurio -->
-            <translate X=0 Y=0 Z=-1.842>  
-            <scale X=0.38 Y =0.38 Z=0.38>
+            <translate X="0" Y="0" Z="-1.842"/>
+            <scale X="0.38" Y="0.38" Z="0.38"/>
             <models>
                 <model file = "sphere.3d" /> 
             </models>
         </group>
         <group>
-         <!-- Venus -->
-            <translate X=0 Y=0 Z=-0.828>  
-            <scale X=0.95 Y =0.95 Z=0.95>
+            <translate X="0" Y="0" Z="-0.828"/>
+            <scale X="0.95" Y="0.95" Z="0.95"/>
             <models>
                 <model file = "sphere.3d" /> 
             </models>
         </group>
         <group>
-         <!-- Marte -->
-            <translate X=0 Y=0 Z=1.566>  
-            <scale X=0.53 Y =0.53 Z= 0.53>
+            <translate X="0" Y="0" Z="1.566"/>
+            <scale X="0.53" Y="0.53" Z="0.53"/>
             <models>
                 <model file = "sphere.3d" /> 
             </models>
         </group>
         <group>
-         <!-- Jupiter -->
-            <translate X=0 Y=0 Z=12.578>  
-            <scale X=11.19 Y = 11.19 Z=11.19 >
+            <translate X="0" Y="0" Z="12.578"/>
+            <scale X="11.19" Y="11.19" Z="11.19"/>
             <models>
                 <model file = "sphere.3d" /> 
             </models>
         </group>
         <group>
-         <!-- Saturno -->
-            <translate X=0 Y=0 Z=28650>  
-            <scale X=9.40 Y = 9.40 Z=9.40 >
+            <translate X="0" Y="0" Z="28650"/>
+            <scale X="9.40" Y="9.40" Z="9.40"/>
             <models>
                 <model file = "sphere.3d" /> 
             </models>
         </group>
         <group>
-         <!-- Urano -->
-            <translate X=0 Y=0 Z=57417>  
-            <scale X=4.04 Y = 4.04 Z=4.04 >
+            <translate X="0" Y="0" Z="57417"/>
+            <scale X="4.04" Y="4.04" Z="4.04"/>
             <models>
                 <model file = "sphere.3d" /> 
             </models>
         </group>
         <group>
-        <!-- Neptuno -->
-            <translate X=0 Y=0 Z=89897>  
-            <scale X=3.88 Y = 3.88 Z=3.88 >
+            <translate X="0" Y="0" Z="89897"/>
+            <scale X="3.88" Y="3.88" Z="3.88"/>
             <models>
                 <model file = "sphere.3d" /> 
             </models>
