@@ -11,11 +11,11 @@ using namespace std;
 namespace engine::entities {
     class Model {
     private:
-        vector<vec3> vertices_ = vector<vec3>();
+        vector<vec3> vertices = vector<vec3>();
 
     protected:
         void AddVertex(double x, double y, double z) {
-            vertices_.push_back({x, y, z});
+            vertices.push_back({x, y, z});
         }
 
     public:

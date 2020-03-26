@@ -7,7 +7,7 @@
 #include <Common/vectors.h>
 
 #define _USE_MATH_DEFINES
-#include <cmath>
+#include <math.h>
 
 using namespace std;
 
@@ -20,30 +20,30 @@ using namespace std;
  */
 class AbstractGenerator {
 private:
-    /** @var vertices_ Os vértices que este gerador gerou. */
-    list<vec3> vertices_ = list<vec3>();
+    /** @var vertices Os vértices que este gerador gerou. */
+    list<vec3> vertices = list<vec3>();
 
-    /** @var filename_ O nome do ficheiro onde guardar os vértices gerados. */
-    string filename_;
+    /** @var filename O nome do ficheiro onde guardar os vértices gerados. */
+    string filename;
 
 protected:
     void SetFilename(const string& filename) {
-        this->filename_ = filename;
+        this->filename = filename;
     }
 
     void AddVertex(const vec3& vertex) {
-        this->vertices_.push_back(vertex);
+        this->vertices.push_back(vertex);
     }
 
     void AddVertex(const double& x, const double& y, const double& z) {
-        this->vertices_.push_back({x, y, z});
+        this->vertices.push_back({x, y, z});
     }
 
 public:
     virtual ~AbstractGenerator() = default;
 
     const string& GetFilename() {
-        return this->filename_;
+        return this->filename;
     }
 
     /**
@@ -70,9 +70,9 @@ public:
      * O formato é comum a todos os geradores; portanto, esta função também.
      */
     void SaveVerticesToFile() {
-        ofstream file(filename_);
+        ofstream file(filename);
 
-        for(const vec3& vertex : vertices_) {
+        for(const vec3& vertex : vertices) {
             file << vertex.x << " "
                  << vertex.y << " "
                  << vertex.z << endl;

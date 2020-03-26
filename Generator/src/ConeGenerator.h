@@ -7,10 +7,10 @@
 
 class ConeGenerator : public AbstractGenerator {
 private:
-    int bottomRadius_;
-    int height_;
-    int slices_;
-    int stacks_;
+    int bottomRadius;
+    int height;
+    int slices;
+    int stacks;
 
 public:
     ~ConeGenerator() override = default;

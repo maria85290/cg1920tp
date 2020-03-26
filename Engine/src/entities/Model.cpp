@@ -20,7 +20,7 @@ namespace engine::entities {
     void Model::Render() const {
         glBegin(GL_TRIANGLES);
 
-        for(const auto& v : vertices_) {
+        for(const auto& v : vertices) {
             glVertex3d(v.x, v.y, v.z);
         }
 

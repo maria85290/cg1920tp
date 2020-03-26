@@ -34,7 +34,7 @@ namespace engine::entities {
     }
 
     void Models::Render() const {
-        for(const Model *model : models_) {
+        for(const Model *model : models) {
             model->Render();
         }
     }

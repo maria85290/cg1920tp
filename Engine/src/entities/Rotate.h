@@ -8,9 +8,9 @@ namespace engine::entities {
     class Rotate: public Entity {
     private:
         /** The rotation angle, in degrees. */
-        double angle_;
+        double angle;
         /** The rotation vector. */
-        vec3 vector_;
+        vec3 vector;
 
     public:
         ~Rotate() override = default;

@@ -10,9 +10,9 @@
 
 class PlaneGenerator : public AbstractGenerator {
 private:
-    int plane_ = 0;
-    int width_ = 0;
-    int height_ = 0;
+    int plane = 0;
+    int width = 0;
+    int height = 0;
 
     static const int kPlaneXY = 0;
     static const int kPlaneYX = 1;

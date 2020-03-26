@@ -5,7 +5,7 @@
 using namespace std;
 
 bool PlaneGenerator::ParseArguments(int argc, char *argv[]) {
-    plane_ = kPlaneXZ;
+  plane = kPlaneXZ;
 
     // Minor parsing para manter compatibilidade com aquilo que o stor pediu
     if(argc > 5) {
@@ -14,17 +14,17 @@ bool PlaneGenerator::ParseArguments(int argc, char *argv[]) {
         const string planeName = argv[4];
 
         if(planeName == "xy")
-            plane_ = kPlaneXY;
+          plane = kPlaneXY;
         else if(planeName == "yx")
-            plane_ = kPlaneYX;
+          plane = kPlaneYX;
         else if(planeName == "xz")
-            plane_ = kPlaneXZ;
+          plane = kPlaneXZ;
         else if(planeName == "zx")
-            plane_ = kPlaneZX;
+          plane = kPlaneZX;
         else if(planeName == "yz")
-            plane_ = kPlaneYZ;
+          plane = kPlaneYZ;
         else if(planeName == "zy")
-            plane_ = kPlaneZY;
+          plane = kPlaneZY;
         else {
             cerr << "Plano " << planeName << " não definido!" << endl
                  << "Planos possívels: xy, yx, xz, zx, yz, zy" << endl;
@@ -41,17 +41,17 @@ bool PlaneGenerator::ParseArguments(int argc, char *argv[]) {
     } else
         SetFilename(argv[4]); // Número correto de argumentos passado
 
-    width_ = stoi(argv[2]);
-    height_ = stoi(argv[3]);
+    width = stoi(argv[2]);
+  height = stoi(argv[3]);
 
     return true;
 }
 
 void PlaneGenerator::GenerateVertices() {
-    double w = width_ / 2.0;
-    double h = height_ / 2.0;
+    double w = width / 2.0;
+    double h = height / 2.0;
 
-    switch(plane_) {
+    switch(plane) {
         case kPlaneYZ:
             AddVertex(0.0, h, w);
             AddVertex(0.0, -h, w);

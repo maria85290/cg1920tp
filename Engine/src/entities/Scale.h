@@ -8,7 +8,7 @@
 namespace engine::entities {
     class Scale: public Entity {
     private:
-        vec3 factors_;
+        vec3 factors;
 
     public:
         ~Scale() override = default;

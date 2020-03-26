@@ -7,10 +7,10 @@
 namespace engine::entities {
     class Models: public Entity {
     private:
-        vector<const Model*> models_ = vector<const Model*>();
+        vector<const Model*> models = vector<const Model*>();
 
         void AddModel(const Model* model) {
-            models_.push_back(model);
+            models.push_back(model);
         }
 
     public:

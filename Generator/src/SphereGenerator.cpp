@@ -12,9 +12,9 @@ bool SphereGenerator::ParseArguments(int argc, char *argv[]) {
 
     SetFilename(argv[5]);
 
-    radius_ = stoi(argv[2]);
-    slices_ = stoi(argv[3]);
-    stacks_ = stoi(argv[4]);
+  radius = stoi(argv[2]);
+  slices = stoi(argv[3]);
+  stacks = stoi(argv[4]);
 
     return true;
 }
@@ -42,42 +42,42 @@ void SphereGenerator::GenerateVertices() {
     double zC;
 
 
-    double alfa = 2 * M_PI / slices_;
-    double beta = (M_PI) / stacks_;
+    double alfa = 2 * M_PI / slices;
+    double beta = (M_PI) / stacks;
     int i = 0;
 
 
-    for (int i = 1; i <= stacks_; i++) {
+    for (int i = 1; i <= stacks; i++) {
 
         angBeta = M_PI /2 - (beta * i);    //Cálculo do ângulo Beta
 
-        for (int j = 0; j <= slices_; j++) {
+        for (int j = 0; j <= slices; j++) {
 
             angAlfa = (alfa * j);        //Cálculo do ângulo Alfa
 
             // para o ponto P (canto inferior esquerdo)
 
-            xP = radius_ * cos(angBeta) * sin(angAlfa);
-            yP = radius_ * sin(angBeta);
-            zP = radius_ * cos(angBeta) * cos(angAlfa);
+            xP = radius * cos(angBeta) * sin(angAlfa);
+            yP = radius * sin(angBeta);
+            zP = radius * cos(angBeta) * cos(angAlfa);
 
             // para o ponto A (canto inferior direito)
 
-            xA = radius_ * cos(angBeta) * sin(angAlfa + alfa);
-            yA = radius_ * sin(angBeta );
-            zA = radius_ * cos(angBeta) * cos(angAlfa + alfa);
+            xA = radius * cos(angBeta) * sin(angAlfa + alfa);
+            yA = radius * sin(angBeta );
+            zA = radius * cos(angBeta) * cos(angAlfa + alfa);
 
             // Para o ponto B (canto superior esquerdo)
 
-            xB = radius_ * cos(angBeta + beta) * sin(angAlfa );
-            yB = radius_ * sin(angBeta + beta);
-            zB = radius_ * cos(angBeta + beta) * cos(angAlfa );
+            xB = radius * cos(angBeta + beta) * sin(angAlfa );
+            yB = radius * sin(angBeta + beta);
+            zB = radius * cos(angBeta + beta) * cos(angAlfa );
 
             // para o ponto C (canto superior direito)
 
-            xC = radius_ * cos(angBeta + beta) * sin(angAlfa + alfa);
-            yC = radius_ * sin(angBeta + beta);
-            zC = radius_ * cos(angBeta + beta) * cos(angAlfa + alfa);
+            xC = radius * cos(angBeta + beta) * sin(angAlfa + alfa);
+            yC = radius * sin(angBeta + beta);
+            zC = radius * cos(angBeta + beta) * cos(angAlfa + alfa);
 
             AddVertex(xC, yC, zC);
             AddVertex(xP, yP, zP);

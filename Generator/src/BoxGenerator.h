@@ -7,9 +7,9 @@
 
 class BoxGenerator : public AbstractGenerator {
 private:
-    int dimX_;
-    int dimY_;
-    int dimZ_;
+    int dimX;
+    int dimY;
+    int dimZ;
    
 
 public:

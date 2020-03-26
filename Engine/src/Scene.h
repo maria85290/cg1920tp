@@ -11,10 +11,10 @@ using namespace engine::entities;
 namespace engine {
     class Scene {
     private:
-        vector<const Group*> groups_ = vector<const Group*>();
+        vector<const Group*> groups = vector<const Group*>();
 
         void AddGroup(const Group* group) {
-            groups_.push_back(group);
+            groups.push_back(group);
         }
 
     public:

@@ -6,7 +6,7 @@ using namespace std;
 
 namespace engine {
   Scene::~Scene() {
-      for(const Group* group : this->groups_) {
+      for(const Group* group : this->groups) {
           delete group;
       }
   }
@@ -37,7 +37,7 @@ namespace engine {
   }
 
   void Scene::Render() const {
-      for(const Group *group : this->groups_) {
+      for(const Group *group : this->groups) {
           group->Render();
       }
   }

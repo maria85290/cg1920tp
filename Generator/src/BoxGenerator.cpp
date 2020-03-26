@@ -15,18 +15,18 @@ bool BoxGenerator::ParseArguments(int argc, char *argv[]) {
 
     SetFilename(argv[5]); // Número correto de argumentos passado
 
-    dimX_ = stoi(argv[2]);
-    dimY_ = stoi(argv[3]);
-    dimZ_ = stoi(argv[4]);
+    dimX = stoi(argv[2]);
+  dimY = stoi(argv[3]);
+  dimZ = stoi(argv[4]);
 
     return true;
 }
 
 void BoxGenerator::GenerateVertices() {
     
-    double y_ = -dimY_ / 2.0;
-    double h = dimZ_ / 2.0;
-    double w = dimX_ / 2.0;
+    double y_ = -dimY / 2.0;
+    double h = dimZ / 2.0;
+    double w = dimX / 2.0;
 
     // DESENHAR A BASE - plano XZ
 
@@ -40,7 +40,7 @@ void BoxGenerator::GenerateVertices() {
 
 
     // PARTE SUPERIOR - plano ZX
-    y_ = dimY_ / 2.0;
+    y_ = dimY / 2.0;
     AddVertex(-w, y_, -h);
     AddVertex(-w, y_, h);
     AddVertex(w, y_, h);
@@ -50,9 +50,9 @@ void BoxGenerator::GenerateVertices() {
     AddVertex(w, y_, -h);
 
     //PARTE FRONTAL - plano XY:
-    double z_ = dimZ_ / 2.0;
-    w = dimX_ / 2.0;
-    h = dimY_ / 2.0;
+    double z_ = dimZ / 2.0;
+    w = dimX / 2.0;
+    h = dimY / 2.0;
     AddVertex(w, h, z_);
     AddVertex(-w, h, z_);
     AddVertex(-w, -h, z_);
@@ -63,7 +63,7 @@ void BoxGenerator::GenerateVertices() {
 
 
     // Parte de tras plano yx
-    z_ = -dimZ_ / 2.0;
+    z_ = -dimZ / 2.0;
     AddVertex(w, h, z_);
     AddVertex(-w, -h, z_);
     AddVertex(-w, h, z_);
@@ -73,9 +73,9 @@ void BoxGenerator::GenerateVertices() {
     AddVertex(-w, -h, z_);
 
     //lado direito - plano YZ:
-    double x_ = dimX_ / 2.0;
-    h = dimY_ / 2.0;
-    w = dimZ_ / 2.0;
+    double x_ = dimX / 2.0;
+    h = dimY / 2.0;
+    w = dimZ / 2.0;
 
     AddVertex(x_, h, w);
     AddVertex(x_, -h, w);
@@ -87,7 +87,7 @@ void BoxGenerator::GenerateVertices() {
 
     //lado esquerdo plano zy
 
-    x_ = -dimX_ / 2.0;
+    x_ = -dimX / 2.0;
 
     AddVertex(x_, h, w);
     AddVertex(x_, -h, -w);

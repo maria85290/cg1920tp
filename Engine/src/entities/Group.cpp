@@ -9,7 +9,7 @@
 
 namespace engine::entities {
     Group::~Group() {
-        for(const Entity *entity : this->entities_) {
+        for(const Entity *entity : this->entities) {
             delete entity;
         }
     }
@@ -49,7 +49,7 @@ namespace engine::entities {
     void Group::Render() const {
         glPushMatrix();
 
-        for(const Entity *entity : this->entities_) {
+        for(const Entity *entity : this->entities) {
             entity->Render();
         }
 

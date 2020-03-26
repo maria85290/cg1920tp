@@ -7,7 +7,7 @@
 namespace engine::entities {
     class Translate: public Entity {
     private:
-        vec3 vector_;
+        vec3 vector;
     public:
         ~Translate() override = default;
 

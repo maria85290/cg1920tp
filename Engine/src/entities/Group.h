@@ -11,10 +11,10 @@ using namespace std;
 namespace engine::entities {
     class Group: public Entity {
     private:
-        vector<const Entity*> entities_ = vector<const Entity*>();
+        vector<const Entity*> entities = vector<const Entity*>();
 
         void AddEntity(const Entity *entity) {
-            entities_.push_back(entity);
+            entities.push_back(entity);
         }
 
     public:

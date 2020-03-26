@@ -13,9 +13,9 @@
 
 class SphereGenerator : public AbstractGenerator {
 private:
-    int radius_;
-    int slices_;
-    int stacks_;
+    int radius;
+    int slices;
+    int stacks;
 
 public:
     ~SphereGenerator() override = default;
