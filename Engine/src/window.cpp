@@ -6,12 +6,16 @@
 
 #include "Scene.h"
 
+using namespace engine;
+
 namespace window {
     static Scene currentScene;
 	
     double angleQ = 0;
     double angleW = 0;
     double angleE = 0;
+
+    double camX = -150.0, camZ = 0.0;
 	
     void ChangeSize(int, int);
     void RenderScene();
@@ -25,6 +29,26 @@ namespace window {
         }
         if (k == 'e') {
             angleE = fmod((angleE + 1), 360);
+        }
+        glutPostRedisplay();
+    }
+
+    void processSpecialKeys(int k, int mouseX, int mouseY) {
+        if (k == GLUT_KEY_UP) {
+            camX += 5;
+            cout << "Z: " << camZ << " | X: " << camX << endl;
+        }
+        if (k == GLUT_KEY_DOWN) {
+            camX -= 5;
+            cout << "Z: " << camZ << " | X: " << camX << endl;
+        }
+        if (k == GLUT_KEY_LEFT) {
+            camZ -= 5;
+            cout << "Z: " << camZ << " | X: " << camX << endl;
+        }
+        if (k == GLUT_KEY_RIGHT) {
+            camZ += 5;
+            cout << "Z: " << camZ << " | X: " << camX << endl;
         }
         glutPostRedisplay();
     }
@@ -43,9 +67,9 @@ namespace window {
         glutReshapeFunc(ChangeSize);
 
         glutKeyboardFunc(KeyboardEvents);
-        // glutSpecialFunc(processSpecialKeys);
+        glutSpecialFunc(processSpecialKeys);
 
-        //  OpenGL settings
+        // OpenGL settings
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
         glPolygonMode(GL_FRONT, GL_LINE);
@@ -92,8 +116,8 @@ namespace window {
 
         // permite o movimento do teclado
 
-        gluLookAt(5.0, 0.0, 5.0,
-                  0.0, 0.0, 0.0,
+        gluLookAt(camX, 0.0, camZ,
+                  0.0, 0.0, camZ,
                   0.0, 1.0, 0.0);
 
         glRotatef(angleQ, 1 , 0, 0);
