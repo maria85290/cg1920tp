@@ -1,0 +1,72 @@
+<scene>
+    <group>
+        <translate X="0" Y="0" Z="0"/>
+        <scale X="109" Y="109" Z="109"/>
+        <models>
+            <model file="planet.3d"/>
+        </models>
+    </group>
+    <group>
+        <translate X="0" Y="0" Z="-150"/>
+        <scale X="0.383" Y="0.383" Z="0.383"/>
+        <models>
+            <model file="planet.3d"/>
+        </models>
+    </group>
+    <group>
+        <translate X="0" Y="0" Z="-200"/>
+        <scale X="0.949" Y="0.949" Z="0.949"/>
+        <models>
+            <model file="planet.3d"/>
+        </models>
+    </group>
+    <group>
+        <translate X="0" Y="0" Z="-250"/>
+        <scale X="1" Y="1" Z="1"/>
+        <models>
+            <model file="planet.3d"/>
+        </models>
+    </group>
+    <group>
+        <translate X="0" Y="0" Z="-300"/>
+        <scale X="0.532" Y="0.532" Z="0.532"/>
+        <models>
+            <model file="planet.3d"/>
+        </models>
+    </group>
+    <group>
+        <translate X="0" Y="0" Z="-350"/>
+        <scale X="11.21" Y="11.21" Z="11.21"/>
+        <models>
+            <model file="planet.3d"/>
+        </models>
+    </group>
+    <group>
+        <translate X="0" Y="0" Z="-400"/>
+        <scale X="9.45" Y="9.45" Z="9.45"/>
+        <models>
+            <model file="planet.3d"/>
+        </models>
+    </group>
+    <group>
+        <translate X="0" Y="0" Z="-450"/>
+        <scale X="4.01" Y="4.01" Z="4.01"/>
+        <models>
+            <model file="planet.3d"/>
+        </models>
+    </group>
+    <group>
+        <translate X="0" Y="0" Z="-500"/>
+        <scale X="3.88" Y="3.88" Z="3.88"/>
+        <models>
+            <model file="planet.3d"/>
+        </models>
+    </group>
+    <group>
+        <translate X="0" Y="0" Z="-550"/>
+        <scale X="0.186" Y="0.186" Z="0.186"/>
+        <models>
+            <model file="planet.3d"/>
+        </models>
+    </group>
+</scene>
