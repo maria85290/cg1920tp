@@ -11,9 +11,9 @@
 
 #include "window.h"
 
+using namespace engine;
 using namespace std;
 using namespace tinyxml2;
-using namespace entities;
 
 int main(int argc, char *argv[]) {
     if(argc != 2) {

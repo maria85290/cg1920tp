@@ -6,7 +6,7 @@
 
 using namespace std;
 
-namespace entities {
+namespace engine::entities {
     bool Models::ParseXml(XMLNode *modelsNode) {
         XMLNode *node = modelsNode->FirstChild();
 

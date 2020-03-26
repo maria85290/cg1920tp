@@ -9,7 +9,7 @@
 using namespace std;
 using namespace tinyxml2;
 
-namespace entities {
+namespace engine::entities {
     class Entity {
     public:
         Entity() = default;

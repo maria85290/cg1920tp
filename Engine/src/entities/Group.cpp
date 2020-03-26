@@ -7,7 +7,7 @@
 
 #include "Group.h"
 
-namespace entities {
+namespace engine::entities {
     Group::~Group() {
         for(const Entity *entity : this->entities_) {
             delete entity;

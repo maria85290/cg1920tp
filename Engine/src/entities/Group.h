@@ -8,7 +8,7 @@
 
 using namespace std;
 
-namespace entities {
+namespace engine::entities {
     class Group: public Entity {
     private:
         vector<const Entity*> entities_ = vector<const Entity*>();

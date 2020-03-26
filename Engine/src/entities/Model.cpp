@@ -5,7 +5,7 @@
 
 #include "Model.h"
 
-namespace entities {
+namespace engine::entities {
     Model::Model(const string& filename) {
         ifstream file(filename);
 

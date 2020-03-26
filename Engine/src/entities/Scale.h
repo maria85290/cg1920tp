@@ -5,7 +5,7 @@
 
 #include "Entity.h"
 
-namespace entities {
+namespace engine::entities {
     class Scale: public Entity {
     private:
         vec3 factors_;

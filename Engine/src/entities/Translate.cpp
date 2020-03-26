@@ -2,7 +2,7 @@
 
 #include "Translate.h"
 
-namespace entities {
+namespace engine::entities {
     bool Translate::ParseXml(XMLNode *translateNode) {
         const XMLElement *elem = translateNode->ToElement();
 

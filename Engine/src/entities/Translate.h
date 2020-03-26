@@ -4,7 +4,7 @@
 #include <Common/vectors.h>
 #include "Entity.h"
 
-namespace entities {
+namespace engine::entities {
     class Translate: public Entity {
     private:
         vec3 vector_;

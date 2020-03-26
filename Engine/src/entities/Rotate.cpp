@@ -1,6 +1,6 @@
 #include "Rotate.h"
 
-namespace entities {
+namespace engine::entities {
     bool Rotate::ParseXml(XMLNode *rotateNode) {
         const XMLElement *elem = rotateNode->ToElement();
 

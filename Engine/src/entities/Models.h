@@ -4,7 +4,7 @@
 #include "Entity.h"
 #include "Model.h"
 
-namespace entities {
+namespace engine::entities {
     class Models: public Entity {
     private:
         vector<const Model*> models_ = vector<const Model*>();

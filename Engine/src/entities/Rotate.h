@@ -4,7 +4,7 @@
 #include <Common/vectors.h>
 #include "Entity.h"
 
-namespace entities {
+namespace engine::entities {
     class Rotate: public Entity {
     private:
         /** The rotation angle, in degrees. */

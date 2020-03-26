@@ -8,7 +8,7 @@
 
 using namespace std;
 
-namespace entities {
+namespace engine::entities {
     class Model {
     private:
         vector<vec3> vertices_ = vector<vec3>();

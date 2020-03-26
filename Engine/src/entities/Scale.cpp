@@ -1,6 +1,6 @@
 #include "Scale.h"
 
-namespace entities {
+namespace engine::entities {
     bool Scale::ParseXml(XMLNode *translateNode) {
         const XMLElement *elem = translateNode->ToElement();
 
