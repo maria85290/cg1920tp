@@ -21,6 +21,10 @@ namespace engine {
         ~Scene();
 
         bool ParseXml(XMLNode* sceneNode);
+
+        void InitGLSettings() const;
+
+        void ClearPreviousFrame() const;
         void Render() const;
     };
 }

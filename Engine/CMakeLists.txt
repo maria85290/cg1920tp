@@ -2,7 +2,20 @@ cmake_minimum_required(VERSION 3.10)
 
 add_subdirectory(lib)
 
-add_executable(Engine src/main.cpp src/window.h src/window.cpp src/Scene.cpp src/Scene.h src/entities/Group.cpp src/entities/Model.cpp src/entities/Group.h src/entities/Model.h src/entities/Entity.cpp src/entities/Entity.h src/entities/Models.cpp src/entities/Models.h src/entities/Translate.cpp src/entities/Translate.h src/entities/Rotate.cpp src/entities/Rotate.h src/entities/Scale.cpp src/entities/Scale.h)
+add_executable(Engine
+        src/main.cpp
+        src/Scene.cpp src/Scene.h
+        src/entities/Group.cpp src/entities/Group.h
+        src/entities/Model.cpp src/entities/Model.h
+        src/entities/Entity.cpp src/entities/Entity.h
+        src/entities/Models.cpp src/entities/Models.h
+        src/entities/Translate.cpp src/entities/Translate.h
+        src/entities/Rotate.cpp src/entities/Rotate.h
+        src/entities/Scale.cpp src/entities/Scale.h
+        src/window/Window.cpp src/window/Window.h
+        src/window/cameras/Camera.h
+        src/window/cameras/FpsCamera.cpp src/window/cameras/FpsCamera.h
+        src/window/cameras/ExplorerCamera.cpp src/window/cameras/ExplorerCamera.h)
 
 set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED)

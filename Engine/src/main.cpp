@@ -9,11 +9,14 @@
 
 #include "Scene.h"
 
-#include "window.h"
+#include "window/Window.h"
+#include "window/cameras/ExplorerCamera.h"
 
 using namespace engine;
 using namespace std;
 using namespace tinyxml2;
+using engine::window::Window;
+using engine::window::cameras::ExplorerCamera;
 
 int main(int argc, char *argv[]) {
     if(argc != 2) {
@@ -36,13 +39,16 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    Scene& scene = window::GetScene();
+    Window* window = Window::GetInstance();
+
+    Scene& scene = window->GetScene();
     if(!scene.ParseXml(root)) {
         return -1;
     }
 	
-    window::InitWindow(argv[0]);
-    window::MainLoop();
+    window->InitWindow(argv[0]);
+    window->SetCamera(new ExplorerCamera);
+    window->MainLoop();
 
     return 0;
 }
