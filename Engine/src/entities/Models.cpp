@@ -19,14 +19,14 @@ namespace engine::entities {
                 return false;
             }
 
-            const char *file = element->Attribute("file");
+            const char *filename = element->Attribute("file");
 
-            if(file == nullptr) {
+            if(filename == nullptr) {
                 cerr << "Não existe campo 'file'." << endl;
                 return false;
             }
 
-            this->AddModel(new Model(file));
+            this->AddModel(Model::LoadModel(filename));
 
             node = node->NextSibling();
         }

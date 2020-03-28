@@ -2,16 +2,22 @@
 #include <fstream>
 #include <iostream>
 #include <chrono>
+#include <cstdio>
+#include <cstdlib>
 
 #include "../glut.h"
 
 #include "Model.h"
 
-using std::cout, std::endl, std::string, std::ifstream;
+using std::cout, std::endl, std::string, std::ifstream, std::vector, std::map;
 using namespace std::chrono;
 
 namespace engine::entities {
-    Model::Model(const string& filename) {
+    map<string, const Model*> Model::loadedModels = map<string, const Model*>();
+
+    Model::Model(const Model& model): filename(model.filename), vertices(vector<vec3>(model.vertices)), vbo(model.vbo), isVboOwned(false) {}
+
+    Model::Model(const string& filename): filename(filename), isVboOwned(true) {
         ifstream file(filename);
 
         cout << "Loading model: " << filename << endl;
@@ -27,6 +33,8 @@ namespace engine::entities {
         auto elapsedTime = endTime - startTime;
         cout << "Model took " << elapsedTime << " milliseconds to load" << endl;
 
+        Model::loadedModels[filename] = this;
+
         file.close();
     }
 
@@ -38,5 +46,14 @@ namespace engine::entities {
         }
 
         glEnd();
+    }
+
+    const Model* Model::LoadModel(const string &filename) {
+        if(Model::loadedModels.count(filename) > 0) {
+            const Model* model = Model::loadedModels.find(filename)->second;
+            return new Model(*model);
+        } else {
+            return new Model(filename);
+        }
     }
 }
