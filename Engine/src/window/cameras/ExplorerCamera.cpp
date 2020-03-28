@@ -48,16 +48,14 @@ namespace engine::window::cameras {
      * @param mouseY
      */
     void ExplorerCamera::HandleMouseMovement(int mouseX, int mouseY) {
-        int deltaTime = Window::GetInstance()->GetDeltaTime();
-
         int deltaX = lastMouseX - mouseX;
         int deltaY = mouseY - lastMouseY;
 
         if(leftMousePressed) {
-            camAlpha += 0.001 * deltaX * deltaTime;
+            camAlpha += 0.001 * deltaX;
             camAlpha = fmod(camAlpha, 2 * M_PI); // camAlpha %= 360
 
-            camBeta += 0.001 * deltaY * deltaTime;
+            camBeta += 0.001 * deltaY;
 
             if(camBeta < -M_PI_2) {
                 camBeta = -M_PI_2;
@@ -65,7 +63,7 @@ namespace engine::window::cameras {
                 camBeta = M_PI_2;
             }
         } else if(rightMousePressed) {
-            camRadius -= 0.05 * deltaY * deltaTime;
+            camRadius -= 0.05 * deltaY;
 
             if(camRadius < 5.0) {
                 camRadius = 5.0;
