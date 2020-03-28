@@ -27,6 +27,7 @@ namespace engine::entities {
     public:
         Model(const Model& model);
         explicit Model(const std::string& filename);
+        ~Model();
 
         void Render() const;
 

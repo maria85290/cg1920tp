@@ -44,6 +44,7 @@ namespace engine {
     void Scene::InitGLSettings() const {
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
+        glEnableClientState(GL_VERTEX_ARRAY);
         glPolygonMode(GL_FRONT, GL_LINE);
     }
 

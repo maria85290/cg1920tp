@@ -36,9 +36,21 @@ namespace engine::entities {
         Model::loadedModels[filename] = this;
 
         file.close();
+
+        glGenBuffers(1, &this->vbo);
+
+        glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
+        glBufferData(GL_ARRAY_BUFFER, this->vertices.size() * sizeof(double) * 3, this->vertices.data(), GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
-    void Model::Render() const {
+    Model::~Model() {
+        if(this->isVboOwned) {
+            glDeleteBuffers(1, &this->vbo);
+        }
+    }
+
+/*    void Model::Render() const {
         glBegin(GL_TRIANGLES);
 
         for(const auto& v : vertices) {
@@ -46,6 +58,13 @@ namespace engine::entities {
         }
 
         glEnd();
+    }*/
+
+    void Model::Render() const {
+        glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
+        glVertexPointer(3, GL_DOUBLE, 0, nullptr);
+        glDrawArrays(GL_TRIANGLES, 0, this->vertices.size());
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
     const Model* Model::LoadModel(const string &filename) {
