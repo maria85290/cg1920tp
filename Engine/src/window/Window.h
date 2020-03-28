@@ -25,12 +25,14 @@ namespace engine::window {
         cameras::Camera* camera;
 
         int deltaTime;
+        int fps;
 
         Window();
         ~Window();
 
         void PrintInfo() const;
         void ComputeDeltaTime();
+        void MeasureFps();
     public:
         static Window* GetInstance();
 

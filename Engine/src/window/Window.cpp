@@ -1,6 +1,6 @@
 #include "Window.h"
 
-using std::cerr, std::endl;
+using std::string, std::cerr, std::endl;
 using engine::window::cameras::Camera;
 
 namespace engine::window {
@@ -42,6 +42,7 @@ namespace engine::window {
 
     void Window::RenderScene() {
         ComputeDeltaTime();
+        MeasureFps();
 
         this->scene.ClearPreviousFrame();
 
@@ -94,6 +95,25 @@ namespace engine::window {
 
         this->deltaTime = currentTime - lastTime;
         lastTime = currentTime;
+    }
+
+    void Window::MeasureFps()
+    {
+        static int timebase = 0;
+        static int time = 0;
+        static int frame = 0;
+
+        frame++;
+        time = glutGet(GLUT_ELAPSED_TIME);
+
+        if(time - timebase > 1000)
+        {
+            fps = frame * 1000 / (time - timebase);
+            timebase = time;
+            frame = 0;
+
+            glutSetWindowTitle((string("CG@DI-UM - FPS: ") + std::to_string(fps)).c_str());
+        }
     }
 
     Scene& Window::GetScene() {
