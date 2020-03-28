@@ -6,12 +6,10 @@
 
 #include <Common/vectors.h>
 
-using namespace std;
-
 namespace engine::entities {
     class Model {
     private:
-        vector<vec3> vertices = vector<vec3>();
+        std::vector<vec3> vertices = std::vector<vec3>();
 
     protected:
         void AddVertex(double x, double y, double z) {
@@ -19,7 +17,7 @@ namespace engine::entities {
         }
 
     public:
-        explicit Model(const string& filename);
+        explicit Model(const std::string& filename);
 
         void Render() const;
     };

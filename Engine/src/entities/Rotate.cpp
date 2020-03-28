@@ -1,5 +1,8 @@
 #include "Rotate.h"
 
+using std::cerr, std::endl;
+using tinyxml2::XMLNode, tinyxml2::XMLElement, tinyxml2::XML_SUCCESS;
+
 namespace engine::entities {
     bool Rotate::ParseXml(XMLNode *rotateNode) {
         const XMLElement *elem = rotateNode->ToElement();

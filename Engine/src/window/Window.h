@@ -4,8 +4,6 @@
 #include "../Scene.h"
 #include "cameras/Camera.h"
 
-using engine::window::cameras::Camera;
-
 namespace engine::window {
     /**
      * @brief Singleton responsável pela configuração e manutenção de uma janela, capaz de renderizar cenas.
@@ -22,7 +20,7 @@ namespace engine::window {
         /**
          * O tipo de câmara que está atualmente a ser utilizado para navegar o mundo.
          */
-        Camera* camera;
+        cameras::Camera* camera;
 
         int deltaTime;
 
@@ -39,8 +37,8 @@ namespace engine::window {
 
         Scene& GetScene();
 
-        Camera* GetCamera();
-        void SetCamera(Camera* camera);
+        cameras::Camera* GetCamera();
+        void SetCamera(cameras::Camera* camera);
 
         int GetDeltaTime();
 
@@ -65,28 +63,28 @@ namespace engine::window {
         }
 
         inline void HandleKeyPress(unsigned char key, int mouseX, int mouseY) {
-            Camera* camera = Window::GetInstance()->GetCamera();
+            cameras::Camera* camera = Window::GetInstance()->GetCamera();
 
             if(camera != nullptr)
                 camera->HandleKeyPress(key, mouseX, mouseY);
         }
 
         inline void HandleSpecialKeyPress(int key, int mouseX, int mouseY) {
-            Camera* camera = Window::GetInstance()->GetCamera();
+            cameras::Camera* camera = Window::GetInstance()->GetCamera();
 
             if(camera != nullptr)
                 camera->HandleSpecialKeyPress(key, mouseX, mouseY);
         }
 
         inline void HandleMouseKeyPress(int button, int state, int x, int y) {
-            Camera* camera = Window::GetInstance()->GetCamera();
+            cameras::Camera* camera = Window::GetInstance()->GetCamera();
 
             if(camera != nullptr)
                 camera->HandleMouseKeyPress(button, state, x, y);
         }
 
         inline void HandleMouseMovement(int x, int y) {
-            Camera* camera = Window::GetInstance()->GetCamera();
+            cameras::Camera* camera = Window::GetInstance()->GetCamera();
 
             if(camera != nullptr)
                 camera->HandleMouseMovement(x, y);

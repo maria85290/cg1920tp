@@ -6,12 +6,10 @@
 #include "Model.h"
 #include "Entity.h"
 
-using namespace std;
-
 namespace engine::entities {
     class Group: public Entity {
     private:
-        vector<const Entity*> entities = vector<const Entity*>();
+        std::vector<const Entity*> entities = std::vector<const Entity*>();
 
         void AddEntity(const Entity *entity) {
             entities.push_back(entity);
@@ -20,7 +18,7 @@ namespace engine::entities {
     public:
         ~Group() override;
 
-        bool ParseXml(XMLNode *groupNode) override;
+        bool ParseXml(tinyxml2::XMLNode *groupNode) override;
         void Render() const override;
     };
 }

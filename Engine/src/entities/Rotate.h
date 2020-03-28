@@ -15,7 +15,7 @@ namespace engine::entities {
     public:
         ~Rotate() override = default;
 
-        bool ParseXml(XMLNode *rotateNode) override;
+        bool ParseXml(tinyxml2::XMLNode *rotateNode) override;
         void Render() const override;
     };
 }

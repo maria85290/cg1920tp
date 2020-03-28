@@ -1,24 +1,20 @@
 #include <iostream>
-#include <cstdio>
-#include "glut.h"
-
-#define _USE_MATH_DEFINES
-#include <math.h>
 
 #include <tinyxml2/tinyxml2.h>
 
-#include "Scene.h"
+#include "glut.h"
 
+#include "Scene.h"
 #include "window/Window.h"
 #include "window/cameras/ExplorerCamera.h"
 
-using namespace engine;
-using namespace std;
-using namespace tinyxml2;
+using std::cerr, std::endl, std::cout;
+using tinyxml2::XMLDocument, tinyxml2::XMLNode, tinyxml2::XML_SUCCESS;
+using engine::Scene;
 using engine::window::Window;
 using engine::window::cameras::ExplorerCamera;
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     if(argc != 2) {
         cerr << "Engine requer exatamente 1 argumento, o ficheiro de configuração XML." << endl;
         cerr << "Uso ./engine <file.xml>" << endl;
@@ -32,7 +28,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    XMLNode *root = document.FirstChild();
+    XMLNode* root = document.FirstChild();
 
     if(strcmp("scene", root->Value()) != 0) {
         cerr << "Esperado valor 'scene', obtido '" << root->Value() << "'" << endl;
@@ -43,9 +39,10 @@ int main(int argc, char *argv[]) {
 
     Scene& scene = window->GetScene();
     if(!scene.ParseXml(root)) {
+        cerr << "Failed to parse Scene's XML!" << endl;
         return -1;
     }
-	
+
     window->InitWindow(argv[0]);
     window->SetCamera(new ExplorerCamera);
     window->MainLoop();

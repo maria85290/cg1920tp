@@ -6,16 +6,13 @@
 
 #include "../glut.h"
 
-using namespace std;
-using namespace tinyxml2;
-
 namespace engine::entities {
     class Entity {
     public:
         Entity() = default;
         virtual ~Entity() = default;
 
-        virtual bool ParseXml(XMLNode *node) = 0;
+        virtual bool ParseXml(tinyxml2::XMLNode *node) = 0;
         virtual void Render() const = 0;
     };
 }

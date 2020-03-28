@@ -4,7 +4,8 @@
 
 #include "Models.h"
 
-using namespace std;
+using std::cerr, std::endl;
+using tinyxml2::XMLNode, tinyxml2::XMLElement;
 
 namespace engine::entities {
     bool Models::ParseXml(XMLNode *modelsNode) {

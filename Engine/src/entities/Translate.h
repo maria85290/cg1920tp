@@ -11,7 +11,7 @@ namespace engine::entities {
     public:
         ~Translate() override = default;
 
-        bool ParseXml(XMLNode *translateNode) override;
+        bool ParseXml(tinyxml2::XMLNode *translateNode) override;
         void Render() const override;
     };
 }

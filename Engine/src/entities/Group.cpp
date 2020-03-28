@@ -7,6 +7,9 @@
 
 #include "Group.h"
 
+using std::string, std::cerr, std::endl;
+using tinyxml2::XMLNode;
+
 namespace engine::entities {
     Group::~Group() {
         for(const Entity *entity : this->entities) {

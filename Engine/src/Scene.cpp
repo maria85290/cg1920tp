@@ -2,7 +2,9 @@
 
 #include "Scene.h"
 
-using namespace std;
+using std::cout, std::cerr, std::endl;
+using tinyxml2::XMLNode;
+using engine::entities::Group;
 
 namespace engine {
     Scene::~Scene() {
@@ -26,7 +28,10 @@ namespace engine {
             }
 
             Group* group = new Group;
-            group->ParseXml(groupNode);
+            if(!group->ParseXml(groupNode)) {
+                cerr << "Falha ao processar o XML do grupo!" << endl;
+                return false;
+            }
 
             this->AddGroup(group);
 

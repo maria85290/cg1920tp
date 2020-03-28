@@ -5,22 +5,19 @@
 
 #include "entities/Group.h"
 
-using namespace tinyxml2;
-using namespace engine::entities;
-
 namespace engine {
     class Scene {
     private:
-        vector<const Group*> groups = vector<const Group*>();
+        std::vector<const entities::Group*> groups = std::vector<const entities::Group*>();
 
-        void AddGroup(const Group* group) {
+        void AddGroup(const entities::Group* group) {
             groups.push_back(group);
         }
 
     public:
         ~Scene();
 
-        bool ParseXml(XMLNode* sceneNode);
+        bool ParseXml(tinyxml2::XMLNode* sceneNode);
 
         void InitGLSettings() const;
 

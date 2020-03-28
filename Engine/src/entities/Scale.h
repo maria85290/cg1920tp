@@ -13,7 +13,7 @@ namespace engine::entities {
     public:
         ~Scale() override = default;
 
-        bool ParseXml(XMLNode *node) override;
+        bool ParseXml(tinyxml2::XMLNode *node) override;
         void Render() const override;
     };
 }

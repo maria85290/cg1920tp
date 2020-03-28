@@ -1,5 +1,8 @@
 #include "Window.h"
 
+using std::cerr, std::endl;
+using engine::window::cameras::Camera;
+
 namespace engine::window {
     Window* Window::instance = nullptr;
 
@@ -55,6 +58,8 @@ namespace engine::window {
             cerr << "Please define a camera by calling window->SetCamera() before attempting to enter GLUT's Main Loop." << endl;
             exit(-1);
         }
+
+        PrintInfo();
 
         glutMainLoop();
     }
