@@ -11,11 +11,10 @@ namespace engine::window {
     Window::~Window() {
         Window::instance = nullptr;
 
-        delete this->camera;
         this->camera = nullptr;
     }
 
-    void Window::InitWindow(char* programName) const {
+    void Window::InitWindow(char* programName) {
         int argc = 1;
         char* argv2[] = {programName};
 
@@ -23,7 +22,9 @@ namespace engine::window {
         glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
         glutInitWindowPosition(100, 100);
         glutInitWindowSize(800, 800);
-        glutCreateWindow(programName);
+        this->windowId = glutCreateWindow(programName);
+
+        glewInit();
 
         glutDisplayFunc(glut_handlers::RenderScene);
         glutIdleFunc(glut_handlers::RenderScene);
@@ -109,6 +110,10 @@ namespace engine::window {
 
     int Window::GetDeltaTime() {
         return this->deltaTime;
+    }
+
+    void Window::DestroyWindow() {
+        glutDestroyWindow(this->windowId);
     }
 
     Window* Window::GetInstance() {

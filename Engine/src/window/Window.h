@@ -12,6 +12,8 @@ namespace engine::window {
     private:
         static Window* instance;
 
+        int windowId;
+
         /**
          * A cena que está atualmente a ser desenhada.
          */
@@ -32,8 +34,9 @@ namespace engine::window {
     public:
         static Window* GetInstance();
 
-        void InitWindow(char* programName) const;
+        void InitWindow(char* programName);
         void MainLoop() const;
+        void DestroyWindow();
 
         Scene& GetScene();
 
