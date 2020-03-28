@@ -36,6 +36,8 @@ int main(int argc, char* argv[]) {
     }
 
     Window* window = Window::GetInstance();
+    window->InitWindow(argv[0]);
+    window->SetCamera(new ExplorerCamera);
 
     Scene& scene = window->GetScene();
     if(!scene.ParseXml(root)) {
@@ -43,16 +45,19 @@ int main(int argc, char* argv[]) {
         return -1;
     }
 
-    window->InitWindow(argv[0]);
-    window->SetCamera(new ExplorerCamera);
     window->MainLoop();
+
+    delete window->GetCamera();
+    window->DestroyWindow();
 
     return 0;
 }
 
 // Windows-specific code:
 // NVIDIA/AMD Driver Hints to select dicrete graphics on laptops with dual graphics
+#ifdef WIN32
 extern "C" {
 __declspec(dllexport) unsigned long NvOptimusEnablement = 0x00000001;
 __declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
 }
+#endif
