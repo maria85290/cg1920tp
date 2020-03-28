@@ -49,3 +49,10 @@ int main(int argc, char* argv[]) {
 
     return 0;
 }
+
+// Windows-specific code:
+// NVIDIA/AMD Driver Hints to select dicrete graphics on laptops with dual graphics
+extern "C" {
+__declspec(dllexport) unsigned long NvOptimusEnablement = 0x00000001;
+__declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
+}
