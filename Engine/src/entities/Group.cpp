@@ -8,7 +8,7 @@
 #include "Group.h"
 
 using std::string, std::cerr, std::endl;
-using tinyxml2::XMLNode;
+using tinyxml2::XMLNode, tinyxml2::XMLComment;
 
 namespace engine::entities {
     Group::~Group() {
@@ -35,8 +35,11 @@ namespace engine::entities {
                 entity = new Models;
             } else if(nodeName == "group") {
                 entity = new Group;
+            } else if(dynamic_cast<const XMLComment*>(childNode)) {
+                childNode = childNode->NextSibling();
+                continue;
             } else {
-                cerr << "Errou!" << endl; // TODO
+                cerr << "Encontrada node " << nodeName << ", não sei processar. Saindo.!" << endl; // TODO
                 return false;
             }
 

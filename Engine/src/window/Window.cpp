@@ -39,7 +39,6 @@ namespace engine::window {
 
         glutMouseFunc(glut_handlers::HandleMouseKeyPress);
         glutMotionFunc(glut_handlers::HandleMouseMovement);
-
         glutPassiveMotionFunc(glut_handlers::HandlePassiveMouseMovement);
 
         this->scene.InitGLSettings();

@@ -123,8 +123,10 @@
             <scale X="0.0833" Y="0.0833" Z="0.0833"/>
             <models>
                 <model file="planet.3d"/>
+                <!-- Isto é outro comentário -->
             </models>
         </group>
+        <!-- Isto é um comentário -->
         <group>
             <translate X="-7" Y="0" Z="12.12"/>
             <scale X="0.0881" Y="0.0881" Z="0.0881"/>
@@ -258,4 +260,5 @@
             </models>
         </group>
     </group>
+    <!-- Isto é ainda outro comentário! -->
 </scene>

@@ -3,7 +3,7 @@
 #include "Scene.h"
 
 using std::cout, std::cerr, std::endl;
-using tinyxml2::XMLNode;
+using tinyxml2::XMLNode, tinyxml2::XMLComment;
 using engine::entities::Group;
 
 namespace engine {
@@ -22,6 +22,11 @@ namespace engine {
         XMLNode* groupNode = sceneNode->FirstChild();
 
         while(groupNode != nullptr) {
+            if(dynamic_cast<const XMLComment*>(groupNode)) {
+                groupNode = groupNode->NextSibling();
+                continue;
+            }
+
             if(strcmp("group", groupNode->Value()) != 0) {
                 cerr << "Encontrada tag inválida: scene->" << groupNode->Value() << endl;
                 return false;
