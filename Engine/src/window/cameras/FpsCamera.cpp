@@ -10,8 +10,6 @@ using std::cout, std::endl;
 
 namespace engine::window::cameras {
     FpsCamera::FpsCamera() {
-        glutSetCursor(GLUT_CURSOR_NONE);
-
         SphericalToCartesian();
 
         Window* window = Window::GetInstance();
@@ -25,6 +23,7 @@ namespace engine::window::cameras {
 
     void FpsCamera::PrintInfo() {
         cout << "Use WASD to move the camera, and the mouse to change the yaw/pitch." << endl;
+        cout << "NOTE: It is required to press ESCAPE to move the mouse!" << endl;
     }
 
     void FpsCamera::UpdateCameraPosition() {
@@ -35,7 +34,7 @@ namespace engine::window::cameras {
         );
 
         Window* window = Window::GetInstance();
-        if(window->IsFocused()) {
+        if(window->IsFocused() && escKeyPressed) {
             lastMouseX = window->GetWidth() / 2;
             lastMouseY = window->GetHeight() / 2;
 
@@ -52,6 +51,22 @@ namespace engine::window::cameras {
         right = scale(right, 20.0/deltaTime);
 
         switch(key) {
+            case 27:
+                escKeyPressed = !escKeyPressed;
+
+                if(escKeyPressed) {
+                    glutSetCursor(GLUT_CURSOR_NONE);
+
+                    Window* window = Window::GetInstance();
+                    lastMouseX = window->GetWidth() / 2;
+                    lastMouseY = window->GetHeight() / 2;
+
+                    glutWarpPointer(lastMouseX, lastMouseY);
+                } else {
+                    glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
+                }
+
+                break;
             case 'w':
             case 'W':
                 cameraPos = {cameraPos.x + forward.x, cameraPos.y + forward.y, cameraPos.z + forward.z};
@@ -95,6 +110,9 @@ namespace engine::window::cameras {
     }
 
     void FpsCamera::HandlePassiveMouseMovement(int mouseX, int mouseY) {
+        if(!escKeyPressed)
+            return;
+
         int deltaTime = Window::GetInstance()->GetDeltaTime() / 10;
         int deltaX = lastMouseX - mouseX;
         int deltaY = lastMouseY - mouseY;

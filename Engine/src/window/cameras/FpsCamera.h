@@ -7,6 +7,8 @@
 namespace engine::window::cameras {
     class FpsCamera: public Camera {
     private:
+        bool escKeyPressed = false;
+
         int lastMouseX;
         int lastMouseY;
 
