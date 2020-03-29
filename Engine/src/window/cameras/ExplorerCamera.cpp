@@ -13,7 +13,7 @@ namespace engine::window::cameras {
         SphericalToCartesian();
     }
 
-    void ExplorerCamera::PositionInWorld() {
+    void ExplorerCamera::UpdateCameraPosition() {
         gluLookAt(cam.x, cam.y, cam.z,
                   center.x, center.y, center.z,
                   0, 1, 0);

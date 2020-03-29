@@ -13,7 +13,7 @@ namespace engine::window::cameras {
 
         virtual void PrintInfo() = 0;
 
-        virtual void PositionInWorld() = 0;
+        virtual void UpdateCameraPosition() = 0;
 
         // GLUT Callbacks
 

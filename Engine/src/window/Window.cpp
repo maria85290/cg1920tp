@@ -58,7 +58,7 @@ namespace engine::window {
         this->scene.ClearPreviousFrame();
 
         glLoadIdentity();
-        this->camera->PositionInWorld();
+        this->camera->UpdateCameraPosition();
 
         this->scene.Render();
 

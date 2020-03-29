@@ -13,6 +13,10 @@ namespace engine::window::cameras {
         glutSetCursor(GLUT_CURSOR_NONE);
 
         SphericalToCartesian();
+
+        Window* window = Window::GetInstance();
+        lastMouseX = window->GetWidth() / 2;
+        lastMouseY = window->GetHeight() / 2;
     }
 
     FpsCamera::~FpsCamera() {
@@ -23,7 +27,7 @@ namespace engine::window::cameras {
         cout << "Use WASD to move the camera, and the mouse to change the yaw/pitch." << endl;
     }
 
-    void FpsCamera::PositionInWorld() {
+    void FpsCamera::UpdateCameraPosition() {
         gluLookAt(
             cameraPos.x, cameraPos.y, cameraPos.z,
             lookingAt.x, lookingAt.y, lookingAt.z,

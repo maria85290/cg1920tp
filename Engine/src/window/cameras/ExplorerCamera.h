@@ -26,7 +26,7 @@ namespace engine::window::cameras {
 
         void PrintInfo() override;
 
-        void PositionInWorld() override;
+        void UpdateCameraPosition() override;
 
         void HandleKeyPress(unsigned char, int, int) override {}
         void HandleSpecialKeyPress(int, int, int) override {}
