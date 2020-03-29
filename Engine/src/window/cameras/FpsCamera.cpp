@@ -22,8 +22,9 @@ namespace engine::window::cameras {
     }
 
     void FpsCamera::PrintInfo() {
-        cout << "Use WASD to move the camera, and the mouse to change the yaw/pitch." << endl;
-        cout << "NOTE: It is required to press ESCAPE to move the mouse!" << endl;
+        cout << "Use WASD or the arrow keys to move the camera, and the mouse to change the yaw/pitch." << endl;
+        cout << "Press Q to speed up the camera movement, and E to slow it down." << endl;
+        cout << "NOTE: To toggle the mouse movement, press ESCAPE!" << endl;
     }
 
     void FpsCamera::UpdateCameraPosition() {
