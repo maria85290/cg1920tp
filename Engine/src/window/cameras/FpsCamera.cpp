@@ -124,14 +124,13 @@ namespace engine::window::cameras {
         if(!escKeyPressed)
             return;
 
-        int deltaTime = Window::GetInstance()->GetDeltaTime() / 10;
         int deltaX = lastMouseX - mouseX;
         int deltaY = lastMouseY - mouseY;
 
-        yaw += 0.001 * deltaX * deltaTime;
+        yaw += 0.001 * deltaX;
         yaw = fmod(yaw, 2 * M_PI); // camAlpha %= 360
 
-        pitch += 0.001 * deltaY * deltaTime;
+        pitch += 0.001 * deltaY;
 
         if(pitch < -M_PI_2) {
             pitch = -M_PI_2 + 0.0001;
