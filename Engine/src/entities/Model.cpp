@@ -65,7 +65,7 @@ namespace engine::entities {
     	
         glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
 
-        glColor3d(diffR, diffG, diffB);
+        glColor3ub(diffR, diffG, diffB);
         glVertexPointer(3, GL_DOUBLE, 0, nullptr);
         glDrawArrays(GL_TRIANGLES, 0, this->vertices->size());
 
@@ -83,9 +83,9 @@ namespace engine::entities {
             return nullptr;
         }
 
-        double diffR = element->DoubleAttribute("diffR", 1.0);
-        double diffG = element->DoubleAttribute("diffG", 1.0);
-        double diffB = element->DoubleAttribute("diffB", 1.0);
+        double diffR = element->DoubleAttribute("diffR", 255.0);
+        double diffG = element->DoubleAttribute("diffG", 255.0);
+        double diffB = element->DoubleAttribute("diffB", 255.0);
 
         if(Model::loadedModels.count(filename) > 0) {
             const Model* model = Model::loadedModels.find(filename)->second;
