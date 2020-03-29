@@ -4,7 +4,7 @@
         <translate X="0" Y="0" Z="0"/>
         <scale X="109" Y="109" Z="109"/>
         <models>
-            <model file="planet.3d"/>
+            <model file="planet.3d" diffR="253" diffG="184" diffB="19"/>
         </models>
     </group>
     <group>
@@ -12,7 +12,7 @@
         <translate X="0" Y="0" Z="-150"/>
         <scale X="0.383" Y="0.383" Z="0.383"/>
         <models>
-            <model file="planet.3d"/>
+            <model file="planet.3d" diffR="181" diffG="167" diffB="167"/>
         </models>
     </group>
     <group>
@@ -20,7 +20,7 @@
         <translate X="0" Y="0" Z="-200"/>
         <scale X="0.949" Y="0.949" Z="0.949"/>
         <models>
-            <model file="planet.3d"/>
+            <model file="planet.3d" diffR="187" diffG="183" diffB="171"/>
         </models>
     </group>
     <group>
@@ -29,7 +29,7 @@
             <!-- Earth -->
             <scale X="1" Y="1" Z="1"/>
             <models>
-                <model file="planet.3d"/>
+                <model file="planet.3d" diffR="140" diffG="177" diffB="222"/>
             </models>
         </group>
         <group>
@@ -47,7 +47,7 @@
             <!-- Mars -->
             <scale X="0.532" Y="0.532" Z="0.532"/>
             <models>
-                <model file="planet.3d"/>
+                <model file="planet.3d" diffR="198" diffG="123" diffB="92"/>
             </models>
         </group>
         <group>
@@ -73,7 +73,7 @@
             <!-- Jupiter -->
             <scale X="11.21" Y="11.21" Z="11.21"/>
             <models>
-                <model file="planet.3d"/>
+                <model file="planet.3d" diffR="200" diffG="139" diffB="58"/>
             </models>
         </group>
         <group>
@@ -115,7 +115,7 @@
             <!-- Saturn -->
             <scale X="9.45" Y="9.45" Z="9.45"/>
             <models>
-                <model file="planet.3d"/>
+                <model file="planet.3d" diffR="164" diffG="155" diffB="114"/>
             </models>
         </group>
         <group>
@@ -197,7 +197,7 @@
             <!-- Uranus -->
             <scale X="4.01" Y="4.01" Z="4.01"/>
             <models>
-                <model file="planet.3d"/>
+                <model file="planet.3d" diffR="147" diffG="184" diffB="190"/>
             </models>
         </group>
         <group>
@@ -247,7 +247,7 @@
             <!-- Neptune -->
             <scale X="3.88" Y="3.88" Z="3.88"/>
             <models>
-                <model file="planet.3d"/>
+                <model file="planet.3d" diffR="43" diffG="45" diffB="94"/>
             </models>
         </group>
         <group>
@@ -281,7 +281,7 @@
             <!-- Pluto -->
             <scale X="0.186" Y="0.186" Z="0.186"/>
             <models>
-                <model file="planet.3d"/>
+                <model file="planet.3d" diffR="221" diffG="196" diffB="175"/>
             </models>
         </group>
         <group>
