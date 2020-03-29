@@ -15,11 +15,12 @@ namespace engine::window::cameras {
 
         // GLUT Callbacks
 
-        virtual void HandleKeyPress(unsigned char, int, int) {}
-        virtual void HandleSpecialKeyPress(int, int, int) {}
+        virtual void HandleKeyPress(unsigned char key, int mouseX, int mouseY) {}
+        virtual void HandleSpecialKeyPress(int key, int mouseX, int mouseY) {}
 
         virtual void HandleMouseKeyPress(int button, int state, int mouseX, int mouseY) {}
         virtual void HandleMouseMovement(int mouseX, int mouseY) {}
+        virtual void HandlePassiveMouseMovement(int mouseX, int mouseY) {}
     };
 }
 

@@ -13,6 +13,9 @@ namespace engine::window {
         static Window* instance;
 
         int windowId;
+        int width;
+        int height;
+        bool focused = true;
 
         /**
          * A cena que está atualmente a ser desenhada.
@@ -46,10 +49,14 @@ namespace engine::window {
         void SetCamera(cameras::Camera* camera);
 
         int GetDeltaTime();
+        int GetWidth() { return width; }
+        int GetHeight() { return height; }
+        bool IsFocused() { return focused; }
 
         // Handlers de callbacks do GLUT
         void RenderScene();
         void HandleWindowChangeSize(int, int);
+        void HandleWindowEntry(int state);
     };
 
     /**
@@ -67,6 +74,10 @@ namespace engine::window {
             Window::GetInstance()->HandleWindowChangeSize(width, height);
         }
 
+        inline void HandleWindowEntry(int state) {
+            Window::GetInstance()->HandleWindowEntry(state);
+        }
+
         inline void HandleKeyPress(unsigned char key, int mouseX, int mouseY) {
             cameras::Camera* camera = Window::GetInstance()->GetCamera();
 
@@ -75,6 +86,13 @@ namespace engine::window {
         }
 
         inline void HandleSpecialKeyPress(int key, int mouseX, int mouseY) {
+            if(key == GLUT_KEY_F4) {
+                if(glutGetModifiers() & GLUT_ACTIVE_ALT) {
+                    // Detected Alt+F4!
+                    exit(0);
+                }
+            }
+
             cameras::Camera* camera = Window::GetInstance()->GetCamera();
 
             if(camera != nullptr)
@@ -93,6 +111,13 @@ namespace engine::window {
 
             if(camera != nullptr)
                 camera->HandleMouseMovement(x, y);
+        }
+
+        inline void HandlePassiveMouseMovement(int x, int y) {
+            cameras::Camera* camera = Window::GetInstance()->GetCamera();
+
+            if(camera != nullptr)
+                camera->HandlePassiveMouseMovement(x, y);
         }
     }
 }

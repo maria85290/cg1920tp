@@ -17,6 +17,8 @@ namespace engine::window::cameras {
         gluLookAt(cam.x, cam.y, cam.z,
                   center.x, center.y, center.z,
                   0, 1, 0);
+        cout << "Camera positioned at: " << center.x << " " << center.y << " " << center.z << endl;
+        cout << "Looking at: " << cam.x << " " << cam.y << " " << cam.z << endl;
     }
 
     void MixedCamera::HandleKeyPress(unsigned char key, int mouseX, int mouseY) {

@@ -23,6 +23,8 @@ namespace engine::window {
         glutInitWindowPosition(100, 100);
         glutInitWindowSize(800, 800);
         this->windowId = glutCreateWindow(programName);
+        this->width = 800;
+        this->height = 800;
 
         glewInit();
 
@@ -30,12 +32,15 @@ namespace engine::window {
         glutIdleFunc(glut_handlers::RenderScene);
 
         glutReshapeFunc(glut_handlers::HandleWindowChangeSize);
+        glutEntryFunc(glut_handlers::HandleWindowEntry);
 
         glutKeyboardFunc(glut_handlers::HandleKeyPress);
         glutSpecialFunc(glut_handlers::HandleSpecialKeyPress);
 
         glutMouseFunc(glut_handlers::HandleMouseKeyPress);
         glutMotionFunc(glut_handlers::HandleMouseMovement);
+
+        glutPassiveMotionFunc(glut_handlers::HandlePassiveMouseMovement);
 
         this->scene.InitGLSettings();
     }
@@ -72,6 +77,9 @@ namespace engine::window {
         if(h == 0)
             h = 1;
 
+        this->width = w;
+        this->height = h;
+
         double ratio = w * 1.0 / h;
 
         glMatrixMode(GL_PROJECTION);
@@ -81,6 +89,10 @@ namespace engine::window {
         gluPerspective(45.0f, ratio, 1.0f, 1000.0f);
 
         glMatrixMode(GL_MODELVIEW);
+    }
+
+    void Window::HandleWindowEntry(int state) {
+        focused = state == GLUT_ENTERED;
     }
 
     void Window::PrintInfo() const {

@@ -13,7 +13,7 @@ namespace engine::window::cameras {
         int lastMouseX;
         int lastMouseY;
 
-        double camRadius = 100;
+        double camRadius = 5;
         double camAlpha = 0;
         double camBeta = 0;
 
