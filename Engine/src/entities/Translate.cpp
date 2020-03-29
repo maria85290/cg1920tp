@@ -10,18 +10,15 @@ namespace engine::entities {
         const XMLElement *elem = translateNode->ToElement();
 
         if(elem->QueryAttribute("X", &this->vector.x) != XML_SUCCESS) {
-            cerr << "[Translate] Erro: Não foi encontrado o atributo axisX." << endl;
-            return false;
+            this->vector.x = 0.0;
         }
 
         if(elem->QueryAttribute("Y", &this->vector.y) != XML_SUCCESS) {
-            cerr << "[Translate] Erro: Não foi encontrado o atributo axisY." << endl;
-            return false;
+            this->vector.y = 0.0;
         }
 
         if(elem->QueryAttribute("Z", &this->vector.z) != XML_SUCCESS) {
-            cerr << "[Translate] Erro: Não foi encontrado o atributo axisZ." << endl;
-            return false;
+            this->vector.z = 0.0;
         }
 
         return true;
