@@ -11,6 +11,8 @@ namespace engine::window::cameras {
         Camera() = default;
         virtual ~Camera() = default;
 
+        virtual void PrintInfo() = 0;
+
         virtual void PositionInWorld() = 0;
 
         // GLUT Callbacks

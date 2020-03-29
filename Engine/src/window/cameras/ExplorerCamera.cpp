@@ -6,6 +6,8 @@
 
 #include "ExplorerCamera.h"
 
+using std::cout, std::endl;
+
 namespace engine::window::cameras {
     ExplorerCamera::ExplorerCamera(vec3 center): center(center) {
         SphericalToCartesian();
@@ -15,6 +17,11 @@ namespace engine::window::cameras {
         gluLookAt(cam.x, cam.y, cam.z,
                   center.x, center.y, center.z,
                   0, 1, 0);
+    }
+
+    void ExplorerCamera::PrintInfo() {
+        cout << "Use left click and move mouse to adjust camera position," << endl;
+        cout << "and use right click to zoom in and out." << endl;
     }
 
     /**

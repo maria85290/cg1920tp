@@ -29,7 +29,7 @@ namespace engine::window {
         glewInit();
 
         glutDisplayFunc(glut_handlers::RenderScene);
-        glutIdleFunc(glut_handlers::RenderScene);
+        glutIdleFunc(glut_handlers::Update);
 
         glutReshapeFunc(glut_handlers::HandleWindowChangeSize);
         glutEntryFunc(glut_handlers::HandleWindowEntry);
@@ -45,10 +45,16 @@ namespace engine::window {
         this->scene.InitGLSettings();
     }
 
-    void Window::RenderScene() {
+    void Window::Update() {
         ComputeDeltaTime();
         MeasureFps();
 
+
+
+        glutPostRedisplay();
+    }
+
+    void Window::RenderScene() {
         this->scene.ClearPreviousFrame();
 
         glLoadIdentity();
@@ -67,6 +73,7 @@ namespace engine::window {
         }
 
         PrintInfo();
+        this->camera->PrintInfo();
 
         glutMainLoop();
     }

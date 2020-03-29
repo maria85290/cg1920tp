@@ -24,6 +24,8 @@ namespace engine::window::cameras {
     public:
         explicit ExplorerCamera(vec3 center);
 
+        void PrintInfo() override;
+
         void PositionInWorld() override;
 
         void HandleKeyPress(unsigned char, int, int) override {}

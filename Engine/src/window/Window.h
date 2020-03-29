@@ -54,6 +54,7 @@ namespace engine::window {
         bool IsFocused() { return focused; }
 
         // Handlers de callbacks do GLUT
+        void Update();
         void RenderScene();
         void HandleWindowChangeSize(int, int);
         void HandleWindowEntry(int state);
@@ -66,6 +67,10 @@ namespace engine::window {
      * É ncessária a existência destes proxies pois GLUT é uma API C; logo não é compatível com objetos de C++.
      */
     namespace glut_handlers {
+        inline void Update() {
+            Window::GetInstance()->Update();
+        }
+
         inline void RenderScene() {
             Window::GetInstance()->RenderScene();
         }

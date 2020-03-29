@@ -24,6 +24,8 @@ namespace engine::window::cameras {
         FpsCamera();
         ~FpsCamera() override;
 
+        void PrintInfo() override;
+
         void PositionInWorld() override;
 
         void HandleKeyPress(unsigned char key, int mouseX, int mouseY) override;

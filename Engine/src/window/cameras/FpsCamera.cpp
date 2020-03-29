@@ -19,6 +19,10 @@ namespace engine::window::cameras {
         glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
     }
 
+    void FpsCamera::PrintInfo() {
+        cout << "Use WASD to move the camera, and the mouse to change the yaw/pitch." << endl;
+    }
+
     void FpsCamera::PositionInWorld() {
         gluLookAt(
             cameraPos.x, cameraPos.y, cameraPos.z,
@@ -40,8 +44,8 @@ namespace engine::window::cameras {
         vec3 forward = ComputeForward();
         vec3 right = ComputeRight(forward);
 
-        forward = scale(forward, 5.0/deltaTime);
-        right = scale(right, 5.0/deltaTime);
+        forward = scale(forward, 20.0/deltaTime);
+        right = scale(right, 20.0/deltaTime);
 
         switch(key) {
             case 'w':
@@ -87,13 +91,14 @@ namespace engine::window::cameras {
     }
 
     void FpsCamera::HandlePassiveMouseMovement(int mouseX, int mouseY) {
+        int deltaTime = Window::GetInstance()->GetDeltaTime() / 10;
         int deltaX = lastMouseX - mouseX;
         int deltaY = lastMouseY - mouseY;
 
-        yaw += 0.001 * deltaX;
+        yaw += 0.001 * deltaX * deltaTime;
         yaw = fmod(yaw, 2 * M_PI); // camAlpha %= 360
 
-        pitch += 0.001 * deltaY;
+        pitch += 0.001 * deltaY * deltaTime;
 
         if(pitch < -M_PI_2) {
             pitch = -M_PI_2 + 0.0001;
