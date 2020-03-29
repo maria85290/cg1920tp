@@ -47,8 +47,8 @@ namespace engine::window::cameras {
         vec3 forward = ComputeForward();
         vec3 right = ComputeRight(forward);
 
-        forward = scale(forward, 20.0/deltaTime);
-        right = scale(right, 20.0/deltaTime);
+        forward = scale(forward, speed/deltaTime);
+        right = scale(right, speed/deltaTime);
 
         switch(key) {
             case 27:
@@ -82,6 +82,16 @@ namespace engine::window::cameras {
             case 'd':
             case 'D':
                 cameraPos = {cameraPos.x + right.x, cameraPos.y + right.y, cameraPos.z + right.z};
+                break;
+            case 'q':
+            case 'Q':
+                speed += 5;
+                break;
+            case 'e':
+            case 'E':
+                speed -= 5;
+                if(speed < 0)
+                    speed = 0;
                 break;
             default:
                 break;
