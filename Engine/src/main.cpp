@@ -6,13 +6,13 @@
 
 #include "Scene.h"
 #include "window/Window.h"
-#include "window/cameras/ExplorerCamera.h"
+#include "window/cameras/MixedCamera.h"
 
 using std::cerr, std::endl, std::cout;
 using tinyxml2::XMLDocument, tinyxml2::XMLNode, tinyxml2::XML_SUCCESS;
 using engine::Scene;
 using engine::window::Window;
-using engine::window::cameras::ExplorerCamera;
+using engine::window::cameras::MixedCamera;
 
 int main(int argc, char* argv[]) {
     if(argc != 2) {
@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
 
     Window* window = Window::GetInstance();
     window->InitWindow(argv[0]);
-    window->SetCamera(new ExplorerCamera);
+    window->SetCamera(new MixedCamera({0, 0, 0}));
 
     Scene& scene = window->GetScene();
     if(!scene.ParseXml(root)) {

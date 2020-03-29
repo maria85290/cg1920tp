@@ -1,10 +1,11 @@
 #ifndef CG_TP_ENGINE_SRC_WINDOW_CAMERAS_EXPLORERCAMERA_H_
 #define CG_TP_ENGINE_SRC_WINDOW_CAMERAS_EXPLORERCAMERA_H_
 
+#include <Common/vectors.h>
 #include "Camera.h"
 
 namespace engine::window::cameras {
-    class ExplorerCamera: public Camera {
+    class MixedCamera: public Camera {
     private:
         bool leftMousePressed = false;
         bool rightMousePressed = false;
@@ -21,13 +22,15 @@ namespace engine::window::cameras {
         vec3 center;
 
         void SphericalToCartesian();
+        vec3 ComputeForward();
+        vec3 ComputeRight();
     public:
-        explicit ExplorerCamera(vec3 center);
+        explicit MixedCamera(vec3 center);
 
         void PositionInWorld() override;
 
-        void HandleKeyPress(unsigned char, int, int) override {}
-        void HandleSpecialKeyPress(int, int, int) override {}
+        void HandleKeyPress(unsigned char key, int mouseX, int mouseY) override;
+        void HandleSpecialKeyPress(int key, int mouseX, int mouseY) override {}
 
         void HandleMouseKeyPress(int button, int state, int mouseX, int mouseY) override;
         void HandleMouseMovement(int mouseX, int mouseY) override;

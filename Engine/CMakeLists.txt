@@ -15,7 +15,8 @@ add_executable(Engine
         src/window/Window.cpp src/window/Window.h
         src/window/cameras/Camera.h
         src/window/cameras/FpsCamera.cpp src/window/cameras/FpsCamera.h
-        src/window/cameras/ExplorerCamera.cpp src/window/cameras/ExplorerCamera.h)
+        src/window/cameras/ExplorerCamera.cpp src/window/cameras/ExplorerCamera.h
+        src/window/cameras/MixedCamera.cpp src/window/cameras/MixedCamera.h)
 
 set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED)
@@ -66,8 +67,7 @@ else (WIN32) # Include GLUT and GLEW for Linux and Mac
     endif (NOT GLUT_FOUND)
 
     include_directories(${GLUT_INCLUDE_DIR})
-    link_directories(${GLUT_LIBRARY_DIRS})
-    add_definitions(${GLUT_DEFINITIONS})
+    link_directories(${GLUT_LIBRARIES})
 
     if(NOT APPLE)
         find_package(GLEW REQUIRED)

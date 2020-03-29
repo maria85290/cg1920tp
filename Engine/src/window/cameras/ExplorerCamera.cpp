@@ -7,13 +7,13 @@
 #include "ExplorerCamera.h"
 
 namespace engine::window::cameras {
-    ExplorerCamera::ExplorerCamera() {
+    ExplorerCamera::ExplorerCamera(vec3 center): center(center) {
         SphericalToCartesian();
     }
 
     void ExplorerCamera::PositionInWorld() {
-        gluLookAt(camX, camY, camZ,
-                  0, 0, 0,
+        gluLookAt(cam.x, cam.y, cam.z,
+                  center.x, center.y, center.z,
                   0, 1, 0);
     }
 
@@ -80,8 +80,8 @@ namespace engine::window::cameras {
      * Converte coordenadas esféricas em coordenadas cartesianas.
      */
     void ExplorerCamera::SphericalToCartesian() {
-        camX = camRadius * cos(camBeta) * sin(camAlpha);
-        camY = camRadius * sin(camBeta);
-        camZ = camRadius * cos(camBeta) * cos(camAlpha);
+        cam.x = camRadius * cos(camBeta) * sin(camAlpha);
+        cam.y = camRadius * sin(camBeta);
+        cam.z = camRadius * cos(camBeta) * cos(camAlpha);
     }
 }
