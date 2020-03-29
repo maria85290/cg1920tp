@@ -65,7 +65,7 @@ namespace engine::entities {
                 childNode = childNode->NextSibling();
                 continue;
             } else {
-                cerr << "Encontrada node " << nodeName << ", não sei processar. Saindo.!" << endl; // TODO
+                cerr << "Erro: A node " << nodeName << " foi encontrada dentro de um grupo, mas esta node não é reconhecida!" << endl;
                 return false;
             }
 
