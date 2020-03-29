@@ -20,19 +20,45 @@ namespace engine::entities {
     bool Group::ParseXml(XMLNode *groupNode) {
         XMLNode *childNode = groupNode->FirstChild();
 
+        bool translate = false, scale = false, rotate = false, models = false;
+
         while(childNode != nullptr) {
             string nodeName(childNode->Value());
 
             Entity *entity;
 
             if(nodeName == "translate") {
+                if(translate) {
+                    cerr << "Encontradas duas tags translate dentro do mesmo grupo!" << endl;
+                    return false;
+                }
+
                 entity = new Translate;
+                translate = true;
             } else if(nodeName == "rotate") {
+                if(rotate) {
+                    cerr << "Encontradas duas tags rotate dentro do mesmo grupo!" << endl;
+                    return false;
+                }
+
                 entity = new Rotate;
+                rotate = true;
             } else if(nodeName == "scale") {
+                if(scale) {
+                    cerr << "Encontradas duas tags scale dentro do mesmo grupo!" << endl;
+                    return false;
+                }
+
                 entity = new Scale;
+                scale = true;
             } else if(nodeName == "models") {
+                if(models) {
+                    cerr << "Encontradas duas tags models dentro do mesmo grupo!" << endl;
+                    return false;
+                }
+
                 entity = new Models;
+                models = true;
             } else if(nodeName == "group") {
                 entity = new Group;
             } else if(dynamic_cast<const XMLComment*>(childNode)) {
@@ -43,7 +69,10 @@ namespace engine::entities {
                 return false;
             }
 
-            entity->ParseXml(childNode);
+            if(!entity->ParseXml(childNode)) {
+                return false;
+            }
+
             this->AddEntity(entity);
 
             childNode = childNode->NextSibling();
