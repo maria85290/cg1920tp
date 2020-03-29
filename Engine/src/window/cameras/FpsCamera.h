@@ -9,6 +9,8 @@ namespace engine::window::cameras {
     private:
         bool escKeyPressed = false;
 
+        double speed = 20.0;
+
         int lastMouseX;
         int lastMouseY;
 
