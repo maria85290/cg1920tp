@@ -1,6 +1,7 @@
 <scene>
     <!-- <camera mode="fps" X="0" Y="0" Z="300"/> -->
     <group>
+        <!-- Sun -->
         <translate X="0" Y="0" Z="0"/>
         <scale X="109" Y="109" Z="109"/>
         <models>
@@ -8,6 +9,7 @@
         </models>
     </group>
     <group>
+        <!-- Mercury -->
         <translate X="0" Y="0" Z="-150"/>
         <scale X="0.383" Y="0.383" Z="0.383"/>
         <models>
@@ -15,6 +17,7 @@
         </models>
     </group>
     <group>
+        <!-- Venus -->
         <translate X="0" Y="0" Z="-200"/>
         <scale X="0.949" Y="0.949" Z="0.949"/>
         <models>
@@ -24,12 +27,14 @@
     <group>
         <translate X="0" Y="0" Z="-250"/>
         <group>
+            <!-- Earth -->
             <scale X="1" Y="1" Z="1"/>
             <models>
                 <model file="planet.3d"/>
             </models>
         </group>
         <group>
+            <!-- Moon -->
             <translate X="5" Y="0" Z="0"/>
             <scale X="0.272" Y="0.272" Z="0.272"/>
             <models>
@@ -40,12 +45,14 @@
     <group>
         <translate X="0" Y="0" Z="-300"/>
         <group>
+            <!-- Mars -->
             <scale X="0.532" Y="0.532" Z="0.532"/>
             <models>
                 <model file="planet.3d"/>
             </models>
         </group>
         <group>
+            <!-- Phobos -->
             <translate X="5" Y="0" Z="0"/>
             <scale X="0.00176" Y="0.00176" Z="0.00176"/>
             <models>
@@ -53,6 +60,7 @@
             </models>
         </group>
         <group>
+            <!-- Deimos -->
             <translate X="-5" Y="0" Z="0"/>
             <scale X="0.000973" Y="0.000973" Z="0.000973"/>
             <models>
@@ -63,12 +71,14 @@
     <group>
         <translate X="0" Y="0" Z="-350"/>
         <group>
+            <!-- Jupiter -->
             <scale X="11.21" Y="11.21" Z="11.21"/>
             <models>
                 <model file="planet.3d"/>
             </models>
         </group>
         <group>
+            <!-- Io -->
             <translate X="16" Y="0" Z="0"/>
             <scale X="0.285" Y="0.285" Z="0.285"/>
             <models>
@@ -76,6 +86,7 @@
             </models>
         </group>
         <group>
+            <!-- Europa -->
             <translate X="-16" Y="0" Z="0"/>
             <scale X="0.244" Y="0.244" Z="0.244"/>
             <models>
@@ -83,6 +94,7 @@
             </models>
         </group>
         <group>
+            <!-- Ganymede -->
             <translate X="0" Y="0" Z="16"/>
             <scale X="0.413" Y="0.413" Z="0.413"/>
             <models>
@@ -90,6 +102,7 @@
             </models>
         </group>
         <group>
+            <!-- Callisto -->
             <translate X="0" Y="0" Z="-16"/>
             <scale X="0.378" Y="0.378" Z="0.378"/>
             <models>
@@ -100,12 +113,14 @@
     <group>
         <translate X="0" Y="0" Z="-400"/>
         <group>
+            <!-- Saturn -->
             <scale X="9.45" Y="9.45" Z="9.45"/>
             <models>
                 <model file="planet.3d"/>
             </models>
         </group>
         <group>
+            <!-- Mimas -->
             <translate X="14" Y="0" Z="0"/>
             <scale X="0.0311" Y="0.0311" Z="0.0311"/>
             <models>
@@ -113,6 +128,7 @@
             </models>
         </group>
         <group>
+            <!-- Enceladus -->
             <translate X="10.72" Y="0" Z="8.99"/>
             <scale X="0.0395" Y="0.0395" Z="0.0395"/>
             <models>
@@ -120,15 +136,15 @@
             </models>
         </group>
         <group>
+            <!-- Tethys -->
             <translate X="2.43" Y="0" Z="13.78"/>
             <scale X="0.0833" Y="0.0833" Z="0.0833"/>
             <models>
                 <model file="planet.3d"/>
-                <!-- Isto é outro comentário -->
             </models>
         </group>
-        <!-- Isto é um comentário -->
         <group>
+            <!-- Dione -->
             <translate X="-7" Y="0" Z="12.12"/>
             <scale X="0.0881" Y="0.0881" Z="0.0881"/>
             <models>
@@ -136,6 +152,7 @@
             </models>
         </group>
         <group>
+            <!-- Rhea -->
             <translate X="-13.15" Y="0" Z="4.78"/>
             <scale X="0.119" Y="0.119" Z="0.119"/>
             <models>
@@ -143,6 +160,7 @@
             </models>
         </group>
         <group>
+            <!-- Titan -->
             <translate X="-13.15" Y="0" Z="-4.78"/>
             <scale X="0.404" Y="0.404" Z="0.404"/>
             <models>
@@ -150,6 +168,7 @@
             </models>
         </group>
         <group>
+            <!-- Hyperion -->
             <translate X="-7" Y="0" Z="-12.12"/>
             <scale X="0.0211" Y="0.0211" Z="0.0211"/>
             <models>
@@ -157,6 +176,7 @@
             </models>
         </group>
         <group>
+            <!-- Iapetus -->
             <translate X="2.43" Y="0" Z="-13.78"/>
             <scale X="0.115" Y="0.115" Z="0.115"/>
             <models>
@@ -164,6 +184,7 @@
             </models>
         </group>
         <group>
+            <!-- Phoebe -->
             <translate X="10.72" Y="0" Z="-8.99"/>
             <scale X="0.0167" Y="0.0167" Z="0.0167"/>
             <models>
@@ -174,12 +195,14 @@
     <group>
         <translate X="0" Y="0" Z="-450"/>
         <group>
+            <!-- Uranus -->
             <scale X="4.01" Y="4.01" Z="4.01"/>
             <models>
                 <model file="planet.3d"/>
             </models>
         </group>
         <group>
+            <!-- Miranda -->
             <translate X="9" Y="0" Z="0"/>
             <scale X="0.0370" Y="0.0370" Z="0.0370"/>
             <models>
@@ -187,6 +210,7 @@
             </models>
         </group>
         <group>
+            <!-- Ariel -->
             <translate X="2.78" Y="0" Z="8.55"/>
             <scale X="0.0908" Y="0.0908" Z="0.0908"/>
             <models>
@@ -194,6 +218,7 @@
             </models>
         </group>
         <group>
+            <!-- Umbriel -->
             <translate X="-7.28" Y="0" Z="5.29"/>
             <scale X="0.0917" Y="0.0917" Z="0.0917"/>
             <models>
@@ -201,6 +226,7 @@
             </models>
         </group>
         <group>
+            <!-- Titania -->
             <translate X="-7.28" Y="0" Z="-5.29"/>
             <scale X="0.123" Y="0.123" Z="0.123"/>
             <models>
@@ -208,6 +234,7 @@
             </models>
         </group>
         <group>
+            <!-- Oberon -->
             <translate X="2.78" Y="0" Z="-8.55"/>
             <scale X="0.119" Y="0.119" Z="0.119"/>
             <models>
@@ -218,12 +245,14 @@
     <group>
         <translate X="0" Y="0" Z="-500"/>
         <group>
+            <!-- Neptune -->
             <scale X="3.88" Y="3.88" Z="3.88"/>
             <models>
                 <model file="planet.3d"/>
             </models>
         </group>
         <group>
+            <!-- Proteus -->
             <translate X="9" Y="0" Z="0"/>
             <scale X="0.0329" Y="0.0329" Z="0.0329"/>
             <models>
@@ -231,6 +260,7 @@
             </models>
         </group>
         <group>
+            <!-- Triton -->
             <translate X="-4.5" Y="0" Z="7.79"/>
             <scale X="0.212" Y="0.212" Z="0.212"/>
             <models>
@@ -238,6 +268,7 @@
             </models>
         </group>
         <group>
+            <!-- Nereid -->
             <translate X="-4.5" Y="0" Z="-7.79"/>
             <scale X="0.0266" Y="0.0266" Z="0.0266"/>
             <models>
@@ -248,12 +279,14 @@
     <group>
         <translate X="0" Y="0" Z="-550"/>
         <group>
+            <!-- Pluto -->
             <scale X="0.186" Y="0.186" Z="0.186"/>
             <models>
                 <model file="planet.3d"/>
             </models>
         </group>
         <group>
+            <!-- Charon -->
             <translate X="5" Y="0" Z="0"/>
             <scale X="0.0951" Y="0.0951" Z="0.0951"/>
             <models>
@@ -261,5 +294,4 @@
             </models>
         </group>
     </group>
-    <!-- Isto é ainda outro comentário! -->
 </scene>
