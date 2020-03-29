@@ -17,11 +17,26 @@ namespace engine {
     public:
         ~Scene();
 
+        /**
+         * Lê do ficheiro XML a tag corresponde à cena que vai ser renderizada.
+         *
+         * @param sceneNode O nodo corresponde à cena
+         * @return true se correu tudo bem, false caso contrário
+         */
         bool ParseXml(tinyxml2::XMLNode* sceneNode);
 
+        /**
+         * Inicializa definições do OpenGL que vão ser necessárias para todas as entidades da cena.
+         */
         void InitGLSettings() const;
 
+        /**
+         * Limpa o ecrã de todas as imagens desenhadas na última frame.
+         */
         void ClearPreviousFrame() const;
+        /**
+         * Desenha uma nova frame desta cena.
+         */
         void Render() const;
     };
 }

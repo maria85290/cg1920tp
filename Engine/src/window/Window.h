@@ -43,20 +43,31 @@ namespace engine::window {
         void MainLoop() const;
         void DestroyWindow();
 
+        /** Obtém a cena que vai ser renderizada nesta janela. */
         Scene& GetScene();
 
+        /** Obtém a câmara que está a ser utilizada para o movimento nesta janela. */
         cameras::Camera* GetCamera();
+        /** Define uma nova câmara que está a ser utilizada para o movimento nesta janela. */
         void SetCamera(cameras::Camera* camera);
 
         int GetDeltaTime();
+        /** Retorna o comprimento da janela. */
         int GetWidth() { return width; }
+        /** Retorna a altura da janela. */
         int GetHeight() { return height; }
+        /** Indicador fraco sobre se a janela está em foco. */
         bool IsFocused() { return focused; }
 
         // Handlers de callbacks do GLUT
+
+        /** Callback do glut correspondente à glutIdleFunc(). **/
         void Update();
+        /** Callback do glut para renderizar a cena no ecrã. */
         void RenderScene();
+        /** Callback do glut para quando a janela muda de tamanho. */
         void HandleWindowChangeSize(int, int);
+        /** Callback do glut para quando a janela perde ou ganha foco. */
         void HandleWindowEntry(int state);
     };
 
@@ -91,6 +102,7 @@ namespace engine::window {
         }
 
         inline void HandleSpecialKeyPress(int key, int mouseX, int mouseY) {
+            // Este código permite a deteção do atalho ALT+F4, para permitir que o programa encerre, mesmo em Windows.
             if(key == GLUT_KEY_F4) {
                 if(glutGetModifiers() & GLUT_ACTIVE_ALT) {
                     // Detected Alt+F4!

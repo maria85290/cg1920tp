@@ -53,8 +53,11 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-// Windows-specific code:
-// NVIDIA/AMD Driver Hints to select dicrete graphics on laptops with dual graphics
+// Código específico para Windows:
+// Em portáteis com placas gráficas integradas e dedicadas, este código dá hints às drivers
+// para que estas escolham a placa gráfica dedicada para executar a nossa engine.
+// Não tem qualquer efeito em Linux ou macOS, e portanto, não é incluido nos executáveis gerados
+// para essas plataformas.
 #ifdef WIN32
 extern "C" {
 __declspec(dllexport) unsigned long NvOptimusEnablement = 0x00000001;
