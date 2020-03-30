@@ -44,12 +44,11 @@ namespace engine::window::cameras {
     }
 
     void FpsCamera::HandleKeyPress(unsigned char key, int mouseX, int mouseY) {
-        int deltaTime = Window::GetInstance()->GetDeltaTime();
         vec3 forward = ComputeForward();
         vec3 right = ComputeRight(forward);
 
-        forward = scale(forward, speed/deltaTime);
-        right = scale(right, speed/deltaTime);
+        forward = scale(forward, speed);
+        right = scale(right, speed);
 
         switch(key) {
             case 27:

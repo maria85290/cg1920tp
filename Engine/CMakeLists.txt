@@ -26,16 +26,16 @@ add_definitions(${OpenGL_DEFINITIONS})
 
 if (NOT OPENGL_FOUND)
     message(ERROR " OPENGL not found!")
-endif (NOT OPENGL_FOUND)
+endif ()
 
 if (WIN32)
     set(TOOLKITS_DIR "${CG_TP_SOURCE_DIR}/Engine/lib")
 
     message(STATUS "TOOLKITS_DIR set to: " ${TOOLKITS_DIR})
 
-    if (NOT EXISTS "${TOOLKITS_DIR}/glut/GL/glut.h" OR NOT EXISTS "${TOOLKITS_DIR}/glut/glut32.lib")
+    if (NOT EXISTS "${TOOLKITS_DIR}/glut/GL/glut.h" OR NOT EXISTS "${TOOLKITS_DIR}/glut/freeglut.lib")
         message(ERROR ": GLUT not found: ${TOOLKITS_DIR}/glut/GL/glut.h")
-    endif (NOT EXISTS "${TOOLKITS_DIR}/glut/GL/glut.h" OR NOT EXISTS "${TOOLKITS_DIR}/glut/glut32.lib")
+    endif ()
 
     if (NOT EXISTS "${TOOLKITS_DIR}/glew/GL/glew.h" OR NOT EXISTS "${TOOLKITS_DIR}/glew/glew32.lib")
         message(ERROR ": GLEW not found")
@@ -43,18 +43,19 @@ if (WIN32)
 
     include_directories(${TOOLKITS_DIR}/glut ${TOOLKITS_DIR}/glew)
     link_directories(${TOOLKITS_DIR}/glut ${TOOLKITS_DIR}/glew)
-    set(GLUT_LIBRARY ${TOOLKITS_DIR}/glut/glut32.lib)
+
+    set(GLUT_LIBRARY ${TOOLKITS_DIR}/glut/freeglut.lib)
     set(GLEW_LIBRARY ${TOOLKITS_DIR}/glew/glew32.lib)
 
-    if (EXISTS "${TOOLKITS_DIR}/glut/glut32.dll")
-        file(COPY ${TOOLKITS_DIR}/glut/glut32.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine)
-        file(COPY ${TOOLKITS_DIR}/glut/glut32.dll DESTINATION ${CG_TP_SOURCE_DIR}/Configurations)
-    endif (EXISTS "${TOOLKITS_DIR}/glut/glut32.dll")
+    if (EXISTS "${TOOLKITS_DIR}/glut/freeglut.dll")
+        file(COPY ${TOOLKITS_DIR}/glut/freeglut.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine)
+        file(COPY ${TOOLKITS_DIR}/glut/freeglut.dll DESTINATION ${CG_TP_SOURCE_DIR}/Configurations)
+    endif ()
 
     if (EXISTS "${TOOLKITS_DIR}/glew/glew32.dll")
         file(COPY ${TOOLKITS_DIR}/glew/glew32.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine)
         file(COPY ${TOOLKITS_DIR}/glew/glew32.dll DESTINATION ${CG_TP_SOURCE_DIR}/Configurations)
-    endif (EXISTS "${TOOLKITS_DIR}/glew/glew32.dll")
+    endif ()
 
     set_property(DIRECTORY ${CG_TP_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Engine)
 else (WIN32) # Include GLUT and GLEW for Linux and Mac

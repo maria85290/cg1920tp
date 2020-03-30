@@ -49,7 +49,8 @@ namespace engine {
     void Scene::InitGLSettings() const {
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
-        glPolygonMode(GL_FRONT, GL_LINE);
+        glCullFace(GL_BACK);
+        glPolygonMode(GL_FRONT, GL_FILL);
     }
 
     void Scene::ClearPreviousFrame() const {

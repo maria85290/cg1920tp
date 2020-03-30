@@ -18,7 +18,7 @@ namespace engine::entities {
         std::string filename;
         std::vector<vec3>* vertices;
 
-        GLdouble diffR, diffG, diffB;
+        GLubyte diffR, diffG, diffB;
 
         GLuint vbo;
         bool isCachedModel = false;
@@ -29,8 +29,8 @@ namespace engine::entities {
 
         void GenVBOs();
     public:
-        explicit Model(const Model& model, const double diffR, const double diffG, const double diffB);
-        explicit Model(const std::string& filename, const double diffR, const double diffG, const double diffB);
+        explicit Model(const Model& model, const int diffR, const int diffG, const int diffB);
+        explicit Model(const std::string& filename, const int diffR, const int diffG, const int diffB);
         ~Model();
 
         void Render() const;

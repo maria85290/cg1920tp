@@ -14,15 +14,17 @@ using tinyxml2::XMLElement;
 namespace engine::entities {
     map<string, const Model*> Model::loadedModels = map<string, const Model*>();
 
-    Model::Model(const Model& model, const double diffR, const double diffG, const double diffB): filename(model.filename), vertices(model.vertices),
+    Model::Model(const Model& model, const int diffR, const int diffG, const int diffB):
+    filename(model.filename), vertices(model.vertices),
 	diffR(diffR), diffG(diffG), diffB(diffB),
 	vbo(model.vbo),
 	isCachedModel(false)
     {}
 
-    Model::Model(const string& filename, const double diffR, const double diffG, const double diffB): filename(filename),
-                                                                                    diffR(diffR), diffG(diffG), diffB(diffB),
-                                                                                    isCachedModel(true) {
+    Model::Model(const string& filename, const int diffR, const int diffG, const int diffB):
+    filename(filename),
+    diffR(diffR), diffG(diffG), diffB(diffB),
+    isCachedModel(true) {
         this->vertices = new vector<vec3>;
     	
         ifstream file(filename);
@@ -83,9 +85,9 @@ namespace engine::entities {
             return nullptr;
         }
 
-        double diffR = element->DoubleAttribute("diffR", 255.0);
-        double diffG = element->DoubleAttribute("diffG", 255.0);
-        double diffB = element->DoubleAttribute("diffB", 255.0);
+        int diffR = element->IntAttribute("diffR", 255);
+        int diffG = element->IntAttribute("diffG", 255);
+        int diffB = element->IntAttribute("diffB", 255);
 
         if(Model::loadedModels.count(filename) > 0) {
             const Model* model = Model::loadedModels.find(filename)->second;

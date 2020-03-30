@@ -26,7 +26,9 @@ namespace engine::window {
         this->width = 800;
         this->height = 800;
 
+#ifndef __APPLE__
         glewInit();
+#endif
 
         glutDisplayFunc(glut_handlers::RenderScene);
         glutIdleFunc(glut_handlers::Update);
