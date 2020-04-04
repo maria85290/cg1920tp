@@ -1,18 +1,19 @@
+#include "Model.h"
+
 #include <string>
 #include <fstream>
 #include <iostream>
-#include <chrono>
 #include <tinyxml2/tinyxml2.h>
 
-#include "../glut.h"
-
-#include "Model.h"
+#include <glbinding/gl/gl.h>
 
 using std::cout, std::cerr, std::endl, std::string, std::ifstream, std::vector, std::map;
 using tinyxml2::XMLElement;
 
+using namespace gl;
+
 namespace engine::entities {
-    map<string, const Model*> Model::loadedModels = map<string, const Model*>();
+    map<string, const Model*> Model::loadedModels;
 
     Model::Model(const Model& model, const int diffR, const int diffG, const int diffB):
     filename(model.filename), vertices(model.vertices),
@@ -25,7 +26,7 @@ namespace engine::entities {
     filename(filename),
     diffR(diffR), diffG(diffG), diffB(diffB),
     isCachedModel(true) {
-        this->vertices = new vector<vec3>;
+        this->vertices = new vector<glm::dvec3>;
     	
         ifstream file(filename);
 
@@ -54,11 +55,15 @@ namespace engine::entities {
 
 	void Model::GenVBOs()
 	{
+        glEnableClientState(GL_VERTEX_ARRAY);
+    	
         glGenBuffers(1, &this->vbo);
 
         glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
         glBufferData(GL_ARRAY_BUFFER, 3 * this->vertices->size() * sizeof(double), this->vertices->data(), GL_STATIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        glDisableClientState(GL_VERTEX_ARRAY);
 	}
 
     void Model::Render() const {

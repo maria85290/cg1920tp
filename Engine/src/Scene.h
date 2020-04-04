@@ -15,6 +15,7 @@ namespace engine {
         }
 
     public:
+        Scene() = default;
         ~Scene();
 
         /**

@@ -1,9 +1,11 @@
-#include "../glut.h"
-
 #include "Translate.h"
+
+#include <glbinding/gl/gl.h>
 
 using std::cerr, std::endl;
 using tinyxml2::XMLNode, tinyxml2::XMLElement, tinyxml2::XML_SUCCESS;
+
+using namespace gl;
 
 namespace engine::entities {
     bool Translate::ParseXml(XMLNode *translateNode) {

@@ -1,9 +1,12 @@
-#include <iostream>
-
 #include "ConeGenerator.h"
+
+#include <iostream>
+#include <string>
 
 #define _USE_MATH_DEFINES
 #include <math.h>
+
+using std::cerr, std::endl, std::stoi;
 
 bool ConeGenerator::ParseArguments(int argc, char *argv[]) {
     if(argc < 7) {
@@ -23,7 +26,7 @@ bool ConeGenerator::ParseArguments(int argc, char *argv[]) {
 }
 
 void ConeGenerator::GenerateVertices() {
-    double stacks = stacks; // Implicit type cast; prevents loss of precision when performing integer divisions
+    double stacks = this->stacks; // Implicit type cast; prevents loss of precision when performing integer divisions
 
     double r = bottomRadius / stacks;
     double angle = (2 * M_PI) / slices;

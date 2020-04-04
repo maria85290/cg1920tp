@@ -1,14 +1,14 @@
 #ifndef CG_TP_ENGINE_SRC_ENTITIES_SCALE_H_
 #define CG_TP_ENGINE_SRC_ENTITIES_SCALE_H_
 
-#include <Common/vectors.h>
+#include <glm/vec3.hpp>
 
 #include "Entity.h"
 
 namespace engine::entities {
     class Scale: public Entity {
     private:
-        vec3 factors;
+        glm::vec3 factors;
 
     public:
         ~Scale() override = default;

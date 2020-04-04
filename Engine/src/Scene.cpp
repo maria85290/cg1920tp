@@ -1,10 +1,14 @@
+#include "Scene.h"
+
 #include <iostream>
 
-#include "Scene.h"
+#include <glbinding/gl/gl.h>
 
 using std::cout, std::cerr, std::endl;
 using tinyxml2::XMLNode, tinyxml2::XMLComment;
 using engine::entities::Group;
+
+using namespace gl;
 
 namespace engine {
     Scene::~Scene() {
@@ -22,7 +26,7 @@ namespace engine {
         XMLNode* groupNode = sceneNode->FirstChild();
 
         while(groupNode != nullptr) {
-            if(dynamic_cast<const XMLComment*>(groupNode)) {
+        	if(dynamic_cast<const XMLComment*>(groupNode)) {
                 groupNode = groupNode->NextSibling();
                 continue;
             }
@@ -50,7 +54,7 @@ namespace engine {
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
-        glPolygonMode(GL_FRONT, GL_FILL);
+        glPolygonMode(GL_FRONT, GL_LINE);
     }
 
     void Scene::ClearPreviousFrame() const {

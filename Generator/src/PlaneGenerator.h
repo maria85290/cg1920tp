@@ -1,12 +1,12 @@
 #ifndef CG_TP_PLANEGENERATOR_H
 #define CG_TP_PLANEGENERATOR_H
 
+#include "AbstractGenerator.h"
+
 #include <list>
 #include <string>
 
-#include <Common/vectors.h>
-
-#include "AbstractGenerator.h"
+#include <glm/vec3.hpp>
 
 class PlaneGenerator : public AbstractGenerator {
 private:

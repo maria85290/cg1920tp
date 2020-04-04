@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
 
-add_subdirectory(lib)
-
 add_executable(Engine
         src/main.cpp
         src/Scene.cpp src/Scene.h
@@ -15,76 +13,81 @@ add_executable(Engine
         src/window/Window.cpp src/window/Window.h
         src/window/cameras/Camera.h
         src/window/cameras/FpsCamera.cpp src/window/cameras/FpsCamera.h
-        src/window/cameras/ExplorerCamera.cpp src/window/cameras/ExplorerCamera.h
-        )
+        src/window/cameras/StaticCamera.cpp src/window/cameras/StaticCamera.h)
 
 set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED)
-include_directories(${OpenGL_INCLUDE_DIRS})
-link_directories(${OpenGL_LIBRARY_DIRS})
-add_definitions(${OpenGL_DEFINITIONS})
 
 if (NOT OPENGL_FOUND)
     message(ERROR " OPENGL not found!")
 endif ()
 
 if (WIN32)
-    set(TOOLKITS_DIR "${CG_TP_SOURCE_DIR}/Engine/lib")
+    set(TOOLKITS_DIR "${CG_TP_SOURCE_DIR}/lib")
 
     message(STATUS "TOOLKITS_DIR set to: " ${TOOLKITS_DIR})
 
-    if (NOT EXISTS "${TOOLKITS_DIR}/glut/GL/glut.h" OR NOT EXISTS "${TOOLKITS_DIR}/glut/freeglut.lib")
-        message(ERROR ": GLUT not found: ${TOOLKITS_DIR}/glut/GL/glut.h")
+    if (NOT EXISTS "${TOOLKITS_DIR}/glfw/include/GLFW/glfw3.h" OR NOT EXISTS "${TOOLKITS_DIR}/glfw/lib/glfw3.lib")
+        message(ERROR ": GLFW not found: ${TOOLKITS_DIR}/glfw/include/GLFW/glfw3.h")
     endif ()
 
-    if (NOT EXISTS "${TOOLKITS_DIR}/glew/GL/glew.h" OR NOT EXISTS "${TOOLKITS_DIR}/glew/glew32.lib")
-        message(ERROR ": GLEW not found")
-    endif (NOT EXISTS "${TOOLKITS_DIR}/glew/GL/glew.h" OR NOT EXISTS "${TOOLKITS_DIR}/glew/glew32.lib")
-
-    include_directories(${TOOLKITS_DIR}/glut ${TOOLKITS_DIR}/glew)
-    link_directories(${TOOLKITS_DIR}/glut ${TOOLKITS_DIR}/glew)
-
-    set(GLUT_LIBRARY ${TOOLKITS_DIR}/glut/freeglut.lib)
-    set(GLEW_LIBRARY ${TOOLKITS_DIR}/glew/glew32.lib)
-
-    if (EXISTS "${TOOLKITS_DIR}/glut/freeglut.dll")
-        file(COPY ${TOOLKITS_DIR}/glut/freeglut.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine)
-        file(COPY ${TOOLKITS_DIR}/glut/freeglut.dll DESTINATION ${CG_TP_SOURCE_DIR}/Configurations)
+    if (NOT EXISTS "${TOOLKITS_DIR}/glbindingwin/include/glbinding/glbinding.h" OR NOT EXISTS "${TOOLKITS_DIR}/glbindingwin/lib/glbinding.lib")
+        message(ERROR ": glbinding not found")
     endif ()
 
-    if (EXISTS "${TOOLKITS_DIR}/glew/glew32.dll")
-        file(COPY ${TOOLKITS_DIR}/glew/glew32.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine)
-        file(COPY ${TOOLKITS_DIR}/glew/glew32.dll DESTINATION ${CG_TP_SOURCE_DIR}/Configurations)
+    target_include_directories(Engine
+            PUBLIC ${TOOLKITS_DIR}/glfw/include
+            PUBLIC ${TOOLKITS_DIR}/glbindingwin/include)
+
+    if (EXISTS "${TOOLKITS_DIR}/glfw/bin/glfw3.dll")
+        file(COPY ${TOOLKITS_DIR}/glfw/bin/glfw3.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine)
+        file(COPY ${TOOLKITS_DIR}/glfw/bin/glfw3.dll DESTINATION ${CG_TP_SOURCE_DIR}/Configurations)
     endif ()
+
+    if (EXISTS "${TOOLKITS_DIR}/glbindingwin/bin/glbinding.dll")
+        file(COPY ${TOOLKITS_DIR}/glbindingwin/bin/glbinding.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine)
+        file(COPY ${TOOLKITS_DIR}/glbindingwin/bin/glbinding.dll DESTINATION ${CG_TP_SOURCE_DIR}/Configurations)
+    endif ()
+
+    target_link_libraries(Engine ${TOOLKITS_DIR}/glfw/lib/glfw3.lib ${TOOLKITS_DIR}/glbindingwin/lib/glbinding.lib)
 
     set_property(DIRECTORY ${CG_TP_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Engine)
-else (WIN32) # Include GLUT and GLEW for Linux and Mac
-    set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} Wno-deprecated")
+elseif(UNIX AND NOT APPLE) # Include GLUT and GLEW for Linux
+    find_package(glfw3 REQUIRED)
+    find_package(glbinding REQUIRED)
 
-    find_package(GLUT REQUIRED)
+    if(NOT glfw3_FOUND)
+        message(ERROR ": GLFW not found!")
+        message(ERROR ": To install on Linux, use your distribution's package manager.")
+        message(ERROR ": On Debian-based systems, install package libglfw3-dev")
+    endif()
 
-    if (NOT GLUT_FOUND)
-        message(ERROR ": GLUT not found!")
-    endif (NOT GLUT_FOUND)
+    if(NOT glbinding_FOUND)
+        message(ERROR ": glbinding not found!")
+        message(ERROR ": To install on Linux, use your distribution's package manager.")
+        message(ERROR ": On Ubuntu-based systems, install package libglbinding-dev.")
+    endif()
 
-    include_directories(${GLUT_INCLUDE_DIR})
-    link_directories(${GLUT_LIBRARIES})
+    target_link_libraries(Engine glfw)
+    target_link_libraries(Engine glbinding::glbinding glbinding::glbinding-aux)
+elseif(APPLE)
+    find_package(glfw3 REQUIRED)
+    find_package(glbinding 3.0 REQUIRED)
 
-    if(NOT APPLE)
-        find_package(GLEW REQUIRED)
-        if (NOT GLEW_FOUND)
-            message(ERROR ": GLEW not found!")
-        endif(NOT GLEW_FOUND)
+    if(NOT glfw3_FOUND)
+        message(ERROR ": GLFW not found!")
+        message(ERROR ": Use homebrew to install: brew install glfw3")
+    endif()
 
-        include_directories(${GLEW_INCLUDE_DIRS})
-        link_directories(${GLEW_LIBRARIES})
-    endif(NOT APPLE)
-endif (WIN32)
+    if(NOT glbinding_FOUND)
+        message(ERROR ": glbinding not found!")
+        message(ERROR ": Use homebrew to install: brew install glbinding")
+    endif()
 
-target_link_libraries(Engine ${OPENGL_LIBRARIES})
-target_link_libraries(Engine ${GLUT_LIBRARY})
-if(NOT APPLE)
-    target_link_libraries(Engine ${GLEW_LIBRARY})
-endif(NOT APPLE)
-target_link_libraries(Engine Common)
+    target_link_libraries(Engine glfw)
+    target_link_libraries(Engine glbinding::glbinding)
+endif()
+
+target_link_libraries(Engine OpenGL::GL)
 target_link_libraries(Engine tinyxml2)
+target_link_libraries(Engine glm)

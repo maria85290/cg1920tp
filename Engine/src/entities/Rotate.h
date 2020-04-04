@@ -1,7 +1,7 @@
 #ifndef CG_TP_ENGINE_SRC_ENTITIES_ROTATE_H_
 #define CG_TP_ENGINE_SRC_ENTITIES_ROTATE_H_
 
-#include <Common/vectors.h>
+#include <glm/vec3.hpp>
 #include "Entity.h"
 
 namespace engine::entities {
@@ -10,7 +10,7 @@ namespace engine::entities {
         /** The rotation angle, in degrees. */
         double angle;
         /** The rotation vector. */
-        vec3 vector;
+        glm::vec3 vector;
 
     public:
         ~Rotate() override = default;

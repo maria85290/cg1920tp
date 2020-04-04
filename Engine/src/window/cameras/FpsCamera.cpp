@@ -1,25 +1,40 @@
 #include "FpsCamera.h"
 
-#include "../../glut.h"
 #include "../Window.h"
+
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
+
+#include <glbinding/gl/gl.h>
+
+#include <glm/vec3.hpp>
+#include <glm/geometric.hpp>
+#include <glm/gtx/transform.hpp>
 
 #define _USE_MATH_DEFINES
 #include <math.h>
 
 using std::cout, std::endl;
 
+using namespace gl;
+
 namespace engine::window::cameras {
-    FpsCamera::FpsCamera() {
+	void FpsCamera::InitCamera(Window* window, GLFWwindow* glfwWindow)
+    {
+        Camera::InitCamera(window, glfwWindow);
+		
         SphericalToCartesian();
 
-        Window* window = Window::GetInstance();
-        lastMouseX = window->GetWidth() / 2;
-        lastMouseY = window->GetHeight() / 2;
+        lastMouseX = this->window->GetWidth() / 2.0;
+        lastMouseY = this->window->GetHeight() / 2.0;
+
+        glfwSetInputMode(this->glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    }
+	
+    FpsCamera::~FpsCamera() {
+        glfwSetInputMode(this->glfwWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
     }
 
-    FpsCamera::~FpsCamera() {
-        glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
-    }
 
     void FpsCamera::PrintInfo() {
         cout << "Use WASD or the arrow keys to move the camera, and the mouse to change the yaw/pitch." << endl;
@@ -27,71 +42,38 @@ namespace engine::window::cameras {
         cout << "NOTE: To toggle the mouse movement, press ESCAPE!" << endl;
     }
 
-    void FpsCamera::UpdateCameraPosition() {
-        gluLookAt(
-            cameraPos.x, cameraPos.y, cameraPos.z,
-            lookingAt.x, lookingAt.y, lookingAt.z,
-            0, 1, 0
-        );
+    void FpsCamera::HandleKeyboardKeyPress(int key, int scanCode, int action, int mods) {
+        if(action != GLFW_PRESS)
+            return;
 
-        Window* window = Window::GetInstance();
-        if(window->IsFocused() && escKeyPressed) {
-            lastMouseX = window->GetWidth() / 2;
-            lastMouseY = window->GetHeight() / 2;
+        glm::dvec3 forward = ComputeForward();
+        glm::dvec3 right = ComputeRight(forward);
 
-            glutWarpPointer(lastMouseX, lastMouseY);
-        }
-    }
-
-    void FpsCamera::HandleKeyPress(unsigned char key, int mouseX, int mouseY) {
-        vec3 forward = ComputeForward();
-        vec3 right = ComputeRight(forward);
-
-        forward = scale(forward, speed);
-        right = scale(right, speed);
+        forward = forward * speed;
+        right = right * speed;
 
         switch(key) {
-            case 27:
-                escKeyPressed = !escKeyPressed;
-
-                if(escKeyPressed) {
-                    glutSetCursor(GLUT_CURSOR_NONE);
-
-                    Window* window = Window::GetInstance();
-                    lastMouseX = window->GetWidth() / 2;
-                    lastMouseY = window->GetHeight() / 2;
-
-                    glutWarpPointer(lastMouseX, lastMouseY);
-                } else {
-                    glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
-                }
-
+            case GLFW_KEY_W:
+                cameraPos = glm::dvec3(cameraPos.x + forward.x, cameraPos.y + forward.y, cameraPos.z + forward.z);
                 break;
-            case 'w':
-            case 'W':
-                cameraPos = {cameraPos.x + forward.x, cameraPos.y + forward.y, cameraPos.z + forward.z};
+            case GLFW_KEY_S:
+                cameraPos = glm::dvec3(cameraPos.x - forward.x, cameraPos.y - forward.y, cameraPos.z - forward.z);
                 break;
-            case 's':
-            case 'S':
-                cameraPos = {cameraPos.x - forward.x, cameraPos.y - forward.y, cameraPos.z - forward.z};
+            case GLFW_KEY_A:
+                cameraPos = glm::dvec3(cameraPos.x - right.x, cameraPos.y - right.y, cameraPos.z - right.z);
                 break;
-            case 'a':
-            case 'A':
-                cameraPos = {cameraPos.x - right.x, cameraPos.y - right.y, cameraPos.z - right.z};
+            case GLFW_KEY_D:
+                cameraPos = glm::dvec3(cameraPos.x + right.x, cameraPos.y + right.y, cameraPos.z + right.z);
                 break;
-            case 'd':
-            case 'D':
-                cameraPos = {cameraPos.x + right.x, cameraPos.y + right.y, cameraPos.z + right.z};
-                break;
-            case 'q':
-            case 'Q':
+            case GLFW_KEY_Q:
                 speed += 5;
                 break;
-            case 'e':
-            case 'E':
+            case GLFW_KEY_E:
                 speed -= 5;
+
                 if(speed < 0)
                     speed = 0;
+
                 break;
             default:
                 break;
@@ -100,41 +82,19 @@ namespace engine::window::cameras {
         SphericalToCartesian();
     }
 
-    void FpsCamera::HandleSpecialKeyPress(int key, int mouseX, int mouseY) {
-        switch(key) {
-            case GLUT_KEY_UP:
-                this->HandleKeyPress('w', mouseX, mouseY);
-                break;
-            case GLUT_KEY_DOWN:
-                this->HandleKeyPress('s', mouseX, mouseY);
-                break;
-            case GLUT_KEY_LEFT:
-                this->HandleKeyPress('a', mouseX, mouseY);
-                break;
-            case GLUT_KEY_RIGHT:
-                this->HandleKeyPress('d', mouseX, mouseY);
-                break;
-            default:
-                break;
-        }
-    }
+    void FpsCamera::HandleMouseMovement(double mouseX, double mouseY) {
+        double deltaX = lastMouseX - mouseX;
+        double deltaY = lastMouseY - mouseY;
 
-    void FpsCamera::HandlePassiveMouseMovement(int mouseX, int mouseY) {
-        if(!escKeyPressed)
-            return;
+        yaw += 0.001f * deltaX;
+        yaw = fmod(yaw, 2.0 * M_PI); // camAlpha %= 360
 
-        int deltaX = lastMouseX - mouseX;
-        int deltaY = lastMouseY - mouseY;
-
-        yaw += 0.001 * deltaX;
-        yaw = fmod(yaw, 2 * M_PI); // camAlpha %= 360
-
-        pitch += 0.001 * deltaY;
+        pitch += 0.001f * deltaY;
 
         if(pitch < -M_PI_2) {
-            pitch = -M_PI_2 + 0.0001;
+            pitch = -M_PI_2 + 0.0001f;
         } else if(pitch > M_PI_2) {
-            pitch = M_PI_2 - 0.0001;
+            pitch = M_PI_2 - 0.0001f;
         }
 
         lastMouseX = mouseX;
@@ -147,24 +107,32 @@ namespace engine::window::cameras {
         // LookingAt = ... + cameraPos
         // Isto mantém o vetor forward com tamanho de 1 unidade
 
-        lookingAt.x = cos(pitch) * sin(yaw) + cameraPos.x;
-        lookingAt.y = sin(pitch) + cameraPos.y;
-        lookingAt.z = cos(pitch) * cos(yaw) + cameraPos.z;
+        lookingAt.x = glm::cos(pitch) * glm::sin(yaw) + cameraPos.x;
+        lookingAt.y = glm::sin(pitch) + cameraPos.y;
+        lookingAt.z = glm::cos(pitch) * glm::cos(yaw) + cameraPos.z;
+
+        this->viewMatrix = glm::lookAt(
+            cameraPos,
+            lookingAt,
+            glm::dvec3(0, 1, 0) // Up vector
+        );
     }
 
-    vec3 FpsCamera::ComputeForward() {
-        return normalize({lookingAt.x - cameraPos.x,
-                          lookingAt.y - cameraPos.y,
-                          lookingAt.z - cameraPos.z});
+    glm::dvec3 FpsCamera::ComputeForward() {
+        return glm::normalize(glm::dvec3(
+            lookingAt.x - cameraPos.x,
+            lookingAt.y - cameraPos.y,
+            lookingAt.z - cameraPos.z
+            ));
     }
 
-    vec3 FpsCamera::ComputeRight(vec3 forward) {
-        vec3 up = {0, 1, 0};
+    glm::dvec3 FpsCamera::ComputeRight(glm::dvec3 forward) {
+        const glm::dvec3 up(0, 1, 0);
 
-        return normalize(cross(forward, up));
+        return glm::normalize(glm::cross(forward, up));
     }
 
-    vec3 FpsCamera::ComputeRight() {
+    glm::dvec3 FpsCamera::ComputeRight() {
         return this->ComputeRight(this->ComputeForward());
     }
 }

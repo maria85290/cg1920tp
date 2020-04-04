@@ -7,8 +7,12 @@
 
 #include "Group.h"
 
+#include <glbinding/gl/gl.h>
+
 using std::string, std::cerr, std::endl;
 using tinyxml2::XMLNode, tinyxml2::XMLComment;
+
+using namespace gl;
 
 namespace engine::entities {
     Group::~Group() {

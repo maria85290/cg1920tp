@@ -1,5 +1,5 @@
 #include "../../glut.h"
-#include "../Window.h"
+#include "../Window_old.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>

@@ -6,9 +6,9 @@
 #include <map>
 #include <tinyxml2/tinyxml2.h>
 
-#include <Common/vectors.h>
+#include <glm/vec3.hpp>
 
-#include "../glut.h"
+#include <glbinding/gl/types.h>
 
 namespace engine::entities {
     class Model {
@@ -16,11 +16,11 @@ namespace engine::entities {
         static std::map<std::string, const Model*> loadedModels;
 
         std::string filename;
-        std::vector<vec3>* vertices;
+        std::vector<glm::dvec3>* vertices;
 
-        GLubyte diffR, diffG, diffB;
+        gl::GLubyte diffR, diffG, diffB;
 
-        GLuint vbo;
+        gl::GLuint vbo;
         bool isCachedModel = false;
     protected:
         void AddVertex(double x, double y, double z) {
@@ -29,8 +29,8 @@ namespace engine::entities {
 
         void GenVBOs();
     public:
-        explicit Model(const Model& model, const int diffR, const int diffG, const int diffB);
-        explicit Model(const std::string& filename, const int diffR, const int diffG, const int diffB);
+        explicit Model(const Model& model, int diffR, int diffG, int diffB);
+        explicit Model(const std::string& filename, int diffR, int diffG, int diffB);
         ~Model();
 
         void Render() const;

@@ -28,7 +28,7 @@ namespace engine::window::cameras {
 
         void UpdateCameraPosition() override;
 
-        void HandleKeyPress(unsigned char, int, int) override {}
+        void HandleKeyboardKeyPress(unsigned char, int, int) override {}
         void HandleSpecialKeyPress(int, int, int) override {}
 
         void HandleMouseKeyPress(int button, int state, int mouseX, int mouseY) override;
