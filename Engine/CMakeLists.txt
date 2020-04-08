@@ -33,18 +33,19 @@ if (WIN32)
         message(ERROR ": GLFW not found: ${TOOLKITS_DIR}/glfw/include/GLFW/glfw3.h")
     endif ()
 
-    target_include_directories(Engine
-            PRIVATE ${TOOLKITS_DIR}/glfw/include)
+    target_include_directories(Engine PUBLIC ${TOOLKITS_DIR}/glfw/include)
 
     if (EXISTS "${TOOLKITS_DIR}/glfw/bin/glfw3.dll")
         file(COPY ${TOOLKITS_DIR}/glfw/bin/glfw3.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine)
         file(COPY ${TOOLKITS_DIR}/glfw/bin/glfw3.dll DESTINATION ${CG_TP_SOURCE_DIR}/Configurations)
     endif ()
 
-    target_link_libraries(Engine PRIVATE ${TOOLKITS_DIR}/glfw/lib/glfw3.lib)
+    target_link_libraries(Engine PUBLIC ${TOOLKITS_DIR}/glfw/lib/glfw3.lib)
 
     set_property(DIRECTORY ${CG_TP_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Engine)
 elseif(UNIX AND NOT APPLE) # Include GLUT and GLEW for Linux
+    set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl") # Add -ldl to the command line for cc
+
     find_package(glfw3 REQUIRED)
 
     if(NOT glfw3_FOUND)
@@ -53,8 +54,10 @@ elseif(UNIX AND NOT APPLE) # Include GLUT and GLEW for Linux
         message(ERROR ": On Debian-based systems, install package libglfw3-dev")
     endif()
 
-    target_link_libraries(Engine PUBLIC glfw)
+    target_link_libraries(Engine PUBLIC glfw ${CMAKE_DL_LIBS})
 elseif(APPLE)
+    set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl") # Add -ldl to the command line for cc
+
     find_package(glfw3 REQUIRED)
 
     if(NOT glfw3_FOUND)
@@ -62,7 +65,7 @@ elseif(APPLE)
         message(ERROR ": Use homebrew to install: brew install glfw3")
     endif()
 
-    target_link_libraries(Engine PUBLIC glfw)
+    target_link_libraries(Engine PUBLIC glfw ${CMAKE_DL_LIBS})
 endif()
 
 target_link_libraries(Engine PUBLIC glad)

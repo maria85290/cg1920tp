@@ -16,7 +16,7 @@ namespace engine::window::cameras {
      */
     class Camera {
     protected:
-        friend class Window;
+        friend class ::engine::window::Window;
 
         Window* window;
     	GLFWwindow* glfwWindow;
