@@ -4,11 +4,10 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <tinyxml2/tinyxml2.h>
 
+#include <glad/glad.h>
 #include <glm/vec3.hpp>
-
-#include <glbinding/gl/types.h>
+#include <tinyxml2/tinyxml2.h>
 
 namespace engine::entities {
     class Model {
@@ -18,9 +17,9 @@ namespace engine::entities {
         std::string filename;
         std::vector<glm::dvec3>* vertices;
 
-        gl::GLubyte diffR, diffG, diffB;
+        GLubyte diffR, diffG, diffB;
 
-        gl::GLuint vbo;
+        GLuint vbo;
         bool isCachedModel = false;
     protected:
         void AddVertex(double x, double y, double z) {

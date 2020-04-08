@@ -2,13 +2,9 @@
 
 #include <iostream>
 
-#include <glbinding/gl/gl.h>
-
 using std::cout, std::cerr, std::endl;
 using tinyxml2::XMLNode, tinyxml2::XMLComment;
 using engine::entities::Group;
-
-using namespace gl;
 
 namespace engine {
     Scene::~Scene() {

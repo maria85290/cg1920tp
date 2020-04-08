@@ -1,11 +1,11 @@
-#include <glbinding/gl/gl.h>
-#include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
-
-#include "StaticCamera.h"
 
 #define GLFW_INCLUDE_GLU
 #include <GLFW/glfw3.h>
+
+#include <glm/gtc/matrix_transform.hpp>
+
+#include "StaticCamera.h"
 
 using namespace std;
 

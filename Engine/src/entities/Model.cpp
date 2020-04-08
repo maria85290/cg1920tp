@@ -5,12 +5,8 @@
 #include <iostream>
 #include <tinyxml2/tinyxml2.h>
 
-#include <glbinding/gl/gl.h>
-
 using std::cout, std::cerr, std::endl, std::string, std::ifstream, std::vector, std::map;
 using tinyxml2::XMLElement;
-
-using namespace gl;
 
 namespace engine::entities {
     map<string, const Model*> Model::loadedModels;

@@ -3,16 +3,13 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
-#include <glbinding/gl/gl.h>
-#include <glbinding/glbinding.h>
+#include <glad/glad.h>
 
 #include <glm/mat4x4.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 using std::string, std::cerr, std::endl;
 using engine::window::cameras::Camera;
-
-using namespace gl;
 
 namespace engine::window {
     Window::Window(const char* title, int width, int height):
@@ -45,8 +42,13 @@ namespace engine::window {
         glfwSetCursorPosCallback(this->glfwWindow, callback_handlers::HandleMouseMovement);
 
         glfwMakeContextCurrent(this->glfwWindow);
-        glbinding::initialize(glfwGetProcAddress);
         glfwSwapInterval(1);
+
+        gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress));
+        if(!gladLoadGL()) {
+            cerr << "Failed to initialize OpenGL Context!" << endl;
+            return false;
+        }
 
         // glEnable(GL_DEBUG_OUTPUT);
         // glDebugMessageCallback(Window::DebugCallback, 0);
@@ -151,7 +153,7 @@ namespace engine::window {
         glMatrixMode(GL_MODELVIEW);
     }
 
-	void Window::DebugCallback(gl::GLenum source, gl::GLenum type, gl::GLuint id, gl::GLenum severity, gl::GLsizei length, const gl::GLchar* message, const void* userParam)
+	void Window::DebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
 	{
         fprintf(stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
             (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),

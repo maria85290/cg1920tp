@@ -1,11 +1,9 @@
-#include "Rotate.h"
+#include <glad/glad.h>
 
-#include <glbinding/gl/gl.h>
+#include "Rotate.h"
 
 using std::cerr, std::endl;
 using tinyxml2::XMLNode, tinyxml2::XMLElement, tinyxml2::XML_SUCCESS;
-
-using namespace gl;
 
 namespace engine::entities {
     bool Rotate::ParseXml(XMLNode *rotateNode) {

@@ -5,8 +5,6 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
-#include <glbinding/gl/gl.h>
-
 #include <glm/vec3.hpp>
 #include <glm/geometric.hpp>
 #include <glm/gtx/transform.hpp>
@@ -15,8 +13,6 @@
 #include <math.h>
 
 using std::cout, std::endl;
-
-using namespace gl;
 
 namespace engine::window::cameras {
 	void FpsCamera::InitCamera(Window* window, GLFWwindow* glfwWindow)

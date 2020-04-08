@@ -16,7 +16,7 @@ namespace engine::window {
      */
     class Window {
     private:
-        friend class Camera;
+        friend class cameras::Camera;
 
         GLFWwindow* glfwWindow = nullptr;
 
@@ -42,7 +42,7 @@ namespace engine::window {
         void ComputeDeltaTime();
         void MeasureFps();
 
-        static void DebugCallback(gl::GLenum source, gl::GLenum type, gl::GLuint id, gl::GLenum severity, gl::GLsizei length, const gl::GLchar* message, const void* userParam);
+        static void DebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
     public:
         Window(const char* title, int width, int height);
         ~Window();
