@@ -1,0 +1,26 @@
+language: cpp
+matrix:
+  include:
+    - os: linux
+      dist: bionic
+      sudo: true
+      compiler: gcc
+      addons:
+        apt:
+          packages:
+            - libglfw3-dev
+            - cmake
+            - build-essential
+      script:
+        - mkdir build
+        - cd build
+        - cmake ..
+        - make
+    - os: osx
+      osx_image: xcode11.3
+      compiler: clang
+      script:
+        - mkdir build
+        - cd build
+        - cmake ..
+        - make
