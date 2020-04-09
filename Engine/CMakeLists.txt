@@ -59,13 +59,14 @@ elseif(UNIX AND NOT APPLE) # Include GLUT and GLEW for Linux
 elseif(APPLE)
     set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl") # Add -ldl to the command line for cc
 
-    find_package(glfw REQUIRED)
+    find_package(GLFW3 REQUIRED)
 
     if(NOT glfw3_FOUND)
         message(ERROR ": GLFW not found!")
         message(ERROR ": Use homebrew to install: brew install glfw3")
     endif()
 
+    target_include_directories(Engine PUBLIC ${GLFW_INCLUDE_DIR})
     target_link_libraries(Engine PUBLIC glfw ${CMAKE_DL_LIBS})
 endif()
 
