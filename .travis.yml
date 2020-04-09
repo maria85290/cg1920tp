@@ -19,7 +19,7 @@ matrix:
       deploy:
         provider: releases
         api_key:
-          - secure: $GITHUB_OAUTH
+          secure: $GITHUB_OAUTH
         file:
           - ./Engine/Engine
           - ./Generator/Generator
@@ -42,7 +42,7 @@ matrix:
       deploy:
         provider: releases
         api_key:
-          - secure: $GITHUB_OAUTH
+          secure: $GITHUB_OAUTH
         file:
           - ./Engine/Engine
           - ./Generator/Generator
