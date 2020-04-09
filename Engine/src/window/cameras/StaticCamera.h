@@ -14,7 +14,7 @@ namespace engine::window::cameras {
     public:
         explicit StaticCamera(glm::dvec3 position, glm::dvec3 lookingAt);
 
-        void PrintInfo() override {}
+        void PrintInfo() const override {}
     };
 }
 

@@ -32,7 +32,7 @@ namespace engine::window::cameras {
             this->glfwWindow = glfwWindow;
         }
     	
-        virtual void PrintInfo() = 0;
+        virtual void PrintInfo() const = 0;
 
         virtual void UpdatePosition() {}
 
@@ -59,6 +59,21 @@ namespace engine::window::cameras {
          * @param mouseY
          */
         virtual void HandleMouseMovement(double mouseX, double mouseY) {}
+
+        /**
+         * Responsável por reagir ao movimento da roda do rato, ou a uma ação de scroll num touchpad.
+         *
+         * @param xOffset O scroll efetuado no eixo dos xx
+         * @param yOffset O scroll efetuado no eixo dos yy
+         */
+        virtual void HandleScrollMovement(double xOffset, double yOffset) {}
+
+        /**
+         * Responsável por reagir a uma mudança do estado de foco da janela.
+         *
+         * @param focused True se a janela estiver agora focada; falso caso contrário
+         */
+        virtual void HandleWindowChangeFocus(bool focused) {}
     };
 }
 

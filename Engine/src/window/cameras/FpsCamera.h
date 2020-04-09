@@ -8,7 +8,7 @@
 namespace engine::window::cameras {
     class FpsCamera: public Camera {
     private:
-        double speed = 20.0f;
+        double speed = 40.0;
 
         double lastMouseX;
         double lastMouseY;
@@ -29,12 +29,16 @@ namespace engine::window::cameras {
 
         void InitCamera(Window* window, GLFWwindow* glfwWindow) override;
     	
-        void PrintInfo() override;
+        void PrintInfo() const override;
 
         void UpdatePosition() override;
 
         void HandleMouseKeyPress(int button, int action, int mods) override {}
         void HandleMouseMovement(double mouseX, double mouseY) override;
+
+        void HandleScrollMovement(double xOffset, double yOffset) override;
+
+        void HandleWindowChangeFocus(bool focused) override;
     };
 }
 

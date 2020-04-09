@@ -23,11 +23,6 @@ namespace engine::window::cameras {
         Camera::InitCamera(window, glfwWindow);
 		
         SphericalToCartesian();
-
-        lastMouseX = this->window->GetWidth() / 2.0;
-        lastMouseY = this->window->GetHeight() / 2.0;
-
-        glfwSetInputMode(this->glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     }
 	
     FpsCamera::~FpsCamera() {
@@ -35,51 +30,42 @@ namespace engine::window::cameras {
     }
 
 
-    void FpsCamera::PrintInfo() {
+    void FpsCamera::PrintInfo() const {
         cout << "Use WASD or the arrow keys to move the camera, and the mouse to change the yaw/pitch." << endl;
         cout << "Press Q to speed up the camera movement, and E to slow it down." << endl;
         cout << "NOTE: To toggle the mouse movement, press ESCAPE!" << endl;
     }
 
     void FpsCamera::UpdatePosition() {
+        glm::dvec3 deltaPos = glm::dvec3(0.0, 0.0, 0.0);
+
         glm::dvec3 forward = ComputeForward();
         glm::dvec3 right = ComputeRight(forward);
 
-        forward = forward * speed/10.0 * this->window->GetDeltaTime();
-        right = right * speed/10.0 * this->window->GetDeltaTime();
-
         if(Keyboard::isKeyDown(GLFW_KEY_W)) {
-            cameraPos = glm::dvec3(cameraPos.x + forward.x, cameraPos.y + forward.y, cameraPos.z + forward.z);
+            deltaPos += forward;
         }
 
         if(Keyboard::isKeyDown(GLFW_KEY_S)) {
-            cameraPos = glm::dvec3(cameraPos.x - forward.x, cameraPos.y - forward.y, cameraPos.z - forward.z);
+            deltaPos -= forward;
         }
 
         if(Keyboard::isKeyDown(GLFW_KEY_A)) {
-            cameraPos = glm::dvec3(cameraPos.x - right.x, cameraPos.y - right.y, cameraPos.z - right.z);
+            deltaPos -= right;
         }
 
         if(Keyboard::isKeyDown(GLFW_KEY_D)) {
-            cameraPos = glm::dvec3(cameraPos.x + right.x, cameraPos.y + right.y, cameraPos.z + right.z);
+            deltaPos += right;
         }
 
-        if(Keyboard::isKeyDown(GLFW_KEY_Q)) {
-            speed += 5;
-        }
-
-        if(Keyboard::isKeyDown(GLFW_KEY_E)) {
-            speed -= 5;
-
-            if(speed < 0)
-                speed = 0;
-
-        }
-
+        cameraPos += (deltaPos * speed * this->window->GetDeltaTime());
         SphericalToCartesian();
 	}
 
     void FpsCamera::HandleMouseMovement(double mouseX, double mouseY) {
+	    if(!window->IsFocused())
+	        return; // Do not update the camera view unless the user has the window in focus
+
         double deltaX = lastMouseX - mouseX;
         double deltaY = lastMouseY - mouseY;
 
@@ -98,6 +84,26 @@ namespace engine::window::cameras {
         lastMouseY = mouseY;
 
         SphericalToCartesian();
+    }
+
+    void FpsCamera::HandleScrollMovement(double xOffset, double yOffset) {
+        speed += yOffset * 3;
+
+        if(speed < 0.0)
+            speed = 2.0;
+	}
+
+    void FpsCamera::HandleWindowChangeFocus(bool focused) {
+        if(focused) {
+            glfwSetInputMode(this->glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+            glfwSetCursorPos(this->glfwWindow, this->window->GetWidth() / 2.0, this->window->GetHeight() / 2.0);
+
+            lastMouseX = this->window->GetWidth() / 2.0;
+            lastMouseY = this->window->GetHeight() / 2.0;
+        } else {
+            glfwSetInputMode(this->glfwWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        }
     }
 
     void FpsCamera::SphericalToCartesian() {

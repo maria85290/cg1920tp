@@ -26,6 +26,8 @@ namespace engine::window {
         int width = 1280;
         int height = 720;
 
+        bool focused = false;
+
         /**
          * O tipo de câmara que está atualmente a ser utilizado para navegar o mundo.
          */
@@ -77,27 +79,34 @@ namespace engine::window {
         int GetWidth() const { return width; }
         /** Retorna a altura da janela. */
         int GetHeight() const { return height; }
+        /** Retorna se a janela está em foco ou não. */
+        bool IsFocused() const { return focused; }
 
         /** Renderiza uma frame. */
         void RenderFrame();
-        /** Callback do glut para quando a janela muda de tamanho. */
+        /** Callback do glfw para quando a janela muda de tamanho. */
         void HandleFramebufferSizeChange(int width, int height);
+
+        void HandleWindowChangeFocus(bool focused) {
+            this->focused = focused;
+        }
     };
 
     /**
-     * Este namespace contém funções inline capazes de redirecionar as callbacks do GLUT para as funções membro
-     * do singleton Window descrito acima.
+     * Este namespace contém funções inline capazes de redirecionar as callbacks do GLFW para as funções membro
+     * da classe Window descrita acima.
      *
-     * É ncessária a existência destes proxies pois GLUT é uma API C; logo não é compatível com objetos de C++.
+     * É ncessária a existência destes proxies pois GLFW é uma API C; logo não é compatível com objetos de C++.
      */
     namespace callback_handlers {
         inline void HandleFramebufferSizeChange(GLFWwindow* glfwWindow, int width, int height) {
-            Window* window = (Window*) glfwGetWindowUserPointer(glfwWindow);
+            Window* window = reinterpret_cast<Window*>(glfwGetWindowUserPointer(glfwWindow));
+
             window->HandleFramebufferSizeChange(width, height);
         }
 
         inline void HandleKeyboardKeyPress(GLFWwindow* glfwWindow, int key, int scanCode, int action, int mods) {
-            Window* window = (Window*) glfwGetWindowUserPointer(glfwWindow);
+            Window* window = reinterpret_cast<Window*>(glfwGetWindowUserPointer(glfwWindow));
             cameras::Camera* camera = window->GetCamera();
 
             ::engine::window::input::Keyboard::HandleKeyPress(key, scanCode, action, mods);
@@ -105,17 +114,32 @@ namespace engine::window {
         }
 
         inline void HandleMouseKeyPress(GLFWwindow* glfwWindow, int button, int action, int mods) {
-            Window* window = (Window*) glfwGetWindowUserPointer(glfwWindow);
+            Window* window = reinterpret_cast<Window*>(glfwGetWindowUserPointer(glfwWindow));
             cameras::Camera* camera = window->GetCamera();
 
             camera->HandleMouseKeyPress(button, action, mods);
         }
 
         inline void HandleMouseMovement(GLFWwindow* glfwWindow, double x, double y) {
-            Window* window = (Window*) glfwGetWindowUserPointer(glfwWindow);
+            Window* window = reinterpret_cast<Window*>(glfwGetWindowUserPointer(glfwWindow));
             cameras::Camera* camera = window->GetCamera();
 
             camera->HandleMouseMovement(x, y);
+        }
+
+        inline void HandleScrollMovement(GLFWwindow* glfwWindow, double xOffset, double yOffset) {
+            Window* window = reinterpret_cast<Window*>(glfwGetWindowUserPointer(glfwWindow));
+            cameras::Camera* camera = window->GetCamera();
+
+            camera->HandleScrollMovement(xOffset, yOffset);
+        }
+
+        inline void HandleWindowChangeFocus(GLFWwindow* glfwWindow, int focused) {
+            Window* window = reinterpret_cast<Window*>(glfwGetWindowUserPointer(glfwWindow));
+            cameras::Camera* camera = window->GetCamera();
+
+            window->HandleWindowChangeFocus(focused == GLFW_TRUE);
+            camera->HandleWindowChangeFocus(focused == GLFW_TRUE);
         }
     }
 }

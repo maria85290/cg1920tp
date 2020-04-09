@@ -23,11 +23,13 @@ namespace engine::window {
     }
 
     bool Window::CreateWindow() {
-        // glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-        // glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-        // glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_ANY_PROFILE);
-        // glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
-        
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_ANY_PROFILE);
+        glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_TRUE);
+
+        glfwWindowHint(GLFW_FOCUSED, GLFW_FALSE);
+
         this->glfwWindow = glfwCreateWindow(this->width, this->height, this->title.c_str(), nullptr, nullptr);
 
         if(!this->glfwWindow) {
@@ -40,6 +42,8 @@ namespace engine::window {
         glfwSetKeyCallback(this->glfwWindow, callback_handlers::HandleKeyboardKeyPress);
         glfwSetMouseButtonCallback(this->glfwWindow, callback_handlers::HandleMouseKeyPress);
         glfwSetCursorPosCallback(this->glfwWindow, callback_handlers::HandleMouseMovement);
+        glfwSetScrollCallback(this->glfwWindow, callback_handlers::HandleScrollMovement);
+        glfwSetWindowFocusCallback(this->glfwWindow, callback_handlers::HandleWindowChangeFocus);
 
         glfwMakeContextCurrent(this->glfwWindow);
         glfwSwapInterval(1);
@@ -49,9 +53,6 @@ namespace engine::window {
             cerr << "Failed to initialize OpenGL Context!" << endl;
             return false;
         }
-
-        // glEnable(GL_DEBUG_OUTPUT);
-        // glDebugMessageCallback(Window::DebugCallback, 0);
 
         return true;
     }
@@ -74,6 +75,7 @@ namespace engine::window {
         glfwMakeContextCurrent(this->glfwWindow);
 
     	this->HandleFramebufferSizeChange(this->width, this->height);
+    	this->HandleWindowChangeFocus(glfwGetWindowAttrib(this->glfwWindow, GLFW_FOCUSED) == GLFW_TRUE);
 
         this->scene->InitGLSettings();
 
