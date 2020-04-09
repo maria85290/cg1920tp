@@ -31,7 +31,7 @@ namespace engine::window::cameras {
     	
         void PrintInfo() override;
 
-        void HandleKeyboardKeyPress(int key, int scanCode, int action, int mods) override;
+        void UpdatePosition() override;
 
         void HandleMouseKeyPress(int button, int action, int mods) override {}
         void HandleMouseMovement(double mouseX, double mouseY) override;

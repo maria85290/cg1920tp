@@ -9,6 +9,7 @@
 #include <GLFW/glfw3.h>
 
 #include "cameras/Camera.h"
+#include "input/Keyboard.h"
 
 namespace engine::window {
     /**
@@ -99,6 +100,7 @@ namespace engine::window {
             Window* window = (Window*) glfwGetWindowUserPointer(glfwWindow);
             cameras::Camera* camera = window->GetCamera();
 
+            ::engine::window::input::Keyboard::HandleKeyPress(key, scanCode, action, mods);
             camera->HandleKeyboardKeyPress(key, scanCode, action, mods);
         }
 

@@ -91,6 +91,8 @@ namespace engine::window {
 
         this->scene->ClearPreviousFrame();
 
+        this->camera->UpdatePosition();
+
         glLoadIdentity();
         glMultMatrixd(&this->camera->viewMatrix[0][0]); // Set camera position in world
 

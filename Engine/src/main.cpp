@@ -5,14 +5,12 @@
 #include "Scene.h"
 #include "window/Window.h"
 #include "window/cameras/FpsCamera.h"
-#include "window/cameras/StaticCamera.h"
 
 using std::cerr, std::endl, std::cout;
 using tinyxml2::XMLDocument, tinyxml2::XMLNode, tinyxml2::XML_SUCCESS;
 using engine::Scene;
 using engine::window::Window;
 using engine::window::cameras::FpsCamera;
-using engine::window::cameras::StaticCamera;
 
 XMLNode* ReadSceneFile(const char*);
 

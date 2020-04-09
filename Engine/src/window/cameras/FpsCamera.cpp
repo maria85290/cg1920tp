@@ -9,10 +9,13 @@
 #include <glm/geometric.hpp>
 #include <glm/gtx/transform.hpp>
 
+#include "../input/Keyboard.h"
+
 #define _USE_MATH_DEFINES
 #include <math.h>
 
 using std::cout, std::endl;
+using engine::window::input::Keyboard;
 
 namespace engine::window::cameras {
 	void FpsCamera::InitCamera(Window* window, GLFWwindow* glfwWindow)
@@ -38,45 +41,43 @@ namespace engine::window::cameras {
         cout << "NOTE: To toggle the mouse movement, press ESCAPE!" << endl;
     }
 
-    void FpsCamera::HandleKeyboardKeyPress(int key, int scanCode, int action, int mods) {
-        if(action != GLFW_PRESS)
-            return;
-
+    void FpsCamera::UpdatePosition() {
         glm::dvec3 forward = ComputeForward();
         glm::dvec3 right = ComputeRight(forward);
 
-        forward = forward * speed;
-        right = right * speed;
+        forward = forward * speed/10.0 * this->window->GetDeltaTime();
+        right = right * speed/10.0 * this->window->GetDeltaTime();
 
-        switch(key) {
-            case GLFW_KEY_W:
-                cameraPos = glm::dvec3(cameraPos.x + forward.x, cameraPos.y + forward.y, cameraPos.z + forward.z);
-                break;
-            case GLFW_KEY_S:
-                cameraPos = glm::dvec3(cameraPos.x - forward.x, cameraPos.y - forward.y, cameraPos.z - forward.z);
-                break;
-            case GLFW_KEY_A:
-                cameraPos = glm::dvec3(cameraPos.x - right.x, cameraPos.y - right.y, cameraPos.z - right.z);
-                break;
-            case GLFW_KEY_D:
-                cameraPos = glm::dvec3(cameraPos.x + right.x, cameraPos.y + right.y, cameraPos.z + right.z);
-                break;
-            case GLFW_KEY_Q:
-                speed += 5;
-                break;
-            case GLFW_KEY_E:
-                speed -= 5;
+        if(Keyboard::isKeyDown(GLFW_KEY_W)) {
+            cameraPos = glm::dvec3(cameraPos.x + forward.x, cameraPos.y + forward.y, cameraPos.z + forward.z);
+        }
 
-                if(speed < 0)
-                    speed = 0;
+        if(Keyboard::isKeyDown(GLFW_KEY_S)) {
+            cameraPos = glm::dvec3(cameraPos.x - forward.x, cameraPos.y - forward.y, cameraPos.z - forward.z);
+        }
 
-                break;
-            default:
-                break;
+        if(Keyboard::isKeyDown(GLFW_KEY_A)) {
+            cameraPos = glm::dvec3(cameraPos.x - right.x, cameraPos.y - right.y, cameraPos.z - right.z);
+        }
+
+        if(Keyboard::isKeyDown(GLFW_KEY_D)) {
+            cameraPos = glm::dvec3(cameraPos.x + right.x, cameraPos.y + right.y, cameraPos.z + right.z);
+        }
+
+        if(Keyboard::isKeyDown(GLFW_KEY_Q)) {
+            speed += 5;
+        }
+
+        if(Keyboard::isKeyDown(GLFW_KEY_E)) {
+            speed -= 5;
+
+            if(speed < 0)
+                speed = 0;
+
         }
 
         SphericalToCartesian();
-    }
+	}
 
     void FpsCamera::HandleMouseMovement(double mouseX, double mouseY) {
         double deltaX = lastMouseX - mouseX;

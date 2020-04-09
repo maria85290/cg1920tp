@@ -34,6 +34,8 @@ namespace engine::window::cameras {
     	
         virtual void PrintInfo() = 0;
 
+        virtual void UpdatePosition() {}
+
         /**
          * Responsável por reagir ao evento de uma tecla do teclado pressionada.
          * @param key

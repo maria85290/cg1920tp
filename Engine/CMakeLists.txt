@@ -13,7 +13,8 @@ add_executable(Engine
         src/window/Window.cpp src/window/Window.h
         src/window/cameras/Camera.h
         src/window/cameras/FpsCamera.cpp src/window/cameras/FpsCamera.h
-        src/window/cameras/StaticCamera.cpp src/window/cameras/StaticCamera.h)
+        src/window/cameras/StaticCamera.cpp src/window/cameras/StaticCamera.h
+        src/window/input/Keyboard.cpp src/window/input/Keyboard.h)
 
 set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED COMPONENTS OpenGL)
