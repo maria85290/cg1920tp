@@ -59,7 +59,7 @@ elseif(UNIX AND NOT APPLE) # Include GLUT and GLEW for Linux
 elseif(APPLE)
     set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl") # Add -ldl to the command line for cc
 
-    find_package(glfw3 REQUIRED)
+    find_package(glfw REQUIRED)
 
     if(NOT glfw3_FOUND)
         message(ERROR ": GLFW not found!")
