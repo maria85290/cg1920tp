@@ -27,21 +27,26 @@ target_link_libraries(Engine PUBLIC OpenGL::GL)
 
 if (WIN32)
     set(TOOLKITS_DIR "${CG_TP_SOURCE_DIR}/lib")
-
     message(STATUS "TOOLKITS_DIR set to: " ${TOOLKITS_DIR})
+	
+	if (NOT CMAKE_CL_64)
+		set(GLFW_DIR "${TOOLKITS_DIR}/glfw/x32")
+	else ()
+		set(GLFW_DIR "${TOOLKITS_DIR}/glfw/x64")
+	endif ()
 
-    if (NOT EXISTS "${TOOLKITS_DIR}/glfw/include/GLFW/glfw3.h" OR NOT EXISTS "${TOOLKITS_DIR}/glfw/lib/glfw3.lib")
-        message(ERROR ": GLFW not found: ${TOOLKITS_DIR}/glfw/include/GLFW/glfw3.h")
+    if (NOT EXISTS "${GLFW_DIR}/include/GLFW/glfw3.h" OR NOT EXISTS "${GLFW_DIR}/lib/glfw3.lib")
+        message(ERROR ": GLFW not found: ${GLFW_DIR}/include/GLFW/glfw3.h")
     endif ()
 
-    target_include_directories(Engine PUBLIC ${TOOLKITS_DIR}/glfw/include)
+    target_include_directories(Engine PUBLIC ${GLFW_DIR}/include)
 
-    if (EXISTS "${TOOLKITS_DIR}/glfw/bin/glfw3.dll")
-        file(COPY ${TOOLKITS_DIR}/glfw/bin/glfw3.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine)
-        file(COPY ${TOOLKITS_DIR}/glfw/bin/glfw3.dll DESTINATION ${CG_TP_SOURCE_DIR}/Configurations)
+    if (EXISTS "${GLFW_DIR}/bin/glfw3.dll")
+        file(COPY ${GLFW_DIR}/bin/glfw3.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine)
+        file(COPY ${GLFW_DIR}/bin/glfw3.dll DESTINATION ${CG_TP_SOURCE_DIR}/Configurations)
     endif ()
 
-    target_link_libraries(Engine PUBLIC ${TOOLKITS_DIR}/glfw/lib/glfw3.lib)
+    target_link_libraries(Engine PUBLIC ${GLFW_DIR}/lib/glfw3.lib ${GLFW_DIR}/lib/glfw3dll.lib)
 
     set_property(DIRECTORY ${CG_TP_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Engine)
 elseif(UNIX AND NOT APPLE) # Include GLUT and GLEW for Linux
