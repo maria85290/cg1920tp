@@ -2,33 +2,25 @@
 
 #include "../Window.h"
 
-#define GLFW_INCLUDE_NONE
-#include <GLFW/glfw3.h>
-
-#include <glm/vec3.hpp>
-#include <glm/geometric.hpp>
 #include <glm/gtx/transform.hpp>
-
-#include "../input/Keyboard.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
 
 using std::cout, std::endl;
+using std::fmod, glm::pi;
 using engine::window::input::Keyboard;
 
 namespace engine::window::cameras {
-	void FpsCamera::InitCamera(Window* window, GLFWwindow* glfwWindow)
-    {
+    void FpsCamera::InitCamera(Window* window, GLFWwindow* glfwWindow) {
         Camera::InitCamera(window, glfwWindow);
-		
+
         SphericalToCartesian();
     }
-	
+
     FpsCamera::~FpsCamera() {
         glfwSetInputMode(this->glfwWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
     }
-
 
     void FpsCamera::PrintInfo() const {
         cout << "Use WASD or the arrow keys to move the camera, and the mouse to change the yaw/pitch." << endl;
@@ -60,11 +52,11 @@ namespace engine::window::cameras {
 
         cameraPos += (deltaPos * speed * this->window->GetDeltaTime());
         SphericalToCartesian();
-	}
+    }
 
     void FpsCamera::HandleMouseMovement(double mouseX, double mouseY) {
-	    if(!window->IsFocused())
-	        return; // Do not update the camera view unless the user has the window in focus
+        if(!window->IsFocused())
+            return; // Do not update the camera view unless the user has the window in focus
 
         double deltaX = lastMouseX - mouseX;
         double deltaY = lastMouseY - mouseY;
@@ -91,7 +83,7 @@ namespace engine::window::cameras {
 
         if(speed < 0.0)
             speed = 2.0;
-	}
+    }
 
     void FpsCamera::HandleWindowChangeFocus(bool focused) {
         if(focused) {
@@ -126,7 +118,7 @@ namespace engine::window::cameras {
             lookingAt.x - cameraPos.x,
             lookingAt.y - cameraPos.y,
             lookingAt.z - cameraPos.z
-            ));
+        ));
     }
 
     glm::dvec3 FpsCamera::ComputeRight(glm::dvec3 forward) {

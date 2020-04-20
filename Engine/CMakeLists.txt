@@ -50,7 +50,7 @@ if (WIN32)
 
     set_property(DIRECTORY ${CG_TP_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Engine)
 elseif(UNIX AND NOT APPLE) # Include GLUT and GLEW for Linux
-    set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl") # Add -ldl to the command line for cc
+    set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl -lglfw") # Add -ldl to the command line for cc
 
     find_package(glfw3 REQUIRED)
 
