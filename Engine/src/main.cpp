@@ -53,7 +53,7 @@ int main(int argc, char* argv[]) {
 
     // Set the window parameters
     // window.SetCamera(new StaticCamera(glm::dvec3(0, 0, 1), glm::dvec3(0, 0, 0)));
-    // window.SetCamera(new ExplorerCamera({0, 0, 1}));
+    // window.SetCamera(new ExplorerCamera(glm::dvec3(0, 0, 0)));
     window.SetCamera(new FpsCamera);
     window.SetScene(&scene);
 

@@ -14,6 +14,7 @@ add_executable(Engine
         src/window/cameras/Camera.h
         src/window/cameras/FpsCamera.cpp src/window/cameras/FpsCamera.h
         src/window/cameras/StaticCamera.cpp src/window/cameras/StaticCamera.h
+        src/window/cameras/ExplorerCamera.cpp src/window/cameras/ExplorerCamera.h
         src/window/input/Keyboard.cpp src/window/input/Keyboard.h)
 
 set(OpenGL_GL_PREFERENCE GLVND)
