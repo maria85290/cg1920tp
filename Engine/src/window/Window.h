@@ -83,7 +83,7 @@ namespace engine::window {
         bool IsFocused() const { return focused; }
 
         /** Renderiza uma frame. */
-        void RenderFrame();
+        void ProcessFrame();
         /** Callback do glfw para quando a janela muda de tamanho. */
         void HandleFramebufferSizeChange(int width, int height);
 
