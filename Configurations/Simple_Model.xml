@@ -1,0 +1,10 @@
+<scene>
+    <group>
+        <!-- Sun -->
+        <translate X="0" Y="0" Z="0"/>
+        <scale X="109" Y="109" Z="109"/>
+        <models>
+            <model file="sun.3d" diffR="253" diffG="184" diffB="19"/>
+        </models>
+    </group>
+</scene>

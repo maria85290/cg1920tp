@@ -4,8 +4,6 @@
 #include <tinyxml2/tinyxml2.h>
 #include <iostream>
 
-#include "../glut.h"
-
 namespace engine::entities {
     class Entity {
     public:

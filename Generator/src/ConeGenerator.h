@@ -2,8 +2,6 @@
 #define CG_TP_GENERATOR_SRC_CONEGENERATOR_H_
 
 #include "AbstractGenerator.h"
-#include <string>
-
 
 class ConeGenerator : public AbstractGenerator {
 private:

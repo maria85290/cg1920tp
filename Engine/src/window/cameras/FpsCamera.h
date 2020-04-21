@@ -1,43 +1,43 @@
 #ifndef CG_TP_ENGINE_SRC_WINDOW_CAMERAS_FPSCAMERA_H_
 #define CG_TP_ENGINE_SRC_WINDOW_CAMERAS_FPSCAMERA_H_
 
-#include <Common/vectors.h>
 #include "Camera.h"
+
+#include <glm/vec3.hpp>
 
 namespace engine::window::cameras {
     class FpsCamera: public Camera {
     private:
-        bool escKeyPressed = false;
+        double speed = 40.0;
 
-        double speed = 20.0;
-
-        int lastMouseX;
-        int lastMouseY;
+        double lastMouseX;
+        double lastMouseY;
 
         double yaw = 0;
         double pitch = 0;
 
-        vec3 lookingAt;
-        vec3 cameraPos = {0, 0, -300};
+        glm::dvec3 lookingAt;
+        glm::dvec3 cameraPos = glm::dvec3(0, 0, -300);
+
+        glm::dvec3 ComputeForward();
+        glm::dvec3 ComputeRight(glm::dvec3 forward);
+        glm::dvec3 ComputeRight();
 
         void SphericalToCartesian();
-        vec3 ComputeForward();
-        vec3 ComputeRight(vec3 forward);
-        vec3 ComputeRight();
     public:
-        FpsCamera();
+        FpsCamera() = default;
         ~FpsCamera() override;
 
-        void PrintInfo() override;
+        void InitCamera(Window* window, GLFWwindow* glfwWindow) override;
+    	
+        void PrintInfo() const override;
 
-        void UpdateCameraPosition() override;
+        void UpdatePosition() override;
 
-        void HandleKeyPress(unsigned char key, int mouseX, int mouseY) override;
-        void HandleSpecialKeyPress(int key, int mouseX, int mouseY) override;
+        void HandleMouseKeyPress(int button, int action, int mods) override {}
+        void HandleMouseMovement(double mouseX, double mouseY) override;
 
-        void HandleMouseMovement(int mouseX, int mouseY) override {}
-        void HandleMouseKeyPress(int button, int state, int mouseX, int mouseY) override {}
-        void HandlePassiveMouseMovement(int mouseX, int mouseY) override;
+        void HandleScrollMovement(double xOffset, double yOffset) override;
     };
 }
 

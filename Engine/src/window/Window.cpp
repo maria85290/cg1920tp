@@ -1,106 +1,113 @@
 #include "Window.h"
 
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
+
+#include <glad/glad.h>
+
+#include <glm/mat4x4.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 using std::string, std::cerr, std::endl;
 using engine::window::cameras::Camera;
 
 namespace engine::window {
-    Window* Window::instance = nullptr;
-
-    Window::Window() : scene(Scene()), camera(nullptr), deltaTime(0) {}
+    Window::Window(const char* title, int width, int height):
+    title(title), width(width), height(height)
+    {}
 
     Window::~Window() {
-        Window::instance = nullptr;
-
-        this->camera = nullptr;
+        glfwSetWindowUserPointer(this->glfwWindow, nullptr);
+        glfwDestroyWindow(this->glfwWindow);
+        this->glfwWindow = nullptr;
     }
 
-    void Window::InitWindow(char* programName) {
-        int argc = 1;
-        char* argv2[] = {programName};
+    bool Window::CreateWindow() {
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_ANY_PROFILE);
+        glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_TRUE);
 
-        glutInit(&argc, argv2);
-        glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-        glutInitWindowPosition(100, 100);
-        glutInitWindowSize(800, 800);
-        this->windowId = glutCreateWindow(programName);
-        this->width = 800;
-        this->height = 800;
+        glfwWindowHint(GLFW_FOCUSED, GLFW_FALSE);
 
-#ifndef __APPLE__
-        glewInit();
-#endif
+        this->glfwWindow = glfwCreateWindow(this->width, this->height, this->title.c_str(), nullptr, nullptr);
 
-        glutDisplayFunc(glut_handlers::RenderScene);
-        glutIdleFunc(glut_handlers::Update);
-
-        glutReshapeFunc(glut_handlers::HandleWindowChangeSize);
-        glutEntryFunc(glut_handlers::HandleWindowEntry);
-
-        glutKeyboardFunc(glut_handlers::HandleKeyPress);
-        glutSpecialFunc(glut_handlers::HandleSpecialKeyPress);
-
-        glutMouseFunc(glut_handlers::HandleMouseKeyPress);
-        glutMotionFunc(glut_handlers::HandleMouseMovement);
-        glutPassiveMotionFunc(glut_handlers::HandlePassiveMouseMovement);
-
-        this->scene.InitGLSettings();
-    }
-
-    void Window::Update() {
-        ComputeDeltaTime();
-        MeasureFps();
-
-
-
-        glutPostRedisplay();
-    }
-
-    void Window::RenderScene() {
-        this->scene.ClearPreviousFrame();
-
-        glLoadIdentity();
-        this->camera->UpdateCameraPosition();
-
-        this->scene.Render();
-
-        glutSwapBuffers();
-    }
-
-    void Window::MainLoop() const {
-        if(this->camera == nullptr) {
-            cerr << "Fatal error: no camera has been defined!" << endl;
-            cerr << "Please define a camera by calling window->SetCamera() before attempting to enter GLUT's Main Loop." << endl;
-            exit(-1);
+        if(!this->glfwWindow) {
+            return false;
         }
 
-        PrintInfo();
+        glfwSetWindowUserPointer(this->glfwWindow, this);
+
+        glfwSetFramebufferSizeCallback(this->glfwWindow, callback_handlers::HandleFramebufferSizeChange);
+        glfwSetKeyCallback(this->glfwWindow, callback_handlers::HandleKeyboardKeyPress);
+        glfwSetMouseButtonCallback(this->glfwWindow, callback_handlers::HandleMouseKeyPress);
+        glfwSetCursorPosCallback(this->glfwWindow, callback_handlers::HandleMouseMovement);
+        glfwSetScrollCallback(this->glfwWindow, callback_handlers::HandleScrollMovement);
+        glfwSetWindowFocusCallback(this->glfwWindow, callback_handlers::HandleWindowChangeFocus);
+
+        glfwMakeContextCurrent(this->glfwWindow);
+        glfwSwapInterval(1);
+
+        gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress));
+        if(!gladLoadGL()) {
+            cerr << "Failed to initialize OpenGL Context!" << endl;
+            return false;
+        }
+
+        return true;
+    }
+
+    void Window::MainLoop() {
+        if(this->glfwWindow == nullptr) {
+            throw std::runtime_error("A janela ainda não foi criada!");
+        }
+
+    	if(this->scene == nullptr)
+    	{
+            throw std::runtime_error("Não foi definida uma cena a renderizar!");
+    	}
+
+    	if(this->camera == nullptr)
+    	{
+            throw std::runtime_error("Não foi definida uma câmara para navegar a cena!");
+    	}
+
+        glfwMakeContextCurrent(this->glfwWindow);
+
+    	this->HandleFramebufferSizeChange(this->width, this->height);
+    	this->HandleWindowChangeFocus(glfwGetWindowAttrib(this->glfwWindow, GLFW_FOCUSED) == GLFW_TRUE);
+
+        this->scene->InitGLSettings();
+
+        this->PrintInfo();
         this->camera->PrintInfo();
 
-        glutMainLoop();
+        while(!glfwWindowShouldClose(this->glfwWindow)) {
+            this->ProcessFrame();
+        }
     }
 
-    void Window::HandleWindowChangeSize(int w, int h) {
-        // Prevent a divide by zero, when window is too short
-        // (you cant make a window with zero width).
-        if(h == 0)
-            h = 1;
+    void Window::ProcessFrame() {
+        // Compute some values required for updating the scene
+        this->ComputeDeltaTime();
+        this->MeasureFps();
 
-        this->width = w;
-        this->height = h;
+        // Process all events in queue
+        glfwPollEvents();
 
-        double ratio = w * 1.0 / h;
+        // Update the scene elements
+        this->camera->UpdatePosition();
 
-        glMatrixMode(GL_PROJECTION);
+        // Render the next frame
+        this->scene->ClearPreviousFrame();
 
         glLoadIdentity();
-        glViewport(0, 0, w, h);
-        gluPerspective(45.0f, ratio, 1.0f, 1000.0f);
+        glMultMatrixd(&this->camera->viewMatrix[0][0]); // Set camera position in world
 
-        glMatrixMode(GL_MODELVIEW);
-    }
+        this->scene->Render();
 
-    void Window::HandleWindowEntry(int state) {
-        focused = state == GLUT_ENTERED;
+        // Swap buffers
+        glfwSwapBuffers(this->glfwWindow);
     }
 
     void Window::PrintInfo() const {
@@ -110,8 +117,8 @@ namespace engine::window {
     }
 
     void Window::ComputeDeltaTime() {
-        static int lastTime = 0;
-        int currentTime = glutGet(GLUT_ELAPSED_TIME);
+        static double lastTime = 0;
+        double currentTime = glfwGetTime();
 
         this->deltaTime = currentTime - lastTime;
         lastTime = currentTime;
@@ -119,48 +126,47 @@ namespace engine::window {
 
     void Window::MeasureFps()
     {
-        static int timebase = 0;
-        static int time = 0;
+        static double timebase = 0;
+        static double time = 0;
         static int frame = 0;
 
         frame++;
-        time = glutGet(GLUT_ELAPSED_TIME);
+        time = glfwGetTime();
 
-        if(time - timebase > 1000)
-        {
-            fps = frame * 1000 / (time - timebase);
+        if(time - timebase > 1.0) {
+            fps = (int) round(frame / (time - timebase));
             timebase = time;
             frame = 0;
 
-            glutSetWindowTitle((string("CG@DI-UM - FPS: ") + std::to_string(fps)).c_str());
+            const string title = string(this->title) + " - FPS: " + std::to_string(fps);
+            glfwSetWindowTitle(this->glfwWindow, title.c_str());
         }
     }
 
-    Scene& Window::GetScene() {
-        return this->scene;
+    void Window::HandleFramebufferSizeChange(int width, int height) {
+        if(height == 0)
+            height = 1;
+
+        this->width = width;
+        this->height = height;
+
+        glMatrixMode(GL_PROJECTION);
+
+        glLoadIdentity();
+
+        glViewport(0, 0, width, height);
+
+        glm::dmat4 projectionMatrix = glm::perspective(glm::radians(45.0), double(width) / double(height), 1.0, 1000.0);
+        // glm::dmat4 projectionMatrix = glm::ortho(-1, 1, -1, 1, 1, -1);
+        glLoadMatrixd(&projectionMatrix[0][0]);
+
+        glMatrixMode(GL_MODELVIEW);
     }
 
-    Camera* Window::GetCamera() {
-        return this->camera;
-    }
-
-    void Window::SetCamera(Camera *camera) {
-        this->camera = camera;
-    }
-
-    int Window::GetDeltaTime() {
-        return this->deltaTime;
-    }
-
-    void Window::DestroyWindow() {
-        glutDestroyWindow(this->windowId);
-    }
-
-    Window* Window::GetInstance() {
-        if(instance == nullptr) {
-            return instance = new Window;
-        }
-
-        return instance;
-    }
+	void Window::DebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
+	{
+        fprintf(stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
+            (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
+            type, severity, message);
+	}
 }

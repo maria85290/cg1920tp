@@ -1,3 +1,5 @@
+#include <glad/glad.h>
+
 #include "Scale.h"
 
 using std::cerr, std::endl;

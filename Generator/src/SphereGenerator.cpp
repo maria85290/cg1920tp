@@ -1,6 +1,8 @@
+#include "SphereGenerator.h"
+
 #include <iostream>
 
-#include "SphereGenerator.h"
+using std::cerr, std::endl, std::stoi;
 
 bool SphereGenerator::ParseArguments(int argc, char *argv[]) {
     if(argc < 6) {

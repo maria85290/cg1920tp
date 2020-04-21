@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
 
-add_subdirectory(lib)
-
 add_executable(Engine
         src/main.cpp
         src/Scene.cpp src/Scene.h
@@ -15,76 +13,69 @@ add_executable(Engine
         src/window/Window.cpp src/window/Window.h
         src/window/cameras/Camera.h
         src/window/cameras/FpsCamera.cpp src/window/cameras/FpsCamera.h
+        src/window/cameras/StaticCamera.cpp src/window/cameras/StaticCamera.h
         src/window/cameras/ExplorerCamera.cpp src/window/cameras/ExplorerCamera.h
-        )
+        src/window/input/Keyboard.cpp src/window/input/Keyboard.h)
 
 set(OpenGL_GL_PREFERENCE GLVND)
-find_package(OpenGL REQUIRED)
-include_directories(${OpenGL_INCLUDE_DIRS})
-link_directories(${OpenGL_LIBRARY_DIRS})
-add_definitions(${OpenGL_DEFINITIONS})
+find_package(OpenGL REQUIRED COMPONENTS OpenGL)
 
 if (NOT OPENGL_FOUND)
     message(ERROR " OPENGL not found!")
 endif ()
 
+target_link_libraries(Engine PUBLIC OpenGL::GL)
+
 if (WIN32)
-    set(TOOLKITS_DIR "${CG_TP_SOURCE_DIR}/Engine/lib")
-
+    set(TOOLKITS_DIR "${CG_TP_SOURCE_DIR}/lib")
     message(STATUS "TOOLKITS_DIR set to: " ${TOOLKITS_DIR})
+	
+	if (NOT CMAKE_CL_64)
+		set(GLFW_DIR "${TOOLKITS_DIR}/glfw/x32")
+	else ()
+		set(GLFW_DIR "${TOOLKITS_DIR}/glfw/x64")
+	endif ()
 
-    if (NOT EXISTS "${TOOLKITS_DIR}/glut/GL/glut.h" OR NOT EXISTS "${TOOLKITS_DIR}/glut/freeglut.lib")
-        message(ERROR ": GLUT not found: ${TOOLKITS_DIR}/glut/GL/glut.h")
+    if (NOT EXISTS "${GLFW_DIR}/include/GLFW/glfw3.h" OR NOT EXISTS "${GLFW_DIR}/lib/glfw3.lib")
+        message(ERROR ": GLFW not found: ${GLFW_DIR}/include/GLFW/glfw3.h")
     endif ()
 
-    if (NOT EXISTS "${TOOLKITS_DIR}/glew/GL/glew.h" OR NOT EXISTS "${TOOLKITS_DIR}/glew/glew32.lib")
-        message(ERROR ": GLEW not found")
-    endif (NOT EXISTS "${TOOLKITS_DIR}/glew/GL/glew.h" OR NOT EXISTS "${TOOLKITS_DIR}/glew/glew32.lib")
+    target_include_directories(Engine PUBLIC ${GLFW_DIR}/include)
 
-    include_directories(${TOOLKITS_DIR}/glut ${TOOLKITS_DIR}/glew)
-    link_directories(${TOOLKITS_DIR}/glut ${TOOLKITS_DIR}/glew)
-
-    set(GLUT_LIBRARY ${TOOLKITS_DIR}/glut/freeglut.lib)
-    set(GLEW_LIBRARY ${TOOLKITS_DIR}/glew/glew32.lib)
-
-    if (EXISTS "${TOOLKITS_DIR}/glut/freeglut.dll")
-        file(COPY ${TOOLKITS_DIR}/glut/freeglut.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine)
-        file(COPY ${TOOLKITS_DIR}/glut/freeglut.dll DESTINATION ${CG_TP_SOURCE_DIR}/Configurations)
+    if (EXISTS "${GLFW_DIR}/bin/glfw3.dll")
+        file(COPY ${GLFW_DIR}/bin/glfw3.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine)
+        file(COPY ${GLFW_DIR}/bin/glfw3.dll DESTINATION ${CG_TP_SOURCE_DIR}/Configurations)
     endif ()
 
-    if (EXISTS "${TOOLKITS_DIR}/glew/glew32.dll")
-        file(COPY ${TOOLKITS_DIR}/glew/glew32.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine)
-        file(COPY ${TOOLKITS_DIR}/glew/glew32.dll DESTINATION ${CG_TP_SOURCE_DIR}/Configurations)
-    endif ()
+    target_link_libraries(Engine PUBLIC ${GLFW_DIR}/lib/glfw3.lib ${GLFW_DIR}/lib/glfw3dll.lib)
 
     set_property(DIRECTORY ${CG_TP_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Engine)
-else (WIN32) # Include GLUT and GLEW for Linux and Mac
-    set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} Wno-deprecated")
+elseif(UNIX AND NOT APPLE) # Include GLUT and GLEW for Linux
+    set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl -lglfw") # Add -ldl to the command line for cc
 
-    find_package(GLUT REQUIRED)
+    find_package(glfw3 REQUIRED)
 
-    if (NOT GLUT_FOUND)
-        message(ERROR ": GLUT not found!")
-    endif (NOT GLUT_FOUND)
+    if(NOT glfw3_FOUND)
+        message(ERROR ": GLFW not found!")
+        message(ERROR ": To install on Linux, use your distribution's package manager.")
+        message(ERROR ": On Debian-based systems, install package libglfw3-dev")
+    endif()
 
-    include_directories(${GLUT_INCLUDE_DIR})
-    link_directories(${GLUT_LIBRARIES})
+    target_link_libraries(Engine PUBLIC glfw ${CMAKE_DL_LIBS})
+elseif(APPLE)
+    set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl") # Add -ldl to the command line for cc
 
-    if(NOT APPLE)
-        find_package(GLEW REQUIRED)
-        if (NOT GLEW_FOUND)
-            message(ERROR ": GLEW not found!")
-        endif(NOT GLEW_FOUND)
+    find_package(GLFW3 REQUIRED)
 
-        include_directories(${GLEW_INCLUDE_DIRS})
-        link_directories(${GLEW_LIBRARIES})
-    endif(NOT APPLE)
-endif (WIN32)
+    if(NOT glfw3_FOUND)
+        message(ERROR ": GLFW not found!")
+        message(ERROR ": Use homebrew to install: brew install glfw3")
+    endif()
 
-target_link_libraries(Engine ${OPENGL_LIBRARIES})
-target_link_libraries(Engine ${GLUT_LIBRARY})
-if(NOT APPLE)
-    target_link_libraries(Engine ${GLEW_LIBRARY})
-endif(NOT APPLE)
-target_link_libraries(Engine Common)
-target_link_libraries(Engine tinyxml2)
+    target_include_directories(Engine PUBLIC ${GLFW_INCLUDE_DIR})
+    target_link_libraries(Engine PUBLIC glfw ${CMAKE_DL_LIBS})
+endif()
+
+target_link_libraries(Engine PUBLIC glad)
+target_link_libraries(Engine PUBLIC glm)
+target_link_libraries(Engine PUBLIC tinyxml2)

@@ -1,51 +1,57 @@
-#include "../../glut.h"
-#include "../Window.h"
+#include <iostream>
+
+#include <glad/glad.h>
+
+#include <glm/vec3.hpp>
 
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include <glm/ext/matrix_transform.hpp>
 
 #include "ExplorerCamera.h"
 
 using std::cout, std::endl;
 
 namespace engine::window::cameras {
-    ExplorerCamera::ExplorerCamera(vec3 center): center(center) {
+    ExplorerCamera::ExplorerCamera(glm::dvec3 center): center(center) {}
+
+    void ExplorerCamera::InitCamera(Window *window, GLFWwindow *glfwWindow) {
+        Camera::InitCamera(window, glfwWindow);
+
         SphericalToCartesian();
+
+        glfwGetCursorPos(this->glfwWindow, &lastMouseX, &lastMouseY);
     }
 
-    void ExplorerCamera::UpdateCameraPosition() {
-        gluLookAt(cam.x, cam.y, cam.z,
-                  center.x, center.y, center.z,
-                  0, 1, 0);
-    }
-
-    void ExplorerCamera::PrintInfo() {
+    void ExplorerCamera::PrintInfo() const {
         cout << "Use left click and move mouse to adjust camera position," << endl;
         cout << "and use right click to zoom in and out." << endl;
+    }
+
+    void ExplorerCamera::UpdatePosition() {
+        this->viewMatrix = glm::lookAt(cameraPos, center, glm::dvec3(0, 1, 0));
     }
 
     /**
      * Callback do Glut para quando o utilizador clica (ou larga) uma tecla do rato.
      *
      * @param button
-     * @param state
-     * @param mouseX
-     * @param mouseY
+     * @param action
+     * @param mods
      */
-    void ExplorerCamera::HandleMouseKeyPress(int button, int state, int mouseX, int mouseY) {
+    void ExplorerCamera::HandleMouseKeyPress(int button, int action, int mods) {
         switch(button) {
-            case GLUT_LEFT_BUTTON:
-                leftMousePressed = state == GLUT_DOWN;
+            case GLFW_MOUSE_BUTTON_LEFT:
+                leftMousePressed = action == GLFW_PRESS;
                 break;
-            case GLUT_RIGHT_BUTTON:
-                rightMousePressed = state == GLUT_DOWN;
+            case GLFW_MOUSE_BUTTON_RIGHT:
+                rightMousePressed = action == GLFW_PRESS;
                 break;
             default:
                 break;
         }
 
-        lastMouseX = mouseX;
-        lastMouseY = mouseY;
+        glfwGetCursorPos(this->glfwWindow, &lastMouseX, &lastMouseY);
     }
 
     /**
@@ -54,7 +60,7 @@ namespace engine::window::cameras {
      * @param mouseX
      * @param mouseY
      */
-    void ExplorerCamera::HandleMouseMovement(int mouseX, int mouseY) {
+    void ExplorerCamera::HandleMouseMovement(double mouseX, double mouseY) {
         int deltaX = lastMouseX - mouseX;
         int deltaY = mouseY - lastMouseY;
 
@@ -87,8 +93,10 @@ namespace engine::window::cameras {
      * Converte coordenadas esféricas em coordenadas cartesianas.
      */
     void ExplorerCamera::SphericalToCartesian() {
-        cam.x = camRadius * cos(camBeta) * sin(camAlpha);
-        cam.y = camRadius * sin(camBeta);
-        cam.z = camRadius * cos(camBeta) * cos(camAlpha);
+        cameraPos = camRadius * glm::dvec3(
+            cos(camBeta) * sin(camAlpha),
+            sin(camBeta),
+            cos(camBeta) * cos(camAlpha)
+        );
     }
 }

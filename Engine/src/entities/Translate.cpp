@@ -1,4 +1,4 @@
-#include "../glut.h"
+#include <glad/glad.h>
 
 #include "Translate.h"
 

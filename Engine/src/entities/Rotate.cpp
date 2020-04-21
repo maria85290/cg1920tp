@@ -1,3 +1,5 @@
+#include <glad/glad.h>
+
 #include "Rotate.h"
 
 using std::cerr, std::endl;

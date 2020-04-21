@@ -4,12 +4,10 @@
 #include <list>
 #include <fstream>
 
-#include <Common/vectors.h>
+#include <glm/vec3.hpp>
 
 #define _USE_MATH_DEFINES
 #include <math.h>
-
-using namespace std;
 
 /**
  * Um Gerador é capaz de gerar vértices para um tipo de sólido geométrico arbitrário,
@@ -21,28 +19,28 @@ using namespace std;
 class AbstractGenerator {
 private:
     /** @var vertices Os vértices que este gerador gerou. */
-    list<vec3> vertices = list<vec3>();
+    std::list<glm::vec3> vertices = std::list<glm::vec3>();
 
     /** @var filename O nome do ficheiro onde guardar os vértices gerados. */
-    string filename;
+    std::string filename;
 
 protected:
-    void SetFilename(const string& filename) {
+    void SetFilename(const std::string& filename) {
         this->filename = filename;
     }
 
-    void AddVertex(const vec3& vertex) {
+    void AddVertex(const glm::vec3& vertex) {
         this->vertices.push_back(vertex);
     }
 
     void AddVertex(const double& x, const double& y, const double& z) {
-        this->vertices.push_back({x, y, z});
+        this->vertices.emplace_back(x, y, z);
     }
 
 public:
     virtual ~AbstractGenerator() = default;
 
-    const string& GetFilename() {
+    const std::string& GetFilename() {
         return this->filename;
     }
 
@@ -70,12 +68,12 @@ public:
      * O formato é comum a todos os geradores; portanto, esta função também.
      */
     void SaveVerticesToFile() {
-        ofstream file(filename);
+        std::ofstream file(filename);
 
-        for(const vec3& vertex : vertices) {
+        for(const glm::vec3& vertex : vertices) {
             file << vertex.x << " "
                  << vertex.y << " "
-                 << vertex.z << endl;
+                 << vertex.z << std::endl;
         }
 
         file.close();

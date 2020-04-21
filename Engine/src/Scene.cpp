@@ -1,6 +1,6 @@
-#include <iostream>
-
 #include "Scene.h"
+
+#include <iostream>
 
 using std::cout, std::cerr, std::endl;
 using tinyxml2::XMLNode, tinyxml2::XMLComment;
@@ -22,7 +22,7 @@ namespace engine {
         XMLNode* groupNode = sceneNode->FirstChild();
 
         while(groupNode != nullptr) {
-            if(dynamic_cast<const XMLComment*>(groupNode)) {
+        	if(dynamic_cast<const XMLComment*>(groupNode)) {
                 groupNode = groupNode->NextSibling();
                 continue;
             }

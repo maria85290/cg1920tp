@@ -1,140 +1,145 @@
 #ifndef CG_TP_ENGINE_SRC_WINDOW_WINDOW_H_
 #define CG_TP_ENGINE_SRC_WINDOW_WINDOW_H_
 
+#include <string>
+
 #include "../Scene.h"
+
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
+
 #include "cameras/Camera.h"
+#include "input/Keyboard.h"
 
 namespace engine::window {
     /**
-     * @brief Singleton responsável pela configuração e manutenção de uma janela, capaz de renderizar cenas.
+     * @brief Classe responsável pela configuração e manutenção de uma janela, capaz de renderizar cenas.
      */
     class Window {
     private:
-        static Window* instance;
+        friend class cameras::Camera;
 
-        int windowId;
-        int width;
-        int height;
-        bool focused = true;
+        GLFWwindow* glfwWindow = nullptr;
 
-        /**
-         * A cena que está atualmente a ser desenhada.
-         */
-        Scene scene;
+        std::string title;
+
+        int width = 1280;
+        int height = 720;
+
+        bool focused = false;
 
         /**
          * O tipo de câmara que está atualmente a ser utilizado para navegar o mundo.
          */
-        cameras::Camera* camera;
+        cameras::Camera* camera = nullptr;
 
-        int deltaTime;
-        int fps;
+        /**
+         * A cena que está atualmente a ser desenhada.
+         */
+        Scene* scene = nullptr;
 
-        Window();
-        ~Window();
+        double deltaTime = 0;
+        int fps = 0;
 
         void PrintInfo() const;
         void ComputeDeltaTime();
         void MeasureFps();
+
+        static void DebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
     public:
-        static Window* GetInstance();
+        Window(const char* title, int width, int height);
+        ~Window();
 
-        void InitWindow(char* programName);
-        void MainLoop() const;
-        void DestroyWindow();
-
-        /** Obtém a cena que vai ser renderizada nesta janela. */
-        Scene& GetScene();
+        bool CreateWindow();
+        void MainLoop();
 
         /** Obtém a câmara que está a ser utilizada para o movimento nesta janela. */
-        cameras::Camera* GetCamera();
+        cameras::Camera* GetCamera() const { return camera; }
         /** Define uma nova câmara que está a ser utilizada para o movimento nesta janela. */
-        void SetCamera(cameras::Camera* camera);
+        void SetCamera(cameras::Camera* camera)
+        {
+            if(this->glfwWindow == nullptr)
+                throw std::runtime_error("Não é possível inicializar a câmara sem inicializar a janela primeiro!");
 
-        int GetDeltaTime();
+	        this->camera = camera;
+            this->camera->InitCamera(this, this->glfwWindow);
+        }
+
+        /** Obtém a cena que vai ser renderizada nesta janela. */
+        Scene* GetScene() const { return scene; }
+
+        /** Define qual a cena que vai ser renderizada nesta janela. */
+        void SetScene(Scene* scene)
+        {
+            this->scene = scene;
+        }
+
+        double GetDeltaTime() const { return deltaTime; }
         /** Retorna o comprimento da janela. */
-        int GetWidth() { return width; }
+        int GetWidth() const { return width; }
         /** Retorna a altura da janela. */
-        int GetHeight() { return height; }
-        /** Indicador fraco sobre se a janela está em foco. */
-        bool IsFocused() { return focused; }
+        int GetHeight() const { return height; }
+        /** Retorna se a janela está em foco ou não. */
+        bool IsFocused() const { return focused; }
 
-        // Handlers de callbacks do GLUT
+        /** Renderiza uma frame. */
+        void ProcessFrame();
+        /** Callback do glfw para quando a janela muda de tamanho. */
+        void HandleFramebufferSizeChange(int width, int height);
 
-        /** Callback do glut correspondente à glutIdleFunc(). **/
-        void Update();
-        /** Callback do glut para renderizar a cena no ecrã. */
-        void RenderScene();
-        /** Callback do glut para quando a janela muda de tamanho. */
-        void HandleWindowChangeSize(int, int);
-        /** Callback do glut para quando a janela perde ou ganha foco. */
-        void HandleWindowEntry(int state);
+        void HandleWindowChangeFocus(bool focused) {
+            this->focused = focused;
+        }
     };
 
     /**
-     * Este namespace contém funções inline capazes de redirecionar as callbacks do GLUT para as funções membro
-     * do singleton Window descrito acima.
+     * Este namespace contém funções inline capazes de redirecionar as callbacks do GLFW para as funções membro
+     * da classe Window descrita acima.
      *
-     * É ncessária a existência destes proxies pois GLUT é uma API C; logo não é compatível com objetos de C++.
+     * É ncessária a existência destes proxies pois GLFW é uma API C; logo não é compatível com objetos de C++.
      */
-    namespace glut_handlers {
-        inline void Update() {
-            Window::GetInstance()->Update();
+    namespace callback_handlers {
+        inline void HandleFramebufferSizeChange(GLFWwindow* glfwWindow, int width, int height) {
+            Window* window = reinterpret_cast<Window*>(glfwGetWindowUserPointer(glfwWindow));
+
+            window->HandleFramebufferSizeChange(width, height);
         }
 
-        inline void RenderScene() {
-            Window::GetInstance()->RenderScene();
+        inline void HandleKeyboardKeyPress(GLFWwindow* glfwWindow, int key, int scanCode, int action, int mods) {
+            Window* window = reinterpret_cast<Window*>(glfwGetWindowUserPointer(glfwWindow));
+            cameras::Camera* camera = window->GetCamera();
+
+            ::engine::window::input::Keyboard::HandleKeyPress(key, scanCode, action, mods);
+            camera->HandleKeyboardKeyPress(key, scanCode, action, mods);
         }
 
-        inline void HandleWindowChangeSize(int width, int height) {
-            Window::GetInstance()->HandleWindowChangeSize(width, height);
+        inline void HandleMouseKeyPress(GLFWwindow* glfwWindow, int button, int action, int mods) {
+            Window* window = reinterpret_cast<Window*>(glfwGetWindowUserPointer(glfwWindow));
+            cameras::Camera* camera = window->GetCamera();
+
+            camera->HandleMouseKeyPress(button, action, mods);
         }
 
-        inline void HandleWindowEntry(int state) {
-            Window::GetInstance()->HandleWindowEntry(state);
+        inline void HandleMouseMovement(GLFWwindow* glfwWindow, double x, double y) {
+            Window* window = reinterpret_cast<Window*>(glfwGetWindowUserPointer(glfwWindow));
+            cameras::Camera* camera = window->GetCamera();
+
+            camera->HandleMouseMovement(x, y);
         }
 
-        inline void HandleKeyPress(unsigned char key, int mouseX, int mouseY) {
-            cameras::Camera* camera = Window::GetInstance()->GetCamera();
+        inline void HandleScrollMovement(GLFWwindow* glfwWindow, double xOffset, double yOffset) {
+            Window* window = reinterpret_cast<Window*>(glfwGetWindowUserPointer(glfwWindow));
+            cameras::Camera* camera = window->GetCamera();
 
-            if(camera != nullptr)
-                camera->HandleKeyPress(key, mouseX, mouseY);
+            camera->HandleScrollMovement(xOffset, yOffset);
         }
 
-        inline void HandleSpecialKeyPress(int key, int mouseX, int mouseY) {
-            // Este código permite a deteção do atalho ALT+F4, para permitir que o programa encerre, mesmo em Windows.
-            if(key == GLUT_KEY_F4) {
-                if(glutGetModifiers() & GLUT_ACTIVE_ALT) {
-                    // Detected Alt+F4!
-                    exit(0);
-                }
-            }
+        inline void HandleWindowChangeFocus(GLFWwindow* glfwWindow, int focused) {
+            Window* window = reinterpret_cast<Window*>(glfwGetWindowUserPointer(glfwWindow));
+            cameras::Camera* camera = window->GetCamera();
 
-            cameras::Camera* camera = Window::GetInstance()->GetCamera();
-
-            if(camera != nullptr)
-                camera->HandleSpecialKeyPress(key, mouseX, mouseY);
-        }
-
-        inline void HandleMouseKeyPress(int button, int state, int x, int y) {
-            cameras::Camera* camera = Window::GetInstance()->GetCamera();
-
-            if(camera != nullptr)
-                camera->HandleMouseKeyPress(button, state, x, y);
-        }
-
-        inline void HandleMouseMovement(int x, int y) {
-            cameras::Camera* camera = Window::GetInstance()->GetCamera();
-
-            if(camera != nullptr)
-                camera->HandleMouseMovement(x, y);
-        }
-
-        inline void HandlePassiveMouseMovement(int x, int y) {
-            cameras::Camera* camera = Window::GetInstance()->GetCamera();
-
-            if(camera != nullptr)
-                camera->HandlePassiveMouseMovement(x, y);
+            window->HandleWindowChangeFocus(focused == GLFW_TRUE);
+            camera->HandleWindowChangeFocus(focused == GLFW_TRUE);
         }
     }
 }

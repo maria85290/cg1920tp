@@ -4,11 +4,10 @@
 #include <string>
 #include <vector>
 #include <map>
+
+#include <glad/glad.h>
+#include <glm/vec3.hpp>
 #include <tinyxml2/tinyxml2.h>
-
-#include <Common/vectors.h>
-
-#include "../glut.h"
 
 namespace engine::entities {
     class Model {
@@ -16,7 +15,7 @@ namespace engine::entities {
         static std::map<std::string, const Model*> loadedModels;
 
         std::string filename;
-        std::vector<vec3>* vertices;
+        std::vector<glm::dvec3>* vertices;
 
         GLubyte diffR, diffG, diffB;
 
@@ -29,8 +28,8 @@ namespace engine::entities {
 
         void GenVBOs();
     public:
-        explicit Model(const Model& model, const int diffR, const int diffG, const int diffB);
-        explicit Model(const std::string& filename, const int diffR, const int diffG, const int diffB);
+        explicit Model(const Model& model, int diffR, int diffG, int diffB);
+        explicit Model(const std::string& filename, int diffR, int diffG, int diffB);
         ~Model();
 
         void Render() const;

@@ -1,7 +1,9 @@
+#include "BoxGenerator.h"
+
 #include <iostream>
 #include <string>
 
-#include "BoxGenerator.h"
+using std::cerr, std::endl, std::stoi;
 
 bool BoxGenerator::ParseArguments(int argc, char *argv[]) {
 
@@ -16,8 +18,8 @@ bool BoxGenerator::ParseArguments(int argc, char *argv[]) {
     SetFilename(argv[5]); // Número correto de argumentos passado
 
     dimX = stoi(argv[2]);
-  dimY = stoi(argv[3]);
-  dimZ = stoi(argv[4]);
+    dimY = stoi(argv[3]);
+    dimZ = stoi(argv[4]);
 
     return true;
 }

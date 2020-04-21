@@ -1,8 +1,9 @@
-#include <iostream>
-
 #include "PlaneGenerator.h"
 
-using namespace std;
+#include <iostream>
+#include <string>
+
+using std::cerr, std::endl, std::stoi, std::string;
 
 bool PlaneGenerator::ParseArguments(int argc, char *argv[]) {
   plane = kPlaneXZ;
