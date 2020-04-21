@@ -5,8 +5,8 @@
 using std::cerr, std::endl;
 using tinyxml2::XMLNode, tinyxml2::XMLElement, tinyxml2::XML_SUCCESS;
 
-namespace engine::entities {
-    bool Scale::ParseXml(XMLNode *translateNode) {
+namespace engine::scene::entities {
+    bool Scale::ParseXml(const XMLNode *translateNode) {
         const XMLElement *elem = translateNode->ToElement();
 
         if(elem->QueryAttribute("X", &this->factors.x) != XML_SUCCESS) {

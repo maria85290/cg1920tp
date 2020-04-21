@@ -3,7 +3,7 @@
 
 #include <tinyxml2/tinyxml2.h>
 
-#include "Scene.h"
+#include "scene/Scene.h"
 #include "window/Window.h"
 #include "window/cameras/FpsCamera.h"
 #include "window/cameras/ExplorerCamera.h"
@@ -11,7 +11,7 @@
 using std::cerr, std::endl, std::cout;
 using std::unique_ptr;
 using tinyxml2::XMLDocument, tinyxml2::XMLNode, tinyxml2::XML_SUCCESS;
-using engine::Scene;
+using engine::scene::Scene;
 using engine::window::Window;
 using engine::window::cameras::FpsCamera;
 using engine::window::cameras::ExplorerCamera;

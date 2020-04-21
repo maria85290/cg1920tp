@@ -9,10 +9,10 @@
 #include <glm/vec3.hpp>
 #include <tinyxml2/tinyxml2.h>
 
-namespace engine::entities {
+namespace engine::scene::entities {
     class Model {
     private:
-        static std::map<std::string, const Model*> loadedModels;
+        static std::map<std::string, Model*> loadedModels;
 
         std::string filename;
         std::vector<glm::dvec3>* vertices;
@@ -34,7 +34,7 @@ namespace engine::entities {
 
         void Render() const;
 
-        static const Model* LoadModel(const tinyxml2::XMLElement* element);
+        static Model* LoadModel(const tinyxml2::XMLElement* element);
     };
 }
 

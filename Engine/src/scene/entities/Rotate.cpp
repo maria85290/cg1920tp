@@ -5,8 +5,8 @@
 using std::cerr, std::endl;
 using tinyxml2::XMLNode, tinyxml2::XMLElement, tinyxml2::XML_SUCCESS;
 
-namespace engine::entities {
-    bool Rotate::ParseXml(XMLNode *rotateNode) {
+namespace engine::scene::entities {
+    bool Rotate::ParseXml(const XMLNode *rotateNode) {
         const XMLElement *elem = rotateNode->ToElement();
 
         if(elem->QueryAttribute("angle", &this->angle) != XML_SUCCESS) {

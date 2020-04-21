@@ -4,22 +4,22 @@
 
 using std::cout, std::cerr, std::endl;
 using tinyxml2::XMLNode, tinyxml2::XMLComment;
-using engine::entities::Group;
+using engine::scene::entities::Group;
 
-namespace engine {
+namespace engine::scene {
     Scene::~Scene() {
         for(const Group* group : this->groups) {
             delete group;
         }
     }
 
-    bool Scene::ParseXml(XMLNode* sceneNode) {
+    bool Scene::ParseXml(const XMLNode* sceneNode) {
         if(sceneNode->NoChildren()) {
             cout << "Não contêm children." << endl;
             return false;
         }
 
-        XMLNode* groupNode = sceneNode->FirstChild();
+        const XMLNode* groupNode = sceneNode->FirstChild();
 
         while(groupNode != nullptr) {
         	if(dynamic_cast<const XMLComment*>(groupNode)) {

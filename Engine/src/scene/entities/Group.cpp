@@ -10,15 +10,15 @@
 using std::string, std::cerr, std::endl;
 using tinyxml2::XMLNode, tinyxml2::XMLComment;
 
-namespace engine::entities {
+namespace engine::scene::entities {
     Group::~Group() {
         for(const Entity *entity : this->entities) {
             delete entity;
         }
     }
 
-    bool Group::ParseXml(XMLNode *groupNode) {
-        XMLNode *childNode = groupNode->FirstChild();
+    bool Group::ParseXml(const XMLNode *groupNode) {
+        const XMLNode *childNode = groupNode->FirstChild();
 
         bool translate = false, scale = false, rotate = false, models = false;
 

@@ -5,12 +5,12 @@
 
 #include "entities/Group.h"
 
-namespace engine {
+namespace engine::scene {
     class Scene {
     private:
-        std::vector<const entities::Group*> groups = std::vector<const entities::Group*>();
+        std::vector<entities::Group*> groups;
 
-        void AddGroup(const entities::Group* group) {
+        void AddGroup(entities::Group* group) {
             groups.push_back(group);
         }
 
@@ -24,7 +24,7 @@ namespace engine {
          * @param sceneNode O nodo corresponde à cena
          * @return true se correu tudo bem, false caso contrário
          */
-        bool ParseXml(tinyxml2::XMLNode* sceneNode);
+        bool ParseXml(const tinyxml2::XMLNode* sceneNode);
 
         /**
          * Inicializa definições do OpenGL que vão ser necessárias para todas as entidades da cena.

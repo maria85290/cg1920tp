@@ -4,7 +4,7 @@
 #include <tinyxml2/tinyxml2.h>
 #include <iostream>
 
-namespace engine::entities {
+namespace engine::scene::entities {
     class Entity {
     public:
         Entity() = default;
@@ -15,7 +15,7 @@ namespace engine::entities {
          * @param node O nodo do ficheiro XML correspondente a esta entidade.
          * @return true se o parsing se deu corretamente; false caso contrário
          */
-        virtual bool ParseXml(tinyxml2::XMLNode *node) = 0;
+        virtual bool ParseXml(const tinyxml2::XMLNode *node) = 0;
         /**
          * Função responsável por renderizar esta entidade no ecrã.
          */

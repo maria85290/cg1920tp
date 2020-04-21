@@ -2,14 +2,14 @@ cmake_minimum_required(VERSION 3.10)
 
 add_executable(Engine
         src/main.cpp
-        src/Scene.cpp src/Scene.h
-        src/entities/Group.cpp src/entities/Group.h
-        src/entities/Model.cpp src/entities/Model.h
-        src/entities/Entity.cpp src/entities/Entity.h
-        src/entities/Models.cpp src/entities/Models.h
-        src/entities/Translate.cpp src/entities/Translate.h
-        src/entities/Rotate.cpp src/entities/Rotate.h
-        src/entities/Scale.cpp src/entities/Scale.h
+        src/scene/Scene.cpp src/scene/Scene.h
+        src/scene/entities/Group.cpp src/scene/entities/Group.h
+        src/scene/entities/Model.cpp src/scene/entities/Model.h
+        src/scene/entities/Entity.cpp src/scene/entities/Entity.h
+        src/scene/entities/Models.cpp src/scene/entities/Models.h
+        src/scene/entities/Translate.cpp src/scene/entities/Translate.h
+        src/scene/entities/Rotate.cpp src/scene/entities/Rotate.h
+        src/scene/entities/Scale.cpp src/scene/entities/Scale.h
         src/window/Window.cpp src/window/Window.h
         src/window/cameras/Camera.h
         src/window/cameras/FpsCamera.cpp src/window/cameras/FpsCamera.h

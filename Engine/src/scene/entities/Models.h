@@ -4,17 +4,17 @@
 #include "Entity.h"
 #include "Model.h"
 
-namespace engine::entities {
+namespace engine::scene::entities {
     class Models: public Entity {
     private:
-        std::vector<const Model*> models = std::vector<const Model*>();
+        std::vector<Model*> models;
 
-        void AddModel(const Model* model) {
+        void AddModel(Model* model) {
             models.push_back(model);
         }
 
     public:
-        bool ParseXml(tinyxml2::XMLNode *node) override;
+        bool ParseXml(const tinyxml2::XMLNode *node) override;
         void Render() const override;
     };
 }

@@ -5,7 +5,7 @@
 
 #include "Entity.h"
 
-namespace engine::entities {
+namespace engine::scene::entities {
     class Scale: public Entity {
     private:
         glm::vec3 factors;
@@ -13,7 +13,7 @@ namespace engine::entities {
     public:
         ~Scale() override = default;
 
-        bool ParseXml(tinyxml2::XMLNode *node) override;
+        bool ParseXml(const tinyxml2::XMLNode *node) override;
         void Render() const override;
     };
 }

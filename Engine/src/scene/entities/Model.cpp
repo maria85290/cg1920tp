@@ -8,8 +8,8 @@
 using std::cout, std::cerr, std::endl, std::string, std::ifstream, std::vector, std::map;
 using tinyxml2::XMLElement;
 
-namespace engine::entities {
-    map<string, const Model*> Model::loadedModels;
+namespace engine::scene::entities {
+    map<string, Model*> Model::loadedModels;
 
     Model::Model(const Model& model, const int diffR, const int diffG, const int diffB):
     filename(model.filename), vertices(model.vertices),
@@ -78,7 +78,7 @@ namespace engine::entities {
         glDisableClientState(GL_VERTEX_ARRAY);
     }
 
-    const Model* Model::LoadModel(const XMLElement* element) {
+    Model* Model::LoadModel(const XMLElement* element) {
         const char *filename = element->Attribute("file");
 
         if(filename == nullptr) {

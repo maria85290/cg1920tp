@@ -7,9 +7,9 @@
 using std::cerr, std::endl;
 using tinyxml2::XMLNode, tinyxml2::XMLElement, tinyxml2::XMLComment;
 
-namespace engine::entities {
-    bool Models::ParseXml(XMLNode *modelsNode) {
-        XMLNode *node = modelsNode->FirstChild();
+namespace engine::scene::entities {
+    bool Models::ParseXml(const XMLNode *modelsNode) {
+        const XMLNode *node = modelsNode->FirstChild();
 
         while(node != nullptr) {
             if(dynamic_cast<const XMLComment*>(node)) {
@@ -17,14 +17,14 @@ namespace engine::entities {
                 continue;
             }
 
-            XMLElement *element = node->ToElement();
+            const XMLElement *element = node->ToElement();
 
             if(strcmp("model", node->Value()) != 0) {
                 cerr << "Esperado valor 'model', obtido '" << node->Value() << "'" << endl;
                 return false;
             }
 
-            const Model* model = Model::LoadModel(element);
+            Model* model = Model::LoadModel(element);
 
             if(model == nullptr) {
                 return false;
@@ -39,7 +39,7 @@ namespace engine::entities {
     }
 
     void Models::Render() const {
-        for(const Model *model : models) {
+        for(auto model : models) {
             model->Render();
         }
     }
