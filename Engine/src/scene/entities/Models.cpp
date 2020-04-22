@@ -24,7 +24,7 @@ namespace engine::scene::entities {
                 return false;
             }
 
-            Model* model = Model::LoadModel(element);
+            Model* model = new Model(element);
 
             if(model == nullptr) {
                 return false;
@@ -36,6 +36,12 @@ namespace engine::scene::entities {
         }
 
         return true;
+    }
+
+    Models::~Models() {
+        for(auto model : this->models) {
+            delete model;
+        }
     }
 
     void Models::Render() const {

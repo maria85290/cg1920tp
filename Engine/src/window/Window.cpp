@@ -46,7 +46,7 @@ namespace engine::window {
         glfwSetWindowFocusCallback(this->glfwWindow, callback_handlers::HandleWindowChangeFocus);
 
         glfwMakeContextCurrent(this->glfwWindow);
-        glfwSwapInterval(1);
+        glfwSwapInterval(0);
 
         gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress));
         if(!gladLoadGL()) {

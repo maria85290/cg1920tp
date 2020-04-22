@@ -4,37 +4,30 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <memory>
 
 #include <glad/glad.h>
 #include <glm/vec3.hpp>
 #include <tinyxml2/tinyxml2.h>
 
+#include "../../objects/ModelMesh.h"
+
+using std::shared_ptr;
+using engine::objects::ModelMesh;
+
 namespace engine::scene::entities {
     class Model {
     private:
-        static std::map<std::string, Model*> loadedModels;
-
-        std::string filename;
-        std::vector<glm::dvec3>* vertices;
+        shared_ptr<ModelMesh> mesh;
 
         GLubyte diffR, diffG, diffB;
-
-        GLuint vbo;
-        bool isCachedModel = false;
-    protected:
-        void AddVertex(double x, double y, double z) {
-            vertices->push_back({x, y, z});
-        }
-
-        void GenVBOs();
     public:
-        explicit Model(const Model& model, int diffR, int diffG, int diffB);
-        explicit Model(const std::string& filename, int diffR, int diffG, int diffB);
-        ~Model();
+        explicit Model(const tinyxml2::XMLElement* element);
+        Model(const Model& model) = delete;
+        Model& operator=(const Model& other) = delete;
+        ~Model() = default;
 
         void Render() const;
-
-        static Model* LoadModel(const tinyxml2::XMLElement* element);
     };
 }
 

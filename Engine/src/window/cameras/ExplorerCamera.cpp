@@ -61,8 +61,8 @@ namespace engine::window::cameras {
      * @param mouseY
      */
     void ExplorerCamera::HandleMouseMovement(double mouseX, double mouseY) {
-        int deltaX = lastMouseX - mouseX;
-        int deltaY = mouseY - lastMouseY;
+        double deltaX = lastMouseX - mouseX;
+        double deltaY = mouseY - lastMouseY;
 
         if(leftMousePressed) {
             camAlpha += 0.001 * deltaX;

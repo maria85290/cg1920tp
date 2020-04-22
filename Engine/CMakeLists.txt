@@ -10,6 +10,8 @@ add_executable(Engine
         src/scene/entities/Translate.cpp src/scene/entities/Translate.h
         src/scene/entities/Rotate.cpp src/scene/entities/Rotate.h
         src/scene/entities/Scale.cpp src/scene/entities/Scale.h
+        src/objects/ObjectCache.h
+        src/objects/ModelMesh.cpp src/objects/ModelMesh.h
         src/window/Window.cpp src/window/Window.h
         src/window/cameras/Camera.h
         src/window/cameras/FpsCamera.cpp src/window/cameras/FpsCamera.h
