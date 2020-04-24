@@ -16,12 +16,15 @@ namespace engine::objects {
 
         const std::string filename;
         std::vector<glm::vec3> vertices;
+        std::vector<unsigned short> indices;
 
         long numVertices = 0;
-        GLuint vbo;
+        long numIndices = 0;
+
+        GLuint vbos[2];
     protected:
-        void AddVertex(float x, float y, float z) {
-            vertices.push_back({x, y, z});
+        void AddVertex(const float& x, const float& y, const float& z) {
+            vertices.emplace_back(x, y, z);
         }
 
         void GenVBOs();

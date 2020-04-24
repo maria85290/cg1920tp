@@ -12,6 +12,15 @@ namespace engine::objects {
     ModelMesh::ModelMesh(const string &filename): filename(filename) {
         ifstream file(filename);
 
+        file >> this->numIndices;
+
+        for(int i = 0; i < numIndices; i++) {
+            int v;
+            file >> v;
+
+            this->indices.push_back(v);
+        }
+
         float x, y, z;
         while(file >> x >> y >> z) {
             AddVertex(x, y, z);
@@ -19,39 +28,45 @@ namespace engine::objects {
 
         file.close();
 
+        this->numVertices = this->vertices.size();
+
         this->GenVBOs();
+        this->vertices.clear();
+        this->indices.clear();
     }
 
     void ModelMesh::GenVBOs()
     {
-        glEnableClientState(GL_VERTEX_ARRAY);
+        glGenBuffers(2, this->vbos);
 
-        glGenBuffers(1, &this->vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, this->vbos[0]);
+        glBufferData(GL_ARRAY_BUFFER, 3 * this->numVertices * sizeof(float), this->vertices.data(), GL_STATIC_DRAW);
 
-        glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
-        glBufferData(GL_ARRAY_BUFFER, 3 * this->vertices.size() * sizeof(float), this->vertices.data(), GL_STATIC_DRAW);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vbos[1]);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->numIndices * sizeof(unsigned short), this->indices.data(), GL_STATIC_DRAW);
+
         glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-        glDisableClientState(GL_VERTEX_ARRAY);
-
-        this->numVertices = this->vertices.size();
-        this->vertices.clear();
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     }
 
     ModelMesh::~ModelMesh() {
-        glDeleteBuffers(1, &this->vbo);
+        glDeleteBuffers(2, this->vbos);
     }
 
     void ModelMesh::Render() const {
         glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_INDEX_ARRAY);
 
-        glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, this->vbos[0]);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vbos[1]);
 
         glVertexPointer(3, GL_FLOAT, 0, nullptr);
-        glDrawArrays(GL_TRIANGLES, 0, this->numVertices);
+        glDrawElements(GL_TRIANGLES, this->numIndices, GL_UNSIGNED_SHORT, nullptr);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+        glDisableClientState(GL_INDEX_ARRAY);
         glDisableClientState(GL_VERTEX_ARRAY);
     }
 }

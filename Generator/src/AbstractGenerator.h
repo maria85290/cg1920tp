@@ -1,9 +1,12 @@
 #ifndef CG_TP_ABSTRACTGENERATOR_H
 #define CG_TP_ABSTRACTGENERATOR_H
 
+#include <map>
 #include <list>
 #include <fstream>
 
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/hash.hpp>
 #include <glm/vec3.hpp>
 
 #define _USE_MATH_DEFINES
@@ -19,22 +22,25 @@
 class AbstractGenerator {
 private:
     /** @var vertices Os vértices que este gerador gerou. */
-    std::list<glm::vec3> vertices = std::list<glm::vec3>();
+    std::unordered_map<glm::vec3, unsigned short> vertices;
+
+    /** @var indices */
+    std::list<unsigned short> indices;
+
+    /** @var nextIndex The next index to use for the next new vertex that comes along. */
+    int nextIndex = 0;
 
     /** @var filename O nome do ficheiro onde guardar os vértices gerados. */
     std::string filename;
 
+    void AddVertex(const glm::vec3& v);
 protected:
     void SetFilename(const std::string& filename) {
         this->filename = filename;
     }
 
-    void AddVertex(const glm::vec3& vertex) {
-        this->vertices.push_back(vertex);
-    }
-
-    void AddVertex(const double& x, const double& y, const double& z) {
-        this->vertices.emplace_back(x, y, z);
+    inline void AddVertex(const double& x, const double& y, const double& z) {
+        this->AddVertex({x, y, z});
     }
 
 public:
@@ -67,17 +73,7 @@ public:
      *
      * O formato é comum a todos os geradores; portanto, esta função também.
      */
-    void SaveVerticesToFile() {
-        std::ofstream file(filename);
-
-        for(const glm::vec3& vertex : vertices) {
-            file << vertex.x << " "
-                 << vertex.y << " "
-                 << vertex.z << std::endl;
-        }
-
-        file.close();
-    }
+    void SaveVerticesToFile();
 };
 
 #endif //CG_TP_ABSTRACTGENERATOR_H

@@ -14,9 +14,9 @@ bool SphereGenerator::ParseArguments(int argc, char *argv[]) {
 
     SetFilename(argv[5]);
 
-  radius = stoi(argv[2]);
-  slices = stoi(argv[3]);
-  stacks = stoi(argv[4]);
+    radius = stoi(argv[2]);
+    slices = stoi(argv[3]);
+    stacks = stoi(argv[4]);
 
     return true;
 }
