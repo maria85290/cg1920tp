@@ -8,7 +8,7 @@ namespace engine::scene::entities {
     class Rotate: public Entity {
     private:
         /** The rotation angle, in degrees. */
-        double angle;
+        float angle;
         /** The rotation vector. */
         glm::vec3 vector;
 

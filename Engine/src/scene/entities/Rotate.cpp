@@ -34,6 +34,6 @@ namespace engine::scene::entities {
     }
 
     void Rotate::Render() const {
-        glRotated(angle, vector.x, vector.y, vector.z);
+        glRotatef(angle, vector.x, vector.y, vector.z);
     }
 }

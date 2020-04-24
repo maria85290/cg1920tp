@@ -25,6 +25,6 @@ namespace engine::scene::entities {
     }
 
     void Translate::Render() const {
-        glTranslated(this->vector.x, this->vector.y, this->vector.z);
+        glTranslatef(this->vector.x, this->vector.y, this->vector.z);
     }
 }

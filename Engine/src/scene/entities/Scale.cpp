@@ -28,6 +28,6 @@ namespace engine::scene::entities {
     }
 
     void Scale::Render() const {
-        glScaled(this->factors.x, this->factors.y, this->factors.z);
+        glScalef(this->factors.x, this->factors.y, this->factors.z);
     }
 }

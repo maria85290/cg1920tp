@@ -157,8 +157,7 @@ namespace engine::window {
         glViewport(0, 0, width, height);
 
         glm::dmat4 projectionMatrix = glm::perspective(glm::radians(45.0), double(width) / double(height), 1.0, 1000.0);
-        // glm::dmat4 projectionMatrix = glm::ortho(-1, 1, -1, 1, 1, -1);
-        glLoadMatrixd(&projectionMatrix[0][0]);
+        glMultMatrixd(&projectionMatrix[0][0]);
 
         glMatrixMode(GL_MODELVIEW);
     }

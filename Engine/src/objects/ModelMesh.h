@@ -15,12 +15,12 @@ namespace engine::objects {
         static ObjectCache<ModelMesh> cache;
 
         const std::string filename;
-        std::vector<glm::dvec3> vertices;
+        std::vector<glm::vec3> vertices;
 
         long numVertices = 0;
         GLuint vbo;
     protected:
-        void AddVertex(double x, double y, double z) {
+        void AddVertex(float x, float y, float z) {
             vertices.push_back({x, y, z});
         }
 
