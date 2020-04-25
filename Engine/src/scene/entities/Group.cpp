@@ -1,11 +1,13 @@
 #include <iostream>
 
 #include "Models.h"
-#include "Translate.h"
-#include "Rotate.h"
+#include "StaticTranslate.h"
+#include "StaticRotate.h"
 #include "Scale.h"
 
 #include "Group.h"
+#include "CatmullRomAnimation.h"
+#include "TimedRotate.h"
 
 using std::string, std::cerr, std::endl;
 using tinyxml2::XMLNode, tinyxml2::XMLComment;
@@ -33,7 +35,12 @@ namespace engine::scene::entities {
                     return false;
                 }
 
-                entity = new Translate;
+                if(childNode->NoChildren()) {
+                    entity = new StaticTranslate;
+                } else {
+                    // entity = new CatmullRomAnimation;
+                }
+
                 translate = true;
             } else if(nodeName == "rotate") {
                 if(rotate) {
@@ -41,7 +48,12 @@ namespace engine::scene::entities {
                     return false;
                 }
 
-                entity = new Rotate;
+                if(childNode->ToElement()->FindAttribute("time") == nullptr) {
+                    entity = new StaticRotate;
+                } else {
+                    entity = new TimedRotate;
+                }
+
                 rotate = true;
             } else if(nodeName == "scale") {
                 if(scale) {
@@ -81,10 +93,16 @@ namespace engine::scene::entities {
         return true;
     }
 
+    void Group::Update(double deltaTime) {
+        for(auto entity : this->entities) {
+            entity->Update(deltaTime);
+        }
+    }
+
     void Group::Render() const {
         glPushMatrix();
 
-        for(const Entity *entity : this->entities) {
+        for(auto entity : this->entities) {
             entity->Render();
         }
 

@@ -5,7 +5,7 @@
 #include "Entity.h"
 
 namespace engine::scene::entities {
-    class Rotate: public Entity {
+    class StaticRotate: public Entity {
     private:
         /** The rotation angle, in degrees. */
         float angle;
@@ -13,7 +13,7 @@ namespace engine::scene::entities {
         glm::vec3 vector;
 
     public:
-        ~Rotate() override = default;
+        ~StaticRotate() override = default;
 
         bool ParseXml(const tinyxml2::XMLNode *rotateNode) override;
         void Render() const override;

@@ -1,12 +1,12 @@
 #include <glad/glad.h>
 
-#include "Translate.h"
+#include "StaticTranslate.h"
 
 using std::cerr, std::endl;
 using tinyxml2::XMLNode, tinyxml2::XMLElement, tinyxml2::XML_SUCCESS;
 
 namespace engine::scene::entities {
-    bool Translate::ParseXml(const XMLNode *translateNode) {
+    bool StaticTranslate::ParseXml(const XMLNode *translateNode) {
         const XMLElement *elem = translateNode->ToElement();
 
         if(elem->QueryAttribute("X", &this->vector.x) != XML_SUCCESS) {
@@ -24,7 +24,7 @@ namespace engine::scene::entities {
         return true;
     }
 
-    void Translate::Render() const {
+    void StaticTranslate::Render() const {
         glTranslatef(this->vector.x, this->vector.y, this->vector.z);
     }
 }

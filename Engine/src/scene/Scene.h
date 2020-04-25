@@ -35,6 +35,13 @@ namespace engine::scene {
          * Limpa o ecrã de todas as imagens desenhadas na última frame.
          */
         void ClearPreviousFrame() const;
+
+        /**
+         * Função responsável por atualizar os parãmetros internos de cada identidade, se necessário.
+         * @param deltaTime
+         */
+        void Update(double deltaTime);
+
         /**
          * Desenha uma nova frame desta cena.
          */

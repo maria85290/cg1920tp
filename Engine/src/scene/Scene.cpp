@@ -8,7 +8,7 @@ using engine::scene::entities::Group;
 
 namespace engine::scene {
     Scene::~Scene() {
-        for(const Group* group : this->groups) {
+        for(auto group : this->groups) {
             delete group;
         }
     }
@@ -50,7 +50,7 @@ namespace engine::scene {
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
-        glPolygonMode(GL_FRONT, GL_FILL);
+        glPolygonMode(GL_FRONT, GL_LINE);
     }
 
     void Scene::ClearPreviousFrame() const {
@@ -58,8 +58,14 @@ namespace engine::scene {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
+    void Scene::Update(double deltaTime) {
+        for(auto group : this->groups) {
+            group->Update(deltaTime);
+        }
+    }
+
     void Scene::Render() const {
-        for(const Group* group : this->groups) {
+        for(auto group : this->groups) {
             group->Render();
         }
     }

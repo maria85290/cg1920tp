@@ -5,11 +5,11 @@
 #include "Entity.h"
 
 namespace engine::scene::entities {
-    class Translate: public Entity {
+    class StaticTranslate: public Entity {
     private:
         glm::vec3 vector;
     public:
-        ~Translate() override = default;
+        ~StaticTranslate() override = default;
 
         bool ParseXml(const tinyxml2::XMLNode *translateNode) override;
         void Render() const override;

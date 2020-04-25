@@ -97,6 +97,7 @@ namespace engine::window {
 
         // Update the scene elements
         this->camera->UpdatePosition();
+        this->scene->Update(deltaTime);
 
         // Render the next frame
         this->scene->ClearPreviousFrame();

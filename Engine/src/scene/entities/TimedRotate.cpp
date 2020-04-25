@@ -1,16 +1,16 @@
 #include <glad/glad.h>
 
-#include "Rotate.h"
+#include "TimedRotate.h"
 
 using std::cerr, std::endl;
 using tinyxml2::XMLNode, tinyxml2::XMLElement, tinyxml2::XML_SUCCESS;
 
 namespace engine::scene::entities {
-    bool Rotate::ParseXml(const XMLNode *rotateNode) {
+    bool TimedRotate::ParseXml(const XMLNode *rotateNode) {
         const XMLElement *elem = rotateNode->ToElement();
 
-        if(elem->QueryAttribute("angle", &this->angle) != XML_SUCCESS) {
-            cerr << "[Rotate] Erro: Não foi encontrado o atributo angle." << endl;
+        if(elem->QueryAttribute("time", &this->time) != XML_SUCCESS) {
+            cerr << "[Rotate] Erro: Não foi encontrado o atributo time." << endl;
             return false;
         }
 
@@ -29,11 +29,17 @@ namespace engine::scene::entities {
             return false;
         }
 
+        this->degreesPerSecond = 360.0 / double(this->time);
+
         // Sem erros!
         return true;
     }
 
-    void Rotate::Render() const {
-        glRotatef(angle, vector.x, vector.y, vector.z);
+    void TimedRotate::Update(double deltaTime) {
+        this->angle += this->degreesPerSecond * deltaTime;
+    }
+
+    void TimedRotate::Render() const {
+        glRotated(this->angle, vector.x, vector.y, vector.z);
     }
 }

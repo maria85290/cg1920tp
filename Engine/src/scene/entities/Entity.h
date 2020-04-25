@@ -16,6 +16,13 @@ namespace engine::scene::entities {
          * @return true se o parsing se deu corretamente; false caso contrário
          */
         virtual bool ParseXml(const tinyxml2::XMLNode *node) = 0;
+
+        /**
+         * Função responsável por atualizar os parãmetros internos de cada identidade, se necessário.
+         * @param deltaTime
+         */
+        virtual void Update(double deltaTime) {};
+
         /**
          * Função responsável por renderizar esta entidade no ecrã.
          */

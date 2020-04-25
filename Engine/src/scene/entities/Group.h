@@ -19,6 +19,7 @@ namespace engine::scene::entities {
         ~Group() override;
 
         bool ParseXml(const tinyxml2::XMLNode *groupNode) override;
+        void Update(double deltaTime) override;
         void Render() const override;
     };
 }
