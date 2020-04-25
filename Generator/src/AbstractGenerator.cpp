@@ -7,6 +7,10 @@ void AbstractGenerator::AddVertex(const glm::vec3& v) {
         this->vertices[v] = this->nextIndex++;
     }
 
+    if(this->nextIndex == USHRT_MAX) {
+        throw std::runtime_error("The requested model is too large! Please lower the model's generation parameters.");
+    }
+
     this->indices.push_back(this->vertices[v]);
 }
 
