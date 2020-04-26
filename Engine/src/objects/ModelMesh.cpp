@@ -40,12 +40,11 @@ namespace engine::objects {
         glGenBuffers(2, this->vbos);
 
         glBindBuffer(GL_ARRAY_BUFFER, this->vbos[0]);
-        glBufferData(GL_ARRAY_BUFFER, 3 * this->numVertices * sizeof(float), this->vertices.data(), GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, this->numVertices * sizeof(glm::vec3), this->vertices.data(), GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vbos[1]);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->numIndices * sizeof(unsigned short), this->indices.data(), GL_STATIC_DRAW);
-
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     }
 
@@ -66,7 +65,7 @@ namespace engine::objects {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-        glDisableClientState(GL_INDEX_ARRAY);
         glDisableClientState(GL_VERTEX_ARRAY);
+        glDisableClientState(GL_INDEX_ARRAY);
     }
 }

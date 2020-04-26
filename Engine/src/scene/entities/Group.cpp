@@ -35,10 +35,10 @@ namespace engine::scene::entities {
                     return false;
                 }
 
-                if(childNode->NoChildren()) {
+                if(childNode->ToElement()->FindAttribute("time") == nullptr) {
                     entity = new StaticTranslate;
                 } else {
-                    // entity = new CatmullRomAnimation;
+                    entity = new CatmullRomAnimation;
                 }
 
                 translate = true;

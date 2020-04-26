@@ -1,11 +1,20 @@
 <scene>
     <group>
-        <!-- Sun -->
-        <translate X="0" Y="0" Z="0"/>
-        <rotate time="10" axisX="0" axisY="1" axisZ="0" />
-        <scale X="109" Y="109" Z="109"/>
-        <models>
-            <model file="sun.3d" diffR="253" diffG="184" diffB="19"/>
-        </models>
+        <translate X="0" Y="100" Z="0" />
+        <group>
+            <!-- Sun -->
+            <translate time="60">
+                <point X="10" Y="0" Z="0" />
+                <point X="5" Y="5" Z="0" />
+                <point X="10" Y="10" Z="0" />
+                <point X="0" Y="10" Z="0" />
+                <point X="0" Y="0" Z="0" />
+            </translate>
+            <rotate time="10" axisX="0" axisY="1" axisZ="0" />
+            <!--<scale X="109" Y="109" Z="109"/>-->
+            <models>
+                <model file="sun.3d" diffR="253" diffG="184" diffB="19"/>
+            </models>
+        </group>
     </group>
 </scene>
