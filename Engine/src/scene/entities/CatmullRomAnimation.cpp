@@ -21,7 +21,8 @@ namespace engine::scene::entities {
         // First, parse the time from the node
         auto elem = translateNode->ToElement();
 
-        if(elem->QueryAttribute("time", &this->time) != XML_SUCCESS) {
+        int time;
+        if(elem->QueryAttribute("time", &time) != XML_SUCCESS) {
             cerr << "Failed to parse the animation time from the translate node!" << endl;
             return false;
         }
@@ -62,7 +63,7 @@ namespace engine::scene::entities {
         }
 
         // Let's figure out the rate at which t must change for the animation to happen every "time" seconds
-        this->tPerSecond = 1.0f / this->time;
+        this->tPerSecond = 1.0f / time;
 
         // Let's generate the full curve rendering ahead of time
         this->GenerateCurveRendering();

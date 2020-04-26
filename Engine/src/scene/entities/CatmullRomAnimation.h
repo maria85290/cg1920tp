@@ -12,7 +12,6 @@
 namespace engine::scene::entities {
     class CatmullRomAnimation: public Entity {
     private:
-        int time;
         /** How much the t parameter increases every second. */
         float tPerSecond;
 
