@@ -1,6 +1,7 @@
 #include "CatmullRomAnimation.h"
 
 #include <string>
+#include <tuple>
 #include <glm/gtc/type_ptr.hpp>
 
 using tinyxml2::XML_SUCCESS;
