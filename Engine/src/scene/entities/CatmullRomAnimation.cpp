@@ -10,12 +10,12 @@ using std::cerr, std::endl;
 
 namespace engine::scene::entities {
 
-    glm::mat4 CatmullRomAnimation::coefficientMatrix = glm::transpose(glm::mat4(
+    glm::mat4 CatmullRomAnimation::coefficientMatrix = glm::mat4(
         glm::vec4(-0.5f, 1.5f, -1.5f, 0.5f),
         glm::vec4(1.0f, -2.5f, 2.0f, -0.5f),
         glm::vec4(-0.5f, 0.0f, 0.5f, 0.0f),
         glm::vec4(0.0f, 1.0f, 0.0f, 0.0f)
-    ));
+    );
 
     bool CatmullRomAnimation::ParseXml(const tinyxml2::XMLNode *translateNode) {
         // First, parse the time from the node
@@ -112,17 +112,12 @@ namespace engine::scene::entities {
     const tuple<glm::vec3, glm::vec3> CatmullRomAnimation::GetCatmullRomPoint(float t,
         const glm::vec3& p0, const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& p3) {
 
-        glm::vec3 pos;
-        glm::vec3 deriv;
+        glm::mat4x3 A = glm::mat4x3(p0, p1, p2, p3) * this->coefficientMatrix;
 
-        for(int i = 0; i < 3; i++) {
-            auto A = this->coefficientMatrix * glm::vec4(p0[i], p1[i], p2[i], p3[i]);
+        glm::vec4 pos(powf(t, 3), powf(t, 2), t, 1.0f);
+        glm::vec4 deriv(3.0f * powf(t, 2), 2.0f * t, 1.0f, 0.0f);
 
-            pos[i] = powf(t, 3) * A[0] + powf(t, 2) * A[1] + t * A[2] + A[3];
-            deriv[i] = 3.0f * powf(t, 2) * A[0] + 2.0f * t * A[1] + A[2];
-        }
-
-        return {pos, deriv};
+        return {A * pos, A * deriv};
     }
 
     const tuple<glm::vec3, glm::vec3> CatmullRomAnimation::GetGlobalCatmullRomPoint(float gt) {
