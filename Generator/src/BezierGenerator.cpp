@@ -5,9 +5,6 @@
 
 using namespace std;
 
-//template struct glm::mat<4, 4, glm::vec3, glm::defaultp>;
-//typedef struct glm::mat<4, 4, glm::vec3, glm::defaultp> vmat16;
-
 bool BezierGenerator::ParseArguments(int argc, char* argv[]) {
 
     if(argc < 5) {
@@ -96,23 +93,13 @@ void BezierGenerator::GenerateVertices() {
     }
 }
 
-const glm::vec3 BezierGenerator::ComputePatchPoint(float u, float v, const std::vector<int>& patch) {
-    return this->ComputePatchPoint(
-        u, v,
-        controlPoints[patch[0]], controlPoints[patch[1]], controlPoints[patch[2]], controlPoints[patch[3]],
-        controlPoints[patch[4]], controlPoints[patch[5]], controlPoints[patch[6]], controlPoints[patch[7]],
-        controlPoints[patch[8]], controlPoints[patch[9]], controlPoints[patch[10]], controlPoints[patch[11]],
-        controlPoints[patch[12]], controlPoints[patch[13]], controlPoints[patch[14]], controlPoints[patch[15]]
-    );
-}
-
-const glm::vec3 BezierGenerator::ComputePatchPoint(float u, float v,
-                                                   const glm::vec3& p00, const glm::vec3& p01, const glm::vec3& p02, const glm::vec3& p03,
-                                                   const glm::vec3& p10, const glm::vec3& p11, const glm::vec3& p12, const glm::vec3& p13,
-                                                   const glm::vec3& p20, const glm::vec3& p21, const glm::vec3& p22, const glm::vec3& p23,
-                                                   const glm::vec3& p30, const glm::vec3& p31, const glm::vec3& p32, const glm::vec3& p33
-) {
-    const glm::vec4 uCoeffs = {powf(u, 3), powf(u, 2), u, 1.0f};
+const glm::vec4 BezierGenerator::ComputePatchPoint(float u, float v,
+                                                   const glm::vec4& p00, const glm::vec4& p01, const glm::vec4& p02, const glm::vec4& p03,
+                                                   const glm::vec4& p10, const glm::vec4& p11, const glm::vec4& p12, const glm::vec4& p13,
+                                                   const glm::vec4& p20, const glm::vec4& p21, const glm::vec4& p22, const glm::vec4& p23,
+                                                   const glm::vec4& p30, const glm::vec4& p31, const glm::vec4& p32, const glm::vec4& p33
+) const {
+    const glm::vec4 U = {powf(u, 3), powf(u, 2), u, 1.0f};
 
     static const glm::mat4 M = {
         {-1.0f, 3.0f, -3.0f, 1.0f},
@@ -121,30 +108,14 @@ const glm::vec3 BezierGenerator::ComputePatchPoint(float u, float v,
         {1.0f, 0.0f, 0.0f, 0.0f}
     };
 
-    const glm::vec4 vCoeffs = {powf(v, 3), powf(v, 2), v, 1.0f};
+    const vmat4 P = {
+        {p00, p10, p20, p30},
+        {p01, p11, p21, p31},
+        {p02, p12, p22, p32},
+        {p03, p13, p23, p33}
+    };
 
-    glm::mat4 P = glm::transpose(glm::mat4(
-        glm::mat4(
-            glm::vec4(p00, 1.0f),
-            glm::vec4(p01, 0.0f),
-            glm::vec4(p02, 0.0f),
-            glm::vec4(p03, 0.0f)) * M * vCoeffs,
-        glm::mat4(
-            glm::vec4(p10, 1.0f),
-            glm::vec4(p11, 0.0f),
-            glm::vec4(p12, 0.0f),
-            glm::vec4(p13, 0.0f)) * M * vCoeffs,
-        glm::mat4(
-            glm::vec4(p20, 1.0f),
-            glm::vec4(p21, 0.0f),
-            glm::vec4(p22, 0.0f),
-            glm::vec4(p23, 0.0f)) * M * vCoeffs,
-        glm::mat4(
-            glm::vec4(p30, 1.0f),
-            glm::vec4(p31, 0.0f),
-            glm::vec4(p32, 0.0f),
-            glm::vec4(p33, 0.0f)) * M * vCoeffs
-    ));
+    const glm::vec4 V = {powf(v, 3), powf(v, 2), v, 1.0f};
 
-    return uCoeffs * M * P;
+    return U * M * transpose(P) * M * V;
 }
