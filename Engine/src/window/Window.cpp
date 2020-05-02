@@ -83,25 +83,32 @@ namespace engine::window {
         this->camera->PrintInfo();
 
         while(!glfwWindowShouldClose(this->glfwWindow)) {
-            this->RenderFrame();
+            this->ProcessFrame();
         }
     }
 
-    void Window::RenderFrame() {
+    void Window::ProcessFrame() {
+        // Compute some values required for updating the scene
         this->ComputeDeltaTime();
         this->MeasureFps();
 
-        this->scene->ClearPreviousFrame();
+        // Process all events in queue
+        glfwPollEvents();
 
+        // Update the scene elements
         this->camera->UpdatePosition();
+        this->scene->Update(deltaTime);
+
+        // Render the next frame
+        this->scene->ClearPreviousFrame();
 
         glLoadIdentity();
         glMultMatrixd(&this->camera->viewMatrix[0][0]); // Set camera position in world
 
         this->scene->Render();
 
+        // Swap buffers
         glfwSwapBuffers(this->glfwWindow);
-        glfwPollEvents();
     }
 
     void Window::PrintInfo() const {
@@ -151,8 +158,7 @@ namespace engine::window {
         glViewport(0, 0, width, height);
 
         glm::dmat4 projectionMatrix = glm::perspective(glm::radians(45.0), double(width) / double(height), 1.0, 1000.0);
-        // glm::dmat4 projectionMatrix = glm::ortho(-1, 1, -1, 1, 1, -1);
-        glLoadMatrixd(&projectionMatrix[0][0]);
+        glMultMatrixd(&projectionMatrix[0][0]);
 
         glMatrixMode(GL_MODELVIEW);
     }

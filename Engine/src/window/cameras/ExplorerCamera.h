@@ -3,36 +3,36 @@
 
 #include "Camera.h"
 
+#include <glm/vec3.hpp>
+
 namespace engine::window::cameras {
     class ExplorerCamera: public Camera {
     private:
         bool leftMousePressed = false;
         bool rightMousePressed = false;
 
-        int lastMouseX;
-        int lastMouseY;
+        double lastMouseX;
+        double lastMouseY;
 
         double camRadius = 100;
         double camAlpha = 0;
         double camBeta = 0;
 
-        vec3 cam;
-
-        vec3 center;
+        glm::dvec3 cameraPos;
+        glm::dvec3 center;
 
         void SphericalToCartesian();
     public:
-        explicit ExplorerCamera(vec3 center);
+        explicit ExplorerCamera(glm::dvec3 center);
 
-        void PrintInfo() override;
+        void InitCamera(Window *window, GLFWwindow *glfwWindow) override;
 
-        void UpdateCameraPosition() override;
+        void PrintInfo() const override;
 
-        void HandleKeyboardKeyPress(unsigned char, int, int) override {}
-        void HandleSpecialKeyPress(int, int, int) override {}
+        void UpdatePosition() override;
 
-        void HandleMouseKeyPress(int button, int state, int mouseX, int mouseY) override;
-        void HandleMouseMovement(int mouseX, int mouseY) override;
+        void HandleMouseKeyPress(int button, int action, int mods) override;
+        void HandleMouseMovement(double mouseX, double mouseY) override;
     };
 }
 

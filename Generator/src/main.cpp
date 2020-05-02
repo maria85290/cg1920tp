@@ -41,8 +41,12 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
-    generator->GenerateVertices();
-    generator->SaveVerticesToFile();
+    try {
+        generator->GenerateVertices();
+        generator->SaveVerticesToFile();
+    } catch(std::runtime_error error) {
+        cerr << error.what() << endl;
+    }
 
     cout << "Saved model to file " << generator->GetFilename() << endl;
 

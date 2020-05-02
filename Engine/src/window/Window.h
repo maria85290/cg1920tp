@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "../Scene.h"
+#include "../scene/Scene.h"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -36,7 +36,7 @@ namespace engine::window {
         /**
          * A cena que está atualmente a ser desenhada.
          */
-        Scene* scene = nullptr;
+        scene::Scene* scene = nullptr;
 
         double deltaTime = 0;
         int fps = 0;
@@ -66,10 +66,10 @@ namespace engine::window {
         }
 
         /** Obtém a cena que vai ser renderizada nesta janela. */
-        Scene* GetScene() const { return scene; }
+        scene::Scene* GetScene() const { return scene; }
 
         /** Define qual a cena que vai ser renderizada nesta janela. */
-        void SetScene(Scene* scene)
+        void SetScene(scene::Scene* scene)
         {
             this->scene = scene;
         }
@@ -83,7 +83,7 @@ namespace engine::window {
         bool IsFocused() const { return focused; }
 
         /** Renderiza uma frame. */
-        void RenderFrame();
+        void ProcessFrame();
         /** Callback do glfw para quando a janela muda de tamanho. */
         void HandleFramebufferSizeChange(int width, int height);
 

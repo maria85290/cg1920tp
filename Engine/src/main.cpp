@@ -1,18 +1,22 @@
 #include <iostream>
+#include <memory>
 
 #include <tinyxml2/tinyxml2.h>
 
-#include "Scene.h"
+#include "scene/Scene.h"
 #include "window/Window.h"
 #include "window/cameras/FpsCamera.h"
+#include "window/cameras/ExplorerCamera.h"
 
 using std::cerr, std::endl, std::cout;
+using std::unique_ptr;
 using tinyxml2::XMLDocument, tinyxml2::XMLNode, tinyxml2::XML_SUCCESS;
-using engine::Scene;
+using engine::scene::Scene;
 using engine::window::Window;
 using engine::window::cameras::FpsCamera;
+using engine::window::cameras::ExplorerCamera;
 
-XMLNode* ReadSceneFile(const char*);
+unique_ptr<XMLDocument> ReadSceneFile(const char*);
 
 int main(int argc, char* argv[]) {
     if(argc != 2) {
@@ -35,23 +39,21 @@ int main(int argc, char* argv[]) {
     window.CreateWindow();
 
     // Find out if the scene file exists
-    XMLNode* root = ReadSceneFile(argv[1]);
+    auto root = ReadSceneFile(argv[1]);
     if(root == nullptr) {
         return -1;
     }
 
     // Parse the scene file
     Scene scene;
-    if(!scene.ParseXml(root)) {
+    if(!scene.ParseXml(root->FirstChild())) {
         cerr << "Failed to parse Scene's XML!" << endl;
         return -1;
     }
 
-    // Delete the XMLDocument as its no longer needed
-    delete root->GetDocument();
-
     // Set the window parameters
     // window.SetCamera(new StaticCamera(glm::dvec3(0, 0, 1), glm::dvec3(0, 0, 0)));
+    // window.SetCamera(new ExplorerCamera(glm::dvec3(0, 0, 0)));
     window.SetCamera(new FpsCamera);
     window.SetScene(&scene);
 
@@ -65,8 +67,8 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-XMLNode* ReadSceneFile(const char* filename) {
-    XMLDocument* document = new XMLDocument;
+unique_ptr<XMLDocument> ReadSceneFile(const char* filename) {
+    auto document = unique_ptr<XMLDocument>(new XMLDocument);
 
     if(document->LoadFile(filename) != XML_SUCCESS) {
         cerr << "Ocorreu um erro na leitura do ficheiro de configuração XML fornecido." << endl;
@@ -80,7 +82,7 @@ XMLNode* ReadSceneFile(const char* filename) {
         return nullptr;
     }
 
-    return root;
+    return document;
 }
 
 // Código específico para Windows:

@@ -19,10 +19,11 @@ namespace engine::window::cameras {
         glm::dvec3 lookingAt;
         glm::dvec3 cameraPos = glm::dvec3(0, 0, -300);
 
-        void SphericalToCartesian();
         glm::dvec3 ComputeForward();
         glm::dvec3 ComputeRight(glm::dvec3 forward);
         glm::dvec3 ComputeRight();
+
+        void SphericalToCartesian();
     public:
         FpsCamera() = default;
         ~FpsCamera() override;
@@ -37,8 +38,6 @@ namespace engine::window::cameras {
         void HandleMouseMovement(double mouseX, double mouseY) override;
 
         void HandleScrollMovement(double xOffset, double yOffset) override;
-
-        void HandleWindowChangeFocus(bool focused) override;
     };
 }
 

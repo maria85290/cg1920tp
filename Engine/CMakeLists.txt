@@ -2,19 +2,24 @@ cmake_minimum_required(VERSION 3.10)
 
 add_executable(Engine
         src/main.cpp
-        src/Scene.cpp src/Scene.h
-        src/entities/Group.cpp src/entities/Group.h
-        src/entities/Model.cpp src/entities/Model.h
-        src/entities/Entity.cpp src/entities/Entity.h
-        src/entities/Models.cpp src/entities/Models.h
-        src/entities/Translate.cpp src/entities/Translate.h
-        src/entities/Rotate.cpp src/entities/Rotate.h
-        src/entities/Scale.cpp src/entities/Scale.h
+        src/scene/Scene.cpp src/scene/Scene.h
+        src/scene/entities/Group.cpp src/scene/entities/Group.h
+        src/scene/entities/Model.cpp src/scene/entities/Model.h
+        src/scene/entities/Entity.cpp src/scene/entities/Entity.h
+        src/scene/entities/Models.cpp src/scene/entities/Models.h
+        src/scene/entities/StaticTranslate.cpp src/scene/entities/StaticTranslate.h
+        src/scene/entities/StaticRotate.cpp src/scene/entities/StaticRotate.h
+        src/scene/entities/Scale.cpp src/scene/entities/Scale.h
+        src/objects/ObjectCache.h
+        src/objects/ModelMesh.cpp src/objects/ModelMesh.h
         src/window/Window.cpp src/window/Window.h
         src/window/cameras/Camera.h
         src/window/cameras/FpsCamera.cpp src/window/cameras/FpsCamera.h
         src/window/cameras/StaticCamera.cpp src/window/cameras/StaticCamera.h
-        src/window/input/Keyboard.cpp src/window/input/Keyboard.h)
+        src/window/cameras/ExplorerCamera.cpp src/window/cameras/ExplorerCamera.h
+        src/window/input/Keyboard.cpp src/window/input/Keyboard.h
+        src/scene/entities/TimedRotate.cpp src/scene/entities/TimedRotate.h
+        src/scene/entities/CatmullRomAnimation.cpp src/scene/entities/CatmullRomAnimation.h)
 
 set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED COMPONENTS OpenGL)
@@ -27,25 +32,30 @@ target_link_libraries(Engine PUBLIC OpenGL::GL)
 
 if (WIN32)
     set(TOOLKITS_DIR "${CG_TP_SOURCE_DIR}/lib")
-
     message(STATUS "TOOLKITS_DIR set to: " ${TOOLKITS_DIR})
+	
+	if (NOT CMAKE_CL_64)
+		set(GLFW_DIR "${TOOLKITS_DIR}/glfw/x32")
+	else ()
+		set(GLFW_DIR "${TOOLKITS_DIR}/glfw/x64")
+	endif ()
 
-    if (NOT EXISTS "${TOOLKITS_DIR}/glfw/include/GLFW/glfw3.h" OR NOT EXISTS "${TOOLKITS_DIR}/glfw/lib/glfw3.lib")
-        message(ERROR ": GLFW not found: ${TOOLKITS_DIR}/glfw/include/GLFW/glfw3.h")
+    if (NOT EXISTS "${GLFW_DIR}/include/GLFW/glfw3.h" OR NOT EXISTS "${GLFW_DIR}/lib/glfw3.lib")
+        message(ERROR ": GLFW not found: ${GLFW_DIR}/include/GLFW/glfw3.h")
     endif ()
 
-    target_include_directories(Engine PUBLIC ${TOOLKITS_DIR}/glfw/include)
+    target_include_directories(Engine PUBLIC ${GLFW_DIR}/include)
 
-    if (EXISTS "${TOOLKITS_DIR}/glfw/bin/glfw3.dll")
-        file(COPY ${TOOLKITS_DIR}/glfw/bin/glfw3.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine)
-        file(COPY ${TOOLKITS_DIR}/glfw/bin/glfw3.dll DESTINATION ${CG_TP_SOURCE_DIR}/Configurations)
+    if (EXISTS "${GLFW_DIR}/bin/glfw3.dll")
+        file(COPY ${GLFW_DIR}/bin/glfw3.dll DESTINATION ${CMAKE_BINARY_DIR}/Engine)
+        file(COPY ${GLFW_DIR}/bin/glfw3.dll DESTINATION ${CG_TP_SOURCE_DIR}/Configurations)
     endif ()
 
-    target_link_libraries(Engine PUBLIC ${TOOLKITS_DIR}/glfw/lib/glfw3.lib)
+    target_link_libraries(Engine PUBLIC ${GLFW_DIR}/lib/glfw3.lib ${GLFW_DIR}/lib/glfw3dll.lib)
 
     set_property(DIRECTORY ${CG_TP_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Engine)
 elseif(UNIX AND NOT APPLE) # Include GLUT and GLEW for Linux
-    set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl") # Add -ldl to the command line for cc
+    set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl -lglfw") # Add -ldl to the command line for cc
 
     find_package(glfw3 REQUIRED)
 
