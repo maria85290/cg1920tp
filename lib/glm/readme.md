@@ -344,7 +344,7 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 - Added more information to build messages
 
 #### Fixes:
-- Fixed GTX_extended_min_max filename typo #386
+- Fixed GTX_extended_min_max patchFilename typo #386
 - Fixed intersectRayTriangle to not do any unintentional backface culling
 - Fixed long long warnings when using C++98 on GCC and Clang #482
 - Fixed sign with signed integer function on non-x86 architecture
@@ -386,7 +386,7 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 - Fixed Visual C++ SIMD instruction set automatic detection in 64 bits
 - Fixed to_string when used with GLM_FORCE_INLINE #506
 - Fixed GLM_FORCE_INLINE with binary vec4 operators
-- Fixed GTX_extended_min_max filename typo #386
+- Fixed GTX_extended_min_max patchFilename typo #386
 - Fixed intersectRayTriangle to not do any unintentional backface culling
 
 ---
