@@ -6,13 +6,14 @@
 #include "BoxGenerator.h"
 #include "SphereGenerator.h"
 #include "ConeGenerator.h"
+#include "BezierGenerator.h"
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
     if(argc <= 1) {
         cerr << "Não foi especificado um tipo de primitva a gerar!" << endl;
-        cerr << "Uso: " << argv[0] << " <plane/box/sphere/cone> <parameters...> <filename>" << endl;
+        cerr << "Uso: " << argv[0] << " <plane/box/sphere/cone/bezier> <parameters...> <filename>" << endl;
 
         return 1;
     }
@@ -29,8 +30,12 @@ int main(int argc, char *argv[]) {
     } else if(primitiveType == "sphere") {
         generator = new SphereGenerator;
 
-    } else if(primitiveType == "cone") {
-       generator = new ConeGenerator;
+    }
+    else if (primitiveType == "cone") {
+        generator = new ConeGenerator;
+
+    }else if (primitiveType == "bezier") {
+       generator = new BezierGenerator;
 
     } else {
         // ERROR!

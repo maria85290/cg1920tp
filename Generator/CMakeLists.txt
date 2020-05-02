@@ -6,6 +6,7 @@ add_executable(Generator
         src/PlaneGenerator.cpp src/PlaneGenerator.h
         src/BoxGenerator.cpp src/BoxGenerator.h
         src/SphereGenerator.cpp src/SphereGenerator.h
+	src/BezierGenerator.cpp src/BezierGenerator.h
         src/ConeGenerator.cpp src/ConeGenerator.h)
 
 target_link_libraries(Generator glm)
