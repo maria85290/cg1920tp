@@ -62,7 +62,7 @@ public:
  * @param m A matriz a multiplicar
  */
 inline glm::mat4 operator*(const glm::vec4& v, const vmat4& m) {
-    return {v * m.a, v * m.b, v * m.c, v * m.d };
+    return { v * m.a, v * m.b, v * m.c, v * m.d };
 }
 
 /**
@@ -72,6 +72,6 @@ inline glm::mat4 operator*(const glm::vec4& v, const vmat4& m) {
  *
  * @param m A matriz a transpor
  */
-inline vmat4 transpose(const vmat4& m) {
+inline vmat4 transposeEach(const vmat4& m) {
     return { glm::transpose(m.a), glm::transpose(m.b), glm::transpose(m.c), glm::transpose(m.d) };
 }

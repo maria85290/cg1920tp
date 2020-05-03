@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -20,26 +21,33 @@ bool BezierGenerator::ParseArguments(int argc, char* argv[]) {
     this->tessellationLevel = stoi(argv[3]);
 
     /*
-Formato do ficheiro, "patchs":
-1º - numero de patches
-2º - reprentação de todos os patchs (cada um tem 16 indices)
-3º - Numero total de pontos de controlo
-4º - Lista com todas as coordenadas dos pontos de controlo
-*/
+    Formato do ficheiro de patches:
+    1º - Número de patches
+    2º - Índices dos vértices de cada patch; 1 patch por linha
+    3º - Número total de pontos de controlo
+    4º - Coordenadas dos pontos de controlo; 1 ponto por linha
+    */
 
     ifstream file(this->patchFilename);
 
     int numPatches;
     file >> numPatches;
+    file.ignore(numeric_limits<streamsize>::max(), '\n');
 
     for(int i = 0; i < numPatches; i++) {
         std::vector<int> patch;
         patch.reserve(16);
 
+        string line;
+        getline(file, line);
+
+        stringstream lineStream(line);
+
         for(int j = 0; j < 16; j++) {
             int index;
-            file >> index;
-            file.ignore(1);
+            lineStream >> index;
+            lineStream.ignore(numeric_limits<streamsize>::max(), ',');
+
             patch.push_back(index);
         }
 
@@ -48,16 +56,23 @@ Formato do ficheiro, "patchs":
 
     int numControlPoints;
     file >> numControlPoints;
+    file.ignore(numeric_limits<streamsize>::max(), '\n');
 
     for(int i = 0; i < numControlPoints; i++) {
         glm::vec4 point(1.0f);
 
-        file >> point.x;
-        file.ignore(1);
-        file >> point.y;
-        file.ignore(1);
-        file >> point.z;
-        file.ignore(1);
+        string line;
+        getline(file, line);
+
+        stringstream lineStream(line);
+
+        lineStream >> point.x;
+        lineStream.ignore(numeric_limits<streamsize>::max(), ',');
+
+        lineStream >> point.y;
+        lineStream.ignore(numeric_limits<streamsize>::max(), ',');
+
+        lineStream >> point.z;
 
         this->controlPoints.push_back(point);
     }
@@ -68,7 +83,7 @@ Formato do ficheiro, "patchs":
 }
 
 void BezierGenerator::GenerateVertices() {
-    // Calcular os pontos (tendo como referencia os varios valores de u e v de acordo com o nivel de tessellation
+    // step é o valor de quanto u e v têm de andar para a frente, e é definido de acordo com o nível de tesselação
     const float step = 1.0f / float(tessellationLevel);
 
     for(int i = 0; i < this->patches.size(); i++) {
@@ -108,14 +123,17 @@ const glm::vec4 BezierGenerator::ComputePatchPoint(float u, float v,
         {1.0f, 0.0f, 0.0f, 0.0f}
     };
 
-    const vmat4 P = {
+    // This matrix is defined as column-major; each line here represents a column in standard form
+    // We also need to transpose each of the matrices in P because OpenGL expects column-major matrices,
+    // and each of the 4 matrices are being independently defined as line-major. So a transposition is needed
+    const vmat4 P = transposeEach({
         {p00, p10, p20, p30},
         {p01, p11, p21, p31},
         {p02, p12, p22, p32},
         {p03, p13, p23, p33}
-    };
+    });
 
     const glm::vec4 V = {powf(v, 3), powf(v, 2), v, 1.0f};
 
-    return U * M * transpose(P) * M * V;
+    return U * M * P * M * V;
 }
