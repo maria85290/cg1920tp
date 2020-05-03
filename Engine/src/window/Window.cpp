@@ -7,6 +7,7 @@
 
 #include <glm/mat4x4.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 using std::string, std::cerr, std::endl;
 using engine::window::cameras::Camera;
@@ -157,8 +158,8 @@ namespace engine::window {
 
         glViewport(0, 0, width, height);
 
-        glm::dmat4 projectionMatrix = glm::perspective(glm::radians(45.0), double(width) / double(height), 1.0, 1000.0);
-        glMultMatrixd(&projectionMatrix[0][0]);
+        glm::dmat4 projectionMatrix = glm::perspective(glm::radians(45.0), double(width) / double(height), 1.0, 5000.0);
+        glMultMatrixd(glm::value_ptr(projectionMatrix));
 
         glMatrixMode(GL_MODELVIEW);
     }
