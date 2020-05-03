@@ -420,7 +420,11 @@
         </group>
     </group>
     <group>
-        <translate X= "300" Y= "300" Z= "300" />
+        <translate time="5">
+            <point X="300" Y="300" Z="300" />
+            <point X="250" Y="250" Z="-250" />
+            <point X="200" Y="200" Z="-200" />
+        </translate>
         <group>
             <!-- Cometa -->
             <scale X="10" Y="10" Z="10"/>
