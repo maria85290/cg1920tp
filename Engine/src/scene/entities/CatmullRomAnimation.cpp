@@ -95,7 +95,7 @@ namespace engine::scene::entities {
     void CatmullRomAnimation::Render() const {
         // Render the curve itself
         if(Settings::Contains("debug")) {
-            glEnable(GL_VERTEX_ARRAY);
+            glEnableClientState(GL_VERTEX_ARRAY);
 
             glBindBuffer(GL_ARRAY_BUFFER, this->curveVbo);
 
@@ -104,7 +104,7 @@ namespace engine::scene::entities {
 
             glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-            glDisable(GL_VERTEX_ARRAY);
+            glDisableClientState(GL_VERTEX_ARRAY);
         }
 
         // Now position the next entities in the pipeline properly,

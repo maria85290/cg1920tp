@@ -33,6 +33,12 @@ namespace engine::window {
 
         glfwWindowHint(GLFW_FOCUSED, GLFW_FALSE);
 
+#ifndef DEBUG
+        if (glfwExtensionSupported("GL_ARB_debug_output") == GLFW_TRUE) {
+            glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
+        }
+#endif
+
         this->glfwWindow = glfwCreateWindow(this->width, this->height, this->title.c_str(), nullptr, nullptr);
 
         if(!this->glfwWindow) {
@@ -56,6 +62,12 @@ namespace engine::window {
             cerr << "Failed to initialize OpenGL Context!" << endl;
             return false;
         }
+
+#ifndef NDEBUG
+        glEnable(GL_DEBUG_OUTPUT);
+        glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+        glDebugMessageCallback(Window::DebugCallback, nullptr);
+#endif
 
         return true;
     }
@@ -198,7 +210,7 @@ namespace engine::window {
         }
     }
 
-	void Window::DebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
+	void APIENTRY Window::DebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
 	{
         fprintf(stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
             (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
