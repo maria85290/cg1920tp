@@ -9,6 +9,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "../util/Settings.h"
+
 using std::string, std::cerr, std::endl;
 using engine::window::cameras::Camera;
 
@@ -106,6 +108,8 @@ namespace engine::window {
         glLoadIdentity();
         glMultMatrixd(&this->camera->viewMatrix[0][0]); // Set camera position in world
 
+        if(Settings::Contains("debug"))
+            this->RenderAxis();
         this->scene->Render();
 
         // Swap buffers
@@ -145,6 +149,26 @@ namespace engine::window {
         }
     }
 
+    void Window::RenderAxis() const {
+        static const float axisSize = 100;
+
+        glBegin(GL_LINES);
+
+        glColor3f(1, 0, 0);
+        glVertex3f(0, 0, 0);
+        glVertex3f(axisSize, 0, 0);
+
+        glColor3f(0, 1, 0);
+        glVertex3f(0, 0, 0);
+        glVertex3f(0, axisSize, 0);
+
+        glColor3f(0, 0, 1);
+        glVertex3f(0, 0, 0);
+        glVertex3f(0, 0, axisSize);
+
+        glEnd();
+    }
+
     void Window::HandleFramebufferSizeChange(int width, int height) {
         if(height == 0)
             height = 1;
@@ -162,6 +186,16 @@ namespace engine::window {
         glMultMatrixd(glm::value_ptr(projectionMatrix));
 
         glMatrixMode(GL_MODELVIEW);
+    }
+
+    void Window::HandleKeyboardKeyPress(int key, int scanCode, int action, int mods) {
+        if(key == GLFW_KEY_F3 && action == GLFW_PRESS) {
+            if(Settings::Contains("debug")) {
+                Settings::Delete("debug");
+            } else {
+                Settings::Set("debug", "true");
+            }
+        }
     }
 
 	void Window::DebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)

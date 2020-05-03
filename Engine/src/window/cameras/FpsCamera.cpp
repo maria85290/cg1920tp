@@ -63,6 +63,15 @@ namespace engine::window::cameras {
         );
     }
 
+    void FpsCamera::HandleKeyboardKeyPress(int key, int scanCode, int action, int mods) {
+        if(key == GLFW_KEY_F2 && action == GLFW_PRESS) {
+            cout << "[Debug] Coordenadas da camara: ("
+                << this->cameraPos.x << ", " << this->cameraPos.y << ", " << this->cameraPos.z << ")" << endl;
+            cout << "[Debug] Camara a olhar para: ("
+                << this->lookingAt.x << ", " << this->lookingAt.y << ", " << this->lookingAt.z << ")" << endl;
+        }
+    }
+
     void FpsCamera::HandleMouseMovement(double mouseX, double mouseY) {
         if(!window->IsFocused())
             return; // Do not update the camera view unless the user has the window in focus

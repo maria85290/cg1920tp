@@ -10,6 +10,8 @@ add_executable(Engine
         src/scene/entities/StaticTranslate.cpp src/scene/entities/StaticTranslate.h
         src/scene/entities/StaticRotate.cpp src/scene/entities/StaticRotate.h
         src/scene/entities/Scale.cpp src/scene/entities/Scale.h
+        src/scene/entities/TimedRotate.cpp src/scene/entities/TimedRotate.h
+        src/scene/entities/CatmullRomAnimation.cpp src/scene/entities/CatmullRomAnimation.h
         src/objects/ObjectCache.h
         src/objects/ModelMesh.cpp src/objects/ModelMesh.h
         src/window/Window.cpp src/window/Window.h
@@ -18,8 +20,7 @@ add_executable(Engine
         src/window/cameras/StaticCamera.cpp src/window/cameras/StaticCamera.h
         src/window/cameras/ExplorerCamera.cpp src/window/cameras/ExplorerCamera.h
         src/window/input/Keyboard.cpp src/window/input/Keyboard.h
-        src/scene/entities/TimedRotate.cpp src/scene/entities/TimedRotate.h
-        src/scene/entities/CatmullRomAnimation.cpp src/scene/entities/CatmullRomAnimation.h)
+        src/util/Settings.cpp src/util/Settings.h)
 
 set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED COMPONENTS OpenGL)

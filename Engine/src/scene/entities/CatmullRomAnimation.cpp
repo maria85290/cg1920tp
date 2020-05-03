@@ -1,4 +1,5 @@
 #include "CatmullRomAnimation.h"
+#include "../../util/Settings.h"
 
 #include <string>
 #include <tuple>
@@ -93,16 +94,18 @@ namespace engine::scene::entities {
 
     void CatmullRomAnimation::Render() const {
         // Render the curve itself
-        glEnable(GL_VERTEX_ARRAY);
+        if(Settings::Contains("debug")) {
+            glEnable(GL_VERTEX_ARRAY);
 
-        glBindBuffer(GL_ARRAY_BUFFER, this->curveVbo);
+            glBindBuffer(GL_ARRAY_BUFFER, this->curveVbo);
 
-        glVertexPointer(3, GL_FLOAT, 0, nullptr);
-        glDrawArrays(GL_LINE_LOOP, 0, this->numCurveVertices);
+            glVertexPointer(3, GL_FLOAT, 0, nullptr);
+            glDrawArrays(GL_LINE_LOOP, 0, this->numCurveVertices);
 
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+            glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-        glDisable(GL_VERTEX_ARRAY);
+            glDisable(GL_VERTEX_ARRAY);
+        }
 
         // Now position the next entities in the pipeline properly,
         // by applying the proper transformations to the OpenGL State

@@ -17,7 +17,7 @@ namespace engine::window::cameras {
         double pitch = 0;
 
         glm::dvec3 lookingAt;
-        glm::dvec3 cameraPos = glm::dvec3(0, 0, -300);
+        glm::dvec3 cameraPos = glm::dvec3(0, 0, 1);
 
         glm::dvec3 ComputeForward();
         glm::dvec3 ComputeRight(glm::dvec3 forward);
@@ -33,6 +33,8 @@ namespace engine::window::cameras {
         void PrintInfo() const override;
 
         void UpdatePosition() override;
+
+        void HandleKeyboardKeyPress(int key, int scanCode, int action, int mods) override;
 
         void HandleMouseKeyPress(int button, int action, int mods) override {}
         void HandleMouseMovement(double mouseX, double mouseY) override;

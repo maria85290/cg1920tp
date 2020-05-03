@@ -3,10 +3,10 @@
 
 #include <string>
 
-#include "../scene/Scene.h"
-
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
+
+#include "../scene/Scene.h"
 
 #include "cameras/Camera.h"
 #include "input/Keyboard.h"
@@ -44,6 +44,7 @@ namespace engine::window {
         void PrintInfo() const;
         void ComputeDeltaTime();
         void MeasureFps();
+        void RenderAxis() const;
 
         static void DebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
     public:
@@ -90,6 +91,8 @@ namespace engine::window {
         void HandleWindowChangeFocus(bool focused) {
             this->focused = focused;
         }
+
+        void HandleKeyboardKeyPress(int key, int scanCode, int action, int mods);
     };
 
     /**
@@ -110,6 +113,7 @@ namespace engine::window {
             cameras::Camera* camera = window->GetCamera();
 
             ::engine::window::input::Keyboard::HandleKeyPress(key, scanCode, action, mods);
+            window->HandleKeyboardKeyPress(key, scanCode, action, mods);
             camera->HandleKeyboardKeyPress(key, scanCode, action, mods);
         }
 
