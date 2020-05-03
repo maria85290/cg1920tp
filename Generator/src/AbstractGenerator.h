@@ -33,11 +33,12 @@ private:
     /** @var filename O nome do ficheiro onde guardar os vértices gerados. */
     std::string filename;
 
-    void AddVertex(const glm::vec3& v);
 protected:
     void SetFilename(const std::string& filename) {
         this->filename = filename;
     }
+
+    void AddVertex(const glm::vec3& v);
 
     inline void AddVertex(const double& x, const double& y, const double& z) {
         this->AddVertex({x, y, z});
