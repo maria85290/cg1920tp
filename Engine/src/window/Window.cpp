@@ -33,7 +33,7 @@ namespace engine::window {
 
         glfwWindowHint(GLFW_FOCUSED, GLFW_FALSE);
 
-#ifndef DEBUG
+#ifndef NDEBUG
         if (glfwExtensionSupported("GL_ARB_debug_output") == GLFW_TRUE) {
             glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
         }
@@ -64,9 +64,11 @@ namespace engine::window {
         }
 
 #ifndef NDEBUG
-        glEnable(GL_DEBUG_OUTPUT);
-        glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-        glDebugMessageCallback(Window::DebugCallback, nullptr);
+        if (glfwExtensionSupported("GL_ARB_debug_output") == GLFW_TRUE) {
+            glEnable(GL_DEBUG_OUTPUT);
+            glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+            glDebugMessageCallback(Window::DebugCallback, nullptr);
+        }
 #endif
 
         return true;
@@ -118,7 +120,7 @@ namespace engine::window {
         this->scene->ClearPreviousFrame();
 
         glLoadIdentity();
-        glMultMatrixd(&this->camera->viewMatrix[0][0]); // Set camera position in world
+        glMultMatrixd(glm::value_ptr(this->camera->viewMatrix)); // Set camera position in world
 
         if(Settings::Contains("debug"))
             this->RenderAxis();
