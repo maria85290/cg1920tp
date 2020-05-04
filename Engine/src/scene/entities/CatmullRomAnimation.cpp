@@ -9,6 +9,7 @@ using tinyxml2::XML_SUCCESS;
 
 using std::string, std::tuple, std::vector;
 using std::cerr, std::endl;
+using tinyxml2::XMLComment;
 
 namespace engine::scene::entities {
 
@@ -34,6 +35,11 @@ namespace engine::scene::entities {
         auto currNode = translateNode->FirstChild();
 
         while(currNode != nullptr) {
+            if(dynamic_cast<const XMLComment*>(currNode)) {
+                currNode = currNode->NextSibling();
+                continue;
+            }
+
             string nodeName(currNode->Value());
 
             if(nodeName != "point") {
