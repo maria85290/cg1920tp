@@ -27,6 +27,7 @@
             <point X="300"   Z="-100" Y="0"  />
 
         </translate>
+        <rotate time="10" axisX="0" axisY="1" axisZ="0" />
         <scale X="1.146" Y="1.146" Z="1.146"/>
         <models>
             <model file="planet.3d" diffR="181" diffG="167" diffB="167"/>
@@ -51,6 +52,7 @@
             <point X="600"   Z="0"   Y="0"  />
             <point X="400"   Z="-134" Y="0"  />
         </translate>
+        <rotate time="10" axisX="0" axisY="1" axisZ="0" />
         <scale X="2.847" Y="2.847" Z="2.847"/>
         <models>
             <model file="planet.3d" diffR="187" diffG="183" diffB="171"/>
@@ -75,6 +77,7 @@
             <point X="500"   Z="-167" Y="0"  />
         </translate>
         <group>
+            <rotate time="10" axisX="0" axisY="1" axisZ="0" />
             <!-- Earth -->
             <scale X="3" Y="3" Z="3"/>
             <models>
@@ -84,6 +87,7 @@
         <group>
             <!-- Moon -->
             <translate X="5" Y="0" Z="0"/>
+            <rotate time="28" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.816" Y="0.816" Z="0.816"/>
             <models>
                 <model file="planet.3d" diffR="254" diffG="252" diffB="215"/>
@@ -110,6 +114,7 @@
         </translate>
         <group>
             <!-- Mars -->
+            <rotate time="10" axisX="0" axisY="1" axisZ="0" />
             <scale X="2" Y="2" Z="2"/>
             <models>
                 <model file="planet.3d" diffR="198" diffG="123" diffB="92"/>
@@ -118,6 +123,7 @@
         <group>
             <!-- Phobos -->
             <translate X="5" Y="0" Z="0"/>
+            <rotate time="20" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.00176" Y="0.00176" Z="0.00176"/>
             <models>
                 <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
@@ -133,7 +139,7 @@
         </group>
     </group>
     <group>
-        <translate time = "1186">
+        <translate time = "118">
             <!-- Ponto de simetria -->
             <point X="0"    Z="-350" Y="0"  />
 
@@ -152,6 +158,7 @@
         </translate>
         <group>
             <!-- Jupiter -->
+            <rotate time="30" axisX="0" axisY="1" axisZ="0" />
             <scale X="33" Y="33" Z="33"/>
             <models>
                 <model file="planet.3d" diffR="167" diffG="156" diffB="134"/>
@@ -160,6 +167,7 @@
         <group>
             <!-- Io -->
             <translate X="16" Y="0" Z="0"/>
+            <rotate time="10" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.285" Y="0.285" Z="0.285"/>
             <models>
                 <model file="planet.3d" diffR="194" diffG="192" diffB="112"/>
@@ -168,6 +176,7 @@
         <group>
             <!-- Europa -->
             <translate X="-16" Y="0" Z="0"/>
+            <rotate time="5" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.244" Y="0.244" Z="0.244"/>
             <models>
                 <model file="planet.3d" diffR="199" diffG="141" diffB="97"/>
@@ -176,6 +185,7 @@
         <group>
             <!-- Ganymede -->
             <translate X="0" Y="0" Z="16"/>
+            <rotate time="15" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.413" Y="0.413" Z="0.413"/>
             <models>
                 <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
@@ -184,6 +194,7 @@
         <group>
             <!-- Callisto -->
             <translate X="0" Y="0" Z="-16"/>
+            <rotate time="12" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.378" Y="0.378" Z="0.378"/>
             <models>
                 <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
@@ -191,7 +202,7 @@
         </group>
     </group>
     <group>
-        <translate time = "2946">
+        <translate time = "294">
             <!-- Ponto de simetria -->
             <point X="0"    Z="-400" Y="0"  />
 
@@ -210,6 +221,7 @@
         </translate>
         <group>
             <!-- Saturn -->
+            <rotate time="10" axisX="0" axisY="1" axisZ="0" />
             <scale X="27" Y="27" Z="27"/>
             <models>
                 <model file="planet.3d" diffR="164" diffG="155" diffB="114"/>
@@ -218,6 +230,7 @@
         <group>
             <!-- Mimas -->
             <translate X="14" Y="0" Z="0"/>
+            <rotate time="15" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0311" Y="0.0311" Z="0.0311"/>
             <models>
                 <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
@@ -226,6 +239,7 @@
         <group>
             <!-- Enceladus -->
             <translate X="10.72" Y="0" Z="8.99"/>
+            <rotate time="20" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0395" Y="0.0395" Z="0.0395"/>
             <models>
                 <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
@@ -234,6 +248,7 @@
         <group>
             <!-- Tethys -->
             <translate X="2.43" Y="0" Z="13.78"/>
+            <rotate time="25" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0833" Y="0.0833" Z="0.0833"/>
             <models>
                 <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
@@ -242,6 +257,7 @@
         <group>
             <!-- Dione -->
             <translate X="-7" Y="0" Z="12.12"/>
+            <rotate time="5" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0881" Y="0.0881" Z="0.0881"/>
             <models>
                 <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
@@ -250,6 +266,7 @@
         <group>
             <!-- Rhea -->
             <translate X="-13.15" Y="0" Z="4.78"/>
+            <rotate time="30" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.119" Y="0.119" Z="0.119"/>
             <models>
                 <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
@@ -258,6 +275,7 @@
         <group>
             <!-- Titan -->
             <translate X="-13.15" Y="0" Z="-4.78"/>
+            <rotate time="18" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.404" Y="0.404" Z="0.404"/>
             <models>
                 <model file="planet.3d" diffR="129" diffG="157" diffB="132"/>
@@ -266,6 +284,7 @@
         <group>
             <!-- Hyperion -->
             <translate X="-7" Y="0" Z="-12.12"/>
+            <rotate time="8" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0211" Y="0.0211" Z="0.0211"/>
             <models>
                 <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
@@ -274,6 +293,7 @@
         <group>
             <!-- Iapetus -->
             <translate X="2.43" Y="0" Z="-13.78"/>
+            <rotate time="28" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.115" Y="0.115" Z="0.115"/>
             <models>
                 <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
@@ -282,6 +302,7 @@
         <group>
             <!-- Phoebe -->
             <translate X="10.72" Y="0" Z="-8.99"/>
+            <rotate time="35" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0167" Y="0.0167" Z="0.0167"/>
             <models>
                 <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
@@ -289,7 +310,7 @@
         </group>
     </group>
     <group>
-        <translate time = "8401">
+        <translate time = "840">
             <!-- Ponto de simetria -->
             <point X="0"    Z="-450" Y="0"  />
 
@@ -308,6 +329,7 @@
         </translate>
         <group>
             <!-- Uranus -->
+            <rotate time="10" axisX="0" axisY="1" axisZ="0" />
             <scale X="12" Y="12" Z="12"/>
             <models>
                 <model file="planet.3d" diffR="101" diffG="134" diffB="139"/>
@@ -316,6 +338,7 @@
         <group>
             <!-- Miranda -->
             <translate X="9" Y="0" Z="0"/>
+            <rotate time="30" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0370" Y="0.0370" Z="0.0370"/>
             <models>
                 <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
@@ -324,6 +347,7 @@
         <group>
             <!-- Ariel -->
             <translate X="2.78" Y="0" Z="8.55"/>
+            <rotate time="24" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0908" Y="0.0908" Z="0.0908"/>
             <models>
                 <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
@@ -332,6 +356,7 @@
         <group>
             <!-- Umbriel -->
             <translate X="-7.28" Y="0" Z="5.29"/>
+            <rotate time="19" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0917" Y="0.0917" Z="0.0917"/>
             <models>
                 <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
@@ -340,6 +365,7 @@
         <group>
             <!-- Titania -->
             <translate X="-7.28" Y="0" Z="-5.29"/>
+            <rotate time="11" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.123" Y="0.123" Z="0.123"/>
             <models>
                 <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
@@ -348,6 +374,7 @@
         <group>
             <!-- Oberon -->
             <translate X="2.78" Y="0" Z="-8.55"/>
+            <rotate time="3" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.119" Y="0.119" Z="0.119"/>
             <models>
                 <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
@@ -355,7 +382,7 @@
         </group>
     </group>
     <group>
-        <translate time = "16480">
+        <translate time = "381">
             <!-- Ponto de simetria -->
             <point X="0"    Z="-500" Y="0"  />
 
@@ -374,6 +401,7 @@
         </translate>
         <group>
             <!-- Neptune -->
+            <rotate time="10" axisX="0" axisY="1" axisZ="0" />
             <scale X="11.64" Y="11.64" Z="11.64"/>
             <models>
                 <model file="planet.3d" diffR="204" diffG="186" diffB="153"/>
@@ -382,6 +410,7 @@
         <group>
             <!-- Proteus -->
             <translate X="9" Y="0" Z="0"/>
+            <rotate time="19" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0329" Y="0.0329" Z="0.0329"/>
             <models>
                 <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
@@ -390,6 +419,7 @@
         <group>
             <!-- Triton -->
             <translate X="-4.5" Y="0" Z="7.79"/>
+            <rotate time="13" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.212" Y="0.212" Z="0.212"/>
             <models>
                 <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
@@ -398,6 +428,7 @@
         <group>
             <!-- Nereid -->
             <translate X="-4.5" Y="0" Z="-7.79"/>
+            <rotate time="12" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0266" Y="0.0266" Z="0.0266"/>
             <models>
                 <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
@@ -405,7 +436,7 @@
         </group>
     </group>
     <group>
-        <translate time = "24853">
+        <translate time = "448">
             <!-- Ponto de simetria -->
             <point X="0"    Z="-550" Y="0"  />
 
@@ -424,6 +455,7 @@
         </translate>
         <group>
             <!-- Pluto -->
+            <rotate time="11" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.54" Y="0.54" Z="0.54"/>
             <models>
                 <model file="planet.3d" diffR="209" diffG="196" diffB="179"/>
@@ -432,6 +464,7 @@
         <group>
             <!-- Charon -->
             <translate X="5" Y="0" Z="0"/>
+            <rotate time="10" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0951" Y="0.0951" Z="0.0951"/>
             <models>
                 <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
@@ -439,6 +472,9 @@
         </group>
     </group>
     <group>
+        <!-- Queremos esta rotação aplicada ANTES da translação e da curva de catmull-rom, visto que queremos rodar
+            a órbita completa por 65º -->
+        <rotate angle="65" axisX="1" axisY="0" axisZ="0" />
         <translate time="150">
             <!-- Ponto de simetria -->
             <point X="-200"    Z="-200" Y="0"  />
