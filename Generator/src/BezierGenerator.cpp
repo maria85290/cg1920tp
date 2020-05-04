@@ -123,9 +123,9 @@ const glm::vec4 BezierGenerator::ComputePatchPoint(float u, float v,
         {1.0f, 0.0f, 0.0f, 0.0f}
     };
 
-    // This matrix is defined as column-major; each line here represents a column in standard form
-    // We also need to transpose each of the matrices in P because OpenGL expects column-major matrices,
-    // and each of the 4 matrices are being independently defined as line-major. So a transposition is needed
+    // This matrix must be defined as column-major; each line here represents a column in standard form
+    // Each line here also defines a 4x4 matrix itself. However, that definition is being done in a line-major format
+    // Therefore, we must transpose each of the 4x4 sub-matrices individually, so they become column-major
     const vmat4 P = transposeEach({
         {p00, p10, p20, p30},
         {p01, p11, p21, p31},

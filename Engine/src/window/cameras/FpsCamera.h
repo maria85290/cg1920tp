@@ -13,11 +13,11 @@ namespace engine::window::cameras {
         double lastMouseX;
         double lastMouseY;
 
-        double yaw = 0;
-        double pitch = 0;
+        double yaw = 3.14159;
+        double pitch = -3.14159 / 4;
 
         glm::dvec3 lookingAt;
-        glm::dvec3 cameraPos = glm::dvec3(0, 0, 1);
+        glm::dvec3 cameraPos = glm::dvec3(0, 150, 150);
 
         glm::dvec3 ComputeForward();
         glm::dvec3 ComputeRight(glm::dvec3 forward);

@@ -69,6 +69,8 @@ namespace engine::window {
             glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
             glDebugMessageCallback(Window::DebugCallback, nullptr);
         }
+
+        Settings::Set("debug", "true");
 #endif
 
         return true;

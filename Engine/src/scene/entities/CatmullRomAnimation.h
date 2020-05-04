@@ -18,7 +18,7 @@ namespace engine::scene::entities {
         /** How much the t parameter increases every second. */
         float tPerSecond;
 
-        std::vector<glm::vec3> controlPoints;
+        std::vector<glm::vec4> controlPoints;
 
         static glm::mat4 coefficientMatrix;
 
@@ -30,7 +30,7 @@ namespace engine::scene::entities {
         glm::vec3 position;
         glm::mat4 orientation;
 
-        const std::tuple<glm::vec3, glm::vec3> GetCatmullRomPoint(float t, const glm::vec3& p0, const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& p3);
+        const std::tuple<glm::vec3, glm::vec3> GetCatmullRomPoint(float t, const glm::vec4& p0, const glm::vec4& p1, const glm::vec4& p2, const glm::vec4& p3);
         const std::tuple<glm::vec3, glm::vec3> GetGlobalCatmullRomPoint(float gt);
 
         void GenerateCurveRendering();

@@ -12,12 +12,13 @@ using std::cerr, std::endl;
 
 namespace engine::scene::entities {
 
-    glm::mat4 CatmullRomAnimation::coefficientMatrix = glm::mat4(
-        glm::vec4(-0.5f, 1.5f, -1.5f, 0.5f),
-        glm::vec4(1.0f, -2.5f, 2.0f, -0.5f),
-        glm::vec4(-0.5f, 0.0f, 0.5f, 0.0f),
-        glm::vec4(0.0f, 1.0f, 0.0f, 0.0f)
-    );
+    /** A matriz de coeficientes para animações com Catmull-Rom Splines. Em formato column-major. */
+    glm::mat4 CatmullRomAnimation::coefficientMatrix = {
+        { -0.5f,  1.0f, -0.5f,  0.0f },
+        {  1.5f, -2.5f,  0.0f,  1.0f },
+        { -1.5f,  2.0f,  0.5f,  0.0f },
+        {  0.5f, -0.5f,  0.0f,  0.0f }
+    };
 
     bool CatmullRomAnimation::ParseXml(const tinyxml2::XMLNode *translateNode) {
         // First, parse the time from the node
@@ -42,7 +43,7 @@ namespace engine::scene::entities {
 
             auto currElem = currNode->ToElement();
 
-            glm::vec3 v;
+            glm::vec4 v(1.0f);
 
             if(currElem->QueryAttribute("X", &v.x) != XML_SUCCESS) {
                 cerr << "Failed to parse element X from point node!" << endl;
@@ -114,14 +115,14 @@ namespace engine::scene::entities {
     }
 
     const tuple<glm::vec3, glm::vec3> CatmullRomAnimation::GetCatmullRomPoint(float t,
-        const glm::vec3& p0, const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& p3) {
+        const glm::vec4& p0, const glm::vec4& p1, const glm::vec4& p2, const glm::vec4& p3) {
 
-        glm::mat4x3 A = glm::mat4x3(p0, p1, p2, p3) * this->coefficientMatrix;
+        glm::mat4 A = this->coefficientMatrix * glm::transpose(glm::mat4(p0, p1, p2, p3));
 
         glm::vec4 pos(powf(t, 3), powf(t, 2), t, 1.0f);
         glm::vec4 deriv(3.0f * powf(t, 2), 2.0f * t, 1.0f, 0.0f);
 
-        return {A * pos, A * deriv};
+        return {pos * A, deriv * A};
     }
 
     const tuple<glm::vec3, glm::vec3> CatmullRomAnimation::GetGlobalCatmullRomPoint(float gt) {
