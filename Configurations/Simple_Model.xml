@@ -4,35 +4,7 @@
         <translate X="0" Y="0" Z="0"/>
         <scale X="109" Y="109" Z="109"/>
         <models>
-            <model file="sun.3d" diffR="253" diffG="184" diffB="19"/>
+            <model file="teapot.3d" diffR="253" diffG="184" diffB="19"/>
         </models>
-    </group>
-    <group>
-        <scale X="10" Y="10" Z="10" />
-        <group>
-            <!-- Mercury -->
-            <translate time="24">
-                <!-- Ponto de simetria -->
-                <point X="0"    Z="-25.5" Y="0"  />
-
-                <!-- Parte X negativo -->
-                <point X="-60"  Z="-20" Y="0"  />
-                <point X="-80"  Z="0"   Y="0"  />
-                <point X="-60"  Z="20"  Y="0"  />
-
-                <!-- Ponto de simetria -->
-                <point X="0"    Z="25.5"  Y="0"  />
-
-                <!-- Parte X positivo -->
-                <point X="60"   Z="20"  Y="0"  />
-                <point X="80"   Z="0"   Y="0"  />
-                <point X="60"   Z="-20" Y="0"  />
-            </translate>
-
-            <scale X="0.383" Y="0.383" Z="0.383"/>
-            <models>
-                <model file="planet.3d" diffR="181" diffG="167" diffB="167"/>
-            </models>
-        </group>
     </group>
 </scene>

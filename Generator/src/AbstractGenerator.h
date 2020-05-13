@@ -12,6 +12,21 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
+struct vertex_data {
+    glm::vec3 pos;
+    glm::vec3 normal;
+    glm::vec2 textureCoords;
+
+    bool operator==(const vertex_data&) const;
+};
+
+namespace std {
+    template<>
+    struct hash<struct vertex_data> {
+        std::size_t operator()(const vertex_data&) const;
+    };
+}
+
 /**
  * Um Gerador é capaz de gerar vértices para um tipo de sólido geométrico arbitrário,
  * dados certos parâmetros.
@@ -22,7 +37,7 @@
 class AbstractGenerator {
 private:
     /** @var vertices Os vértices que este gerador gerou. */
-    std::unordered_map<glm::vec3, unsigned short> vertices;
+    std::unordered_map<vertex_data, unsigned short> vertices;
 
     /** @var indices */
     std::list<unsigned short> indices;
@@ -38,7 +53,17 @@ protected:
         this->filename = filename;
     }
 
-    void AddVertex(const glm::vec3& v);
+    void AddVertex(const glm::vec3& v, const glm::vec3& n, const glm::vec2& t);
+
+    inline void AddVertex(const double& x, const double& y, const double& z,
+                          const double& nx, const double& ny, const double& nz,
+                          const double& tx, const double& ty) {
+        this->AddVertex({x, y, z}, {nx, ny, nz}, {tx, ty});
+    }
+
+    inline void AddVertex(const glm::vec3& v) {
+        this->AddVertex(v, {0, 0, 0}, {0, 0});
+    }
 
     inline void AddVertex(const double& x, const double& y, const double& z) {
         this->AddVertex({x, y, z});
