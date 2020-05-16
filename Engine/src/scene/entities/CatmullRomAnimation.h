@@ -30,8 +30,8 @@ namespace engine::scene::entities {
         glm::vec3 position;
         glm::mat4 orientation;
 
-        const std::tuple<glm::vec3, glm::vec3> GetCatmullRomPoint(float t, const glm::vec4& p0, const glm::vec4& p1, const glm::vec4& p2, const glm::vec4& p3);
-        const std::tuple<glm::vec3, glm::vec3> GetGlobalCatmullRomPoint(float gt);
+        const std::pair<glm::vec3, glm::vec3> GetCatmullRomPoint(float t, const glm::vec4& p0, const glm::vec4& p1, const glm::vec4& p2, const glm::vec4& p3);
+        const std::pair<glm::vec3, glm::vec3> GetGlobalCatmullRomPoint(float gt);
 
         void GenerateCurveRendering();
     public:

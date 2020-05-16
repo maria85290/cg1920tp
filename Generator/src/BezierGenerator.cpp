@@ -91,30 +91,31 @@ void BezierGenerator::GenerateVertices() {
 
         for(float u = 0; u < 1.0; u += step) {
             for(float v = 0; v < 1.0; v += step) {
-                auto p0 = this->ComputePatchPoint(u, v, patch);
-                auto p1 = this->ComputePatchPoint(u, v + step, patch);
-                auto p2 = this->ComputePatchPoint(u + step, v, patch);
-                auto p3 = this->ComputePatchPoint(u + step, v + step, patch);
+                auto [p0, d0] = this->ComputePatchPoint(u, v, patch);
+                auto [p1, d1] = this->ComputePatchPoint(u, v + step, patch);
+                auto [p2, d2] = this->ComputePatchPoint(u + step, v, patch);
+                auto [p3, d3] = this->ComputePatchPoint(u + step, v + step, patch);
 
-                AddVertex(p3);
-                AddVertex(p2);
-                AddVertex(p1);
+                AddVertex(p3, d3, {0.0f, 0.0f});
+                AddVertex(p2, d2, {0.0f, 0.0f});
+                AddVertex(p1, d1, {0.0f, 0.0f});
 
-                AddVertex(p2);
-                AddVertex(p0);
-                AddVertex(p1);
+                AddVertex(p2, d2, {0.0f, 0.0f});
+                AddVertex(p0, d0, {0.0f, 0.0f});
+                AddVertex(p1, d1, {0.0f, 0.0f});
             }
         }
     }
 }
 
-const glm::vec4 BezierGenerator::ComputePatchPoint(float u, float v,
+const pair<glm::vec3, glm::vec3> BezierGenerator::ComputePatchPoint(float u, float v,
                                                    const glm::vec4& p00, const glm::vec4& p01, const glm::vec4& p02, const glm::vec4& p03,
                                                    const glm::vec4& p10, const glm::vec4& p11, const glm::vec4& p12, const glm::vec4& p13,
                                                    const glm::vec4& p20, const glm::vec4& p21, const glm::vec4& p22, const glm::vec4& p23,
                                                    const glm::vec4& p30, const glm::vec4& p31, const glm::vec4& p32, const glm::vec4& p33
 ) const {
     const glm::vec4 U = {powf(u, 3), powf(u, 2), u, 1.0f};
+    const glm::vec4 UPrime = {3 * powf(u, 2), 2 * u, 1.0f, 0.0f};
 
     static const glm::mat4 M = {
         {-1.0f, 3.0f, -3.0f, 1.0f},
@@ -134,6 +135,10 @@ const glm::vec4 BezierGenerator::ComputePatchPoint(float u, float v,
     });
 
     const glm::vec4 V = {powf(v, 3), powf(v, 2), v, 1.0f};
+    const glm::vec4 VPrime = {3 * powf(v, 2), 2 * v, 1.0f, 0.0f};
 
-    return U * M * P * M * V;
+    const glm::vec3 partialU = UPrime * M * P * M * V;
+    const glm::vec3 partialV = U * M * P * M * VPrime;
+
+    return {U * M * P * M * V, partialV * partialU};
 }

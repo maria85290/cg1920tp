@@ -120,7 +120,7 @@ namespace engine::scene::entities {
         glMultMatrixf(glm::value_ptr(this->orientation));
     }
 
-    const tuple<glm::vec3, glm::vec3> CatmullRomAnimation::GetCatmullRomPoint(float t,
+    const pair<glm::vec3, glm::vec3> CatmullRomAnimation::GetCatmullRomPoint(float t,
         const glm::vec4& p0, const glm::vec4& p1, const glm::vec4& p2, const glm::vec4& p3) {
 
         glm::mat4 A = this->coefficientMatrix * glm::transpose(glm::mat4(p0, p1, p2, p3));
@@ -131,7 +131,7 @@ namespace engine::scene::entities {
         return {pos * A, deriv * A};
     }
 
-    const tuple<glm::vec3, glm::vec3> CatmullRomAnimation::GetGlobalCatmullRomPoint(float gt) {
+    const pair<glm::vec3, glm::vec3> CatmullRomAnimation::GetGlobalCatmullRomPoint(float gt) {
         const int numPoints = this->controlPoints.size();
 
         float t = gt * numPoints;
