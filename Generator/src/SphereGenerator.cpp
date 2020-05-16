@@ -43,54 +43,50 @@ void SphereGenerator::GenerateVertices() {
     double yC;
     double zC;
 
-
     double alfa = 2 * M_PI / slices;
     double beta = (M_PI) / stacks;
-    int i = 0;
 
+    for (int i = 0; i < stacks; i++) {
+        angBeta = M_PI / 2 - (beta * (i+1));    //Cálculo do ângulo Beta
 
-    for (int i = 1; i <= stacks; i++) {
-
-        angBeta = M_PI /2 - (beta * i);    //Cálculo do ângulo Beta
-
-        for (int j = 0; j <= slices; j++) {
-
+        for (int j = 0; j < slices; j++) {
             angAlfa = (alfa * j);        //Cálculo do ângulo Alfa
 
             // para o ponto P (canto inferior esquerdo)
+            // currentStack, currentSlice
 
             xP = radius * cos(angBeta) * sin(angAlfa);
             yP = radius * sin(angBeta);
             zP = radius * cos(angBeta) * cos(angAlfa);
 
             // para o ponto A (canto inferior direito)
+            // currentStack, nextSlice
 
             xA = radius * cos(angBeta) * sin(angAlfa + alfa);
             yA = radius * sin(angBeta );
             zA = radius * cos(angBeta) * cos(angAlfa + alfa);
 
             // Para o ponto B (canto superior esquerdo)
+            // nextStack, currentSlice
 
             xB = radius * cos(angBeta + beta) * sin(angAlfa );
             yB = radius * sin(angBeta + beta);
             zB = radius * cos(angBeta + beta) * cos(angAlfa );
 
             // para o ponto C (canto superior direito)
+            // nextStack, nextSlice
 
             xC = radius * cos(angBeta + beta) * sin(angAlfa + alfa);
             yC = radius * sin(angBeta + beta);
             zC = radius * cos(angBeta + beta) * cos(angAlfa + alfa);
 
-            AddVertex(xC, yC, zC);
-            AddVertex(xP, yP, zP);
-            AddVertex(xA, yA, zA);
+            AddVertex({xC, yC, zC}, {xC, yC, zC}, {float(j + 1) / float(slices), float(i) / float(stacks)});
+            AddVertex({xP, yP, zP}, {xP, yP, zP}, {float(j) / float(slices), float(i + 1) / float(stacks)});
+            AddVertex({xA, yA, zA}, {xA, yA, zA}, {float(j + 1) / float(slices), float(i + 1) / float(stacks)});
 
-            AddVertex(xB, yB, zB);
-            AddVertex(xP, yP, zP);
-            AddVertex(xC, yC, zC);
-
-
+            AddVertex({xB, yB, zB}, {xB, yB, zB}, {float(j) / float(slices), float(i) / float(stacks)});
+            AddVertex({xP, yP, zP}, {xP, yP, zP}, {float(j) / float(slices), float(i + 1) / float(stacks)});
+            AddVertex({xC, yC, zC}, {xC, yC, zC}, {float(j + 1) / float(slices), float(i) / float(stacks)});
         }
     }
-
 }

@@ -6,7 +6,7 @@
 using std::cerr, std::endl, std::stoi, std::string;
 
 bool PlaneGenerator::ParseArguments(int argc, char *argv[]) {
-  plane = kPlaneXZ;
+    plane = kPlaneXZ;
 
     // Minor parsing para manter compatibilidade com aquilo que o stor pediu
     if(argc > 5) {
@@ -15,17 +15,17 @@ bool PlaneGenerator::ParseArguments(int argc, char *argv[]) {
         const string planeName = argv[4];
 
         if(planeName == "xy")
-          plane = kPlaneXY;
+            plane = kPlaneXY;
         else if(planeName == "yx")
-          plane = kPlaneYX;
+            plane = kPlaneYX;
         else if(planeName == "xz")
-          plane = kPlaneXZ;
+            plane = kPlaneXZ;
         else if(planeName == "zx")
-          plane = kPlaneZX;
+            plane = kPlaneZX;
         else if(planeName == "yz")
-          plane = kPlaneYZ;
+            plane = kPlaneYZ;
         else if(planeName == "zy")
-          plane = kPlaneZY;
+            plane = kPlaneZY;
         else {
             cerr << "Plano " << planeName << " não definido!" << endl
                  << "Planos possívels: xy, yx, xz, zx, yz, zy" << endl;
@@ -39,11 +39,12 @@ bool PlaneGenerator::ParseArguments(int argc, char *argv[]) {
              << "Utilização: " << argv[0] << " plane <width> <height> [xy|yx|xz|zx|yz|zy] <fileName>" << endl;
 
         return false;
-    } else
+    } else {
         SetFilename(argv[4]); // Número correto de argumentos passado
+    }
 
     width = stoi(argv[2]);
-  height = stoi(argv[3]);
+    height = stoi(argv[3]);
 
     return true;
 }
@@ -54,63 +55,69 @@ void PlaneGenerator::GenerateVertices() {
 
     switch(plane) {
         case kPlaneYZ:
-            AddVertex(0.0, h, w);
-            AddVertex(0.0, -h, w);
-            AddVertex(0.0, -h, -w);
+            AddVertex({0.0, h, w}, {-1, 0, 0}, {1, 1});
+            AddVertex({0.0, -h, w}, {-1, 0, 0}, {1, 0});
+            AddVertex({0.0, -h, -w}, {-1, 0, 0}, {0, 0});
 
-            AddVertex(0.0, h, w);
-            AddVertex(0.0, -h, -w);
-            AddVertex(0.0, h, -w);
+            AddVertex({0.0, h, w}, {-1, 0, 0}, {1, 1});
+            AddVertex({0.0, -h, -w}, {-1, 0, 0}, {0, 0});
+            AddVertex({0.0, h, -w}, {-1, 0, 0}, {0, 1});
+
             break;
 
         case kPlaneZY:
-            AddVertex(0.0, h, w);
-            AddVertex(0.0, -h, -w);
-            AddVertex(0.0, -h, w);
+            AddVertex({0.0, h, w}, {1, 0, 0}, {1, 1});
+            AddVertex({0.0, -h, -w}, {1, 0, 0}, {0, 0});
+            AddVertex({0.0, -h, w}, {1, 0, 0}, {1, 0});
 
-            AddVertex(0.0, h, w);
-            AddVertex(0.0, h, -w);
-            AddVertex(0.0, -h, -w);
+            AddVertex({0.0, h, w}, {1, 0, 0}, {1, 1});
+            AddVertex({0.0, h, -w}, {1, 0, 0}, {0, 1});
+            AddVertex({0.0, -h, -w}, {1, 0, 0}, {0, 0});
+
             break;
 
         case kPlaneXZ:
-            AddVertex(-w, 0.0, -h);
-            AddVertex(w, 0.0, h);
-            AddVertex(-w, 0.0, h);
+            AddVertex({-w, 0.0, -h}, {0, 1, 0}, {0, 0});
+            AddVertex({w, 0.0, h}, {0, 1, 0}, {1, 1});
+            AddVertex({-w, 0.0, h}, {0, 1, 0}, {0, 1});
 
-            AddVertex(-w, 0.0, -h);
-            AddVertex(w, 0.0, -h);
-            AddVertex(w, 0.0, h);
+            AddVertex({-w, 0.0, -h}, {0, 1, 0}, {0, 0});
+            AddVertex({w, 0.0, -h}, {0, 1, 0}, {1, 0});
+            AddVertex({w, 0.0, h}, {0, 1, 0}, {1, 1});
+
             break;
 
         case kPlaneZX:
-            AddVertex(-w, 0.0, -h);
-            AddVertex(-w, 0.0, h);
-            AddVertex(w, 0.0, h);
+            AddVertex({-w, 0.0, -h}, {0, -1, 0}, {0, 0});
+            AddVertex({-w, 0.0, h}, {0, -1, 0}, {0, 1});
+            AddVertex({w, 0.0, h}, {0, -1, 0}, {1, 1});
 
-            AddVertex(-w, 0.0, -h);
-            AddVertex(w, 0.0, h);
-            AddVertex(w, 0.0, -h);
+            AddVertex({-w, 0.0, -h}, {0, -1, 0}, {0, 0});
+            AddVertex({w, 0.0, h}, {0, -1, 0}, {1, 1});
+            AddVertex({w, 0.0, -h}, {0, -1, 0}, {1, 0});
+
             break;
 
         case kPlaneXY:
-            AddVertex(w, h, 0.0);
-            AddVertex(-w, h, 0.0);
-            AddVertex(-w, -h, 0.0);
+            AddVertex({w, h, 0.0}, {0, 0, 1}, {1, 1});
+            AddVertex({-w, h, 0.0}, {0, 0, 1}, {0, 1});
+            AddVertex({-w, -h, 0.0}, {0, 0, 1}, {0, 0});
 
-            AddVertex(w, h, 0.0);
-            AddVertex(-w, -h, 0.0);
-            AddVertex(w, -h, 0.0);
+            AddVertex({w, h, 0.0}, {0, 0, 1}, {1, 1});
+            AddVertex({-w, -h, 0.0}, {0, 0, 1}, {0, 0});
+            AddVertex({w, -h, 0.0}, {0, 0, 1}, {1, 0});
+
             break;
 
         case kPlaneYX:
-            AddVertex(w, h, 0.0);
-            AddVertex(-w, -h, 0.0);
-            AddVertex(-w, h, 0.0);
+            AddVertex({w, h, 0.0}, {0, 0, -1}, {1, 1});
+            AddVertex({-w, -h, 0.0}, {0, 0, -1}, {0, 0});
+            AddVertex({-w, h, 0.0}, {0, 0, -1}, {0, 1});
 
-            AddVertex(w, h, 0.0);
-            AddVertex(w, -h, 0.0);
-            AddVertex(-w, -h, 0.0);
+            AddVertex({w, h, 0.0}, {0, 0, -1}, {1, 1});
+            AddVertex({w, -h, 0.0}, {0, 0, -1}, {1, 0});
+            AddVertex({-w, -h, 0.0}, {0, 0, -1}, {0, 0});
+
             break;
     }
 }

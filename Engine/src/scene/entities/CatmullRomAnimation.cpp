@@ -162,6 +162,7 @@ namespace engine::scene::entities {
 
         glBindBuffer(GL_ARRAY_BUFFER, this->curveVbo);
         glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), vertices.data(), GL_STATIC_DRAW);
+
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 

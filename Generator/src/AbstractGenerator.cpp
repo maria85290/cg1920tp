@@ -3,7 +3,7 @@
 using std::endl;
 
 void AbstractGenerator::AddVertex(const glm::vec3& v, const glm::vec3& n, const glm::vec2& t) {
-    vertex_data vd = {v, n, t};
+    vertex_data vd = {v, glm::normalize(n), t};
 
     if(this->vertices.count(vd) == 0) {
         this->vertices[vd] = this->nextIndex++;

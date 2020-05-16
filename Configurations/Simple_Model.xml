@@ -1,10 +1,9 @@
 <scene>
     <group>
         <!-- Sun -->
-        <translate X="0" Y="0" Z="0"/>
-        <scale X="109" Y="109" Z="109"/>
+        <scale X="30" Y="30" Z="30" />
         <models>
-            <model file="teapot.3d" diffR="253" diffG="184" diffB="19"/>
+            <model file="sun.3d" diffR="255" diffG="255" diffB="255" texture="8k_earth_night.jpg" />
         </models>
     </group>
 </scene>

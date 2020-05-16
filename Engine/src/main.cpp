@@ -3,6 +3,8 @@
 
 #include <tinyxml2/tinyxml2.h>
 
+#include <IL/il.h>
+
 #include "scene/Scene.h"
 #include "window/Window.h"
 #include "window/cameras/FpsCamera.h"
@@ -27,9 +29,12 @@ int main(int argc, char* argv[]) {
 
     // Initialize GLFW
     if(!glfwInit()) {
-        cerr << "Failed to initialize GLFW! Exitting..." << endl;
+        cerr << "Failed to initialize GLFW! Exiting..." << endl;
         exit(-1);
     }
+
+    // Initialize DevIL
+    ilInit();
 
 	// Setup the window and OpenGL Context
 	// This must happen before we attempt to parse the scene file
@@ -92,7 +97,7 @@ unique_ptr<XMLDocument> ReadSceneFile(const char* filename) {
 // para essas plataformas.
 #ifdef WIN32
 extern "C" {
-//__declspec(dllexport) unsigned long NvOptimusEnablement = 0x00000001;
-//__declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
+__declspec(dllexport) unsigned long NvOptimusEnablement = 0x00000001;
+__declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
 }
 #endif
