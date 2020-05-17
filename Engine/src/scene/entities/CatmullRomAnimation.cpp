@@ -7,7 +7,7 @@
 
 using tinyxml2::XML_SUCCESS;
 
-using std::string, std::tuple, std::vector;
+using std::string, std::pair, std::vector;
 using std::cerr, std::endl;
 using tinyxml2::XMLComment;
 

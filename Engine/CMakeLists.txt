@@ -21,7 +21,11 @@ add_executable(Engine
         src/window/cameras/StaticCamera.cpp src/window/cameras/StaticCamera.h
         src/window/cameras/ExplorerCamera.cpp src/window/cameras/ExplorerCamera.h
         src/window/input/Keyboard.cpp src/window/input/Keyboard.h
-        src/util/Settings.cpp src/util/Settings.h)
+        src/util/Settings.cpp src/util/Settings.h
+        src/scene/lighting/Lights.cpp src/scene/lighting/Lights.h
+        src/scene/lighting/Light.h src/scene/lighting/Light.cpp
+        src/scene/lighting/PointLight.cpp src/scene/lighting/PointLight.h
+        src/scene/lighting/DirectionalLight.h src/scene/lighting/DirectionalLight.cpp)
 
 set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED COMPONENTS OpenGL)

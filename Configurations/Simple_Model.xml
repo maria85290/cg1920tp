@@ -1,9 +1,33 @@
 <scene>
+    <lights>
+        <light type="point"
+               posX="0" posY="0" posZ="0"
+               ambR="51" ambG="51" ambB="51"
+               diffR="204" diffG="204" diffB="204"
+               specR="204" specG="204" specB="204" />
+    </lights>
+    <group>
+        <translate Z="-1" />
+        <models>
+            <!--<model file="teapot.3d" diffR="0" diffG="0" diffB="255" shininess="128" />-->
+        </models>
+    </group>
+    <group>
+        <translate Z="10" />
+        <scale X="1" Y="1" Z="1" />
+        <rotate angle="180" axisX="0" axisY="1" axisZ="0" />
+        <models>
+            <model file="plane.3d" diffR="0" diffG="255" diffB="0" specR="0" specG="255" specB="0" shininess="128" />
+            <model file="teapot.3d" diffR="0" diffG="255" diffB="0" specR="0" specG="255" specB="0" shininess="128" />
+        </models>
+    </group>
     <group>
         <!-- Sun -->
-        <scale X="30" Y="30" Z="30" />
+        <translate Z="-10" />
+        <scale X="1" Y="1" Z="1" />
         <models>
-            <model file="sun.3d" diffR="255" diffG="255" diffB="255" texture="8k_earth_night.jpg" />
+            <!--<model file="sun.3d" diffR="0" diffG="255" diffB="0" texture="8k_earth.jpg" />-->
+            <!--<model file="teapot.3d" diffR="255" diffG="0" diffB="0" />-->
         </models>
     </group>
 </scene>

@@ -4,10 +4,12 @@
 #include <tinyxml2/tinyxml2.h>
 
 #include "entities/Group.h"
+#include "lighting/Lights.h"
 
 namespace engine::scene {
     class Scene {
     private:
+        lighting::Lights* lights = nullptr;
         std::vector<entities::Group*> groups;
 
         void AddGroup(entities::Group* group) {
