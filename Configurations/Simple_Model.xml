@@ -1,37 +1,20 @@
 <scene>
     <lights>
-        <light type="spot"
-               posX="0" posY="0" posZ="-20"
-               dirX="0" dirY="0" dirZ="-1"
-               cutoffAngle="5" cutoffExponent="0"
-               attenuationLinear="0"
+        <light type="point"
+               posX="50" posY="0" posZ="30"
                ambR="51" ambG="51" ambB="51"
                diffR="204" diffG="204" diffB="204"
                specR="204" specG="204" specB="204" />
     </lights>
-
     <group>
-        <translate Z="-1" />
         <models>
-            <!--<model file="teapot.3d" diffR="0" diffG="0" diffB="255" shininess="128" />-->
-        </models>
-    </group>
-    <group>
-        <!--<rotate angle="45" axisX="1" axisY="0" axisZ="0" />-->
-        <translate Z="-30" />
-        <scale X="1" Y="1" Z="1" />
-        <!--<rotate angle="180" axisX="0" axisY="1" axisZ="0" />-->
-        <models>
-            <model file="teapot.3d" diffR="204" diffG="204" diffB="204" specR="255" specG="255" specB="255" shininess="128" />
-        </models>
-    </group>
-    <group>
-        <!-- Sun -->
-        <translate Z="-10" />
-        <scale X="1" Y="1" Z="1" />
-        <models>
-            <!--<model file="sun.3d" diffR="0" diffG="255" diffB="0" texture="8k_earth.jpg" />-->
-            <!--<model file="teapot.3d" diffR="255" diffG="0" diffB="0" />-->
+            <model file="paralelipipedo.3d"
+                   texture="debugRectangle3D.png"
+                   ambR="255" ambG="255" ambB="255"
+                   diffR="255" diffG="255" diffB="255"
+                   specR="255" specG="255" specB="255"
+                   shininess="60"
+            />
         </models>
     </group>
 </scene>
