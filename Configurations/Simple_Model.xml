@@ -5,8 +5,8 @@
                ambR="51" ambG="51" ambB="51"
                diffR="204" diffG="204" diffB="204"
                specR="204" specG="204" specB="204" />
-        <light type="point"
-               posX="0" posY="0" posZ="-60"
+        <light type="directional"
+               dirX="0" dirY="0" dirZ="-1"
                ambR="51" ambG="51" ambB="51"
                diffR="204" diffG="204" diffB="204"
                specR="204" specG="204" specB="204" />
