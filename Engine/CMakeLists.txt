@@ -88,7 +88,7 @@ elseif(UNIX AND NOT APPLE) # Include GLUT and GLEW for Linux
     endif()
 
     target_include_directories(Engine PUBLIC ${GLFW_INCLUDE_DIR} ${IL_INCLUDE_DIR})
-    target_link_libraries(Engine PUBLIC glfw DevIL ${CMAKE_DL_LIBS})
+    target_link_libraries(Engine PUBLIC glfw IL ${CMAKE_DL_LIBS})
 elseif(APPLE)
     set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl") # Add -ldl to the command line for cc
 
