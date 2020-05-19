@@ -10,13 +10,22 @@
 #include <glad/glad.h>
 #include <stdexcept>
 
+namespace engine::window {
+    class Window;
+}
+
 namespace engine::scene::lighting {
     class Light {
     private:
+        friend class ::engine::window::Window;
+
         static int NEXT_LIGHT_NO;
 
         int lightNo;
 
+        static inline void ResetLightNo() {
+            Light::NEXT_LIGHT_NO = GL_LIGHT0;
+        }
     protected:
         glm::vec4 ambient;
         glm::vec4 diffuse;
@@ -48,10 +57,6 @@ namespace engine::scene::lighting {
 
         inline void Disable() const {
             glDisable(GetLightNo());
-        }
-
-        static inline void ResetLightNo() {
-            Light::NEXT_LIGHT_NO = GL_LIGHT0;
         }
     };
 }
