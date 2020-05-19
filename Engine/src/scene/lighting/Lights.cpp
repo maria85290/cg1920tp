@@ -4,7 +4,7 @@
 #include "PointLight.h"
 #include "DirectionalLight.h"
 
-using tinyxml2::XMLNode, tinyxml2::XMLElement;
+using tinyxml2::XMLNode, tinyxml2::XMLElement, tinyxml2::XMLComment;
 
 using namespace std;
 
@@ -14,6 +14,11 @@ namespace engine::scene::lighting {
 
         while(childNode != nullptr) {
             string nodeName(childNode->Value());
+
+            if(dynamic_cast<const XMLComment*>(childNode)) {
+                childNode = childNode->NextSibling();
+                continue;
+            }
 
             if(nodeName != "light") {
                 cerr << "Encontrada uma node chamada " + nodeName + " dentro da tag lights!" << endl;

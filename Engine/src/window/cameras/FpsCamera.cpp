@@ -64,7 +64,7 @@ namespace engine::window::cameras {
     }
 
     void FpsCamera::HandleKeyboardKeyPress(int key, int scanCode, int action, int mods) {
-        if(key == GLFW_KEY_F2 && action == GLFW_PRESS) {
+        if(key == GLFW_KEY_F4 && action == GLFW_PRESS) {
             cout << "[Debug] Coordenadas da camara: ("
                 << this->cameraPos.x << ", " << this->cameraPos.y << ", " << this->cameraPos.z << ")" << endl;
             cout << "[Debug] Camara a olhar para: ("

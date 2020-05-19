@@ -26,14 +26,16 @@ private:
     std::vector<std::vector<int>> patches;
     std::vector<glm::dvec4> controlPoints;
 
-    const std::pair<glm::dvec3, glm::dvec3> ComputePatchPoint(float u, float v,
+    const std::pair<glm::dvec3, glm::dvec3> ComputePatchPoint(double u, double v,
                                        const glm::dvec4& p00, const glm::dvec4& p01, const glm::dvec4& p02, const glm::dvec4& p03,
                                        const glm::dvec4& p10, const glm::dvec4& p11, const glm::dvec4& p12, const glm::dvec4& p13,
                                        const glm::dvec4& p20, const glm::dvec4& p21, const glm::dvec4& p22, const glm::dvec4& p23,
                                        const glm::dvec4& p30, const glm::dvec4& p31, const glm::dvec4& p32, const glm::dvec4& p33
     ) const;
 
-    inline const std::pair<glm::dvec3, glm::dvec3> ComputePatchPoint(float u, float v, const std::vector<int>& patch) const {
+    inline const std::pair<glm::dvec3, glm::dvec3> ComputePatchPoint(const std::vector<int>& patch,
+                                                                     double u,
+                                                                     double v) const {
         return this->ComputePatchPoint(
             u, v,
             controlPoints[patch[0]], controlPoints[patch[1]], controlPoints[patch[2]], controlPoints[patch[3]],

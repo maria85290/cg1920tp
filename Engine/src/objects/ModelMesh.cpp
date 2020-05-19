@@ -35,7 +35,7 @@ namespace engine::objects {
 
         file.close();
 
-        this->numVertices = this->vertices.size();
+        this->numVertices = static_cast<int>(this->vertices.size());
 
         this->GenVBOs();
         this->vertices.clear();

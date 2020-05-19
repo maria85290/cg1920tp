@@ -24,8 +24,7 @@ namespace engine::scene::lighting {
     void PointLight::Enable() const {
         Light::Enable();
 
-        GLfloat pos[4] = {position.x, position.y, position.z, 1.0f};
-        glLightfv(GetLightNo(), GL_POSITION,  pos);
+        glLightfv(GetLightNo(), GL_POSITION,  glm::value_ptr(this->position));
         glLightfv(GetLightNo(), GL_AMBIENT,   glm::value_ptr(this->ambient));
         glLightfv(GetLightNo(), GL_DIFFUSE,   glm::value_ptr(this->diffuse));
         glLightfv(GetLightNo(), GL_SPECULAR,  glm::value_ptr(this->specular));

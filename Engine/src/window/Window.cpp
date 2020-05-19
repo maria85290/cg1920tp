@@ -12,7 +12,11 @@
 #include "../util/Settings.h"
 
 using std::string, std::cerr, std::endl;
+using std::unique_ptr;
 using engine::window::cameras::Camera;
+using tinyxml2::XMLDocument;
+
+extern unique_ptr<XMLDocument> ReadSceneFile(const char*);
 
 namespace engine::window {
     Window::Window(const char* title, int width, int height):
@@ -183,6 +187,8 @@ namespace engine::window {
         glVertex3f(0, 0, axisSize);
 
         glEnd();
+
+        glColor3f(1.0, 1.0, 1.0);
     }
 
     void Window::HandleFramebufferSizeChange(int width, int height) {
@@ -198,13 +204,30 @@ namespace engine::window {
 
         glViewport(0, 0, width, height);
 
-        glm::dmat4 projectionMatrix = glm::perspective(glm::radians(45.0), double(width) / double(height), 1.0, 5000.0);
+        glm::dmat4 projectionMatrix = glm::perspective(glm::radians(45.0), double(width) / double(height), 0.1, 5000.0);
         glMultMatrixd(glm::value_ptr(projectionMatrix));
 
         glMatrixMode(GL_MODELVIEW);
     }
 
     void Window::HandleKeyboardKeyPress(int key, int scanCode, int action, int mods) {
+        if(key == GLFW_KEY_F1 && action == GLFW_PRESS) {
+            if(glIsEnabled(GL_CULL_FACE))
+                glDisable(GL_CULL_FACE);
+            else
+                glEnable(GL_CULL_FACE);
+        }
+
+        if(key == GLFW_KEY_F2 && action == GLFW_PRESS) {
+            int polygonMode[2];
+            glGetIntegerv(GL_POLYGON_MODE, polygonMode);
+
+            if(polygonMode[0] == GL_FILL)
+                glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+            else
+                glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        }
+
         if(key == GLFW_KEY_F3 && action == GLFW_PRESS) {
             if(Settings::Contains("debug")) {
                 Settings::Delete("debug");
@@ -212,6 +235,26 @@ namespace engine::window {
                 Settings::Set("debug", "true");
             }
         }
+
+        if(key == GLFW_KEY_F5 && action == GLFW_PRESS) {
+            this->ReloadScene();
+        }
+    }
+
+    void Window::ReloadScene() {
+        // Delete the old scene and caches
+        delete this->scene;
+        ModelMesh::GetCache().Clear();
+        Texture::GetCache().Clear();
+        scene::lighting::Light::ResetLightNo();
+
+        this->scene = new scene::Scene;
+
+        // Find out if the scene file exists
+        auto root = ReadSceneFile(this->sceneFile.c_str());
+
+        // Parse the scene file
+        this->scene->ParseXml(root->FirstChild());
     }
 
 	void APIENTRY Window::DebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)

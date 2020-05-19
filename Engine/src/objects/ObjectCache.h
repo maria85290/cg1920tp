@@ -47,6 +47,10 @@ namespace engine::objects {
 
             return true;
         }
+
+        inline void Clear() {
+            this->objects.clear();
+        }
     };
 }
 

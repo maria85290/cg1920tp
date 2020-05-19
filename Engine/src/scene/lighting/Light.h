@@ -49,6 +49,10 @@ namespace engine::scene::lighting {
         inline void Disable() const {
             glDisable(GetLightNo());
         }
+
+        static inline void ResetLightNo() {
+            Light::NEXT_LIGHT_NO = GL_LIGHT0;
+        }
     };
 }
 
