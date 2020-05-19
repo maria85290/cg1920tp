@@ -1,16 +1,15 @@
 <scene>
     <lights>
-        <light type="point"
-               posX="0" posY="0" posZ="0"
-               ambR="51" ambG="51" ambB="51"
-               diffR="204" diffG="204" diffB="204"
-               specR="204" specG="204" specB="204" />
-        <light type="directional"
+        <light type="spot"
+               posX="0" posY="0" posZ="-20"
                dirX="0" dirY="0" dirZ="-1"
+               cutoffAngle="5" cutoffExponent="0"
+               attenuationLinear="0"
                ambR="51" ambG="51" ambB="51"
                diffR="204" diffG="204" diffB="204"
                specR="204" specG="204" specB="204" />
     </lights>
+
     <group>
         <translate Z="-1" />
         <models>

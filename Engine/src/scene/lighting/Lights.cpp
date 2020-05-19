@@ -3,6 +3,7 @@
 #include "Lights.h"
 #include "PointLight.h"
 #include "DirectionalLight.h"
+#include "SpotLight.h"
 
 using tinyxml2::XMLNode, tinyxml2::XMLElement, tinyxml2::XMLComment;
 
@@ -36,9 +37,11 @@ namespace engine::scene::lighting {
             Light* light;
 
             if(type == "point" || type == "POINT") {
-                light = new PointLight();
+                light = new PointLight;
             } else if(type == "directional" || type == "DIRECTIONAL") {
-                light = new DirectionalLight();
+                light = new DirectionalLight;
+            } else if(type == "spot" || type == "SPOT") {
+                light = new SpotLight;
             } else {
                 cerr << "Tipo de luz " + type + " desconhecido!" << endl;
                 return false;

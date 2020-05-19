@@ -25,7 +25,8 @@ add_executable(Engine
         src/scene/lighting/Lights.cpp src/scene/lighting/Lights.h
         src/scene/lighting/Light.h src/scene/lighting/Light.cpp
         src/scene/lighting/PointLight.cpp src/scene/lighting/PointLight.h
-        src/scene/lighting/DirectionalLight.h src/scene/lighting/DirectionalLight.cpp)
+        src/scene/lighting/DirectionalLight.cpp src/scene/lighting/DirectionalLight.h
+        src/scene/lighting/SpotLight.cpp src/scene/lighting/SpotLight.h)
 
 set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED COMPONENTS OpenGL)
