@@ -75,8 +75,9 @@ namespace engine::objects {
 
     void ModelMesh::Render() const {
         glEnableClientState(GL_VERTEX_ARRAY);
-        glEnableClientState(GL_INDEX_ARRAY);
+        glEnableClientState(GL_NORMAL_ARRAY);
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+        glEnableClientState(GL_INDEX_ARRAY);
 
         glBindBuffer(GL_ARRAY_BUFFER, this->vbos[0]);
         glVertexPointer(3, GL_FLOAT, 0, nullptr);
@@ -95,7 +96,8 @@ namespace engine::objects {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
         glDisableClientState(GL_VERTEX_ARRAY);
-        glDisableClientState(GL_INDEX_ARRAY);
+        glDisableClientState(GL_NORMAL_ARRAY);
         glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        glDisableClientState(GL_INDEX_ARRAY);
     }
 }
