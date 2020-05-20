@@ -1,9 +1,25 @@
 #include "AbstractGenerator.h"
 
-using std::endl;
+#include <fstream>
 
-void AbstractGenerator::AddVertex(const glm::vec3& v, const glm::vec3& n, const glm::vec2& t) {
-    vertex_data vd = {v, glm::normalize(n), t};
+using namespace std;
+
+void AbstractGenerator::AddVertex(const glm::dvec3& v, const glm::dvec3& n, const glm::dvec2& t) {
+    glm::dvec3 normal = n;
+
+    if(normal.x == 0.0 && normal.y == 0.0 && normal.z == 0) {
+        normal = {0, 0, 0};
+    } else if(glm::length(normal) > 1) {
+        normal = glm::normalize(normal);
+    } else if(glm::length(normal) < 1) {
+        do {
+            normal = 100.0 * normal;
+        } while(glm::length(normal) < 1);
+
+        normal = glm::normalize(normal);
+    }
+
+    vertex_data vd = {v, normal, t};
 
     if(this->vertices.count(vd) == 0) {
         this->vertices[vd] = this->nextIndex++;
@@ -19,7 +35,7 @@ void AbstractGenerator::AddVertex(const glm::vec3& v, const glm::vec3& n, const 
 }
 
 void AbstractGenerator::SaveVerticesToFile() {
-    std::ofstream file(filename);
+    ofstream file(filename);
 
     // Print the number of indices that will exist on the file
     file << this->indices.size() << endl;
@@ -30,7 +46,7 @@ void AbstractGenerator::SaveVerticesToFile() {
     }
 
     // Print each vertex to the file
-    std::map<unsigned short, vertex_data> orderedVertices;
+    map<unsigned short, vertex_data> orderedVertices;
 
     for(auto pair : this->vertices) {
         orderedVertices[pair.second] = pair.first;
@@ -55,7 +71,7 @@ bool vertex_data::operator==(const vertex_data& o) const {
     return o.pos == this->pos && o.normal == this->normal && o.textureCoords == this->textureCoords;
 }
 
-std::size_t std::hash<struct vertex_data>::operator()(const vertex_data& o) const {
+size_t std::hash<struct vertex_data>::operator()(const vertex_data& o) const {
     size_t res = 17;
     res = res * 31 + hash<glm::vec3>()( o.pos );
     res = res * 31 + hash<glm::vec3>()( o.normal );

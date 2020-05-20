@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-using std::cerr, std::endl, std::stoi;
+using std::cerr, std::endl, std::stoi, std::max;
 
 bool BoxGenerator::ParseArguments(int argc, char *argv[]) {
 
@@ -15,7 +15,7 @@ bool BoxGenerator::ParseArguments(int argc, char *argv[]) {
         return false;
     }
 
-    SetFilename(argv[5]); // Número correto de argumentos passado
+    SetFilename(argv[5]);
 
     dimX = stoi(argv[2]);
     dimY = stoi(argv[3]);
@@ -25,77 +25,88 @@ bool BoxGenerator::ParseArguments(int argc, char *argv[]) {
 }
 
 void BoxGenerator::GenerateVertices() {
-    
-    double y_ = -dimY / 2.0;
-    double h = dimZ / 2.0;
+    double h = dimY / 2.0;
     double w = dimX / 2.0;
+    double d = dimZ / 2.0;
 
-    // DESENHAR A BASE - plano XZ
+    double textureImageHeight = max(dimY, dimZ);
+    double textureImageWidth = 4*dimX + 2*dimZ;
 
-    AddVertex(-w, y_, -h);
-    AddVertex(w, y_, h);
-    AddVertex(-w, y_, h);
+    // Current left bottom corner and right bottom corner, respectively
+    glm::vec2 lbc = {0.0f, float(dimY)}, rtc = {float(dimZ),0.0f};
 
-    AddVertex(-w, y_, -h);
-    AddVertex(w, y_, -h);
-    AddVertex(w, y_, h);
+    // Parallel with plane ZY
+    AddVertex({w,-h,d},{1,0,0},{lbc[0]/textureImageWidth,lbc[1]/textureImageHeight});
+    AddVertex({w,-h,-d},{1,0,0},{rtc[0]/textureImageWidth,lbc[1]/textureImageHeight});
+    AddVertex({w,h,-d},{1,0,0},{rtc[0]/textureImageWidth,rtc[1]/textureImageHeight});
 
+    AddVertex({w,-h,d},{1,0,0},{lbc[0]/textureImageWidth,lbc[1]/textureImageHeight});
+    AddVertex({w,h,-d},{1,0,0},{rtc[0]/textureImageWidth,rtc[1]/textureImageHeight});
+    AddVertex({w,h,d},{1,0,0},{lbc[0]/textureImageWidth,rtc[1]/textureImageHeight});
 
-    // PARTE SUPERIOR - plano ZX
-    y_ = dimY / 2.0;
-    AddVertex(-w, y_, -h);
-    AddVertex(-w, y_, h);
-    AddVertex(w, y_, h);
-
-    AddVertex(-w, y_, -h);
-    AddVertex(w, y_, h);
-    AddVertex(w, y_, -h);
-
-    //PARTE FRONTAL - plano XY:
-    double z_ = dimZ / 2.0;
-    w = dimX / 2.0;
-    h = dimY / 2.0;
-    AddVertex(w, h, z_);
-    AddVertex(-w, h, z_);
-    AddVertex(-w, -h, z_);
-
-    AddVertex(w, h, z_);
-    AddVertex(-w, -h, z_);
-    AddVertex(w, -h, z_);
+    lbc[0] += float(dimZ);
+    rtc[0] += float(dimZ);
 
 
-    // Parte de tras plano yx
-    z_ = -dimZ / 2.0;
-    AddVertex(w, h, z_);
-    AddVertex(-w, -h, z_);
-    AddVertex(-w, h, z_);
+    // Parallel with plane YZ
+    AddVertex({-w,-h,d},{-1,0,0},{rtc[0]/textureImageWidth,lbc[1]/textureImageHeight});
+    AddVertex({-w,h,-d},{-1,0,0},{lbc[0]/textureImageWidth,rtc[1]/textureImageHeight});
+    AddVertex({-w,-h,-d},{-1,0,0},{lbc[0]/textureImageWidth,lbc[1]/textureImageHeight});
 
-    AddVertex(w, h, z_);
-    AddVertex(w, -h, z_);
-    AddVertex(-w, -h, z_);
+    AddVertex({-w,-h,d},{-1,0,0},{rtc[0]/textureImageWidth,lbc[1]/textureImageHeight});
+    AddVertex({-w,h,d},{-1,0,0},{rtc[0]/textureImageWidth,rtc[1]/textureImageHeight});
+    AddVertex({-w,h,-d},{-1,0,0},{lbc[0]/textureImageWidth,rtc[1]/textureImageHeight});
 
-    //lado direito - plano YZ:
-    double x_ = dimX / 2.0;
-    h = dimY / 2.0;
-    w = dimZ / 2.0;
+    lbc[0] += float(dimZ);
+    rtc[0] += float(dimX);
 
-    AddVertex(x_, h, w);
-    AddVertex(x_, -h, w);
-    AddVertex(x_, -h, -w);
 
-    AddVertex(x_, h, w);
-    AddVertex(x_, -h, -w);
-    AddVertex(x_, h, -w);
+    // Parallel with plane XY
+    AddVertex({-w,-h,d},{0,0,1},{lbc[0]/textureImageWidth,lbc[1]/textureImageHeight});
+    AddVertex({w,h,d},{0,0,1},{rtc[0]/textureImageWidth,rtc[1]/textureImageHeight});
+    AddVertex({-w,h,d},{0,0,1},{lbc[0]/textureImageWidth,rtc[1]/textureImageHeight});
 
-    //lado esquerdo plano zy
+    AddVertex({-w,-h,d},{0,0,1},{lbc[0]/textureImageWidth,lbc[1]/textureImageHeight});
+    AddVertex({w,-h,d},{0,0,1},{rtc[0]/textureImageWidth,lbc[1]/textureImageHeight});
+    AddVertex({w,h,d},{0,0,1},{rtc[0]/textureImageWidth,rtc[1]/textureImageHeight});
 
-    x_ = -dimX / 2.0;
+    lbc[0] += float(dimX);
+    rtc[0] += float(dimX);
 
-    AddVertex(x_, h, w);
-    AddVertex(x_, -h, -w);
-    AddVertex(x_, -h, w);
 
-    AddVertex(x_, h, w);
-    AddVertex(x_, h, -w);
-    AddVertex(x_, -h, -w);
+    // Parallel with plane YX
+    AddVertex({-w,-h,-d},{0,0,-1},{rtc[0]/textureImageWidth,lbc[1]/textureImageHeight});
+    AddVertex({-w,h,-d},{0,0,-1},{rtc[0]/textureImageWidth,rtc[1]/textureImageHeight});
+    AddVertex({w,h,-d},{0,0,-1},{lbc[0]/textureImageWidth,rtc[1]/textureImageHeight});
+
+    AddVertex({-w,-h,-d},{0,0,-1},{rtc[0]/textureImageWidth,lbc[1]/textureImageHeight});
+    AddVertex({w,h,-d},{0,0,-1},{lbc[0]/textureImageWidth,rtc[1]/textureImageHeight});
+    AddVertex({w,-h,-d},{0,0,-1},{lbc[0]/textureImageWidth,lbc[1]/textureImageHeight});
+
+    lbc[0] += float(dimX);
+    lbc[1] = float(dimZ);
+    rtc[0] += float(dimX);
+
+
+    // Parallel with plane XZ
+    AddVertex({w,h,d},{0,1,0},{rtc[0]/textureImageWidth,lbc[1]/textureImageHeight});
+    AddVertex({w,h,-d},{0,1,0},{rtc[0]/textureImageWidth,rtc[1]/textureImageHeight});
+    AddVertex({-w,h,-d},{0,1,0},{lbc[0]/textureImageWidth,rtc[1]/textureImageHeight});
+
+    AddVertex({w,h,d},{0,1,0},{rtc[0]/textureImageWidth,lbc[1]/textureImageHeight});
+    AddVertex({-w,h,-d},{0,1,0},{lbc[0]/textureImageWidth,rtc[1]/textureImageHeight});
+    AddVertex({-w,h,d},{0,1,0},{lbc[0]/textureImageWidth,lbc[1]/textureImageHeight});
+
+    lbc[0] += float(dimX);
+    rtc[0] += float(dimX);
+
+
+    // Parallel with plane ZX
+    AddVertex({w,-h,d},{0,-1,0},{rtc[0]/textureImageWidth,rtc[1]/textureImageHeight});
+    AddVertex({-w,-h,-d},{0,-1,0},{lbc[0]/textureImageWidth,lbc[1]/textureImageHeight});
+    AddVertex({w,-h,-d},{0,-1,0},{rtc[0]/textureImageWidth,lbc[1]/textureImageHeight});
+
+    AddVertex({w,-h,d},{0,-1,0},{rtc[0]/textureImageWidth,rtc[1]/textureImageHeight});
+    AddVertex({-w,-h,d},{0,-1,0},{lbc[0]/textureImageWidth,rtc[1]/textureImageHeight});
+    AddVertex({-w,-h,-d},{0,-1,0},{lbc[0]/textureImageWidth,lbc[1]/textureImageHeight});
 }

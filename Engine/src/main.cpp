@@ -4,6 +4,7 @@
 #include <tinyxml2/tinyxml2.h>
 
 #include <IL/il.h>
+#include <string>
 
 #include "scene/Scene.h"
 #include "window/Window.h"
@@ -11,7 +12,7 @@
 #include "window/cameras/ExplorerCamera.h"
 
 using std::cerr, std::endl, std::cout;
-using std::unique_ptr;
+using std::unique_ptr, std::string;
 using tinyxml2::XMLDocument, tinyxml2::XMLNode, tinyxml2::XML_SUCCESS;
 using engine::scene::Scene;
 using engine::window::Window;
@@ -50,8 +51,8 @@ int main(int argc, char* argv[]) {
     }
 
     // Parse the scene file
-    Scene scene;
-    if(!scene.ParseXml(root->FirstChild())) {
+    Scene* scene = new Scene;
+    if(!scene->ParseXml(root->FirstChild())) {
         cerr << "Failed to parse Scene's XML!" << endl;
         return -1;
     }
@@ -60,13 +61,14 @@ int main(int argc, char* argv[]) {
     // window.SetCamera(new StaticCamera(glm::dvec3(0, 0, 1), glm::dvec3(0, 0, 0)));
     // window.SetCamera(new ExplorerCamera(glm::dvec3(0, 0, 0)));
     window.SetCamera(new FpsCamera);
-    window.SetScene(&scene);
+    window.SetScene(scene, string(argv[1]));
 
     // Start main loop
     window.MainLoop();
 
     // Free up resources
     delete window.GetCamera();
+    delete window.GetScene();
     glfwTerminate();
 
     return 0;
@@ -97,7 +99,7 @@ unique_ptr<XMLDocument> ReadSceneFile(const char* filename) {
 // para essas plataformas.
 #ifdef WIN32
 extern "C" {
-__declspec(dllexport) unsigned long NvOptimusEnablement = 0x00000001;
+// __declspec(dllexport) unsigned long NvOptimusEnablement = 0x00000001;
 __declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
 }
 #endif

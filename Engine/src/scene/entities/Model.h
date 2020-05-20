@@ -23,7 +23,10 @@ namespace engine::scene::entities {
         shared_ptr<ModelMesh> mesh;
         shared_ptr<Texture> texture;
 
-        GLubyte diffR, diffG, diffB;
+        glm::vec4 ambientLight;
+        glm::vec4 diffuseLight;
+        glm::vec4 specularLight;
+        float shininess;
     public:
         explicit Model(const tinyxml2::XMLElement* element);
 

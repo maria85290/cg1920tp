@@ -5,9 +5,12 @@
 using std::cout, std::cerr, std::endl;
 using tinyxml2::XMLNode, tinyxml2::XMLComment;
 using engine::scene::entities::Group;
+using engine::scene::lighting::Lights;
 
 namespace engine::scene {
     Scene::~Scene() {
+        delete lights;
+
         for(auto group : this->groups) {
             delete group;
         }
@@ -19,28 +22,37 @@ namespace engine::scene {
             return false;
         }
 
-        const XMLNode* groupNode = sceneNode->FirstChild();
+        const XMLNode* node = sceneNode->FirstChild();
 
-        while(groupNode != nullptr) {
-        	if(dynamic_cast<const XMLComment*>(groupNode)) {
-                groupNode = groupNode->NextSibling();
+        while(node != nullptr) {
+        	if(dynamic_cast<const XMLComment*>(node)) {
+                node = node->NextSibling();
                 continue;
             }
 
-            if(strcmp("group", groupNode->Value()) != 0) {
-                cerr << "Encontrada tag inválida: scene->" << groupNode->Value() << endl;
+        	if(strcmp("lights", node->Value()) == 0) {
+        	    if(this->lights != nullptr) {
+        	        cerr << "Encontrado mais do que um grupo de luzes na cena!" << endl;
+        	        return false;
+        	    }
+
+        	    this->lights = new Lights();
+                this->lights->ParseXml(node);
+            } else if(strcmp("group", node->Value()) == 0) {
+                Group* group = new Group;
+
+                if(!group->ParseXml(node)) {
+                    cerr << "Falha ao processar o XML do grupo!" << endl;
+                    return false;
+                }
+
+                this->AddGroup(group);
+            } else {
+                cerr << "Encontrada tag inválida: scene->" << node->Value() << endl;
                 return false;
             }
 
-            Group* group = new Group;
-            if(!group->ParseXml(groupNode)) {
-                cerr << "Falha ao processar o XML do grupo!" << endl;
-                return false;
-            }
-
-            this->AddGroup(group);
-
-            groupNode = groupNode->NextSibling();
+            node = node->NextSibling();
         }
 
         return true;
@@ -48,8 +60,10 @@ namespace engine::scene {
 
     void Scene::InitGLSettings() const {
         glEnable(GL_DEPTH_TEST);
+
         glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
+
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     }
 
@@ -65,8 +79,18 @@ namespace engine::scene {
     }
 
     void Scene::Render() const {
+        if(this->lights != nullptr) {
+            glEnable(GL_LIGHTING);
+            this->lights->Enable();
+        }
+
         for(auto group : this->groups) {
             group->Render();
+        }
+
+        if(this->lights != nullptr) {
+            this->lights->Disable();
+            glDisable(GL_LIGHTING);
         }
     }
 }

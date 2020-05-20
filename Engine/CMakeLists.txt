@@ -21,7 +21,12 @@ add_executable(Engine
         src/window/cameras/StaticCamera.cpp src/window/cameras/StaticCamera.h
         src/window/cameras/ExplorerCamera.cpp src/window/cameras/ExplorerCamera.h
         src/window/input/Keyboard.cpp src/window/input/Keyboard.h
-        src/util/Settings.cpp src/util/Settings.h)
+        src/util/Settings.cpp src/util/Settings.h
+        src/scene/lighting/Lights.cpp src/scene/lighting/Lights.h
+        src/scene/lighting/Light.h src/scene/lighting/Light.cpp
+        src/scene/lighting/PointLight.cpp src/scene/lighting/PointLight.h
+        src/scene/lighting/DirectionalLight.cpp src/scene/lighting/DirectionalLight.h
+        src/scene/lighting/SpotLight.cpp src/scene/lighting/SpotLight.h)
 
 set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED COMPONENTS OpenGL)
@@ -84,7 +89,7 @@ elseif(UNIX AND NOT APPLE) # Include GLUT and GLEW for Linux
     endif()
 
     target_include_directories(Engine PUBLIC ${GLFW_INCLUDE_DIR} ${IL_INCLUDE_DIR})
-    target_link_libraries(Engine PUBLIC glfw DevIL ${CMAKE_DL_LIBS})
+    target_link_libraries(Engine PUBLIC glfw IL ${CMAKE_DL_LIBS})
 elseif(APPLE)
     set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl") # Add -ldl to the command line for cc
 

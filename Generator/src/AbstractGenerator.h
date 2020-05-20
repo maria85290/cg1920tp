@@ -13,9 +13,9 @@
 #include <math.h>
 
 struct vertex_data {
-    glm::vec3 pos;
-    glm::vec3 normal;
-    glm::vec2 textureCoords;
+    glm::dvec3 pos;
+    glm::dvec3 normal;
+    glm::dvec2 textureCoords;
 
     bool operator==(const vertex_data&) const;
 };
@@ -53,20 +53,12 @@ protected:
         this->filename = filename;
     }
 
-    void AddVertex(const glm::vec3& v, const glm::vec3& n, const glm::vec2& t);
+    void AddVertex(const glm::dvec3& v, const glm::dvec3& n, const glm::dvec2& t);
 
     inline void AddVertex(const double& x, const double& y, const double& z,
                           const double& nx, const double& ny, const double& nz,
                           const double& tx, const double& ty) {
         this->AddVertex({x, y, z}, {nx, ny, nz}, {tx, ty});
-    }
-
-    inline void AddVertex(const glm::vec3& v) {
-        this->AddVertex(v, {0, 0, 0}, {0, 0});
-    }
-
-    inline void AddVertex(const double& x, const double& y, const double& z) {
-        this->AddVertex({x, y, z});
     }
 
 public:

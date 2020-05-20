@@ -7,7 +7,7 @@
 
 using tinyxml2::XML_SUCCESS;
 
-using std::string, std::tuple, std::vector;
+using std::string, std::pair, std::vector;
 using std::cerr, std::endl;
 using tinyxml2::XMLComment;
 
@@ -132,7 +132,7 @@ namespace engine::scene::entities {
     }
 
     const pair<glm::vec3, glm::vec3> CatmullRomAnimation::GetGlobalCatmullRomPoint(float gt) {
-        const int numPoints = this->controlPoints.size();
+        const int numPoints = static_cast<int>(this->controlPoints.size());
 
         float t = gt * numPoints;
         int index = (int) floorf(t);
@@ -156,7 +156,7 @@ namespace engine::scene::entities {
             vertices.push_back(pos);
         }
 
-        this->numCurveVertices = vertices.size();
+        this->numCurveVertices = static_cast<int>(vertices.size());
 
         glGenBuffers(1, &this->curveVbo);
 

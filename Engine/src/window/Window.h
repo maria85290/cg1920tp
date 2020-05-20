@@ -37,6 +37,7 @@ namespace engine::window {
          * A cena que está atualmente a ser desenhada.
          */
         scene::Scene* scene = nullptr;
+        std::string sceneFile;
 
         double deltaTime = 0;
         int fps = 0;
@@ -45,6 +46,7 @@ namespace engine::window {
         void ComputeDeltaTime();
         void MeasureFps();
         void RenderAxis() const;
+        void ReloadScene();
 
         static void APIENTRY DebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
     public:
@@ -70,9 +72,10 @@ namespace engine::window {
         scene::Scene* GetScene() const { return scene; }
 
         /** Define qual a cena que vai ser renderizada nesta janela. */
-        void SetScene(scene::Scene* scene)
+        void SetScene(scene::Scene* scene, const std::string& sceneFilename)
         {
             this->scene = scene;
+            this->sceneFile = sceneFilename;
         }
 
         double GetDeltaTime() const { return deltaTime; }

@@ -59,7 +59,7 @@ bool BezierGenerator::ParseArguments(int argc, char* argv[]) {
     file.ignore(numeric_limits<streamsize>::max(), '\n');
 
     for(int i = 0; i < numControlPoints; i++) {
-        glm::vec4 point(1.0f);
+        glm::dvec4 point(1.0);
 
         string line;
         getline(file, line);
@@ -84,61 +84,61 @@ bool BezierGenerator::ParseArguments(int argc, char* argv[]) {
 
 void BezierGenerator::GenerateVertices() {
     // step é o valor de quanto u e v têm de andar para a frente, e é definido de acordo com o nível de tesselação
-    const float step = 1.0f / float(tessellationLevel);
+    const double step = 1.0 / double(tessellationLevel);
 
     for(int i = 0; i < this->patches.size(); i++) {
         auto patch = this->patches[i];
 
-        for(float u = 0; u < 1.0; u += step) {
-            for(float v = 0; v < 1.0; v += step) {
-                auto [p0, d0] = this->ComputePatchPoint(u, v, patch);
-                auto [p1, d1] = this->ComputePatchPoint(u, v + step, patch);
-                auto [p2, d2] = this->ComputePatchPoint(u + step, v, patch);
-                auto [p3, d3] = this->ComputePatchPoint(u + step, v + step, patch);
+        for(double u = 0.0000000001; u < 1.0; u += step) {
+            for(double v = 0.0000000001; v < 1.0; v += step) {
+                auto [p0, d0] = this->ComputePatchPoint(patch, u, v);
+                auto [p1, d1] = this->ComputePatchPoint(patch, u, v + step);
+                auto [p2, d2] = this->ComputePatchPoint(patch, u + step, v);
+                auto [p3, d3] = this->ComputePatchPoint(patch, u + step, v + step);
 
-                AddVertex(p3, d3, {0.0f, 0.0f});
-                AddVertex(p2, d2, {0.0f, 0.0f});
-                AddVertex(p1, d1, {0.0f, 0.0f});
+                AddVertex(p3, d3, {0.0, 0.0});
+                AddVertex(p2, d2, {0.0, 0.0});
+                AddVertex(p1, d1, {0.0, 0.0});
 
-                AddVertex(p2, d2, {0.0f, 0.0f});
-                AddVertex(p0, d0, {0.0f, 0.0f});
-                AddVertex(p1, d1, {0.0f, 0.0f});
+                AddVertex(p2, d2, {0.0, 0.0});
+                AddVertex(p0, d0, {0.0, 0.0});
+                AddVertex(p1, d1, {0.0, 0.0});
             }
         }
     }
 }
 
-const pair<glm::vec3, glm::vec3> BezierGenerator::ComputePatchPoint(float u, float v,
-                                                   const glm::vec4& p00, const glm::vec4& p01, const glm::vec4& p02, const glm::vec4& p03,
-                                                   const glm::vec4& p10, const glm::vec4& p11, const glm::vec4& p12, const glm::vec4& p13,
-                                                   const glm::vec4& p20, const glm::vec4& p21, const glm::vec4& p22, const glm::vec4& p23,
-                                                   const glm::vec4& p30, const glm::vec4& p31, const glm::vec4& p32, const glm::vec4& p33
+const pair<glm::dvec3, glm::dvec3> BezierGenerator::ComputePatchPoint(double u, double v,
+                                                   const glm::dvec4& p00, const glm::dvec4& p01, const glm::dvec4& p02, const glm::dvec4& p03,
+                                                   const glm::dvec4& p10, const glm::dvec4& p11, const glm::dvec4& p12, const glm::dvec4& p13,
+                                                   const glm::dvec4& p20, const glm::dvec4& p21, const glm::dvec4& p22, const glm::dvec4& p23,
+                                                   const glm::dvec4& p30, const glm::dvec4& p31, const glm::dvec4& p32, const glm::dvec4& p33
 ) const {
-    const glm::vec4 U = {powf(u, 3), powf(u, 2), u, 1.0f};
-    const glm::vec4 UPrime = {3 * powf(u, 2), 2 * u, 1.0f, 0.0f};
+    const glm::dvec4 U = {u * u * u, u * u, u, 1.0};
+    const glm::dvec4 UPrime = {3 * u * u, 2 * u, 1.0, 0.0};
 
-    static const glm::mat4 M = {
-        {-1.0f, 3.0f, -3.0f, 1.0f},
-        {3.0f, -6.0f, 3.0f, 0.0f},
-        {-3.0f, 3.0f, 0.0f, 0.0f},
-        {1.0f, 0.0f, 0.0f, 0.0f}
+    static const glm::dmat4 M = {
+        {-1.0, 3.0, -3.0, 1.0},
+        {3.0, -6.0, 3.0, 0.0},
+        {-3.0, 3.0, 0.0, 0.0},
+        {1.0, 0.0, 0.0, 0.0}
     };
 
     // This matrix must be defined as column-major; each line here represents a column in standard form
     // Each line here also defines a 4x4 matrix itself. However, that definition is being done in a line-major format
     // Therefore, we must transpose each of the 4x4 sub-matrices individually, so they become column-major
-    const vmat4 P = transposeEach({
+    const vdmat4 P = transposeEach({
         {p00, p10, p20, p30},
         {p01, p11, p21, p31},
         {p02, p12, p22, p32},
         {p03, p13, p23, p33}
     });
 
-    const glm::vec4 V = {powf(v, 3), powf(v, 2), v, 1.0f};
-    const glm::vec4 VPrime = {3 * powf(v, 2), 2 * v, 1.0f, 0.0f};
+    const glm::dvec4 V = {v * v * v, v * v, v, 1.0};
+    const glm::dvec4 VPrime = {3 * v * v, 2 * v, 1.0, 0.0};
 
-    const glm::vec3 partialU = UPrime * M * P * M * V;
-    const glm::vec3 partialV = U * M * P * M * VPrime;
+    const glm::dvec3 partialU = UPrime * M * P * M * V;
+    const glm::dvec3 partialV = (U * M * P) * (M * VPrime);
 
-    return {U * M * P * M * V, partialV * partialU};
+    return {U * M * P * M * V, glm::cross(partialV, partialU)};
 }

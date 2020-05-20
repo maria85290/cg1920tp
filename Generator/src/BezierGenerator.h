@@ -12,11 +12,11 @@
 /**
  * Define uma estrutura de utilidade para simplificar o código relacionado com a multiplicação de matrizes.
  * Esta estrutura é, em essência, uma matriz de 16x16, ou, vista de outra forma, uma matriz de 4x4 cujos elementos
- * são pontos (vec4), e não apenas floats simples.
+ * são pontos (dvec4), e não apenas floats simples.
  */
-typedef struct vmat4 {
-    glm::mat4 a, b, c, d;
-} vmat4;
+typedef struct vdmat4 {
+    glm::dmat4 a, b, c, d;
+} vdmat4;
 
 class BezierGenerator : public AbstractGenerator {
 private:
@@ -24,16 +24,18 @@ private:
     int tessellationLevel;
 
     std::vector<std::vector<int>> patches;
-    std::vector<glm::vec4> controlPoints;
+    std::vector<glm::dvec4> controlPoints;
 
-    const std::pair<glm::vec3, glm::vec3> ComputePatchPoint(float u, float v,
-                                       const glm::vec4& p00, const glm::vec4& p01, const glm::vec4& p02, const glm::vec4& p03,
-                                       const glm::vec4& p10, const glm::vec4& p11, const glm::vec4& p12, const glm::vec4& p13,
-                                       const glm::vec4& p20, const glm::vec4& p21, const glm::vec4& p22, const glm::vec4& p23,
-                                       const glm::vec4& p30, const glm::vec4& p31, const glm::vec4& p32, const glm::vec4& p33
+    const std::pair<glm::dvec3, glm::dvec3> ComputePatchPoint(double u, double v,
+                                       const glm::dvec4& p00, const glm::dvec4& p01, const glm::dvec4& p02, const glm::dvec4& p03,
+                                       const glm::dvec4& p10, const glm::dvec4& p11, const glm::dvec4& p12, const glm::dvec4& p13,
+                                       const glm::dvec4& p20, const glm::dvec4& p21, const glm::dvec4& p22, const glm::dvec4& p23,
+                                       const glm::dvec4& p30, const glm::dvec4& p31, const glm::dvec4& p32, const glm::dvec4& p33
     ) const;
 
-    inline const std::pair<glm::vec3, glm::vec3> ComputePatchPoint(float u, float v, const std::vector<int>& patch) const {
+    inline const std::pair<glm::dvec3, glm::dvec3> ComputePatchPoint(const std::vector<int>& patch,
+                                                                     double u,
+                                                                     double v) const {
         return this->ComputePatchPoint(
             u, v,
             controlPoints[patch[0]], controlPoints[patch[1]], controlPoints[patch[2]], controlPoints[patch[3]],
@@ -53,7 +55,7 @@ public:
 };
 
 /**
- * Define a multiplicação entre um vector com 4 componentes e uma matriz 4x4 de vetores com 4 componentes cada.
+ * Define a multiplicação entre um dvector com 4 componentes e uma matriz 4x4 de vetores com 4 componentes cada.
  *
  * Esta operação está definida como:
  * - O resultado é uma matriz 4x4 de floats;
@@ -62,7 +64,7 @@ public:
  * @param v O vetor a multiplicar
  * @param m A matriz a multiplicar
  */
-inline glm::mat4 operator*(const glm::vec4& v, const vmat4& m) {
+inline glm::dmat4 operator*(const glm::dvec4& v, const vdmat4& m) {
     return { v * m.a, v * m.b, v * m.c, v * m.d };
 }
 
@@ -73,6 +75,6 @@ inline glm::mat4 operator*(const glm::vec4& v, const vmat4& m) {
  *
  * @param m A matriz a transpor
  */
-inline vmat4 transposeEach(const vmat4& m) {
+inline vdmat4 transposeEach(const vdmat4& m) {
     return { glm::transpose(m.a), glm::transpose(m.b), glm::transpose(m.c), glm::transpose(m.d) };
 }
