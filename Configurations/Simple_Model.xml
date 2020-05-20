@@ -1,15 +1,8 @@
 <scene>
-    <lights>
-        <light type="point"
-               posX="50" posY="0" posZ="30"
-               ambR="51" ambG="51" ambB="51"
-               diffR="204" diffG="204" diffB="204"
-               specR="204" specG="204" specB="204" />
-    </lights>
     <group>
         <models>
-            <model file="paralelipipedo.3d"
-                   texture="debugRectangle3D.png"
+            <model file="cone.3d"
+                   texture="coneDebug.png"
                    ambR="255" ambG="255" ambB="255"
                    diffR="255" diffG="255" diffB="255"
                    specR="255" specG="255" specB="255"

@@ -6,7 +6,7 @@
 class ConeGenerator : public AbstractGenerator {
 private:
     int bottomRadius;
-    int height;
+    float height;
     int slices;
     int stacks;
 

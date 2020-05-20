@@ -61,14 +61,6 @@ protected:
         this->AddVertex({x, y, z}, {nx, ny, nz}, {tx, ty});
     }
 
-    inline void AddVertex(const glm::dvec3& v) {
-        this->AddVertex(v, {0, 0, 0}, {0, 0});
-    }
-
-    inline void AddVertex(const double& x, const double& y, const double& z) {
-        this->AddVertex({x, y, z});
-    }
-
 public:
     virtual ~AbstractGenerator() = default;
 
