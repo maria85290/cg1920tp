@@ -26,6 +26,7 @@ namespace engine::scene::entities {
         glm::vec4 ambientLight;
         glm::vec4 diffuseLight;
         glm::vec4 specularLight;
+        glm::vec4 emissionLight;
         float shininess;
     public:
         explicit Model(const tinyxml2::XMLElement* element);

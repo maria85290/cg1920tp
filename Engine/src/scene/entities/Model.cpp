@@ -49,6 +49,7 @@ namespace engine::scene::entities {
         this->ambientLight = Light::ParseLightComponent("amb", element, {0.0f, 0.0f, 0.0f, 1.0f});
         this->diffuseLight = Light::ParseLightComponent("diff", element, {0.0f, 0.0f, 0.0f, 1.0f});
         this->specularLight = Light::ParseLightComponent("spec", element, {0.0f, 0.0f, 0.0f, 1.0f});
+        this->emissionLight = Light::ParseLightComponent("emiss", element, {0.0f, 0.0f, 0.0f, 1.0f});
         this->shininess = element->FloatAttribute("shininess", 0);
     }
 
@@ -56,11 +57,12 @@ namespace engine::scene::entities {
         glPushAttrib(GL_COLOR_BUFFER_BIT);
         glPushAttrib(GL_LIGHTING_BIT);
 
-        // glColor3fv(glm::value_ptr(this->diffuseLight));
+        glColor3fv(glm::value_ptr(this->diffuseLight));
 
         glMaterialfv(GL_FRONT, GL_AMBIENT, glm::value_ptr(this->ambientLight));
         glMaterialfv(GL_FRONT, GL_DIFFUSE, glm::value_ptr(this->diffuseLight));
         glMaterialfv(GL_FRONT, GL_SPECULAR, glm::value_ptr(this->specularLight));
+        glMaterialfv(GL_FRONT, GL_EMISSION, glm::value_ptr(this->emissionLight));
         glMaterialf(GL_FRONT, GL_SHININESS, this->shininess);
 
         if(this->texture)
