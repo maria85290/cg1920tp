@@ -248,9 +248,10 @@ namespace engine::window {
         Texture::GetCache().Clear();
         scene::lighting::Light::ResetLightNo();
 
+        // Create a new scene
         this->scene = new scene::Scene;
 
-        // Find out if the scene file exists
+        // Read the scene file
         auto root = ReadSceneFile(this->sceneFile.c_str());
 
         // Parse the scene file
