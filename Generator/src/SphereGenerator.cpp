@@ -46,7 +46,31 @@ void SphereGenerator::GenerateVertices() {
     double alfa = 2 * M_PI / slices;
     double beta = (M_PI) / stacks;
 
-    for (int i = 0; i < stacks; i++) {
+    for (int j = 0; j < slices; j++) {
+        angBeta = M_PI / 2 - beta;
+        angAlfa = (alfa * j);
+
+        // Ponto central
+        xC = 0;
+        yC = radius;
+        zC = 0;
+
+        // para o ponto P (canto inferior esquerdo)
+        xP = radius * cos(angBeta) * sin(angAlfa);
+        yP = radius * sin(angBeta);
+        zP = radius * cos(angBeta) * cos(angAlfa);
+
+        // para o ponto A (canto inferior direito)
+        xA = radius * cos(angBeta) * sin(angAlfa + alfa);
+        yA = radius * sin(angBeta);
+        zA = radius * cos(angBeta) * cos(angAlfa + alfa);
+
+        AddVertex({xA, yA, zA}, {xA, yA, zA}, {float(j + 1) / float(slices), 1/float(stacks)});
+        AddVertex({xC, yC, zC}, {xC, yC, zC}, {float(j) / float(slices), 0});
+        AddVertex({xP, yP, zP}, {xP, yP, zP}, {float(j) / float(slices), 1/float(stacks)});
+    }
+
+    for (int i = 1; i < stacks-1; i++) {
         angBeta = M_PI / 2 - (beta * (i+1));    //Cálculo do ângulo Beta
 
         for (int j = 0; j < slices; j++) {
@@ -88,5 +112,29 @@ void SphereGenerator::GenerateVertices() {
             AddVertex({xP, yP, zP}, {xP, yP, zP}, {float(j) / float(slices), float(i + 1) / float(stacks)});
             AddVertex({xC, yC, zC}, {xC, yC, zC}, {float(j + 1) / float(slices), float(i) / float(stacks)});
         }
+    }
+
+    for (int j = 0; j < slices; j++) {
+        angBeta = M_PI / 2 - beta * (stacks-1);
+        angAlfa = (alfa * j);
+
+        // Ponto central
+        xC = 0;
+        yC = -radius;
+        zC = 0;
+
+        // para o ponto P (canto inferior esquerdo)
+        xP = radius * cos(angBeta) * sin(angAlfa);
+        yP = radius * sin(angBeta);
+        zP = radius * cos(angBeta) * cos(angAlfa);
+
+        // para o ponto A (canto inferior direito)
+        xA = radius * cos(angBeta) * sin(angAlfa + alfa);
+        yA = radius * sin(angBeta);
+        zA = radius * cos(angBeta) * cos(angAlfa + alfa);
+
+        AddVertex({xA, yA, zA}, {xA, yA, zA}, {float(j + 1) / float(slices),  float(stacks-1)/float(stacks)});
+        AddVertex({xP, yP, zP}, {xP, yP, zP}, {float(j) / float(slices), float(stacks-1)/float(stacks)});
+        AddVertex({xC, yC, zC}, {xC, yC, zC}, {float(j) / float(slices), 1});
     }
 }

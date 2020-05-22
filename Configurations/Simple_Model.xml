@@ -11,8 +11,8 @@
     </lights>
     <group>
         <models>
-            <model file="cone.3d"
-                   texture="coneDebug.png"
+            <model file="sphere.3d"
+                   texture="sphere_debug.png"
                    ambR="255" ambG="255" ambB="255"
                    diffR="255" diffG="255" diffB="255"
                    specR="255" specG="255" specB="255"
