@@ -1,12 +1,24 @@
 <scene>
+    <lights>
+        <light type="point"
+               posX="0" posY="0" posZ="0"
+               dirX="0" dirY="-1" dirZ="0"
+               cutoffAngle="45" cutoffExponent="0"
+               attenuationLinear="0"
+               ambR="51" ambG="51" ambB="51"
+               diffR="204" diffG="204" diffB="204"
+               specR="204" specG="204" specB="204" />
+    </lights>
     <group>
         <!-- Sun -->
         <translate X="0" Y="0" Z="0"/>
         <scale X="109" Y="109" Z="109"/>
         <models>
-            <model texture="texture_sun.png" ambR="255" ambG="255" ambB="255"
+            <model file="sun.3d" texture="texture_sun.png"
+                   ambR="255" ambG="255" ambB="255"
                    diffR="255" diffG="255" diffB="255"
-                   specR="255" specG="255" specB="255" file="sun.3d"/>
+                   specR="255" specG="255" specB="255"
+                   emissR="255" emissG="255" emissB="255" />
         </models>
     </group>
     <group>
@@ -31,7 +43,10 @@
         <rotate time="10" axisX="0" axisY="1" axisZ="0" />
         <scale X="1.146" Y="1.146" Z="1.146"/>
         <models>
-            <model texture="texture_mercury.png" file="planet.3d" diffR="181" diffG="167" diffB="167"/>
+            <model texture="texture_mercury.png" file="planet.3d"
+                   ambR="255" ambG="255" ambB="255"
+                   diffR="255" diffG="255" diffB="255"
+                   specR="255" specG="255" specB="255" />
         </models>
     </group>
     <group>
@@ -56,7 +71,10 @@
         <rotate time="10" axisX="0" axisY="1" axisZ="0" />
         <scale X="2.847" Y="2.847" Z="2.847"/>
         <models>
-            <model texture="texture_venus.png" file="planet.3d" diffR="187" diffG="183" diffB="171"/>
+            <model texture="texture_venus.png" file="planet.3d"
+                   ambR="255" ambG="255" ambB="255"
+                   diffR="255" diffG="255" diffB="255"
+                   specR="255" specG="255" specB="255" />
         </models>
     </group>
     <group>
@@ -82,7 +100,10 @@
             <!-- Earth -->
             <scale X="3" Y="3" Z="3"/>
             <models>
-                <model texture="texture_earth.jpg" file="planet.3d" diffR="140" diffG="177" diffB="222"/>
+                <model texture="texture_earth.jpg" file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -91,7 +112,10 @@
             <rotate time="28" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.816" Y="0.816" Z="0.816"/>
             <models>
-                <model texture="texture_moon.png" file="planet.3d" diffR="254" diffG="252" diffB="215"/>
+                <model texture="texture_moon.png" file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
     </group>
@@ -118,7 +142,10 @@
             <rotate time="10" axisX="0" axisY="1" axisZ="0" />
             <scale X="2" Y="2" Z="2"/>
             <models>
-                <model texture="texture_mars.png" file="planet.3d" diffR="198" diffG="123" diffB="92"/>
+                <model texture="texture_mars.png" file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -127,7 +154,10 @@
             <rotate time="20" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.00176" Y="0.00176" Z="0.00176"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -135,7 +165,10 @@
             <translate X="-5" Y="0" Z="0"/>
             <scale X="0.000973" Y="0.000973" Z="0.000973"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
     </group> <group>
@@ -161,7 +194,10 @@
             <rotate time="30" axisX="0" axisY="1" axisZ="0" />
             <scale X="33" Y="33" Z="33"/>
             <models>
-                <model texture="texture_jupiter.png" file="planet.3d" diffR="167" diffG="156" diffB="134"/>
+                <model texture="texture_jupiter.png" file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -170,7 +206,10 @@
             <rotate time="10" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.285" Y="0.285" Z="0.285"/>
             <models>
-                <model file="planet.3d" diffR="194" diffG="192" diffB="112"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -179,7 +218,10 @@
             <rotate time="5" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.244" Y="0.244" Z="0.244"/>
             <models>
-                <model file="planet.3d" diffR="199" diffG="141" diffB="97"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -188,7 +230,10 @@
             <rotate time="15" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.413" Y="0.413" Z="0.413"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -197,7 +242,10 @@
             <rotate time="12" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.378" Y="0.378" Z="0.378"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
     </group>
@@ -224,7 +272,10 @@
             <rotate time="10" axisX="0" axisY="1" axisZ="0" />
             <scale X="27" Y="27" Z="27"/>
             <models>
-                <model texture="texture_saturn.png" file="planet.3d" diffR="164" diffG="155" diffB="114"/>
+                <model texture="texture_saturn.png" file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -233,7 +284,10 @@
             <rotate time="15" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0311" Y="0.0311" Z="0.0311"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -242,7 +296,10 @@
             <rotate time="20" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0395" Y="0.0395" Z="0.0395"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -251,7 +308,10 @@
             <rotate time="25" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0833" Y="0.0833" Z="0.0833"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -260,7 +320,10 @@
             <rotate time="5" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0881" Y="0.0881" Z="0.0881"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -269,7 +332,10 @@
             <rotate time="30" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.119" Y="0.119" Z="0.119"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -278,7 +344,10 @@
             <rotate time="18" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.404" Y="0.404" Z="0.404"/>
             <models>
-                <model file="planet.3d" diffR="129" diffG="157" diffB="132"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -287,7 +356,10 @@
             <rotate time="8" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0211" Y="0.0211" Z="0.0211"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -296,7 +368,10 @@
             <rotate time="28" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.115" Y="0.115" Z="0.115"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -305,7 +380,10 @@
             <rotate time="35" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0167" Y="0.0167" Z="0.0167"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
     </group>
@@ -332,7 +410,10 @@
             <rotate time="10" axisX="0" axisY="1" axisZ="0" />
             <scale X="12" Y="12" Z="12"/>
             <models>
-                <model texture="texture_uranus.png" file="planet.3d" diffR="101" diffG="134" diffB="139"/>
+                <model texture="texture_uranus.png" file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -341,7 +422,10 @@
             <rotate time="30" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0370" Y="0.0370" Z="0.0370"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -350,7 +434,10 @@
             <rotate time="24" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0908" Y="0.0908" Z="0.0908"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -359,7 +446,10 @@
             <rotate time="19" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0917" Y="0.0917" Z="0.0917"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -368,7 +458,10 @@
             <rotate time="11" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.123" Y="0.123" Z="0.123"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -377,7 +470,10 @@
             <rotate time="3" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.119" Y="0.119" Z="0.119"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
     </group>
@@ -404,7 +500,10 @@
             <rotate time="10" axisX="0" axisY="1" axisZ="0" />
             <scale X="11.64" Y="11.64" Z="11.64"/>
             <models>
-                <model texture="texture_neptune.png" file="planet.3d" diffR="204" diffG="186" diffB="153"/>
+                <model texture="texture_neptune.png" file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -413,7 +512,10 @@
             <rotate time="19" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0329" Y="0.0329" Z="0.0329"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -422,7 +524,10 @@
             <rotate time="13" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.212" Y="0.212" Z="0.212"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -431,7 +536,10 @@
             <rotate time="12" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0266" Y="0.0266" Z="0.0266"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
     </group>
@@ -458,7 +566,10 @@
             <rotate time="11" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.54" Y="0.54" Z="0.54"/>
             <models>
-                <model texture="texture_pluto.jpg" file="planet.3d" diffR="209" diffG="196" diffB="179"/>
+                <model texture="texture_pluto.jpg" file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
         <group>
@@ -467,7 +578,10 @@
             <rotate time="10" axisX="0" axisY="1" axisZ="0" />
             <scale X="0.0951" Y="0.0951" Z="0.0951"/>
             <models>
-                <model file="planet.3d" diffR="183" diffG="174" diffB="162"/>
+                <model file="planet.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
     </group>
@@ -496,7 +610,10 @@
             <!-- Cometa -->
             <scale X="5" Y="5" Z="5"/>
             <models>
-                <model texture="texture_comet.jpg" file="teapot.3d" diffR="209" diffG="196" diffB="179"/>
+                <model texture="texture_comet.jpg" file="teapot.3d"
+                       ambR="255" ambG="255" ambB="255"
+                       diffR="255" diffG="255" diffB="255"
+                       specR="255" specG="255" specB="255" />
             </models>
         </group>
     </group>

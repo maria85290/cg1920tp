@@ -4,11 +4,25 @@
 #include <tinyxml2/tinyxml2.h>
 #include <iostream>
 
+#include "../Scene.h"
+
 namespace engine::scene::entities {
     class Entity {
+    private:
+        const Scene& scene;
+
+    protected:
+        const Scene& GetScene() const {
+            return scene;
+        }
+
     public:
-        Entity() = default;
+        Entity() = delete;
+        Entity(const Scene& scene): scene(scene) {}
         virtual ~Entity() = default;
+
+        Entity(const Entity& entity) = delete;
+        Entity& operator=(const Entity& other) = delete;
 
         /**
          * Função responsável pela leitura da secção do ficheiro XML corresponde a esta entidade.

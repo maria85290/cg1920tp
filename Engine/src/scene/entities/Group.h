@@ -16,6 +16,7 @@ namespace engine::scene::entities {
         }
 
     public:
+        Group(const Scene& scene): Entity(scene) {}
         ~Group() override;
 
         bool ParseXml(const tinyxml2::XMLNode *groupNode) override;

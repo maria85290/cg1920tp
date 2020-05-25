@@ -10,11 +10,16 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "../util/Settings.h"
+#include "../objects/ModelMesh.h"
+#include "../objects/Texture.h"
 
 using std::string, std::cerr, std::endl;
 using std::unique_ptr;
-using engine::window::cameras::Camera;
+
 using tinyxml2::XMLDocument;
+
+using engine::window::cameras::Camera;
+using engine::objects::ModelMesh, engine::objects::Texture;
 
 extern unique_ptr<XMLDocument> ReadSceneFile(const char*);
 

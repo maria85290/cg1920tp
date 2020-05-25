@@ -13,6 +13,7 @@ namespace engine::scene::entities {
         glm::vec3 vector;
 
     public:
+        StaticRotate(const Scene& scene): Entity(scene) {}
         ~StaticRotate() override = default;
 
         bool ParseXml(const tinyxml2::XMLNode *rotateNode) override;

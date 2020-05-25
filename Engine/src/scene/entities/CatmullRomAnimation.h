@@ -35,6 +35,7 @@ namespace engine::scene::entities {
 
         void GenerateCurveRendering();
     public:
+        CatmullRomAnimation(const Scene& scene): Entity(scene) {}
         ~CatmullRomAnimation();
 
         bool ParseXml(const tinyxml2::XMLNode *node) override;

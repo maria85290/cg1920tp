@@ -11,6 +11,7 @@ namespace engine::scene::entities {
         glm::vec3 factors;
 
     public:
+        Scale(const Scene& scene): Entity(scene) {}
         ~Scale() override = default;
 
         bool ParseXml(const tinyxml2::XMLNode *node) override;

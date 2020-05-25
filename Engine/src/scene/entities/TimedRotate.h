@@ -18,6 +18,7 @@ namespace engine::scene::entities {
         double degreesPerSecond;
 
     public:
+        TimedRotate(const Scene& scene): Entity(scene) {}
         ~TimedRotate() override = default;
 
         bool ParseXml(const tinyxml2::XMLNode *rotateNode) override;

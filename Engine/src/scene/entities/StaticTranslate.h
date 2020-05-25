@@ -9,6 +9,7 @@ namespace engine::scene::entities {
     private:
         glm::vec3 vector;
     public:
+        StaticTranslate(const Scene& scene): Entity(scene) {}
         ~StaticTranslate() override = default;
 
         bool ParseXml(const tinyxml2::XMLNode *translateNode) override;

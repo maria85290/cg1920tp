@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <algorithm>
 
 using std::cerr, std::endl, std::stoi, std::max;
 

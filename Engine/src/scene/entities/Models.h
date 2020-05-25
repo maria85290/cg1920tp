@@ -14,6 +14,7 @@ namespace engine::scene::entities {
         }
 
     public:
+        Models(const Scene& scene): Entity(scene) {}
         ~Models();
 
         bool ParseXml(const tinyxml2::XMLNode *node) override;

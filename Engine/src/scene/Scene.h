@@ -3,8 +3,11 @@
 
 #include <tinyxml2/tinyxml2.h>
 
-#include "entities/Group.h"
 #include "lighting/Lights.h"
+
+namespace engine::scene::entities {
+    class Group;
+}
 
 namespace engine::scene {
     class Scene {
@@ -19,6 +22,9 @@ namespace engine::scene {
     public:
         Scene() = default;
         ~Scene();
+
+        Scene(const Scene& scene) = delete;
+        Scene& operator=(const Scene& other) = delete;
 
         /**
          * Lê do ficheiro XML a tag corresponde à cena que vai ser renderizada.
@@ -48,6 +54,16 @@ namespace engine::scene {
          * Desenha uma nova frame desta cena.
          */
         void Render() const;
+
+        /**
+         * Liga as luzes, se estas tiverem sido definidas.
+         */
+        void EnableLights() const;
+
+        /**
+         * Desliga as luzes, se estas tiverem sido definidas.
+         */
+        void DisableLights() const;
     };
 }
 

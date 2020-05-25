@@ -1,6 +1,7 @@
 #include "Scene.h"
 
 #include <iostream>
+#include "entities/Group.h"
 
 using std::cout, std::cerr, std::endl;
 using tinyxml2::XMLNode, tinyxml2::XMLComment;
@@ -36,10 +37,10 @@ namespace engine::scene {
         	        return false;
         	    }
 
-        	    this->lights = new Lights();
+        	    this->lights = new Lights;
                 this->lights->ParseXml(node);
             } else if(strcmp("group", node->Value()) == 0) {
-                Group* group = new Group;
+                Group* group = new Group(*this);
 
                 if(!group->ParseXml(node)) {
                     cerr << "Falha ao processar o XML do grupo!" << endl;
@@ -79,15 +80,23 @@ namespace engine::scene {
     }
 
     void Scene::Render() const {
-        if(this->lights != nullptr) {
-            glEnable(GL_LIGHTING);
-            this->lights->Enable();
-        }
+        this->EnableLights();
 
         for(auto group : this->groups) {
             group->Render();
         }
 
+        this->DisableLights();
+    }
+
+    void Scene::EnableLights() const {
+        if(this->lights != nullptr) {
+            glEnable(GL_LIGHTING);
+            this->lights->Enable();
+        }
+    }
+
+    void Scene::DisableLights() const {
         if(this->lights != nullptr) {
             this->lights->Disable();
             glDisable(GL_LIGHTING);

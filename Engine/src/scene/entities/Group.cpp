@@ -36,9 +36,9 @@ namespace engine::scene::entities {
                 }
 
                 if(childNode->ToElement()->FindAttribute("time") == nullptr) {
-                    entity = new StaticTranslate;
+                    entity = new StaticTranslate(this->GetScene());
                 } else {
-                    entity = new CatmullRomAnimation;
+                    entity = new CatmullRomAnimation(this->GetScene());
                 }
 
                 translate = true;
@@ -49,9 +49,9 @@ namespace engine::scene::entities {
                 }
 
                 if(childNode->ToElement()->FindAttribute("time") == nullptr) {
-                    entity = new StaticRotate;
+                    entity = new StaticRotate(this->GetScene());
                 } else {
-                    entity = new TimedRotate;
+                    entity = new TimedRotate(this->GetScene());
                 }
 
                 rotate = true;
@@ -61,7 +61,7 @@ namespace engine::scene::entities {
                     return false;
                 }
 
-                entity = new Scale;
+                entity = new Scale(this->GetScene());
                 scale = true;
             } else if(nodeName == "models") {
                 if(models) {
@@ -69,10 +69,10 @@ namespace engine::scene::entities {
                     return false;
                 }
 
-                entity = new Models;
+                entity = new Models(this->GetScene());
                 models = true;
             } else if(nodeName == "group") {
-                entity = new Group;
+                entity = new Group(this->GetScene());
             } else if(dynamic_cast<const XMLComment*>(childNode)) {
                 childNode = childNode->NextSibling();
                 continue;
