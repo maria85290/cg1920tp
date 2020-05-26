@@ -34,7 +34,7 @@ matrix:
       addons:
         homebrew:
           packages:
-            - glfw3
+            - glfw
             - devil
       script:
         - mkdir build
