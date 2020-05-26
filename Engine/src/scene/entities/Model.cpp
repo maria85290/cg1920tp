@@ -56,14 +56,11 @@ namespace engine::scene::entities {
     }
 
     void Model::Render() const {
-        // TODO: Change the generator to automatically provide the radius in the model's file
         // At this point in the rendering stage, the current OpenGL Matrix says that we are currently in local space
         // i.e., the current object is always centered at (0,0,0).
-        // The model file will already have provided the radius for the bounding sphere, so we just plug that in
-        // here as well
         // Note: If GL_CULL_FACE isn't enabled, we don't view frustum cull, because otherwise the F1 debug feature
         // becomes useless
-        if(!ViewFrustum::SphereInFrustum(glm::vec3(0), 1.0f) && glIsEnabled(GL_CULL_FACE))
+        if(!ViewFrustum::UnitSphereShouldRender() && glIsEnabled(GL_CULL_FACE))
             return;
 
         glPushAttrib(GL_COLOR_BUFFER_BIT);

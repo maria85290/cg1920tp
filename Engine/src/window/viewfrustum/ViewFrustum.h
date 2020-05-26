@@ -22,12 +22,17 @@ namespace engine::window::viewfrustum {
          * @param center The center of the sphere
          * @param radius The radius of the sphere
          *
-         * @return True if the given sphere falls completely inside the view frustum, false otherwise
+         * @return False if the given sphere falls completely outside the view frustum, true otherwise
          */
         bool IsSphereInFrustum(const glm::vec3& center, const float& radius) const;
 
-        static inline bool SphereInFrustum(const glm::vec3& center, const float& radius) {
-            return ViewFrustum().IsSphereInFrustum(center, radius);
+        /**
+         * Tests if a sphere centered on (0, 0, 0) and with radius 1 would intersect with the view frustum.
+         *
+         * @return True if the sphere should render, false otherwise
+         */
+        static inline bool UnitSphereShouldRender() {
+            return ViewFrustum().IsSphereInFrustum(glm::vec3(0.0f), 1.0f);
         }
     };
 }

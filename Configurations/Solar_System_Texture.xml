@@ -610,7 +610,8 @@
             <!-- Cometa -->
             <scale X="5" Y="5" Z="5"/>
             <models>
-                <model texture="texture_comet.jpg" file="teapot.3d"
+                <!-- texture="texture_comet.jpg" -->
+                <model file="teapot.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
                        specR="255" specG="255" specB="255" />
