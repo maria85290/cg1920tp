@@ -16,7 +16,9 @@ namespace engine::window::viewfrustum {
         inline explicit Plane(const glm::vec4& coeffs) {
             // Definir os primeiros 3 componentes de coeffs como sendo o vector normal o plano,
             // e definir o último valor de coeffs como sendo o valor D da equação do plano
-            this->coeffs = glm::vec4(glm::normalize(glm::vec3(coeffs)), coeffs.w / glm::length(glm::vec3(coeffs)));
+
+            const float length = glm::length(glm::vec3(coeffs));
+            this->coeffs = glm::vec4(glm::vec3(coeffs) / length, coeffs.w / length);
         }
 
         inline float GetD() const {
