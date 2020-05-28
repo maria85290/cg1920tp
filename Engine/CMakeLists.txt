@@ -93,7 +93,7 @@ elseif(UNIX AND NOT APPLE) # Include GLUT and GLEW for Linux
 elseif(APPLE)
     set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl") # Add -ldl to the command line for cc
 
-    find_package(GLFW3 REQUIRED)
+    find_package(glfw3 REQUIRED)
     find_package(DevIL REQUIRED)
 
     if(NOT glfw3_FOUND)
@@ -107,7 +107,7 @@ elseif(APPLE)
     endif()
 
     target_include_directories(Engine PUBLIC ${GLFW_INCLUDE_DIR} ${IL_INCLUDE_DIR})
-    target_link_libraries(Engine PUBLIC glfw IL ${CMAKE_DL_LIBS})
+    target_link_libraries(Engine PUBLIC glfw ${IL_LIBRARIES} ${CMAKE_DL_LIBS})
 endif()
 
 target_link_libraries(Engine PUBLIC glad)
