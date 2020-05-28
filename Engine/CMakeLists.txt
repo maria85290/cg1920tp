@@ -72,8 +72,6 @@ if (WIN32)
 
     set_property(DIRECTORY ${CG_TP_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Engine)
 elseif(UNIX AND NOT APPLE) # Include GLUT and GLEW for Linux
-    set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl -lglfw") # Add -ldl to the command line for cc
-
     find_package(glfw3 REQUIRED)
     find_package(DevIL REQUIRED)
 
@@ -91,8 +89,6 @@ elseif(UNIX AND NOT APPLE) # Include GLUT and GLEW for Linux
     target_include_directories(Engine PUBLIC ${GLFW_INCLUDE_DIR} ${IL_INCLUDE_DIR})
     target_link_libraries(Engine PUBLIC glfw IL ${CMAKE_DL_LIBS})
 elseif(APPLE)
-    set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl") # Add -ldl to the command line for cc
-
     find_package(GLFW3 REQUIRED)
     find_package(DevIL REQUIRED)
 
@@ -107,7 +103,7 @@ elseif(APPLE)
     endif()
 
     target_include_directories(Engine PUBLIC ${GLFW_INCLUDE_DIR} ${IL_INCLUDE_DIR})
-    target_link_libraries(Engine PUBLIC glfw DevIL ${CMAKE_DL_LIBS})
+    target_link_libraries(Engine PUBLIC glfw IL ${CMAKE_DL_LIBS})
 endif()
 
 target_link_libraries(Engine PUBLIC glad)
