@@ -4,6 +4,7 @@
 #include <map>
 #include <list>
 #include <fstream>
+#include <unordered_map>
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/hash.hpp>
