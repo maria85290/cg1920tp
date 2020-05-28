@@ -11,6 +11,7 @@ matrix:
             - libglfw3-dev
             - cmake
             - build-essential
+            - libdevil-dev
       script:
         - mkdir build
         - cd build
@@ -34,6 +35,7 @@ matrix:
         homebrew:
           packages:
             - glfw3
+            - devil
       script:
         - mkdir build
         - cd build

@@ -5,6 +5,8 @@
 #include <string>
 #include <list>
 #include <tuple>
+#include <vector>
+#include <unordered_map>
 
 #define _USE_MATH_DEFINES
 #include <math.h>
