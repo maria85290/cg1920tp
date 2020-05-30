@@ -1,5 +1,6 @@
 #include "AbstractGenerator.h"
 
+#include <iostream>
 #include <fstream>
 
 using namespace std;
@@ -9,6 +10,7 @@ void AbstractGenerator::AddVertex(const glm::dvec3& v, const glm::dvec3& n, cons
 
     if(normal.x == 0.0 && normal.y == 0.0 && normal.z == 0) {
         normal = {0, 0, 0};
+        cerr << "Generated a normal as (0, 0, 0)! Please fix." << endl;
     } else if(glm::length(normal) > 1) {
         normal = glm::normalize(normal);
     } else if(glm::length(normal) < 1) {
