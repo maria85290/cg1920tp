@@ -1,21 +1,25 @@
 <scene>
-    <!--<camera type="fps" startX="0" startY="0" startZ="0" lookingAtX="0" /> -->
-    <!--<lights>
-        <light type="spot"
-               posX="0" posY="0" posZ="-20"
-               dirX="0" dirY="0" dirZ="1"
+    <lights>
+        <light type="directional"
+               posX="0" posY="0" posZ="0"
+               dirX="0" dirY="0" dirZ="-1"
                cutoffAngle="5" cutoffExponent="0"
                attenuationLinear="0"
                ambR="51" ambG="51" ambB="51"
                diffR="204" diffG="204" diffB="204"
                specR="204" specG="204" specB="204" />
-    </lights>-->
-
+    </lights>
     <group>
-        <models>
-            <model file="sphere.3d" texture="8k_earth.jpg"
-                   diffR="200" diffG="200" diffB="200"
-            />
-        </models>
+        <group>
+            <!--<rotate time="10" axisX="0" axisY="1" axisZ="1" />-->
+            <scale X="27" Y="27" Z="27"/>
+            <models>
+                <model  file="box.3d"
+                        ambR="255" ambG="255" ambB="255"
+                        diffR="255" diffG="255" diffB="255"
+                        specR="255" specG="255" specB="255"
+                        shininess="1" />
+            </models>
+        </group>
     </group>
 </scene>

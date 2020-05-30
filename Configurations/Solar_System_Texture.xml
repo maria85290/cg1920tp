@@ -272,7 +272,8 @@
             <rotate time="10" axisX="0" axisY="1" axisZ="0" />
             <scale X="27" Y="27" Z="27"/>
             <models>
-                <model texture="texture_saturn.png" file="planet.3d"
+                <!-- texture="texture_saturn.png" -->
+                <model  file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
                        specR="255" specG="255" specB="255" />

@@ -2,6 +2,8 @@
 #define CG_TP_ENGINE_SRC_GLOBJECTS_MODELMESH_H_
 
 #include <vector>
+#include <iostream>
+
 #include <glm/glm.hpp>
 #include <glad/glad.h>
 
@@ -20,7 +22,6 @@ namespace engine::objects {
         std::vector<glm::vec2> texCoords;
         std::vector<unsigned short> indices;
 
-        long numVertices = 0;
         long numIndices = 0;
 
         GLuint vbos[4];
@@ -30,7 +31,10 @@ namespace engine::objects {
         }
 
         void AddNormal(const float& x, const float& y, const float& z) {
-            this->normals.emplace_back(x, y, z);
+            if(x == 0 && y == 0 && z == 0)
+                std::cout << "Existe uma normal que é (0, 0, 0)!" << std::endl;
+
+            this->normals.push_back(glm::normalize(glm::vec3(x, y, z)));
         }
 
         void AddTexCoord(const float& x, const float& y) {

@@ -35,8 +35,6 @@ namespace engine::objects {
 
         file.close();
 
-        this->numVertices = static_cast<int>(this->vertices.size());
-
         this->GenVBOs();
         this->vertices.clear();
         this->normals.clear();
