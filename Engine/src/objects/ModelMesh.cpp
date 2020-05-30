@@ -28,17 +28,15 @@ namespace engine::objects {
                    >> nx >> ny >> nz
                    >> tx >> ty) {
 
-            AddVertex(x, y, z);
-            AddNormal(nx, ny, nz);
-            AddTexCoord(tx, ty);
+            AddVertex(x, y, z,
+                      nx, ny, nz,
+                      tx, ty);
         }
 
         file.close();
 
         this->GenVBOs();
-        this->vertices.clear();
-        this->normals.clear();
-        this->texCoords.clear();
+        this->vertexData.clear();
         this->indices.clear();
     }
 
@@ -46,20 +44,15 @@ namespace engine::objects {
     {
         glGenBuffers(sizeof(this->vbos) / sizeof(this->vbos[0]), this->vbos);
 
-        // vbos[0] stores the vertex coordinates
+        // vbos[0] stores the following:
+        // First 3 bytes are vertex coordinates
+        // Next 3 bytes are normal coordinates
+        // Next 2 bytes are texture coordinates
         glBindBuffer(GL_ARRAY_BUFFER, this->vbos[0]);
-        glBufferData(GL_ARRAY_BUFFER, this->vertices.size() * sizeof(glm::vec3), this->vertices.data(), GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, this->vertexData.size() * sizeof(struct vertex_data), this->vertexData.data(), GL_STATIC_DRAW);
 
-        // vbos[1] stores the normal coordinates
-        glBindBuffer(GL_ARRAY_BUFFER, this->vbos[1]);
-        glBufferData(GL_ARRAY_BUFFER, this->normals.size() * sizeof(glm::vec3), this->normals.data(), GL_STATIC_DRAW);
-
-        // vbos[2] stores the texture coordinates
-        glBindBuffer(GL_ARRAY_BUFFER, this->vbos[2]);
-        glBufferData(GL_ARRAY_BUFFER, this->texCoords.size() * sizeof(glm::vec2), this->texCoords.data(), GL_STATIC_DRAW);
-
-        // vbos[3] stores the indices
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vbos[3]);
+        // vbos[1] stores the indices
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vbos[1]);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->numIndices * sizeof(unsigned short), this->indices.data(), GL_STATIC_DRAW);
 
         // Unbind the buffers
@@ -78,16 +71,12 @@ namespace engine::objects {
         glEnableClientState(GL_INDEX_ARRAY);
 
         glBindBuffer(GL_ARRAY_BUFFER, this->vbos[0]);
-        glVertexPointer(3, GL_FLOAT, 0, nullptr);
 
-        glBindBuffer(GL_ARRAY_BUFFER, this->vbos[1]);
-        glNormalPointer(GL_FLOAT, 0, nullptr);
+        glVertexPointer(3,   GL_FLOAT,  2 * sizeof(glm::vec3) + sizeof(glm::vec2), 0);
+        glNormalPointer(     GL_FLOAT,  sizeof(glm::vec2) + 2 * sizeof(glm::vec3), reinterpret_cast<const void*>(sizeof(glm::vec3)));
+        glTexCoordPointer(2, GL_FLOAT,  2 * sizeof(glm::vec3) + sizeof(glm::vec2), reinterpret_cast<const void*>(sizeof(glm::vec3) + sizeof(glm::vec3)));
 
-        glBindBuffer(GL_ARRAY_BUFFER, this->vbos[2]);
-        glTexCoordPointer(2, GL_FLOAT, 0, nullptr);
-
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vbos[3]);
-
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vbos[1]);
         glDrawElements(GL_TRIANGLES, this->numIndices, GL_UNSIGNED_SHORT, nullptr);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);

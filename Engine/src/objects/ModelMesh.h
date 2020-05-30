@@ -12,33 +12,28 @@
 using engine::objects::ObjectCache;
 
 namespace engine::objects {
+    struct vertex_data {
+        glm::vec3 vertexCoords;
+        glm::vec3 normal;
+        glm::vec2 texCoords;
+    };
+
     class ModelMesh {
     private:
         static ObjectCache<ModelMesh> cache;
 
         const std::string filename;
-        std::vector<glm::vec3> vertices;
-        std::vector<glm::vec3> normals;
-        std::vector<glm::vec2> texCoords;
+        std::vector<struct vertex_data> vertexData;
         std::vector<unsigned short> indices;
 
         long numIndices = 0;
 
-        GLuint vbos[4];
+        GLuint vbos[2];
     protected:
-        void AddVertex(const float& x, const float& y, const float& z) {
-            this->vertices.emplace_back(x, y, z);
-        }
-
-        void AddNormal(const float& x, const float& y, const float& z) {
-            if(x == 0 && y == 0 && z == 0)
-                std::cout << "Existe uma normal que é (0, 0, 0)!" << std::endl;
-
-            this->normals.push_back(glm::normalize(glm::vec3(x, y, z)));
-        }
-
-        void AddTexCoord(const float& x, const float& y) {
-            this->texCoords.emplace_back(x, y);
+        void AddVertex(const float& x, const float& y, const float& z,
+                       const float& nx, const float& ny, const float& nz,
+                       const float& tx, const float& ty) {
+            this->vertexData.push_back({{x, y, z}, {nx, ny, nz}, {tx, ty}});
         }
 
         void GenVBOs();
