@@ -76,28 +76,28 @@ void ConeGenerator::GenerateVertices() {
             DC = {C[0] - D[0], C[1] - D[1], C[2] - D[2]};
 
             AddVertex(B,
-                      glm::normalize(glm::cross(-AB, -DB)),
+                      glm::cross(-AB, -DB),
                       {(float(k + 1) / float(slices)),
                        textureConeBodyOffsetY + (float(j) / float(stacks)) * (1 - textureConeBodyOffsetY)});
             AddVertex(A,
-                      glm::normalize(glm::cross(AC, AB)),
+                      glm::cross(AC, AB),
                       {(float(k) / float(slices)),
                        textureConeBodyOffsetY + (float(j) / float(stacks)) * (1 - textureConeBodyOffsetY)});
             AddVertex(C,
-                      glm::normalize(glm::cross(-DC, -AC)),
+                      glm::cross(-DC, -AC),
                       {(float(k) / float(slices)),
                        textureConeBodyOffsetY + (float(j + 1) / float(stacks)) * (1 - textureConeBodyOffsetY)});
 
             AddVertex(C,
-                      glm::normalize(glm::cross(-DC, -AC)),
+                      glm::cross(-DC, -AC),
                       {(float(k) / float(slices)),
                        textureConeBodyOffsetY + (float(j + 1) / float(stacks)) * (1 - textureConeBodyOffsetY)});
             AddVertex(D,
-                      glm::normalize(glm::cross(DB, DC)),
+                      glm::cross(DB, DC),
                       {(float(k + 1) / float(slices)),
                        textureConeBodyOffsetY + (float(j + 1) / float(stacks)) * (1 - textureConeBodyOffsetY)});
             AddVertex(B,
-                      glm::normalize(glm::cross(-AB, -DB)),
+                      glm::cross(-AB, -DB),
                       {(float(k + 1) / float(slices)),
                        textureConeBodyOffsetY + (float(j) / float(stacks)) * (1 - textureConeBodyOffsetY)});
         }
@@ -118,11 +118,11 @@ void ConeGenerator::GenerateVertices() {
                   {0, 1, 0},
                   {(float(i) / float(slices)), textureConeBodyOffsetY});
         AddVertex(A,
-                  glm::normalize(glm::cross(AB, AC)),
+                  glm::cross(AB, AC),
                   {(float(i) / float(slices)),
                    textureConeBodyOffsetY + (1 / float(stacks)) * (1 - textureConeBodyOffsetY)});
         AddVertex(B,
-                  glm::normalize(glm::cross(BC, -AB)),
+                  glm::cross(BC, -AB),
                   {(float(i + 1) / float(slices)),
                    textureConeBodyOffsetY + (1 / float(stacks)) * (1 - textureConeBodyOffsetY)});
     }
