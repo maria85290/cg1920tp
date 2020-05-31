@@ -42,7 +42,7 @@ void AbstractGenerator::SaveVerticesToFile() {
     }
 
     // Print each vertex to the file
-    map<unsigned short, vertex_data> orderedVertices;
+    map<unsigned int, vertex_data> orderedVertices;
 
     for(auto pair : this->vertices) {
         orderedVertices[pair.second] = pair.first;
