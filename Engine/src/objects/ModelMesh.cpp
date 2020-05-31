@@ -15,7 +15,7 @@ namespace engine::objects {
         file >> this->numIndices;
 
         for(int i = 0; i < numIndices; i++) {
-            int v;
+            unsigned int v;
             file >> v;
 
             this->indices.push_back(v);
@@ -60,7 +60,7 @@ namespace engine::objects {
 
         // vbos[3] stores the indices
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vbos[3]);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->numIndices * sizeof(unsigned short), this->indices.data(), GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->numIndices * sizeof(unsigned int), this->indices.data(), GL_STATIC_DRAW);
 
         // Unbind the buffers
         glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -88,7 +88,7 @@ namespace engine::objects {
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vbos[3]);
 
-        glDrawElements(GL_TRIANGLES, this->numIndices, GL_UNSIGNED_SHORT, nullptr);
+        glDrawElements(GL_TRIANGLES, this->numIndices, GL_UNSIGNED_INT, nullptr);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);

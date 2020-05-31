@@ -38,13 +38,13 @@ namespace std {
 class AbstractGenerator {
 private:
     /** @var vertices Os vértices que este gerador gerou. */
-    std::unordered_map<vertex_data, unsigned short> vertices;
+    std::unordered_map<vertex_data, unsigned int> vertices;
 
     /** @var indices */
-    std::list<unsigned short> indices;
+    std::list<unsigned int> indices;
 
     /** @var nextIndex The next index to use for the next new vertex that comes along. */
-    int nextIndex = 0;
+    long nextIndex = 0;
 
     /** @var filename O nome do ficheiro onde guardar os vértices gerados. */
     std::string filename;

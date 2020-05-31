@@ -20,7 +20,7 @@ namespace engine::objects {
         std::vector<glm::vec3> vertices;
         std::vector<glm::vec3> normals;
         std::vector<glm::vec2> texCoords;
-        std::vector<unsigned short> indices;
+        std::vector<unsigned int> indices;
 
         long numIndices = 0;
 

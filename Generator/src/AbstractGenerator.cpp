@@ -6,19 +6,13 @@
 using namespace std;
 
 void AbstractGenerator::AddVertex(const glm::dvec3& v, const glm::dvec3& n, const glm::dvec2& t) {
-    glm::dvec3 normal = n;
+    glm::dvec3 normal;
 
-    if(normal.x == 0.0 && normal.y == 0.0 && normal.z == 0) {
+    if(n.x == 0.0 && n.y == 0.0 && n.z == 0) {
         normal = {0, 0, 0};
         cerr << "Generated a normal as (0, 0, 0)! Please fix." << endl;
-    } else if(glm::length(normal) > 1) {
-        normal = glm::normalize(normal);
-    } else if(glm::length(normal) < 1) {
-        do {
-            normal = 100.0 * normal;
-        } while(glm::length(normal) < 1);
-
-        normal = glm::normalize(normal);
+    } else {
+        normal = glm::normalize(n);
     }
 
     vertex_data vd = {v, normal, t};
@@ -27,7 +21,7 @@ void AbstractGenerator::AddVertex(const glm::dvec3& v, const glm::dvec3& n, cons
         this->vertices[vd] = this->nextIndex++;
     }
 
-    if(this->nextIndex == USHRT_MAX) {
+    if(this->nextIndex == UINT_MAX) {
         throw std::runtime_error("The requested model is too large! Please lower the model's generation parameters.");
     }
 
