@@ -55,68 +55,68 @@ void PlaneGenerator::GenerateVertices() {
 
     switch(plane) {
         case kPlaneYZ:
-            AddVertex({0.0, h, w}, {-1, 0, 0}, {1, 1});
-            AddVertex({0.0, -h, w}, {-1, 0, 0}, {1, 0});
-            AddVertex({0.0, -h, -w}, {-1, 0, 0}, {0, 0});
+            AddVertex({0.0, h, w}, {-1, 0, 0}, {0, 0});
+            AddVertex({0.0, -h, w}, {-1, 0, 0}, {0, 1});
+            AddVertex({0.0, -h, -w}, {-1, 0, 0}, {1, 1});
 
-            AddVertex({0.0, h, w}, {-1, 0, 0}, {1, 1});
-            AddVertex({0.0, -h, -w}, {-1, 0, 0}, {0, 0});
-            AddVertex({0.0, h, -w}, {-1, 0, 0}, {0, 1});
+            AddVertex({0.0, h, w}, {-1, 0, 0}, {0, 0});
+            AddVertex({0.0, -h, -w}, {-1, 0, 0}, {1, 1});
+            AddVertex({0.0, h, -w}, {-1, 0, 0}, {1, 0});
 
             break;
 
         case kPlaneZY:
-            AddVertex({0.0, h, w}, {1, 0, 0}, {1, 1});
-            AddVertex({0.0, -h, -w}, {1, 0, 0}, {0, 0});
-            AddVertex({0.0, -h, w}, {1, 0, 0}, {1, 0});
+            AddVertex({0.0, h, w}, {1, 0, 0}, {1, 0});
+            AddVertex({0.0, -h, -w}, {1, 0, 0}, {0, 1});
+            AddVertex({0.0, -h, w}, {1, 0, 0}, {1, 1});
 
-            AddVertex({0.0, h, w}, {1, 0, 0}, {1, 1});
-            AddVertex({0.0, h, -w}, {1, 0, 0}, {0, 1});
-            AddVertex({0.0, -h, -w}, {1, 0, 0}, {0, 0});
+            AddVertex({0.0, h, w}, {1, 0, 0}, {1, 0});
+            AddVertex({0.0, h, -w}, {1, 0, 0}, {0, 0});
+            AddVertex({0.0, -h, -w}, {1, 0, 0}, {0, 1});
 
             break;
 
         case kPlaneXZ:
-            AddVertex({-w, 0.0, -h}, {0, 1, 0}, {0, 0});
-            AddVertex({w, 0.0, h}, {0, 1, 0}, {1, 1});
-            AddVertex({-w, 0.0, h}, {0, 1, 0}, {0, 1});
+            AddVertex({-w, 0.0, -h}, {0, 1, 0}, {0, 1});
+            AddVertex({w, 0.0, h}, {0, 1, 0}, {1, 0});
+            AddVertex({-w, 0.0, h}, {0, 1, 0}, {0, 0});
 
-            AddVertex({-w, 0.0, -h}, {0, 1, 0}, {0, 0});
-            AddVertex({w, 0.0, -h}, {0, 1, 0}, {1, 0});
-            AddVertex({w, 0.0, h}, {0, 1, 0}, {1, 1});
+            AddVertex({-w, 0.0, -h}, {0, 1, 0}, {0, 1});
+            AddVertex({w, 0.0, -h}, {0, 1, 0}, {1, 1});
+            AddVertex({w, 0.0, h}, {0, 1, 0}, {1, 0});
 
             break;
 
         case kPlaneZX:
-            AddVertex({-w, 0.0, -h}, {0, -1, 0}, {0, 0});
-            AddVertex({-w, 0.0, h}, {0, -1, 0}, {0, 1});
-            AddVertex({w, 0.0, h}, {0, -1, 0}, {1, 1});
+            AddVertex({-w, 0.0, -h}, {0, -1, 0}, {1, 1});
+            AddVertex({-w, 0.0, h}, {0, -1, 0}, {1, 0});
+            AddVertex({w, 0.0, h}, {0, -1, 0}, {0, 0});
 
-            AddVertex({-w, 0.0, -h}, {0, -1, 0}, {0, 0});
-            AddVertex({w, 0.0, h}, {0, -1, 0}, {1, 1});
-            AddVertex({w, 0.0, -h}, {0, -1, 0}, {1, 0});
+            AddVertex({-w, 0.0, -h}, {0, -1, 0}, {1, 1});
+            AddVertex({w, 0.0, h}, {0, -1, 0}, {0, 0});
+            AddVertex({w, 0.0, -h}, {0, -1, 0}, {0, 1});
 
             break;
 
         case kPlaneXY:
-            AddVertex({w, h, 0.0}, {0, 0, 1}, {1, 1});
-            AddVertex({-w, h, 0.0}, {0, 0, 1}, {0, 1});
-            AddVertex({-w, -h, 0.0}, {0, 0, 1}, {0, 0});
+            AddVertex({w, h, 0.0}, {0, 0, 1}, {1, 0});
+            AddVertex({-w, h, 0.0}, {0, 0, 1}, {0, 0});
+            AddVertex({-w, -h, 0.0}, {0, 0, 1}, {0, 1});
 
-            AddVertex({w, h, 0.0}, {0, 0, 1}, {1, 1});
-            AddVertex({-w, -h, 0.0}, {0, 0, 1}, {0, 0});
-            AddVertex({w, -h, 0.0}, {0, 0, 1}, {1, 0});
+            AddVertex({w, h, 0.0}, {0, 0, 1}, {1, 0});
+            AddVertex({-w, -h, 0.0}, {0, 0, 1}, {0, 1});
+            AddVertex({w, -h, 0.0}, {0, 0, 1}, {1, 1});
 
             break;
 
         case kPlaneYX:
-            AddVertex({w, h, 0.0}, {0, 0, -1}, {1, 1});
-            AddVertex({-w, -h, 0.0}, {0, 0, -1}, {0, 0});
-            AddVertex({-w, h, 0.0}, {0, 0, -1}, {0, 1});
+            AddVertex({w, h, 0.0}, {0, 0, -1}, {0, 0});
+            AddVertex({-w, -h, 0.0}, {0, 0, -1}, {1, 1});
+            AddVertex({-w, h, 0.0}, {0, 0, -1}, {1, 0});
 
-            AddVertex({w, h, 0.0}, {0, 0, -1}, {1, 1});
-            AddVertex({w, -h, 0.0}, {0, 0, -1}, {1, 0});
-            AddVertex({-w, -h, 0.0}, {0, 0, -1}, {0, 0});
+            AddVertex({w, h, 0.0}, {0, 0, -1}, {0, 0});
+            AddVertex({w, -h, 0.0}, {0, 0, -1}, {0, 1});
+            AddVertex({-w, -h, 0.0}, {0, 0, -1}, {1, 1});
 
             break;
     }
