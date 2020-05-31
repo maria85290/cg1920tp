@@ -12,13 +12,15 @@
 #include "../util/Settings.h"
 #include "../objects/ModelMesh.h"
 #include "../objects/Texture.h"
+#include "cameras/FpsCamera.h"
+#include "cameras/ExplorerCamera.h"
 
 using std::string, std::cerr, std::endl;
 using std::unique_ptr;
 
-using tinyxml2::XMLDocument;
+using tinyxml2::XMLDocument, tinyxml2::XMLNode;
 
-using engine::window::cameras::Camera;
+using engine::window::cameras::Camera, engine::window::cameras::FpsCamera, engine::window::cameras::ExplorerCamera;
 using engine::objects::ModelMesh, engine::objects::Texture;
 
 extern unique_ptr<XMLDocument> ReadSceneFile(const char*);
@@ -248,7 +250,9 @@ namespace engine::window {
 
     void Window::ReloadScene() {
         // Delete the old scene and caches
-        delete this->scene;
+        if(this->scene != nullptr)
+            delete this->scene;
+
         ModelMesh::GetCache().Clear();
         Texture::GetCache().Clear();
         scene::lighting::Light::ResetLightNo();
@@ -259,8 +263,36 @@ namespace engine::window {
         // Read the scene file
         auto root = ReadSceneFile(this->sceneFile.c_str());
 
-        // Parse the scene file
-        this->scene->ParseXml(root->FirstChild());
+        // Parse the child tags
+        for(auto child = root->FirstChild(); child != nullptr; child = child->NextSibling()) {
+            if(strcmp("scene", child->Value()) == 0) {
+                this->scene->ParseXml(child);
+            } else if(strcmp("camera", child->Value()) == 0) {
+                delete this->camera;
+
+                this->ParseCamera(child);
+            }
+        }
+
+        if(this->camera == nullptr) {
+            // If no camera was specified in the file, just set a free-flying camera to explore the scene
+            this->SetCamera(new FpsCamera);
+        }
+    }
+
+    void Window::ParseCamera(const XMLNode* cameraNode) {
+        auto elem = cameraNode->ToElement();
+        string type = elem->Attribute("type", "fps");
+
+        if(type == "fps") {
+            this->SetCamera(new FpsCamera);
+        } else if(type == "explorer") {
+            double x = elem->FloatAttribute("centerX", 0.0);
+            double y = elem->FloatAttribute("centerY", 0.0);
+            double z = elem->FloatAttribute("centerZ", 0.0);
+
+            this->SetCamera(new ExplorerCamera({x, y, z}));
+        }
     }
 
 	void APIENTRY Window::DebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)

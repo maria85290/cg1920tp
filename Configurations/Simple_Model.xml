@@ -1,26 +1,39 @@
+<camera type="fps" />
 <scene>
     <lights>
         <light type="point"
                posX="0" posY="0" posZ="0"
-               dirX="0" dirY="0" dirZ="-1"
-               cutoffAngle="10" cutoffExponent="1"
+               ambR="51" ambG="51" ambB="51"
+               diffR="204" diffG="204" diffB="204"
+               specR="204" specG="204" specB="204" />
+        <light type="point"
+               posX="0" posY="0" posZ="-60"
                ambR="51" ambG="51" ambB="51"
                diffR="204" diffG="204" diffB="204"
                specR="204" specG="204" specB="204" />
     </lights>
     <group>
-        <group>
-            <translate Z="-120" />
-            <!--<rotate time="60" axisX="1" axisY="1" axisZ="1" />-->
-            <rotate angle="180" axisX="0" axisY="1" axisZ="0" />
-            <scale X="27" Y="27" Z="27"/>
-            <models>
-                <model  file="planet.3d"
-                        ambR="255" ambG="255" ambB="255"
-                        diffR="255" diffG="255" diffB="255"
-                        specR="255" specG="255" specB="255"
-                        shininess="0" />
-            </models>
-        </group>
+        <translate Z="-1" />
+        <models>
+            <!--<model file="teapot.3d" diffR="0" diffG="0" diffB="255" shininess="128" />-->
+        </models>
+    </group>
+    <group>
+        <!--<rotate angle="45" axisX="1" axisY="0" axisZ="0" />-->
+        <translate Z="-30" />
+        <scale X="1" Y="1" Z="1" />
+        <rotate time="10" axisX="0" axisY="1" axisZ="0" />
+        <models>
+            <model file="sun.3d" texture="8k_sun.jpg" diffR="204" diffG="204" diffB="204" specR="255" specG="255" specB="255" shininess="64" />
+        </models>
+    </group>
+    <group>
+        <!-- Sun -->
+        <translate Z="-10" />
+        <scale X="1" Y="1" Z="1" />
+        <models>
+            <!--<model file="sun.3d" diffR="0" diffG="255" diffB="0" texture="8k_earth.jpg" />-->
+            <!--<model file="teapot.3d" diffR="255" diffG="0" diffB="0" />-->
+        </models>
     </group>
 </scene>

@@ -46,7 +46,6 @@ namespace engine::window {
         void ComputeDeltaTime();
         void MeasureFps();
         void RenderAxis() const;
-        void ReloadScene();
 
         static void APIENTRY DebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
     public:
@@ -67,6 +66,8 @@ namespace engine::window {
 	        this->camera = camera;
             this->camera->InitCamera(this, this->glfwWindow);
         }
+
+        void ParseCamera(const tinyxml2::XMLNode* cameraNode);
 
         /** Obtém a cena que vai ser renderizada nesta janela. */
         scene::Scene* GetScene() const { return scene; }
@@ -96,6 +97,7 @@ namespace engine::window {
         }
 
         void HandleKeyboardKeyPress(int key, int scanCode, int action, int mods);
+        void ReloadScene();
     };
 
     /**
