@@ -57,18 +57,9 @@ int main(int argc, char* argv[]) {
         return -1;
     }
 
-    // Parse the scene file
-    Scene* scene = new Scene;
-    if(!scene->ParseXml(root->FirstChild())) {
-        cerr << "Failed to parse Scene's XML!" << endl;
-        return -1;
-    }
-
-    // Set the window parameters
-    // window.SetCamera(new StaticCamera(glm::dvec3(0, 0, 1), glm::dvec3(0, 0, 0)));
-    // window.SetCamera(new ExplorerCamera(glm::dvec3(0, 0, 0)));
-    window.SetCamera(new FpsCamera);
-    window.SetScene(scene, string(argv[1]));
+    // Load the scene
+    window.SetScene(nullptr, string(argv[1]));
+    window.ReloadScene();
 
     // Start main loop
     window.MainLoop();
@@ -86,13 +77,6 @@ unique_ptr<XMLDocument> ReadSceneFile(const char* filename) {
 
     if(document->LoadFile(filename) != XML_SUCCESS) {
         cerr << "Ocorreu um erro na leitura do ficheiro de configuração XML fornecido." << endl;
-        return nullptr;
-    }
-
-    XMLNode* root = document->FirstChild();
-
-    if(strcmp("scene", root->Value()) != 0) {
-        cerr << "Esperado valor 'scene', obtido '" << root->Value() << "'" << endl;
         return nullptr;
     }
 
