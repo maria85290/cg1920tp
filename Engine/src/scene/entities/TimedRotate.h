@@ -6,6 +6,12 @@
 #include "Entity.h"
 
 namespace engine::scene::entities {
+    /**
+     * Representa as tags <rotation> dos ficheiros XML, na sua versão dinâmica, i.e.,
+     * na versão em que a tag <rotate> especifica um parâmetro "time", que diz quantos
+     * segundos devem os objetos dentro deste grupo demorar a completar uma rotação
+     * de 360º em torno de um eixo.
+     */
     class TimedRotate: public Entity {
     private:
         /** The rotation time, in seconds. */

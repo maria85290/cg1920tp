@@ -6,6 +6,9 @@
 #include "PointLight.h"
 
 namespace engine::scene::lighting {
+    /**
+     * Representa o tipo de luz de holofote, ou "spotlight", e a correspondente tag XML <light>.
+     */
     class SpotLight: public PointLight {
     protected:
         glm::vec3 direction;

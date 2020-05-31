@@ -15,7 +15,7 @@
             <rotate angle="180" axisX="0" axisY="1" axisZ="0" />
             <scale X="27" Y="27" Z="27"/>
             <models>
-                <model  file="teapot.3d"
+                <model  file="planet.3d"
                         ambR="255" ambG="255" ambB="255"
                         diffR="255" diffG="255" diffB="255"
                         specR="255" specG="255" specB="255"

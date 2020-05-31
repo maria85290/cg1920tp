@@ -6,6 +6,9 @@
 #include "Light.h"
 
 namespace engine::scene::lighting {
+    /**
+     * Representa o tipo de luz de ponto, e a correspondente tag XML <light>.
+     */
     class PointLight: public Light {
     protected:
         glm::vec4 position;

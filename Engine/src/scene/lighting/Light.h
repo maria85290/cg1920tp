@@ -16,6 +16,12 @@ namespace engine::window {
 }
 
 namespace engine::scene::lighting {
+    /**
+     * Classe genérica que representa as luzes que podem ser colocadas numa cena.
+     *
+     * Implementa funcionalidade comum a todas as luzes, e atribui um número de luz a cada nova
+     * luz que é construida, até um máximo de 8 (por limitação do próprio OpenGL).
+     */
     class Light {
     private:
         friend class ::engine::window::Window;

@@ -13,6 +13,11 @@
 #include <glad/glad.h>
 
 namespace engine::scene::entities {
+    /**
+     * Representa uma animação baseada numa curva de Catmull-Rom.
+     * Esta entidade está presente na pipeline de renderização quando,
+     * no ficheiro XML, for encontrada uma tag <translate> que tenha filhos.
+     */
     class CatmullRomAnimation: public Entity {
     private:
         /** How much the t parameter increases every second. */

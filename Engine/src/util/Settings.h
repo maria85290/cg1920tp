@@ -5,6 +5,9 @@
 #include <string>
 
 namespace engine {
+    /**
+     * Classe de utilidade que permite a existência de definições globais acessíveis na aplicação toda.
+     */
     class Settings {
     private:
         static std::map<const std::string, std::string> settings;

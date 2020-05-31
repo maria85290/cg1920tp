@@ -7,6 +7,11 @@
 #include "Entity.h"
 
 namespace engine::scene::entities {
+    /**
+     * Representa a tag Grupo presente nos ficheiros XML.
+     *
+     * Cada grupo tem, internamente, uma pipeline de renderização por si próprio.
+     */
     class Group: public Entity {
     private:
         std::vector<Entity*> entities;

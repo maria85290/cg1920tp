@@ -7,6 +7,8 @@ namespace engine::window::input {
     bool Keyboard::downKeys[512];
 
     void Keyboard::HandleKeyPress(int keyCode, int scanCode, int action, int mods) {
+        if(keyCode > 512) return;
+
         Keyboard::downKeys[keyCode] = action != GLFW_RELEASE;
     }
 

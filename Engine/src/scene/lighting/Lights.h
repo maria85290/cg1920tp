@@ -6,6 +6,9 @@
 #include "Light.h"
 
 namespace engine::scene::lighting {
+    /**
+     * Representa a tag <lights> presente no topo de um ficheiro XMl de uma cena.
+     */
     class Lights {
     private:
         std::vector<Light*> lights;

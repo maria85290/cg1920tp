@@ -138,7 +138,7 @@ const pair<glm::dvec3, glm::dvec3> BezierGenerator::ComputePatchPoint(double u, 
     const glm::dvec4 VPrime = {3 * v * v, 2 * v, 1.0, 0.0};
 
     const glm::dvec3 partialU = UPrime * M * P * M * V;
-    const glm::dvec3 partialV = (U * M * P) * (M * VPrime);
+    const glm::dvec3 partialV = U * M * P * M * VPrime;
 
     return {U * M * P * M * V, glm::cross(partialV, partialU)};
 }

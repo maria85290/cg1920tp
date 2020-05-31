@@ -10,6 +10,10 @@ namespace engine::scene::entities {
 }
 
 namespace engine::scene {
+    /**
+     * Representa uma cena renderizável no ecrã, e guarda a informação sobre todos os seus componentes.
+     * Implementa também a funcionalidade de leitura de um ficheiro XML a partir do disco.
+     */
     class Scene {
     private:
         lighting::Lights* lights = nullptr;

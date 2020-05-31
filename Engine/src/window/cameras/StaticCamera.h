@@ -7,6 +7,9 @@
 #include <glm/mat4x4.hpp>
 
 namespace engine::window::cameras {
+    /**
+     * Implementação de uma câmara estática, que não pode ser mexida, nem se movimenta no mundo.
+     */
     class StaticCamera: public Camera {
     private:
         glm::dvec3 position;

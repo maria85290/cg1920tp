@@ -5,6 +5,11 @@
 #include "Entity.h"
 
 namespace engine::scene::entities {
+    /**
+     * Representa a tag <translate> dos ficheiros XML, na sua versão estática, i.e.,
+     * na versão em que não existem nódos-filho desta tag. Isso significa que a
+     * translação deve acontecer sempre para a mesma posição todas as frames.
+     */
     class StaticTranslate: public Entity {
     private:
         glm::vec3 vector;

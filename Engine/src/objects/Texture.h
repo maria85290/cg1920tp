@@ -8,6 +8,14 @@
 #include "ObjectCache.h"
 
 namespace engine::objects {
+    /**
+     * Representa uma textura em memória, e implementa os métodos de carregamento
+     * da textura, bem como os métodos de renderização da mesma.
+     *
+     * Tal como a classe \link ModelMesh, representa um recurso partilhado: texturas.
+     * Deste modo, depois de um ficheiro de textura ser carregad, não precisa de voltar
+     * a ser carregado novamente até a cache de texturas ter sido limpa.
+     */
     class Texture {
     private:
         static ObjectCache<Texture> cache;

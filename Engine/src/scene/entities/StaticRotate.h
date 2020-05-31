@@ -5,6 +5,11 @@
 #include "Entity.h"
 
 namespace engine::scene::entities {
+    /**
+     * Representa a tag <rotate> dos ficheiros XML, na sua versão estática, i.e.,
+     * na sua versão cuja tag <rotate> apresenta apenas um ângulo de rotação, e não
+     * um tempo de rotação.
+     */
     class StaticRotate: public Entity {
     private:
         /** The rotation angle, in degrees. */

@@ -5,6 +5,9 @@
 #include "Model.h"
 
 namespace engine::scene::entities {
+    /**
+     * Representa a tag <models> dos ficheiros XML.
+     */
     class Models: public Entity {
     private:
         std::vector<Model*> models;

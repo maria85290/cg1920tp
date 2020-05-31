@@ -7,6 +7,14 @@
 #include "../Scene.h"
 
 namespace engine::scene::entities {
+    /**
+     * Classe geral que representa uma entidade capaz de ser renderizada E que têm uma tag XML correspondente.
+     *
+     * É importante mencionar que a mesh de um modelo, bem como as texturas dos mesmos, não são consideradas
+     * entities pois não têm uma tag XML correspondente. Além disso, luzes também nao são consideradas entities,
+     * pois não são renderizáveis no mundo, apenas influenciam o modo como os restantes objetos do mundo são
+     * renderizados.
+     */
     class Entity {
     private:
         const Scene& scene;

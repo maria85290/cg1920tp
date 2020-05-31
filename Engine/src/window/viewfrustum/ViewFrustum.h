@@ -8,6 +8,13 @@ namespace engine::window::viewfrustum {
      * Implementação de um View Frustum e de View Frustum Culling baseado no método de verificação
      * em Clip Space, tal como descrito em
      * http://www.lighthouse3d.com/tutorials/view-frustum-culling/clip-space-approach-extracting-the-planes/ .
+     *
+     * Este método foi o escolhido pois é capaz, por si próprio, de ajustar internamente as suas contas
+     * conforme a posição dos objetos que estamos a tentar desenhar. Isto é extremamente útil pois a
+     * pipeline de renderização, como está atualmente implementada, não permite que seja possível
+     * perceber qual a posição de um Model quando este está a ser renderizado, nem o seu tamanho, e portanto,
+     * torna possível uma implementação eficiente de View Frustum Culling sem ser necessário reorganizar todo
+     * o processo de renderização de cenas.
      */
     class ViewFrustum {
     private:

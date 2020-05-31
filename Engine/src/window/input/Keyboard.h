@@ -7,6 +7,10 @@ namespace engine::window
 }
 
 namespace engine::window::input {
+    /**
+     * Classe capaz de receber eventos do teclado, e de guardar internamente quais as teclas que estão atualmente guardadas.
+     * Contém depois métodos capazes de responder a perguntas do tipo "a tecla X está carregada?".
+     */
     class Keyboard {
     private:
         friend class ::engine::window::Window;

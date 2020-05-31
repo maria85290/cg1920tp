@@ -21,6 +21,13 @@ using engine::window::cameras::ExplorerCamera;
 
 unique_ptr<XMLDocument> ReadSceneFile(const char*);
 
+/**
+ * Ponto de entrada do programa.
+ *
+ * Responsável pela inicialização das bibliotecas necessárias ao funcionamento do mesmo,
+ * pela criação de uma janela para desenhar, e pela leitura inicial do ficheiro XML da cena.
+ */
+
 int main(int argc, char* argv[]) {
     if(argc != 2) {
         cerr << "Engine requer exatamente 1 argumento, o ficheiro de configuração XML." << endl;

@@ -6,6 +6,9 @@
 namespace engine::window::viewfrustum {
     enum PlaneType { TOP = 0, BOTTOM, LEFT, RIGHT, NEAR, FAR };
 
+    /**
+     * Representa um plano limitador, para efeitos de View Frustum Culling.
+     */
     class Plane {
     private:
         glm::vec4 coeffs = {0, 0, 0, 0};

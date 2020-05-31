@@ -12,6 +12,27 @@
 using engine::objects::ObjectCache;
 
 namespace engine::objects {
+    /**
+     * Uma ModelMesh representa um ficheiro .3d que contém um modelo 3D renderizável.
+     *
+     * Esta classe contém todos os métodos relacionados com a leitura de ficheiros .3d,
+     * e a renderização dos modelos quando for necessário.
+     *
+     * Esta classe não é, no entanto,responsável por definir parâmetros que são especificados
+     * na tag XML <model>, tal como a cor do objeto, a sua textura, etc. Essa responsabilidade
+     * é das classes \link Model e \link Texture, respetivamente.
+     *
+     * Esta classe implementa também um sistema de cache: para prevenir que o mesmo modelo
+     * seja carregado várias vezes e ocupe mais memória do que aquela que é necessária,
+     * todas as instâncias desta classe são referenciadas apenas e só através de instâncias
+     * de \code shared_ptr. Assim, sempre que é necessário carregar um modelo, a cache é
+     * verificada primeiro para saber se esse modelo já foi carregado anteriormente. Se sim,
+     * uma nova instância de um \code shared_ptr é criada, e é retornada essa instância.
+     * Quando todos os modelos que se referem à mesma mesh forem destruidos, então a
+     * instância do ModelMesh também é destruida.
+     * Caso o objeto não exista já em cache, é criada uma nova instância deste objeto,
+     * colocada em cache, e depois é retornado o objeto dentro de um \code shared_ptr.
+     */
     class ModelMesh {
     private:
         static ObjectCache<ModelMesh> cache;

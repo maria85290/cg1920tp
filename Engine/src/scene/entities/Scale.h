@@ -6,6 +6,9 @@
 #include "Entity.h"
 
 namespace engine::scene::entities {
+    /**
+     * Representa a tag <scale> dos ficheiros XML.
+     */
     class Scale: public Entity {
     private:
         glm::vec3 factors;

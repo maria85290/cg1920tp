@@ -6,6 +6,9 @@
 #include <glm/vec3.hpp>
 
 namespace engine::window::cameras {
+    /**
+     * Implementação do tipo de câmara 3D em modo FPS.
+     */
     class FpsCamera: public Camera {
     private:
         double speed = 40.0;

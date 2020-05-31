@@ -6,6 +6,14 @@
 #include <string>
 
 namespace engine::objects {
+    /**
+     * Este template é responsável pela implementação do sistema de cache utilizado por
+     * recursos partilhados entre várias tags XML, como por exemplo os modelos e as texturas.
+     *
+     * Esta classe implementa operações básicas de uma cache, com recurso a \code shared_ptr.
+     *
+     * @tparam T O tipo de objeto que vai ser partilhado
+     */
 	template<class T>
     class ObjectCache {
     private:

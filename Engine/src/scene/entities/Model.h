@@ -18,6 +18,12 @@ using engine::objects::ModelMesh;
 using engine::objects::Texture;
 
 namespace engine::scene::entities {
+    /**
+     * Representa a tag <model> presente nos ficheiros XML.
+     *
+     * Cada modelo obrigatoriamente tem uma mesh, que define a sua estrutura (correspondente ao ficheiro seu .3d),
+     * e pode opcionalmente ter outros parâmetros, como textura, componentes de luz, etc.
+     */
     class Model {
     private:
         shared_ptr<ModelMesh> mesh;
