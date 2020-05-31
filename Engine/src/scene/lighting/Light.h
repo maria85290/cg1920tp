@@ -44,8 +44,6 @@ namespace engine::scene::lighting {
             if(lightNo > GL_LIGHT7) {
                 throw std::runtime_error("The scene contains more than 8 lights!");
             }
-
-            std::cout << "Constructed GL_LIGHT: " << lightNo << std::endl;
         }
     public:
         inline static glm::vec4 ParseLightComponent(const std::string& component, const tinyxml2::XMLElement* element) {
