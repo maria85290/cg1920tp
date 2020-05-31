@@ -33,7 +33,7 @@ void BoxGenerator::GenerateVertices() {
     double textureImageHeight = max(dimY, dimZ);
     double textureImageWidth = 4*dimX + 2*dimZ;
 
-    // Current left bottom corner and right bottom corner, respectively
+    // Current left bottom corner and right top corner, respectively
     glm::vec2 lbc = {0.0f, float(dimY)}, rtc = {float(dimZ),0.0f};
 
     // Parallel with plane ZY
