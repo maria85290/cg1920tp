@@ -1,10 +1,5 @@
 #include "PointLight.h"
 
-#include <iostream>
-
-#include <glad/glad.h>
-#include <glm/gtc/type_ptr.hpp>
-
 namespace engine::scene::lighting {
     bool PointLight::ParseXml(const tinyxml2::XMLNode* lightNode) {
         auto elem = lightNode->ToElement();
