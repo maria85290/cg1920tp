@@ -66,6 +66,8 @@ namespace engine::scene {
         glCullFace(GL_BACK);
 
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+        glEnable(GL_NORMALIZE);
     }
 
     void Scene::ClearPreviousFrame() const {

@@ -46,7 +46,8 @@
             <model texture="texture_mercury.png" file="planet.3d"
                    ambR="255" ambG="255" ambB="255"
                    diffR="255" diffG="255" diffB="255"
-                   specR="255" specG="255" specB="255" />
+                   specR="255" specG="255" specB="255"
+                   shininess="128" />
         </models>
     </group>
     <group>
@@ -74,7 +75,8 @@
             <model texture="texture_venus.png" file="planet.3d"
                    ambR="255" ambG="255" ambB="255"
                    diffR="255" diffG="255" diffB="255"
-                   specR="255" specG="255" specB="255" />
+                   specR="255" specG="255" specB="255"
+                   shininess="128" />
         </models>
     </group>
     <group>
@@ -103,7 +105,8 @@
                 <model texture="texture_earth.jpg" file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -115,7 +118,8 @@
                 <model texture="texture_moon.png" file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="0" specG="0" specB="0"
+                       shininess="128" />
             </models>
         </group>
     </group>
@@ -145,7 +149,8 @@
                 <model texture="texture_mars.png" file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -157,7 +162,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -168,7 +174,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
     </group> <group>
@@ -197,7 +204,8 @@
                 <model texture="texture_jupiter.png" file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -209,7 +217,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -221,7 +230,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -233,7 +243,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -245,7 +256,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
     </group>
@@ -276,7 +288,8 @@
                 <model  file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                        shininess="128" />
             </models>
         </group>
         <group>
@@ -288,7 +301,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -300,7 +314,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -312,7 +327,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -324,7 +340,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -336,7 +353,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -348,7 +366,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -360,7 +379,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -372,7 +392,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -384,7 +405,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
     </group>
@@ -414,7 +436,8 @@
                 <model texture="texture_uranus.png" file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -426,7 +449,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -438,7 +462,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -450,7 +475,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -462,7 +488,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -474,7 +501,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
     </group>
@@ -504,7 +532,8 @@
                 <model texture="texture_neptune.png" file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -516,7 +545,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -528,7 +558,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -540,7 +571,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
     </group>
@@ -570,7 +602,8 @@
                 <model texture="texture_pluto.jpg" file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
         <group>
@@ -582,7 +615,8 @@
                 <model file="planet.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
     </group>
@@ -615,7 +649,8 @@
                 <model file="teapot.3d"
                        ambR="255" ambG="255" ambB="255"
                        diffR="255" diffG="255" diffB="255"
-                       specR="255" specG="255" specB="255" />
+                       specR="255" specG="255" specB="255"
+                       shininess="128" />
             </models>
         </group>
     </group>
