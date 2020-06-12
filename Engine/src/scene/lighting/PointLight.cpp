@@ -10,8 +10,8 @@ namespace engine::scene::lighting {
         this->position.w = 1.0f; // Point lights have w = 1
 
         this->ambient  = Light::ParseLightComponent("amb", elem, {0.2, 0.2, 0.2, 1.0});
-        this->diffuse  = Light::ParseLightComponent("diff", elem);
-        this->specular = Light::ParseLightComponent("spec", elem);
+        this->diffuse  = Light::ParseLightComponent("diff", elem, {0.8, 0.8, 0.8, 1.0});
+        this->specular = Light::ParseLightComponent("spec", elem, {0.0, 0.0, 0.0, 0.0});
 
         return true;
     }
