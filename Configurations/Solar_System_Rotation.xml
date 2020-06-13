@@ -223,7 +223,7 @@
             </models>
         </group>
     </group> 
-        <group>
+    <group>
         <translate time = "118">
             <!-- Ponto de simetria -->
             <point X="0"    Z="-350" Y="0"  />
